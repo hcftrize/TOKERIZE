@@ -28,12 +28,19 @@ async def cmd_perf(args: list) -> str:
     base_id, compare_tokens = await parse_base_and_compare(args)
     token_map = await resolve_coin_ids(compare_tokens)
     all_ids   = list(set([base_id] + list(token_map.values())))
-    base_name = display_name(base_id)
 
     markets_data = await _cached(f"mkts_{','.join(sorted(all_ids))}", get_markets(all_ids))
     if not markets_data:
         return "Could not fetch performance data."
     by_id = {c["id"]: c for c in markets_data}
+
+    def sym(coin_id, original=""):
+        """Use CoinGecko symbol from markets data, fallback to original ticker."""
+        if original:
+            return original.upper()
+        return (by_id.get(coin_id, {}).get("symbol") or coin_id).upper()
+
+    base_name = sym(base_id)
 
     perf_90d = {}
     for cid in all_ids:
@@ -54,7 +61,7 @@ async def cmd_perf(args: list) -> str:
     rows = [make_row(base_id, base_name)]
     for orig, cid in token_map.items():
         if cid != base_id:
-            rows.append(make_row(cid, display_name(cid, orig)))
+            rows.append(make_row(cid, sym(cid, orig)))
     rows = [rows[0]] + sorted(rows[1:], key=lambda r: (r["p7"] or -9999), reverse=True)
 
     def fc(v):
@@ -84,12 +91,18 @@ async def cmd_perf(args: list) -> str:
 async def cmd_pricesim(args: list) -> str:
     base_id, compare_tokens = await parse_base_and_compare(args)
     token_map = await resolve_coin_ids(compare_tokens)
-    base_name = display_name(base_id)
     all_ids = list(set([base_id] + list(token_map.values())))
     markets_data = await _cached(f"mkts_{','.join(sorted(all_ids))}", get_markets(all_ids))
     if not markets_data:
         return "Could not fetch market data."
     by_id = {c["id"]: c for c in markets_data}
+
+    def sym(coin_id, original=""):
+        if original:
+            return original.upper()
+        return (by_id.get(coin_id, {}).get("symbol") or coin_id).upper()
+
+    base_name = sym(base_id)
     base = by_id.get(base_id, {})
     base_price  = base.get("current_price", 0)
     base_supply = base.get("circulating_supply") or (RIZE_SUPPLY if base_id == RIZE_ID else 1)
@@ -115,7 +128,7 @@ async def cmd_pricesim(args: list) -> str:
         hyp_price   = target_mcap / base_supply
         pct_change  = ((hyp_price / base_price) - 1) * 100 if base_price else 0
         pct_of_mcap = (base_mcap / target_mcap) * 100 if target_mcap else 0
-        rows.append((hyp_price, display_name(cid, orig), target_mcap, target_rank, pct_change, pct_of_mcap))
+        rows.append((hyp_price, sym(cid, orig), target_mcap, target_rank, pct_change, pct_of_mcap))
 
     rows.sort(key=lambda r: r[0], reverse=True)
 
@@ -157,10 +170,12 @@ async def cmd_portfoliosim(args: list) -> str:
             if parsed is not None and amount is None: amount = parsed
             elif parse_amount(t) is None: compare_tokens.append(t)
 
-    base_name = display_name(base_id)
+    # Resolve base_name early for error message (use ticker or coin_id)
+    _base_ticker = next((t for t in tokens if t.lower() not in [str(parse_amount(t) or "").lower()] and parse_amount(t) is None), base_id)
+    base_name_early = _base_ticker.upper() if _base_ticker != base_id else base_id.upper()
     if amount is None:
         return (
-            f"Please include your {base_name} amount.\n\n"
+            f"Please include your {base_name_early} amount.\n\n"
             f"Format: `/portfoliosim {{amount}} {{coin}} to {{assets}}`\n"
             f"Example: `/portfoliosim 1000000 rize to eth link mantra`"
         )
@@ -171,7 +186,14 @@ async def cmd_portfoliosim(args: list) -> str:
     if not markets_data:
         return "Could not fetch market data."
     by_id = {c["id"]: c for c in markets_data}
+
+    def sym(coin_id, original=""):
+        if original:
+            return original.upper()
+        return (by_id.get(coin_id, {}).get("symbol") or coin_id).upper()
+
     base = by_id.get(base_id, {})
+    base_name   = sym(base_id)
     base_price  = base.get("current_price", 0)
     base_supply = base.get("circulating_supply") or (RIZE_SUPPLY if base_id == RIZE_ID else 1)
     base_mcap   = base.get("market_cap", 0)
@@ -203,7 +225,7 @@ async def cmd_portfoliosim(args: list) -> str:
         hyp_price = target_mcap / base_supply
         bag_value = amount * hyp_price
         pct = ((bag_value / current_bag) - 1) * 100 if current_bag else 0
-        label = display_name(cid, orig)
+        label = sym(cid, orig)
         rows.append((hyp_price, label, target_mcap, target_rank, bag_value, pct))
 
     rows.sort(key=lambda r: r[0], reverse=True)
@@ -227,6 +249,7 @@ async def cmd_arbitrage(args: list) -> str:
     tokens = list(args)
     amount = None
     base_id = RIZE_ID
+    base_ticker = ""
     compare_tokens = []
 
     if "to" in [t.lower() for t in tokens]:
@@ -238,18 +261,32 @@ async def cmd_arbitrage(args: list) -> str:
             if parsed is not None: amount = parsed
             else:
                 resolved = await resolve_coin_id(t)
-                if resolved: base_id = resolved
+                if resolved: base_id = resolved; base_ticker = t
         compare_tokens = right
     else:
         base_id, remaining = await parse_base_and_compare(tokens)
+        # Find the ticker that became the base
+        for t in tokens:
+            if parse_amount(t) is None:
+                resolved = await resolve_coin_id(t)
+                if resolved == base_id: base_ticker = t; break
         for t in remaining:
             parsed = parse_amount(t)
             if parsed is not None and amount is None: amount = parsed
             elif parse_amount(t) is None: compare_tokens.append(t)
 
-    base_name = display_name(base_id)
+    # Fetch markets to get proper symbols
     token_map = await resolve_coin_ids(compare_tokens)
     all_ids   = list(set([base_id] + list(token_map.values())))
+    markets_data = await _cached(f"mkts_{','.join(sorted(all_ids))}", get_markets(all_ids))
+    by_id = {c["id"]: c for c in markets_data} if markets_data else {}
+
+    def sym(coin_id, original=""):
+        if original:
+            return original.upper()
+        return (by_id.get(coin_id, {}).get("symbol") or coin_id).upper()
+
+    base_name = sym(base_id, base_ticker)
 
     # Fetch 90d charts for all coins
     charts = {}
@@ -287,7 +324,7 @@ async def cmd_arbitrage(args: list) -> str:
 
     for orig, cid in token_map.items():
         if cid == base_id: continue
-        label = display_name(cid, orig)
+        label = sym(cid, orig)
         bc = charts.get(base_id, {})
         cc = charts.get(cid, {})
 
