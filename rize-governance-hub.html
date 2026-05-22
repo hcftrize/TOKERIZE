@@ -3061,10 +3061,18 @@ function expRenderVesting(vestingEvents,bondIds){
     const ratePerDay=amount/(vesting/86400);
     const cliffMonths=Math.round(cliff/2592000);
     const totalDays=Math.round((cliff+vesting)/86400);
-    const vestYears=(cliff+vesting)>86400*365?'a year':Math.round((cliff+vesting)/2592000)+' months';
+    function fmtDuration(seconds) {
+      const totalM=Math.round(seconds/2592000);
+      const years=Math.floor(totalM/12);
+      const months=totalM%12;
+      if(years===0) return months+' month'+(months!==1?'s':'');
+      if(months===0) return years+' year'+(years!==1?'s':'');
+      return years+' year'+(years!==1?'s':'')+' '+months+' month'+(months!==1?'s':'');
+    }
+    const vestYears=fmtDuration(vesting);
     const cliffDateStr=new Date(cliffEnd*1000).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
     const vestEndDateStr=new Date(vestEnd*1000).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-    const cliffLabel=cliffMonths>0?cliffMonths+' month'+(cliffMonths>1?'s':'')+' ('+cliffDateStr+')':'None';
+    const cliffLabel=cliffMonths>0?fmtDuration(cliff)+' ('+cliffDateStr+')':'None';
     const pctStr=fmtPct(pct*100);
     const progressBar=pct<1
       ?'<div style="margin-top:12px">'
