@@ -239,7 +239,7 @@ def display_name(coin_id: str, original: str = "") -> str:
 
 async def parse_base_and_compare(args: list[str]) -> tuple[str, list[str]]:
     """
-    Fully dynamic: resolves first arg via live CoinGecko search.
+    Fully dynamic: resolves first non-numeric arg via live CoinGecko search.
     If it resolves to a coin != RIZE, it's the base.
     Otherwise RIZE is the base.
     Returns (base_coin_id, compare_tokens).
@@ -247,20 +247,17 @@ async def parse_base_and_compare(args: list[str]) -> tuple[str, list[str]]:
     if not args:
         return RIZE_ID, []
 
-    first = args[0].strip()
-
-    # Numeric = amount, not a base override
-    clean = first.replace(".", "").replace(",", "").replace(" ", "").rstrip("mkb")
-    if clean.isdigit():
-        return RIZE_ID, args
-
-    # Try to resolve first arg as a coin
-    coin_id = await resolve_coin_id(first)
-    if coin_id and coin_id != RIZE_ID:
-        # Cache display name
-        if first.lower() not in _search_cache:
-            pass  # already cached by resolve_coin_id → search_coin
-        return coin_id, args[1:]
+    # Find first non-numeric arg as potential base
+    for i, arg in enumerate(args):
+        first = arg.strip()
+        clean = first.replace(".", "").replace(",", "").replace(" ", "").rstrip("mkb")
+        if clean.isdigit():
+            continue  # skip amounts
+        # Try to resolve as a coin
+        coin_id = await resolve_coin_id(first)
+        if coin_id and coin_id != RIZE_ID:
+            return coin_id, args[:i] + args[i+1:]
+        break  # first non-numeric didn't resolve to a non-RIZE coin → RIZE is base
 
     return RIZE_ID, args
 
