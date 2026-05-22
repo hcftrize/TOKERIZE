@@ -3064,7 +3064,7 @@ function expRenderVesting(vestingEvents,bondIds){
     function fmtDuration(seconds) {
       const years = seconds / (365.25 * 86400);
       const rounded = Math.round(years * 2) / 2; // nearest 0.5
-      if (rounded === 0) return Math.round(seconds / 2592000) + ' months';
+      if (rounded < 1) return Math.round(seconds / 2592000) + ' months';
       const label = rounded % 1 === 0
         ? rounded + ' year' + (rounded !== 1 ? 's' : '')
         : rounded + ' years';
