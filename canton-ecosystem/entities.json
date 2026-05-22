@@ -2103,6 +2103,22 @@
     "logo_local": "logos\\globalstake.png"
   },
   {
+    "name": "GOAT Network",
+    "slug": "goat-network",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a0f810880b9144bb51919c5_e96d04da-9672-4474-ac31-0e56d839b785.png",
+    "short_desc": "GOAT Network is a Bitcoin secured infrastructure for the agentic economy",
+    "tags": [
+      "APPS (ALL)",
+      "VALIDATOR",
+      "PAYMENTS",
+      "STABLECOINS",
+      "Network Utilities\nPAYMENTSSTABLECOINS",
+      "Roles\nAPPS (ALL)VALIDATOR\nAPPS (ALL)VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nGOAT Network\nhttps://www.goat.network/\nGOAT Network is a Bitcoin secured infrastructure for the agentic economy . We focus on Bitcoin-secured execution, settlement, payments, and decentralized application infrastructure. The L2 uses zero-knowledge proofs, decentralized sequencing, and BitVM2-based bridge architecture to support off-chain computation with settlement and dispute mechanisms connected to Bitcoin. In addition to its Bitcoin Layer 2 work, GOAT Network has developed tools for AI-agent applications, including AgentKit, x402 payment flows, and ERC-8004 identity integrations.\nNetwork Utilities\nPAYMENTSSTABLECOINS\nRoles\nAPPS (ALL)VALIDATOR\nAPPS (ALL)VALIDATOR",
+    "logo_local": "logos\\goat-network.png"
+  },
+  {
     "name": "Goldman Sachs",
     "slug": "goldman-sachs",
     "logo_cdn": "https://cdn.prod.website-files.com/696805252243366e13a64c82/697a4b2e91c884840963f200_yellow-arrow-right.svg",
