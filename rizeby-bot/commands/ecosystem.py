@@ -105,16 +105,13 @@ async def cmd_canton(args: list) -> str:
         clean_tags.add(t.upper())
     tag_str = " · ".join(sorted(clean_tags)) if clean_tags else ""
 
-    # Description: prefer short_desc (clean), fall back to detail_text (extract first clean paragraph)
+    # Description: prefer detail_text (long desc), fall back to short_desc
     short_desc = entity.get("short_desc", "")
     detail_text = entity.get("detail_text", "")
 
-    if short_desc:
-        desc = short_desc
-    elif detail_text:
-        # Extract the first real paragraph from detail_text (skip nav boilerplate)
+    if detail_text:
+        # Extract real paragraphs from detail_text (skip nav boilerplate)
         lines_dt = [l.strip() for l in detail_text.split("\n") if l.strip()]
-        # Skip lines that are navigation/boilerplate
         skip = {"canton network", "developers", "use cases", "resources", "speak to an expert",
                 "network utilities", "roles", "apps (all)", "apps (featured)"}
         real_lines = []
@@ -125,6 +122,10 @@ async def cmd_canton(args: list) -> str:
                 continue
             real_lines.append(l)
         desc = " ".join(real_lines[:3])[:600]
+        if not desc:
+            desc = short_desc
+    elif short_desc:
+        desc = short_desc
     else:
         desc = ""
 
