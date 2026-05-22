@@ -3069,7 +3069,7 @@ function expRenderVesting(vestingEvents,bondIds){
       if(months===0) return years+' year'+(years!==1?'s':'');
       return years+' year'+(years!==1?'s':'')+' '+months+' month'+(months!==1?'s':'');
     }
-    const vestYears=fmtDuration(cliff+vesting);
+    const vestYears=fmtDuration(vesting);
     const cliffDateStr=new Date(cliffEnd*1000).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
     const vestEndDateStr=new Date(vestEnd*1000).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
     const cliffLabel=cliffMonths>0?fmtDuration(cliff)+' ('+cliffDateStr+')':'None';
