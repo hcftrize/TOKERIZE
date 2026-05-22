@@ -110,15 +110,19 @@ async def cmd_canton(args: list) -> str:
     detail_text = entity.get("detail_text", "")
 
     if detail_text:
-        # Extract real paragraphs from detail_text (skip nav boilerplate)
-        lines_dt = [l.strip() for l in detail_text.split("\n") if l.strip()]
-        skip = {"canton network", "developers", "use cases", "resources", "speak to an expert",
-                "network utilities", "roles", "apps (all)", "apps (featured)"}
+        # Cut at boilerplate footer markers
+        cut_markers = ["Network Utilities\n", "Roles\n", "\nNetwork Utilities", "\nRoles"]
+        cut_text = detail_text
+        for marker in cut_markers:
+            idx = cut_text.find(marker)
+            if idx != -1:
+                cut_text = cut_text[:idx]
+        # Extract real paragraphs (skip nav header boilerplate)
+        lines_dt = [l.strip() for l in cut_text.split("\n") if l.strip()]
+        skip = {"canton network", "developers", "use cases", "resources", "speak to an expert"}
         real_lines = []
         for l in lines_dt:
             if l.lower() in skip or l.startswith("http") or l == name:
-                continue
-            if any(x in l.upper() for x in ["VALIDATOR", "FINANCIAL", "MARKET INFRA", "SERVICE"]) and len(l) < 60:
                 continue
             real_lines.append(l)
         desc = " ".join(real_lines[:3])[:600]
