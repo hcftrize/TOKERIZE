@@ -3062,12 +3062,13 @@ function expRenderVesting(vestingEvents,bondIds){
     const cliffMonths=Math.round(cliff/2592000);
     const totalDays=Math.round((cliff+vesting)/86400);
     function fmtDuration(seconds) {
-      const totalM=Math.round(seconds/2592000);
-      const years=Math.floor(totalM/12);
-      const months=totalM%12;
-      if(years===0) return months+' month'+(months!==1?'s':'');
-      if(months===0) return years+' year'+(years!==1?'s':'');
-      return years+' year'+(years!==1?'s':'')+' '+months+' month'+(months!==1?'s':'');
+      const years = seconds / (365.25 * 86400);
+      const rounded = Math.round(years * 2) / 2; // nearest 0.5
+      if (rounded === 0) return Math.round(seconds / 2592000) + ' months';
+      const label = rounded % 1 === 0
+        ? rounded + ' year' + (rounded !== 1 ? 's' : '')
+        : rounded + ' years';
+      return label;
     }
     const vestYears=fmtDuration(vesting);
     const cliffDateStr=new Date(cliffEnd*1000).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
