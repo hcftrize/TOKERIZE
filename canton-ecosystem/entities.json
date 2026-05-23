@@ -572,6 +572,18 @@
     "logo_local": "logos\\black-manta-capital-partners.png"
   },
   {
+    "name": "BlackRock",
+    "slug": "blackrock",
+    "logo_cdn": "https://cdn.prod.website-files.com/696805252243366e13a64c82/697a4b2e91c884840963f200_yellow-arrow-right.svg",
+    "short_desc": "One of the world's leading providers of investment, advisory and risk management solutions.",
+    "tags": [
+      "Network UtilitiesNo items found.",
+      "RolesNo items found.No items found."
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nBlackRock",
+    "logo_local": "logos\\blackrock.svg"
+  },
+  {
     "name": "Blockdaemon",
     "slug": "blockdaemon",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69d3c5dbb41372701abc5b74_BD%20Circle%20Logo.png",
@@ -3447,6 +3459,24 @@
     "logo_local": "logos\\primrose-capital-management.jpeg"
   },
   {
+    "name": "Procur3",
+    "slug": "procur3",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a1130ba1bf02d2bd773421c_ea45c923-97df-42e3-9700-f56c34677fcb.png",
+    "short_desc": "Find and compare Daml-specialised security firms in one place.",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "SERVICE PROVIDER",
+      "COMPLIANCE",
+      "DEVELOPER TOOLS",
+      "FORENSICS & SECURITY",
+      "Network Utilities\nCOMPLIANCEDEVELOPER TOOLSFORENSICS & SECURITY",
+      "Roles\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDER\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDER"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nProcur3\nwww.procur3.io\nProcur3 is a security marketplace that helps teams on Canton discover, compare, and engage Daml-specialised security firms. By standardising vendor discovery and proposal management, Procur3 makes it easier for projects to find the right security partner, evaluate options, and procure audit services efficiently. Having supported 75 teams, Procur3 saves weeks of search and negotiation times and up to 40% on security costs.\nNetwork Utilities\nCOMPLIANCEDEVELOPER TOOLSFORENSICS & SECURITY\nRoles\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDER\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDER",
+    "logo_local": "logos\\procur3.png"
+  },
+  {
     "name": "Prometheus",
     "slug": "prometheus",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515e309bce5006af43c64_Prometheus-wealth-mgt-icon.png",
@@ -4131,6 +4161,21 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nUnion Investment\nhttps://www.union-investment.com/\n\nUnion Investment was an investor in the EIB's 100 million euro-denominated digitally native bond, the inaugural issuance on GS DAP(TM).\n\nRoles\nFINANCIAL INSTITUTIONS\nFINANCIAL INSTITUTIONS",
     "logo_local": "logos\\union-investment.png"
+  },
+  {
+    "name": "Uphold",
+    "slug": "uphold",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a10b6e05c063b8ae0704d15_Uphold.jpg",
+    "short_desc": "Global digital asset platform supporting Canton Coin (CC) trading, custody, and access.",
+    "tags": [
+      "MARKET INFRASTRUCTURE",
+      "VALIDATOR",
+      "EXCHANGES",
+      "Network Utilities\nEXCHANGES",
+      "Roles\nMARKET INFRASTRUCTUREVALIDATOR\nMARKET INFRASTRUCTUREVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nUphold\nhttps://uphold.com/\n\nUphold is a global digital asset platform that enables users to buy, sell, hold, and move cryptocurrencies, stablecoins, and other financial assets across integrated markets. Uphold supports Canton Coin (CC), expanding access to the Canton ecosystem for retail and institutional participants through trading and custody infrastructure.\n\nNetwork Utilities\nEXCHANGES\nRoles\nMARKET INFRASTRUCTUREVALIDATOR\nMARKET INFRASTRUCTUREVALIDATOR",
+    "logo_local": "logos\\uphold.jpg"
   },
   {
     "name": "USD1",
