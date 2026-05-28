@@ -907,6 +907,22 @@
     "logo_local": "logos\\cctools.png"
   },
   {
+    "name": "cETH by onRails",
+    "slug": "ceth-by-onrails",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a15718136d75cac5b6f7406_1c8a9dfd-dbe2-405b-92c1-6b5b7ef7a3f0.png",
+    "short_desc": "cETH is 1:1 wrapped ETH on Canton",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "CANTON FOUNDATION MEMBER",
+      "TOKENIZED ASSETS",
+      "Network Utilities\nTOKENIZED ASSETS",
+      "Roles\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBER\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBER"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\ncETH by onRails\nhttps://www.ceth.network\ncETH is 1:1 wrapped ETH on Canton Network, operated by onRails. ETH is deposited on Ethereum, held through a confirmation window that ensures transaction finality, and cETH is minted on Canton at a 1:1 ratio. cETH follows the CIP-56 token standard for composability across Canton assets, apps, wallets, and venues, while preserving privacy. It is fully unwrappable to ETH.\nNetwork Utilities\nTOKENIZED ASSETS\nRoles\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBER\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBER",
+    "logo_local": "logos\\ceth-by-onrails.png"
+  },
+  {
     "name": "Chain Experts",
     "slug": "chain-experts",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515d5d122a24fb97b608d_chain-expters-icon.png",
