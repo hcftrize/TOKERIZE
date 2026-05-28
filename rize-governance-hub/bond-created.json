@@ -4,7 +4,7 @@
   "bootstrap": true,
   "counts": {
     "bondCreatedEvents": 10137,
-    "increaseBondEvents": 310,
+    "increaseBondEvents": 311,
     "bonds": 10137
   },
   "data": {
@@ -114307,6 +114307,15 @@
         "blockNumber": "46420850",
         "timestamp": "1779631047",
         "txHash": "0xef08db2373eafff3d37b5e92c011c1016ac893e7e11c2b6724f1f4fe76581d30"
+      },
+      {
+        "id": "0x380330deb6fe0d1321fa4c68df6cfb1029cee8b4a940b37db3ff122073355e07-46552699",
+        "nftId": "1317",
+        "amount": "128128.128",
+        "date": "2026-05-27",
+        "blockNumber": "46552699",
+        "timestamp": "1779894745",
+        "txHash": "0x380330deb6fe0d1321fa4c68df6cfb1029cee8b4a940b37db3ff122073355e07"
       }
     ],
     "bonds": [
@@ -246093,5 +246102,5 @@
       }
     ]
   },
-  "updated_at": "2026-05-27T06:23:08.744998+00:00"
+  "updated_at": "2026-05-28T02:07:51.026345+00:00"
 }
