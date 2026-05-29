@@ -2204,6 +2204,23 @@
     "logo_local": "logos\\gsr.png"
   },
   {
+    "name": "HandlPay",
+    "slug": "handlpay",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a161c6da34cce7adba54a32_28c7b79a-7642-44df-813a-6e42889b4415.jpeg",
+    "short_desc": "Social media payment layer resolving funds to social media names, WhatsApp numbers and emails.",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "VALIDATOR",
+      "PAYMENTS",
+      "WALLETS",
+      "Network Utilities\nPAYMENTSWALLETS",
+      "Roles\nAPPS (ALL)APPS (FEATURED)VALIDATOR\nAPPS (ALL)APPS (FEATURED)VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nHandlPay\nhttps://www.handlpay.com\nWhen you pay at a store, you don’t think about how the merchant receives the money. You just tap and go. HandlPay brings that same simplicity to peer-to-peer payments by turning social media usernames and WhatsApp numbers into private, multi-chain payment handles. It fully abstracts away the blockchain layer, allowing users to conveniently send and receive stablecoins without sharing wallet addresses, managing bridges, or worrying about routing.\nNetwork Utilities\nPAYMENTSWALLETS\nRoles\nAPPS (ALL)APPS (FEATURED)VALIDATOR\nAPPS (ALL)APPS (FEATURED)VALIDATOR",
+    "logo_local": "logos\\handlpay.jpeg"
+  },
+  {
     "name": "HashKeyCloud",
     "slug": "hashkeycloud",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515e0a11d31c2013e3ec3_hashkeycloud-logo.png",
@@ -3752,6 +3769,21 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nsend\nhttps://send.app/\n\nSend is a non-custodial USDC payments app offering instant, global transfers with user-friendly features and security.\n\nNetwork Utilities\nWALLETS\nRoles\nAPPS (ALL)VALIDATORCANTON FOUNDATION MEMBER\nAPPS (ALL)VALIDATORCANTON FOUNDATION MEMBER",
     "logo_local": "logos\\send.png"
+  },
+  {
+    "name": "SenseiNode",
+    "slug": "senseinode",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a18657d811aac044b8d0f2f_4e5407fc-2cef-4803-bebd-6a53d720f0ca.png",
+    "short_desc": "High-availability RPC & Nodes-as-a-Service. SOC2 Type II & ISO27001 compliant infrastructure.",
+    "tags": [
+      "SERVICE PROVIDER",
+      "VALIDATOR",
+      "NAAS",
+      "Network Utilities\nNAAS",
+      "Roles\nSERVICE PROVIDERVALIDATOR\nSERVICE PROVIDERVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nSenseiNode\nhttps://www.senseinode.com/\nResilient Enterprise Blockchain Infrastructure Founded in 2021, SenseiNode is a leading institutional-grade blockchain infrastructure provider. We offer flexible shared and dedicated infrastructure tailored to the rigorous demands of asset managers, developers, and global enterprises. Our platform features highly resilient distributed infrastructure with multiple levels and options for redundancy and load balancing, ensuring maximum throughput, ultra-low latency, and elite network performance. Security and operational excellence are at our core. SenseiNode is SOC2 Type II and ISO27001 compliant, providing world-class data security and compliance. Supported by continuous 24/7 monitoring, our ecosystem guarantees the high availability and resilience required by industry leaders. We ran mission-critical infrastructure for premier web3 clients, including Securitize, OpenZeppelin, Lido, and the Web3 Foundation, among others.\nNetwork Utilities\nNAAS\nRoles\nSERVICE PROVIDERVALIDATOR\nSERVICE PROVIDERVALIDATOR",
+    "logo_local": "logos\\senseinode.png"
   },
   {
     "name": "SG Forge",
