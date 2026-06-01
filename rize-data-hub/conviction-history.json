@@ -1523,6 +1523,10 @@
     {
       "date": "2026-05-31",
       "value": 924831273.53
+    },
+    {
+      "date": "2026-06-01",
+      "value": 924832091.22
     }
   ],
   "cex": [
@@ -3029,10 +3033,41 @@
     {
       "date": "2026-05-31",
       "value": 447810190.41
+    },
+    {
+      "date": "2026-06-01",
+      "value": 513517647.17
     }
   ],
   "unbonding": [],
   "whales": [
+    {
+      "date": "2026-06-01",
+      "amount": 66224875.33,
+      "from": "0x4e68e189e4d8d8c0659e0d8a05d0e0ed7071b466",
+      "to": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
+      "from_label": "0x4e68…b466",
+      "to_label": "Kraken Hot 1",
+      "tx": "0xe445a13ce9e13694711ac9860e5756c2332d5f493d56c24e7409209774b51482"
+    },
+    {
+      "date": "2026-06-01",
+      "amount": 66224875.33,
+      "from": "0xe0eabf92c1406c77a8b51ecd257277c8b7aaaefa",
+      "to": "0x4e68e189e4d8d8c0659e0d8a05d0e0ed7071b466",
+      "from_label": "0xe0ea…aefa",
+      "to_label": "0x4e68…b466",
+      "tx": "0xbf84ca6ff4cb8e1808f954461ca980176efc90609eb26e51855cf1913d930b92"
+    },
+    {
+      "date": "2026-06-01",
+      "amount": 5706737.0,
+      "from": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
+      "to": "0x9b0c45d46d386cedd98873168c36efd0dcba8d46",
+      "from_label": "Kraken Hot 1",
+      "to_label": "Revolut",
+      "tx": "0x401432bc3136a93d8106e102069ea997288520e455920ecb906e13526e28387b"
+    },
     {
       "date": "2026-05-28",
       "amount": 5708922.0,
@@ -3266,15 +3301,6 @@
       "from_label": "Revolut",
       "to_label": "0xeb9c…6b8f",
       "tx": "0x0b73b44a6037fb570bb4fa10004841a14cd29b9c6f7c79a2205eab6b92c5e62a"
-    },
-    {
-      "date": "2026-05-01",
-      "amount": 6854414.0,
-      "from": "0xf8191d98ae98d2f7abdfb63a9b0b812b93c873aa",
-      "to": "0x51c72848c68a965f66fa7a88855f9f7784502a7f",
-      "from_label": "0xf819…73aa",
-      "to_label": "0x51c7…2a7f",
-      "tx": "0x46e909f6ee54f553cbf33ea1a968fd2a370fe9471c2724e78035f79fa0f9bc65"
     }
   ],
   "metadata": {
@@ -3292,7 +3318,7 @@
       "0x4D59BEC2b09052c60C6149c623fb3a461fB1Fe74",
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe"
     ],
-    "updated": "2026-05-31T23:59:23.508550+00:00"
+    "updated": "2026-06-01T23:59:20.730384+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
