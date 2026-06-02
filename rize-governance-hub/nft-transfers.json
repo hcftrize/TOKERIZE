@@ -3,8 +3,8 @@
   "scraped_at": "2026-04-26T15:44:27.695872+00:00",
   "bootstrap": true,
   "counts": {
-    "nftTransferEvents": 10138,
-    "bondOwners": 10138
+    "nftTransferEvents": 10140,
+    "bondOwners": 10140
   },
   "data": {
     "nftTransferEvents": [
@@ -111525,6 +111525,28 @@
         "blockNumber": "46714373",
         "timestamp": "1780218093",
         "txHash": "0xb824ffe92b8d26654715e4643b93e1569b55d0f03fd5412883f038882fa598eb"
+      },
+      {
+        "id": "0x59102e9c31be8d3f4678e1df2ebe72702297b65bc74c574ec077e60700d0da31-38",
+        "tokenId": "10139",
+        "from": "0x0000000000000000000000000000000000000000",
+        "to": "0x8b42702018304735f89515418016492413e6dc74",
+        "isMint": true,
+        "date": "2026-06-01",
+        "blockNumber": "46768068",
+        "timestamp": "1780325483",
+        "txHash": "0x59102e9c31be8d3f4678e1df2ebe72702297b65bc74c574ec077e60700d0da31"
+      },
+      {
+        "id": "0x243275e18c7281c490355b37a9b938d333ee29934daf785b4d10c1f939f5ab0f-692",
+        "tokenId": "10140",
+        "from": "0x0000000000000000000000000000000000000000",
+        "to": "0xc9ed07ab9a953944fca928f15bc898d3e4a1dec2",
+        "isMint": true,
+        "date": "2026-06-01",
+        "blockNumber": "46777932",
+        "timestamp": "1780345211",
+        "txHash": "0x243275e18c7281c490355b37a9b938d333ee29934daf785b4d10c1f939f5ab0f"
       }
     ],
     "bondOwners": [
@@ -212907,8 +212929,28 @@
         "lastTransferDate": "2026-05-31",
         "lastTransferTimestamp": "1780218093",
         "transferCount": 1
+      },
+      {
+        "id": "10139",
+        "tokenId": "10139",
+        "owner": "0x8b42702018304735f89515418016492413e6dc74",
+        "mintDate": "2026-06-01",
+        "mintTimestamp": "1780325483",
+        "lastTransferDate": "2026-06-01",
+        "lastTransferTimestamp": "1780325483",
+        "transferCount": 1
+      },
+      {
+        "id": "10140",
+        "tokenId": "10140",
+        "owner": "0xc9ed07ab9a953944fca928f15bc898d3e4a1dec2",
+        "mintDate": "2026-06-01",
+        "mintTimestamp": "1780345211",
+        "lastTransferDate": "2026-06-01",
+        "lastTransferTimestamp": "1780345211",
+        "transferCount": 1
       }
     ]
   },
-  "updated_at": "2026-06-01T06:58:54.775052+00:00"
+  "updated_at": "2026-06-02T06:43:40.031050+00:00"
 }
