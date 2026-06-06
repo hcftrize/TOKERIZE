@@ -2204,6 +2204,41 @@
     "logo_local": "logos\\gsr.png"
   },
   {
+    "name": "Hacken",
+    "slug": "hacken",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a21665f822ff11f737ca22d_3a0d5628-d72e-4b2f-afe0-37257dd394dd.png",
+    "short_desc": "Hacken is an end-to-end security & compliance partner for digital assets.",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "SERVICE PROVIDER",
+      "COMPLIANCE",
+      "FORENSICS & SECURITY",
+      "Network Utilities\nCOMPLIANCEFORENSICS & SECURITY",
+      "Roles\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDERVALIDATOR\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDERVALIDATOR",
+      "VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nHacken\nhttps://hacken.io\nHacken is an end-to-end security & compliance partner for digital assets. Unlike traditional providers, Hacken was born on blockchain. We combine deep DLT expertise with enterprise-grade quality, AI-powered offensive security, and globally recognized certifications. Since 2017, Hacken has been trusted by 1,500 adopters including the European Commission, ADGM, MetaMask, Ethereum Foundation, and Binance to secure the new digital frontier. Our services include: 👉 Security Assessments on smart contracts, blockchain protocols & the foundational cryptography underpinning them. 👉 Technical Compliance for all international digital asset licensing frameworks. 👉 Legal, Regulatory & Tax support via our Advisory arm. We bring top-tier, blockchain-native expertise and proven credibility to help organizations secure their infrastructure and meet modern digital asset regulations with confidence.\nNetwork Utilities\nCOMPLIANCEFORENSICS & SECURITY\nRoles\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDERVALIDATOR\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDERVALIDATOR",
+    "logo_local": "logos\\hacken.png"
+  },
+  {
+    "name": "HackenProof",
+    "slug": "hackenproof",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a216766aac748b634da48ee_ae8a42ad-6a65-4250-b992-a0434d4cdddb.png",
+    "short_desc": "Expert bug bounty and crowdsourced audit platform for the Canton ecosystem",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "SERVICE PROVIDER",
+      "COMPLIANCE",
+      "FORENSICS & SECURITY",
+      "Network Utilities\nCOMPLIANCEFORENSICS & SECURITY",
+      "Roles\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDER\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDER"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nHackenProof\nhttps://hackenproof.com/\nCrowdsourced security platform connecting the Canton ecosystem with a global network of 70,000+ security researchers. Trusted by 300+ projects for over 9 years, HackenProof provides bug bounty programs, smart contract audits, blockchain and dApp audits, penetration testing, and VDP management. Through expert triage, managed researcher payouts, and structured vulnerability reporting, HackenProof turns crowdsourced security into a scalable, compliance-ready layer for the Canton ecosystem.\nNetwork Utilities\nCOMPLIANCEFORENSICS & SECURITY\nRoles\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDER\nAPPS (ALL)APPS (FEATURED)SERVICE PROVIDER",
+    "logo_local": "logos\\hackenproof.png"
+  },
+  {
     "name": "HandlPay",
     "slug": "handlpay",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a161c6da34cce7adba54a32_28c7b79a-7642-44df-813a-6e42889b4415.jpeg",
@@ -2280,6 +2315,20 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nHaven Digital Partners\n\nA regulated and permissioned platform where institutions and accredited investors lend and borrow any asset in Canton, on their own terms, privately and on-chain. Institutional P2P lending with third-party qualified custody, independent KYC/AML, counterparty transparency, and tailored terms.\n\nNetwork Utilities\nFINANCINGLIQUIDITY\nRoles\nVALIDATORAPPS (FEATURED)APPS (ALL)\nVALIDATORAPPS (FEATURED)APPS (ALL)",
     "logo_local": "logos\\haven-digital-partners.svg"
+  },
+  {
+    "name": "Helios Finance",
+    "slug": "helios-finance",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a204b07dc920de8922f80bb_44f858ed-6bb4-4517-93b9-9fcfc2bfb98f.png",
+    "short_desc": "Neobank on Canton Network — borrow, earn, and spend against your assets without selling.",
+    "tags": [
+      "APPS (FEATURED)",
+      "PAYMENTS",
+      "Network Utilities\nPAYMENTS",
+      "Roles\nAPPS (FEATURED)\nAPPS (FEATURED)"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nHelios Finance\nwww.heliosfinance.xyz/canton\nHelios brings DeFi money markets to Canton Network. CC-backed loans, curated yield vaults, and the first CC-backed credit card. Borrow Stablecoins against Canton Coin and other Canton assets. Permissionless and permissioned P2P lending are live on Canton Mainnet today. Yield vaults span 3 categories: Stablecoins, RWA, and CC-denominated Delta-Neutral vault. The Helios Reserve Credit Card lets you borrow against your CC and spend at 150M+ merchants worldwide — a real credit line, not a prepaid card.\nNetwork Utilities\nPAYMENTS\nRoles\nAPPS (FEATURED)\nAPPS (FEATURED)",
+    "logo_local": "logos\\helios-finance.png"
   },
   {
     "name": "Hex Trust",
@@ -3105,6 +3154,21 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nMoonshot\nhttps://moonshot.money/\n\nA blockchain wallet with an incentive driven super app.\n\nNetwork Utilities\nWALLETS\nRoles\nVALIDATOR\nVALIDATOR",
     "logo_local": "logos\\moonshot.jpeg"
+  },
+  {
+    "name": "Moonsong Labs",
+    "slug": "moonsong-labs",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a1f2cb07206e918fd12b718_7fd9d929-926c-429a-99b0-22d22b979625.png",
+    "short_desc": "DAML-certified engineering partner for financial institutions building on Canton",
+    "tags": [
+      "APPS (ALL)",
+      "SERVICE PROVIDER",
+      "COMPLIANCE",
+      "CUSTODY",
+      "DEVELOPER TOOLS"
+    ],
+    "detail_text": "DAML-certified engineering partner for financial institutions building on Canton",
+    "logo_local": "logos\\moonsong-labs.png"
   },
   {
     "name": "MPCH",
@@ -4438,6 +4502,20 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nxVentures\nhttps://www.xventures.de/\nRoles\nVALIDATOR\nVALIDATOR",
     "logo_local": "logos\\xventures.jpg"
+  },
+  {
+    "name": "YZi Labs",
+    "slug": "yzi-labs",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a1fbe5eda3e61b9cda7c325_f6425914-258a-42f1-a9d9-46f59b58abac.png",
+    "short_desc": "YZi Labs is a $10B global investment vehicle backing long-term founders in Web3, AI & Biotech.",
+    "tags": [
+      "SUPER VALIDATOR",
+      "FINANCING",
+      "Network Utilities\nFINANCING",
+      "Roles\nSUPER VALIDATOR\nSUPER VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nYZi Labs\nhttps://yzilabs.com\nYZi Labs manages over $10 billion in assets globally. Our investment philosophy emphasizes impact first—we believe that meaningful returns will naturally follow. We invest in ventures at every stage, prioritizing those with solid fundamentals in Web3, AI, and biotech. YZi Labs’ portfolio covers over 300 projects from over 25 countries across six continents. Some notable portfolios include Trustwallet, CoinMarketCap, Polygon, Injective, Ethena, Safepal Wallet, Canton Network, Better Payment Network, Aster, XAI (SpaceX), and more. More than 65 of YZi Labs’ portfolio companies have gone through our incubation programs. For more information, follow YZi Labs on X (@yzilabs).\nNetwork Utilities\nFINANCING\nRoles\nSUPER VALIDATOR\nSUPER VALIDATOR",
+    "logo_local": "logos\\yzi-labs.png"
   },
   {
     "name": "Zeconomy",
