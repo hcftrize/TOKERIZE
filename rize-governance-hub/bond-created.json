@@ -3,9 +3,9 @@
   "scraped_at": "2026-04-28T11:15:33.797109+00:00",
   "bootstrap": true,
   "counts": {
-    "bondCreatedEvents": 10140,
+    "bondCreatedEvents": 10141,
     "increaseBondEvents": 311,
-    "bonds": 10140
+    "bonds": 10141
   },
   "data": {
     "bondCreatedEvents": [
@@ -111548,6 +111548,17 @@
         "blockNumber": "46777932",
         "timestamp": "1780345211",
         "txHash": "0x243275e18c7281c490355b37a9b938d333ee29934daf785b4d10c1f939f5ab0f"
+      },
+      {
+        "id": "0x0a4f72400632de1d73c00d712bce05c64a1134d71c494f15df9c3de104f7d30f-520",
+        "nftId": "10141",
+        "owner": "0xf7d2c4a3527ff373e6ed9f25ab4c07fbb7c23252",
+        "poolId": 2,
+        "amount": "52839.875833868406569497",
+        "date": "2026-06-05",
+        "blockNumber": "46936116",
+        "timestamp": "1780661579",
+        "txHash": "0x0a4f72400632de1d73c00d712bce05c64a1134d71c494f15df9c3de104f7d30f"
       }
     ],
     "increaseBondEvents": [
@@ -246171,8 +246182,21 @@
         "increaseCount": 0,
         "lastDepositDate": "2026-06-01",
         "lastDepositTimestamp": "1780345211"
+      },
+      {
+        "id": "10141",
+        "nftId": "10141",
+        "owner": "0xf7d2c4a3527ff373e6ed9f25ab4c07fbb7c23252",
+        "poolId": 2,
+        "createdAtDate": "2026-06-05",
+        "createdAtTimestamp": "1780661579",
+        "createdAtBlock": "46936116",
+        "totalDeposited": "52839.875833868406569497",
+        "increaseCount": 0,
+        "lastDepositDate": "2026-06-05",
+        "lastDepositTimestamp": "1780661579"
       }
     ]
   },
-  "updated_at": "2026-06-05T06:25:00.616749+00:00"
+  "updated_at": "2026-06-06T05:55:39.453402+00:00"
 }
