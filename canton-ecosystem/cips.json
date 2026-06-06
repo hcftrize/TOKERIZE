@@ -1064,9 +1064,9 @@
     "number": 117,
     "title": "Logical Synchronizers",
     "type": "Standards Track",
-    "status": "Proposed",
+    "status": "Approved",
     "created": "2026-04-28",
-    "approved": "TBD",
+    "approved": "2026-06-05",
     "description": "Logical Synchronizers provide an abstraction layer between physical synchronizer nodes and the Validators that rely on them. This abstraction allows the Validator node to connect to a single synchronization service, even as the underlying synchronizer nodes (the \"physical\" synchronizers) change their deployment and adopt new communication protocols. This CIP proposes that the Global Synchronizer adopt Logical Synchronizers, and use Logical Synchronizers for future protocol upgrades. This will allow Validator nodes to maintain a continuous synchronizer connection as the physical synchronizer nodes upgrade from one protocol version to another, and to retain all local history. The CIP also proposes scheduling  the first Logical Synchronizer Upgrade (LSU) of the Global Synchronizer, to move the network from Canton Protocol Version 34 to Canton Protocol Version 35\\.\n\nLogical Synchronizer-enabled upgrades (LSUs) will replace the \"Synchronizer Upgrades with Downtime\" procedure used in CIP-0062 and CIP-0089. A successor physical synchronizer spins up alongside the existing one. Validators switch over automatically, with seconds to minutes of noticeable downtime and no migration dump export/import. This eliminates the 90-minute to 3-hour coordinated network pause required by prior protocol upgrades, and allows Validators to retain historical data. Note however that topology changes (new parties, new nodes, and Daml model vetting) must pause for a longer period, up to a few hours, as the topology state propagates to the new physical synchronizer nodes. (Future protocol versions may reduce this topology management pause.)"
   }
 ]
