@@ -3469,6 +3469,18 @@
     "logo_local": "logos\\particula.png"
   },
   {
+    "name": "PartyLayer",
+    "slug": "partylayer",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a28361472aefe86c4dbd479_bfadd5c2-5517-4e8d-959d-939dd7898586.png",
+    "short_desc": "One SDK, one API, every Canton wallet. Open-source wallet abstraction for dApps.",
+    "tags": [
+      "APPS (ALL)",
+      "DEVELOPER TOOLS"
+    ],
+    "detail_text": "One SDK, one API, every Canton wallet. Open-source wallet abstraction for dApps.",
+    "logo_local": "logos\\partylayer.png"
+  },
+  {
     "name": "Paxos",
     "slug": "paxos",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69bdda8ead515e4387c7881e_paxos.jpg",

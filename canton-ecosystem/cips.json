@@ -1014,7 +1014,7 @@
     "number": 112,
     "title": "Canton Network Token Standard V2 - Improvements for Privacy, Performance and Traditional Accounting",
     "type": "Standards Track",
-    "status": "Draft",
+    "status": "Proposed",
     "created": "2026-03-31",
     "approved": "",
     "description": "This proposal outlines a set of improvements to the CIP-0056 token standard. These enhancements make the token standard more suitable for integration with traditional trading and settlement venues, as well as on-chain securities that model holding and settlement via custody chains. They also include improvements to settlement efficiency at the protocol level as well as optimization to the funds that need to be allocated. A high level of backward compatibility with CIP-0056 means that the evolved standard will further foster interoperability between wallets, apps, and assets across crypto and traditional finance."
@@ -1068,5 +1068,15 @@
     "created": "2026-04-28",
     "approved": "2026-06-05",
     "description": "Logical Synchronizers provide an abstraction layer between physical synchronizer nodes and the Validators that rely on them. This abstraction allows the Validator node to connect to a single synchronization service, even as the underlying synchronizer nodes (the \"physical\" synchronizers) change their deployment and adopt new communication protocols. This CIP proposes that the Global Synchronizer adopt Logical Synchronizers, and use Logical Synchronizers for future protocol upgrades. This will allow Validator nodes to maintain a continuous synchronizer connection as the physical synchronizer nodes upgrade from one protocol version to another, and to retain all local history. The CIP also proposes scheduling  the first Logical Synchronizer Upgrade (LSU) of the Global Synchronizer, to move the network from Canton Protocol Version 34 to Canton Protocol Version 35\\.\n\nLogical Synchronizer-enabled upgrades (LSUs) will replace the \"Synchronizer Upgrades with Downtime\" procedure used in CIP-0062 and CIP-0089. A successor physical synchronizer spins up alongside the existing one. Validators switch over automatically, with seconds to minutes of noticeable downtime and no migration dump export/import. This eliminates the 90-minute to 3-hour coordinated network pause required by prior protocol upgrades, and allows Validators to retain historical data. Note however that topology changes (new parties, new nodes, and Daml model vetting) must pause for a longer period, up to a few hours, as the topology state propagates to the new physical synchronizer nodes. (Future protocol versions may reduce this topology management pause.)"
+  },
+  {
+    "id": "CIP-0118",
+    "number": 118,
+    "title": "Add Franklin Templeton as a Super Validator (max weight 5)",
+    "type": "Governance",
+    "status": "Proposed",
+    "created": "2026-06-04",
+    "approved": "",
+    "description": "Add Franklin Templeton as SV of max weight 5"
   }
 ]
