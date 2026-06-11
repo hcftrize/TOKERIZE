@@ -1074,9 +1074,9 @@
     "number": 118,
     "title": "Add Franklin Templeton as a Super Validator (max weight 5)",
     "type": "Governance",
-    "status": "Proposed",
+    "status": "Approved",
     "created": "2026-06-04",
-    "approved": "",
+    "approved": "2026-06-10",
     "description": "Add Franklin Templeton as SV of max weight 5"
   }
 ]
