@@ -1014,9 +1014,9 @@
     "number": 112,
     "title": "Canton Network Token Standard V2 - Improvements for Privacy, Performance and Traditional Accounting",
     "type": "Standards Track",
-    "status": "Proposed",
+    "status": "Approved",
     "created": "2026-03-31",
-    "approved": "",
+    "approved": "2026-06-12",
     "description": "This proposal outlines a set of improvements to the CIP-0056 token standard. These enhancements make the token standard more suitable for integration with traditional trading and settlement venues, as well as on-chain securities that model holding and settlement via custody chains. They also include improvements to settlement efficiency at the protocol level as well as optimization to the funds that need to be allocated. A high level of backward compatibility with CIP-0056 means that the evolved standard will further foster interoperability between wallets, apps, and assets across crypto and traditional finance."
   },
   {
@@ -1078,5 +1078,15 @@
     "created": "2026-06-04",
     "approved": "2026-06-10",
     "description": "Add Franklin Templeton as SV of max weight 5"
+  },
+  {
+    "id": "CIP-0119",
+    "number": 119,
+    "title": "Free Canton Coin Transfer-Preapproval Base Duration",
+    "type": "Tokenomics",
+    "status": "Proposed",
+    "created": "2026-05-22",
+    "approved": "",
+    "description": "CIP-0096 removed validator liveness rewards. This introduced a\nbootstrapping problem: Most exchanges only support sending Canton Coin\nto parties that have preapprovals enabled. But enabling preapprovals\nrequires paying a CC fee for their expiry duration.\nThis CIP solves this bootstrapping problem by introducing a free base duration for preapprovals\n(defaulting to 90 days), which allows creating and renewing a\npreapproval using just traffic costs including using the free base traffic rate."
   }
 ]
