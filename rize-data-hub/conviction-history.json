@@ -1583,6 +1583,10 @@
     {
       "date": "2026-06-15",
       "value": 931487361.49
+    },
+    {
+      "date": "2026-06-16",
+      "value": 932135361.49
     }
   ],
   "cex": [
@@ -3149,10 +3153,23 @@
     {
       "date": "2026-06-15",
       "value": 511640809.66
+    },
+    {
+      "date": "2026-06-16",
+      "value": 506137608.2
     }
   ],
   "unbonding": [],
   "whales": [
+    {
+      "date": "2026-06-16",
+      "amount": 5098964.12,
+      "from": "0xea5cb64754ad7aa24f7a6bbe3b724f29b4f822b8",
+      "to": "0x0851e36d477577cc0f7ec4f796a89213bd83e2bc",
+      "from_label": "0xea5c…22b8",
+      "to_label": "0x0851…e2bc",
+      "tx": "0x1cd4b1cc3fc39daeaafc489ee19b8a607e263033679c69b22ba7c254d89a8c45"
+    },
     {
       "date": "2026-06-15",
       "amount": 5039555.95,
@@ -3448,7 +3465,7 @@
       "0x4D59BEC2b09052c60C6149c623fb3a461fB1Fe74",
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe"
     ],
-    "updated": "2026-06-15T23:59:24.463329+00:00"
+    "updated": "2026-06-16T23:59:21.468085+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
