@@ -3586,6 +3586,18 @@
     "logo_local": "logos\\procur3.png"
   },
   {
+    "name": "Programmable Credit Protocol (PCP)",
+    "slug": "programmable-credit-protocol-pcp",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a303d8d5fd70f340349fc50_c9bf5f5e-470a-4803-a181-229ab61914d6.png",
+    "short_desc": "Post-trade enforcement infrastructure for secured lending & cleared repo on tokenized collateral",
+    "tags": [
+      "MARKET INFRASTRUCTURE",
+      "FINANCING"
+    ],
+    "detail_text": "Post-trade enforcement infrastructure for secured lending & cleared repo on tokenized collateral",
+    "logo_local": "logos\\programmable-credit-protocol-pcp.png"
+  },
+  {
     "name": "Prometheus",
     "slug": "prometheus",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515e309bce5006af43c64_Prometheus-wealth-mgt-icon.png",
