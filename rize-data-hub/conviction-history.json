@@ -1579,6 +1579,10 @@
     {
       "date": "2026-06-14",
       "value": 924981578.16
+    },
+    {
+      "date": "2026-06-15",
+      "value": 931487361.49
     }
   ],
   "cex": [
@@ -3141,10 +3145,32 @@
     {
       "date": "2026-06-14",
       "value": 513494652.02
+    },
+    {
+      "date": "2026-06-15",
+      "value": 511640809.66
     }
   ],
   "unbonding": [],
   "whales": [
+    {
+      "date": "2026-06-15",
+      "amount": 5039555.95,
+      "from": "0xea5cb64754ad7aa24f7a6bbe3b724f29b4f822b8",
+      "to": "0x0851e36d477577cc0f7ec4f796a89213bd83e2bc",
+      "from_label": "0xea5c…22b8",
+      "to_label": "0x0851…e2bc",
+      "tx": "0x2a807fb3d71588a26347b3ca49df29d3b96f0da436cac94e1d490f0038cd63c4"
+    },
+    {
+      "date": "2026-06-15",
+      "amount": 8794358.36,
+      "from": "0xd2dd7b597fd2435b6db61ddf48544fd931e6869f",
+      "to": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
+      "from_label": "Kraken Cold 2",
+      "to_label": "Kraken Hot 1",
+      "tx": "0x39d766427041a83dc566a32c2a8cfbcee48bef43384405a8e5312d0367b2d7ff"
+    },
     {
       "date": "2026-06-14",
       "amount": 8334817.0,
@@ -3405,69 +3431,6 @@
       "from_label": "Kraken Hot 1",
       "to_label": "Revolut",
       "tx": "0x3868128f509720d52341e261cb5ad73939764d5683a6b84133443ff0e43728d4"
-    },
-    {
-      "date": "2026-05-15",
-      "amount": 64381946.0,
-      "from": "0x84b38bc60f3bd82640ecefa320dab2be62e2da15",
-      "to": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
-      "from_label": "0x84b3…da15",
-      "to_label": "Kraken Hot 1",
-      "tx": "0x2e4e09ce9b1fdbfa74343fc4849e52972b237cd6559c1b35aac9c7ccf774c1cd"
-    },
-    {
-      "date": "2026-05-15",
-      "amount": 10034341.0,
-      "from": "0xf8191d98ae98d2f7abdfb63a9b0b812b93c873aa",
-      "to": "0x51c72848c68a965f66fa7a88855f9f7784502a7f",
-      "from_label": "0xf819…73aa",
-      "to_label": "0x51c7…2a7f",
-      "tx": "0xe61d4cb2b9ec254bffa18c8734a8eaffa6dc485ed856b6158d80840bc0ce1275"
-    },
-    {
-      "date": "2026-05-15",
-      "amount": 64381946.0,
-      "from": "0xf8191d98ae98d2f7abdfb63a9b0b812b93c873aa",
-      "to": "0x84b38bc60f3bd82640ecefa320dab2be62e2da15",
-      "from_label": "0xf819…73aa",
-      "to_label": "0x84b3…da15",
-      "tx": "0x18c370262623a0821a00b17712a049ab5deec5a0708f0cabde51c2468d873770"
-    },
-    {
-      "date": "2026-05-15",
-      "amount": 75010000.0,
-      "from": "0xaa9f8b6c6d1ca0d5abd96357a7871864173edb3c",
-      "to": "0xf8191d98ae98d2f7abdfb63a9b0b812b93c873aa",
-      "from_label": "0xaa9f…db3c",
-      "to_label": "0xf819…73aa",
-      "tx": "0x7df8d4a3ee7cffcedf0a4dd5963ff8c7df737675d28b96617e0a8dff94b789ed"
-    },
-    {
-      "date": "2026-05-15",
-      "amount": 75000000.0,
-      "from": "0x157331a32d7cc95441d9479439053c97f03017b6",
-      "to": "0xaa9f8b6c6d1ca0d5abd96357a7871864173edb3c",
-      "from_label": "0x1573…17b6",
-      "to_label": "0xaa9f…db3c",
-      "tx": "0x22985dfb5f4f9ecb5679f9298466adea7e26109847e1844277c7c4e64760cb09"
-    },
-    {
-      "date": "2026-05-15",
-      "amount": 25165000.0,
-      "from": "0xf8191d98ae98d2f7abdfb63a9b0b812b93c873aa",
-      "to": "0x157331a32d7cc95441d9479439053c97f03017b6",
-      "from_label": "0xf819…73aa",
-      "to_label": "0x1573…17b6",
-      "tx": "0xf33673883a9d14ad78afe2ff88a10947d814a333564f7d0d0a642e31c39bee73"
-    },
-    {
-      "date": "2026-05-15",
-      "amount": 19999960.0,
-      "from": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
-      "to": "0xf8191d98ae98d2f7abdfb63a9b0b812b93c873aa",
-      "from_label": "Kraken Hot 1",
-      "to_label": "0xf819…73aa",
-      "tx": "0x584a14b9295c83a72f7b8c094e0e2006075fe7e82fa5be2308c792a8d1459535"
     }
   ],
   "metadata": {
@@ -3485,7 +3448,7 @@
       "0x4D59BEC2b09052c60C6149c623fb3a461fB1Fe74",
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe"
     ],
-    "updated": "2026-06-14T23:59:20.622144+00:00"
+    "updated": "2026-06-15T23:59:24.463329+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
