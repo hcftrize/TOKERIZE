@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T02:00:56.000Z",
+  "updatedAt": "2026-06-21T02:00:59.000Z",
   "validator_rewards": [
     {
       "time": "2024-09-05T00:00:00Z",
@@ -3003,7 +3003,12 @@
     },
     {
       "time": "2026-06-20T00:00:00Z",
-      "app_rewards": "1.4755703432",
+      "app_rewards": "18.1895726802",
+      "validator_rewards": "0.0"
+    },
+    {
+      "time": "2026-06-21T00:00:00Z",
+      "app_rewards": "1.557868841",
       "validator_rewards": "0.0"
     }
   ],
