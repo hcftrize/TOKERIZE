@@ -2762,6 +2762,20 @@
     "logo_local": "logos\\lab6174.svg"
   },
   {
+    "name": "Lattice",
+    "slug": "lattice",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a34c899b48157c7a5ad9afa_855735ba-9018-407b-ae78-f538a119ff38.png",
+    "short_desc": "Lattice is financial tooling and infrastructure for institutions operating on Canton.",
+    "tags": [
+      "FINANCIAL INSTITUTIONS",
+      "PAYMENTS",
+      "Network Utilities\nPAYMENTS",
+      "Roles\nFINANCIAL INSTITUTIONS\nFINANCIAL INSTITUTIONS"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nLattice\nhttps://lattice.cash\nInstitutions onboarding onto Canton lack basic financial infrastructure - fragmented wallets, manual reconciliation, no treasury visibility. Lattice solves this. We give Canton institutions' finance teams real-time wallet visibility, automated reconciliation, and the tools needed to operate successfully on Canton. Our NeoBank gives institutions card and payment infrastructure for employee spend — funding cards directly with Canton-native assets.\nNetwork Utilities\nPAYMENTS\nRoles\nFINANCIAL INSTITUTIONS\nFINANCIAL INSTITUTIONS",
+    "logo_local": "logos\\lattice.png"
+  },
+  {
     "name": "Launchnodes",
     "slug": "launchnodes",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515d1ef7b433c04fcd379_Launchnodes-logo.png",
@@ -3423,6 +3437,20 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nonRails\nhttps://www.onrails.finance\nonRails builds issuance infrastructure for Canton Network. Its full asset pipeline gives institutions explicit finality and policy enforcement at every step. cETH is its first product: Ethereum on Canton, 1:1 backed by ETH in custody with reserves verifiable on-chain. No rehypothecation. CIP-56 compliant, enabling atomic composability with other Canton assets, including USDCx. Built for trading, lending, and settlement across institutional markets.\nNetwork Utilities\nTOKENIZED ASSETS\nRoles\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERVALIDATOR\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERVALIDATOR",
     "logo_local": "logos\\onrails.jpeg"
+  },
+  {
+    "name": "Orb 1 LP",
+    "slug": "orb-1-lp",
+    "logo_cdn": "https://cdn.prod.website-files.com/696805252243366e13a64c82/697a4b2e91c884840963f200_yellow-arrow-right.svg",
+    "short_desc": "JV between Nima Capital, a single family office, and Lennar, a publicly traded real estate corp.",
+    "tags": [
+      "SUPER VALIDATOR",
+      "FINANCING",
+      "Network Utilities\nFINANCING",
+      "Roles\nSUPER VALIDATOR\nSUPER VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nOrb 1 LP\nOrb 1 LP is a JV between Nima Capital, a single family office, and Lennar, a publicly traded homebuilder and real estate solution provider.\nNetwork Utilities\nFINANCING\nRoles\nSUPER VALIDATOR\nSUPER VALIDATOR",
+    "logo_local": "logos\\orb-1-lp.svg"
   },
   {
     "name": "Ownera",
