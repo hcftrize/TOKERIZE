@@ -3,8 +3,8 @@
   "scraped_at": "2026-04-26T15:44:27.695872+00:00",
   "bootstrap": true,
   "counts": {
-    "nftTransferEvents": 10145,
-    "bondOwners": 10145
+    "nftTransferEvents": 10148,
+    "bondOwners": 10148
   },
   "data": {
     "nftTransferEvents": [
@@ -111602,6 +111602,39 @@
         "blockNumber": "47587448",
         "timestamp": "1781964243",
         "txHash": "0x831a9513502c4245636bfc6df768c4add415d55dd54bf0cbf3c0bedb494570ef"
+      },
+      {
+        "id": "0xdf71aff577324f67547b95ac82aa78879c8219a0435bdbbad2f1fe9564847ce8-354",
+        "tokenId": "10146",
+        "from": "0x0000000000000000000000000000000000000000",
+        "to": "0xe8d6e692e971d05081cfe9ecc3221de510cc3871",
+        "isMint": true,
+        "date": "2026-06-22",
+        "blockNumber": "47670956",
+        "timestamp": "1782131259",
+        "txHash": "0xdf71aff577324f67547b95ac82aa78879c8219a0435bdbbad2f1fe9564847ce8"
+      },
+      {
+        "id": "0x9b9c036be368ba6a62645ffef3f78357ccc6bfe5a54b9af8aced856516157fd7-387",
+        "tokenId": "10147",
+        "from": "0x0000000000000000000000000000000000000000",
+        "to": "0xf74bb6ed56889ee80d7fb3a6260d03c3c2665056",
+        "isMint": true,
+        "date": "2026-06-22",
+        "blockNumber": "47671308",
+        "timestamp": "1782131963",
+        "txHash": "0x9b9c036be368ba6a62645ffef3f78357ccc6bfe5a54b9af8aced856516157fd7"
+      },
+      {
+        "id": "0x49586e5863ac82ef76f243dc04f6abad854e1e75ec6c72a2cd55b243bce236e5-280",
+        "tokenId": "10148",
+        "from": "0x0000000000000000000000000000000000000000",
+        "to": "0x701237d76a9964febfb2859592a706bbae0bc4e5",
+        "isMint": true,
+        "date": "2026-06-22",
+        "blockNumber": "47689493",
+        "timestamp": "1782168333",
+        "txHash": "0x49586e5863ac82ef76f243dc04f6abad854e1e75ec6c72a2cd55b243bce236e5"
       }
     ],
     "bondOwners": [
@@ -213054,8 +213087,38 @@
         "lastTransferDate": "2026-06-20",
         "lastTransferTimestamp": "1781964243",
         "transferCount": 1
+      },
+      {
+        "id": "10146",
+        "tokenId": "10146",
+        "owner": "0xe8d6e692e971d05081cfe9ecc3221de510cc3871",
+        "mintDate": "2026-06-22",
+        "mintTimestamp": "1782131259",
+        "lastTransferDate": "2026-06-22",
+        "lastTransferTimestamp": "1782131259",
+        "transferCount": 1
+      },
+      {
+        "id": "10147",
+        "tokenId": "10147",
+        "owner": "0xf74bb6ed56889ee80d7fb3a6260d03c3c2665056",
+        "mintDate": "2026-06-22",
+        "mintTimestamp": "1782131963",
+        "lastTransferDate": "2026-06-22",
+        "lastTransferTimestamp": "1782131963",
+        "transferCount": 1
+      },
+      {
+        "id": "10148",
+        "tokenId": "10148",
+        "owner": "0x701237d76a9964febfb2859592a706bbae0bc4e5",
+        "mintDate": "2026-06-22",
+        "mintTimestamp": "1782168333",
+        "lastTransferDate": "2026-06-22",
+        "lastTransferTimestamp": "1782168333",
+        "transferCount": 1
       }
     ]
   },
-  "updated_at": "2026-06-22T07:26:18.114660+00:00"
+  "updated_at": "2026-06-23T06:08:36.065157+00:00"
 }
