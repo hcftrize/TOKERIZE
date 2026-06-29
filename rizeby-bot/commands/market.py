@@ -140,7 +140,7 @@ async def cmd_pricesim(args: list) -> str:
             f"  MCap: {fmt_usd(target_mcap)}",
             f"  {base_name} price: {fmt_sim_price(hyp_price)}",
             f"  Change: {sign}{pct_change:.0f}%",
-            f"  {base_name} = {pct_of_mcap:.3f}% of {label}",
+            f"  {base_name} = {pct_of_mcap:.3f}% of {label.split('#')[0].strip()}",
             "",
         ]
     return "\n".join(lines)
@@ -239,7 +239,7 @@ async def cmd_portfoliosim(args: list) -> str:
             f"  MCap: {fmt_usd(target_mcap)}",
             f"  {base_name} @ {fmt_price(hyp_price)}",
             f"  Bag: {fmt_usd(bag_value)} ({sign}{pct:.0f}%)",
-            f"  {base_name} = {pct_of_mcap:.3f}% of {label}",
+            f"  {base_name} = {pct_of_mcap:.3f}% of {label.split('#')[0].strip()}",
             "",
         ]
     return "\n".join(lines)
