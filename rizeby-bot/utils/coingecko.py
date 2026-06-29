@@ -210,14 +210,57 @@ async def search_coin(query: str) -> dict | None:
     return result
 
 
+_rank_cache: dict = {}
+
+
+async def resolve_rank_coin(rank: int) -> dict | None:
+    """
+    Fetch the coin at market cap rank #N from CoinGecko.
+    Returns {id, symbol, name, rank} or None.
+    """
+    if rank in _rank_cache:
+        return _rank_cache[rank]
+    data = await cg_get("/coins/markets", {
+        "vs_currency": "usd",
+        "order": "market_cap_desc",
+        "per_page": 1,
+        "page": rank,
+    })
+    if not data or not isinstance(data, list) or len(data) == 0:
+        return None
+    coin = data[0]
+    result = {
+        "id":     coin["id"],
+        "symbol": coin.get("symbol", "").upper(),
+        "name":   coin.get("name", coin["id"]),
+        "rank":   rank,
+    }
+    _rank_cache[rank] = result
+    # Also cache in _search_cache so display_name() works
+    _search_cache[f"rank{rank}"] = result
+    return result
+
+
+def _parse_rank(token: str) -> int | None:
+    """Return N if token matches 'rankN' (case-insensitive), else None."""
+    t = token.lower().strip()
+    if t.startswith("rank") and t[4:].isdigit():
+        return int(t[4:])
+    return None
+
+
 async def resolve_coin_id(token: str) -> str | None:
-    """Resolve a ticker/name string to a CoinGecko coin ID."""
+    """Resolve a ticker/name/rankN string to a CoinGecko coin ID."""
+    rank = _parse_rank(token)
+    if rank is not None:
+        coin = await resolve_rank_coin(rank)
+        return coin["id"] if coin else None
     match = await search_coin(token)
     return match["id"] if match else None
 
 
 async def resolve_coin_ids(tokens: list[str]) -> dict[str, str]:
-    """Resolve multiple tokens to {original: coin_id}."""
+    """Resolve multiple tokens (including rankN) to {original: coin_id}."""
     result = {}
     for t in tokens:
         coin_id = await resolve_coin_id(t)
@@ -227,8 +270,16 @@ async def resolve_coin_ids(tokens: list[str]) -> dict[str, str]:
 
 
 def display_name(coin_id: str, original: str = "") -> str:
-    """Return display name: use original ticker uppercased, fallback to coin_id."""
+    """Return display name: use original ticker uppercased, fallback to coin_id.
+    For rankN tokens, returns 'SYM #N' (e.g. 'BNB #4').
+    """
     if original:
+        rank = _parse_rank(original)
+        if rank is not None:
+            cached = _rank_cache.get(rank) or _search_cache.get(f"rank{rank}")
+            if cached:
+                return f"{cached['symbol'].upper()} #{cached.get('rank', rank)}"
+            return f"#{rank}"
         return original.upper()
     # Use cached search result if available
     cached = _search_cache.get(coin_id.lower())
