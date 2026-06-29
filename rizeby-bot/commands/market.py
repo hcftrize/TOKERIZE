@@ -35,9 +35,9 @@ async def cmd_perf(args: list) -> str:
     by_id = {c["id"]: c for c in markets_data}
 
     def sym(coin_id, original=""):
-        """Use CoinGecko symbol from markets data, fallback to original ticker."""
+        """Use display_name for rankN support, fallback to markets data symbol."""
         if original:
-            return original.upper()
+            return display_name(coin_id, original)
         return (by_id.get(coin_id, {}).get("symbol") or coin_id).upper()
 
     base_name = sym(base_id)
@@ -99,7 +99,7 @@ async def cmd_pricesim(args: list) -> str:
 
     def sym(coin_id, original=""):
         if original:
-            return original.upper()
+            return display_name(coin_id, original)
         return (by_id.get(coin_id, {}).get("symbol") or coin_id).upper()
 
     base_name = sym(base_id)
@@ -189,7 +189,7 @@ async def cmd_portfoliosim(args: list) -> str:
 
     def sym(coin_id, original=""):
         if original:
-            return original.upper()
+            return display_name(coin_id, original)
         return (by_id.get(coin_id, {}).get("symbol") or coin_id).upper()
 
     base = by_id.get(base_id, {})
@@ -283,7 +283,7 @@ async def cmd_arbitrage(args: list) -> str:
 
     def sym(coin_id, original=""):
         if original:
-            return original.upper()
+            return display_name(coin_id, original)
         return (by_id.get(coin_id, {}).get("symbol") or coin_id).upper()
 
     base_name = sym(base_id, base_ticker)
