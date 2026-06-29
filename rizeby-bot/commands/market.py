@@ -134,7 +134,7 @@ async def cmd_pricesim(args: list) -> str:
 
     for hyp_price, label, target_mcap, target_rank, pct_change, pct_of_mcap in rows:
         sign = "+" if pct_change > 0 else ""
-        rank_str = f" #{target_rank}" if target_rank else ""
+        rank_str = f" #{target_rank}" if (target_rank and "#" not in label) else ""
         lines += [
             f"*{label}{rank_str}*",
             f"  MCap: {fmt_usd(target_mcap)}",
@@ -232,7 +232,7 @@ async def cmd_portfoliosim(args: list) -> str:
 
     for hyp_price, label, target_mcap, target_rank, bag_value, pct in rows:
         sign = "+" if pct > 0 else ""
-        rank_str = f" #{target_rank}" if target_rank else ""
+        rank_str = f" #{target_rank}" if (target_rank and "#" not in label) else ""
         pct_of_mcap = (base_mcap / target_mcap) * 100 if target_mcap else 0
         lines += [
             f"*{label}{rank_str}*",
