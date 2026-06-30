@@ -729,6 +729,24 @@
     "logo_local": "logos\\bron-wallet.svg"
   },
   {
+    "name": "BSOS",
+    "slug": "bsos",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a3cde49e8a67172278ec175_6c1d4e03-25dd-4452-88cb-3db970cf5830.png",
+    "short_desc": "Trusted Web3 Infrastructure for Stablecoin Payments and Asset Tokenization",
+    "tags": [
+      "VALIDATOR",
+      "DEVELOPER TOOLS",
+      "NAAS",
+      "PAYMENTS",
+      "Network Utilities\nDEVELOPER TOOLSNAASPAYMENTSSTABLECOINSTOKENIZED ASSETS",
+      "STABLECOINS",
+      "TOKENIZED ASSETS",
+      "Roles\nVALIDATOR\nVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nBSOS\nhttps://www.bsos.co\nBSOS builds trusted Web3 infrastructure for the next generation of financial systems. We help enterprises and financial institutions connect traditional finance with blockchain-based rails, enabling faster, more transparent, and programmable movement of value across markets. By combining enterprise-grade technology, compliance-aware architecture, and real-world financial use cases, BSOS supports the adoption of stablecoin payments, asset tokenization, and digital financial infrastructure at scale. Our vision is to make global finance more efficient, accessible, and interoperable for businesses, institutions, and the broader digital economy.\nNetwork Utilities\nDEVELOPER TOOLSNAASPAYMENTSSTABLECOINSTOKENIZED ASSETS\nRoles\nVALIDATOR\nVALIDATOR",
+    "logo_local": "logos\\bsos.png"
+  },
+  {
     "name": "Bybit",
     "slug": "bybit",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515df0e454c0d5515049d_Bybit%2520logo.png",
@@ -846,6 +864,19 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nCastleton Commodities International\nhttps://www.cci.com/\n\nCastleton Commodities is pairing natural gas trades on Eleox Ox Pair, using distributed ledger and smart contracts.",
     "logo_local": "logos\\castleton-commodities-international.jpeg"
+  },
+  {
+    "name": "Cauri",
+    "slug": "cauri",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a3c68edb8545752c64fdb3e_ea4c33f0-fd6d-473a-aa1e-c714e34b9af0.png",
+    "short_desc": "Cauri is a non-custodial Canton wallet for CIP-56 assets and secure dApp access.",
+    "tags": [
+      "APPS (FEATURED)",
+      "CANTON FOUNDATION MEMBER",
+      "WALLETS"
+    ],
+    "detail_text": "Cauri is a non-custodial Canton wallet for CIP-56 assets and secure dApp access.",
+    "logo_local": "logos\\cauri.png"
   },
   {
     "name": "CBTC",
@@ -4089,6 +4120,19 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nTemple Trading\nhttps://templedigitalgroup.com\n\nTemple, is a compliant and private Central Limit Orderbook (CLOB) and asset issuance platform powered by the Canton network.\n\nNetwork Utilities\nLIQUIDITYTOKENIZED ASSETS\nRoles\nAPPS (FEATURED)CANTON FOUNDATION MEMBERAPPS (ALL)\nAPPS (FEATURED)CANTON FOUNDATION MEMBERAPPS (ALL)",
     "logo_local": "logos\\temple-trading.jpg"
+  },
+  {
+    "name": "TermPrime",
+    "slug": "termprime",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a41ccc263a124667a8a3c21_ab95cb75-1ad6-400b-9fca-ccfdb9678675.png",
+    "short_desc": "TermPrime runs a Canton validator and provides fixed-rate term financing for institutions",
+    "tags": [
+      "APPS (ALL)",
+      "VALIDATOR",
+      "FINANCING"
+    ],
+    "detail_text": "TermPrime runs a Canton validator and provides fixed-rate term financing for institutions",
+    "logo_local": "logos\\termprime.png"
   },
   {
     "name": "Texture Capital",
