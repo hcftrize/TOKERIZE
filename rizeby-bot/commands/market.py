@@ -6,7 +6,7 @@ import httpx
 from utils.coingecko import (
     get_markets, get_market_chart, get_global, get_simple_price,
     resolve_coin_ids, resolve_coin_id, get_coin_detail, parse_base_and_compare,
-    display_name, RIZE_ID, RIZE_SUPPLY, cg_get,
+    display_name, RIZE_ID, RIZE_SUPPLY, cg_get, parse_mcap_token,
 )
 from utils.formatters import fmt_usd, fmt_pct, fmt_price, fmt_sim_price, fmt_num, parse_amount
 import time
@@ -90,7 +90,12 @@ async def cmd_perf(args: list) -> str:
 
 async def cmd_pricesim(args: list) -> str:
     base_id, compare_tokens = await parse_base_and_compare(args)
-    token_map = await resolve_coin_ids(compare_tokens)
+
+    # Split mcap tokens from regular tokens
+    mcap_tokens = [(t, parse_mcap_token(t)) for t in compare_tokens if parse_mcap_token(t) is not None]
+    regular_tokens = [t for t in compare_tokens if parse_mcap_token(t) is None]
+
+    token_map = await resolve_coin_ids(regular_tokens)
     all_ids = list(set([base_id] + list(token_map.values())))
     markets_data = await _cached(f"mkts_{','.join(sorted(all_ids))}", get_markets(all_ids))
     if not markets_data:
@@ -119,6 +124,8 @@ async def cmd_pricesim(args: list) -> str:
         "",
     ]
     rows = []
+
+    # Regular token rows
     for orig, cid in token_map.items():
         if cid == base_id: continue
         c = by_id.get(cid, {})
@@ -129,6 +136,14 @@ async def cmd_pricesim(args: list) -> str:
         pct_change  = ((hyp_price / base_price) - 1) * 100 if base_price else 0
         pct_of_mcap = (base_mcap / target_mcap) * 100 if target_mcap else 0
         rows.append((hyp_price, sym(cid, orig), target_mcap, target_rank, pct_change, pct_of_mcap))
+
+    # MCap target rows
+    for orig, target_mcap in mcap_tokens:
+        hyp_price   = target_mcap / base_supply
+        pct_change  = ((hyp_price / base_price) - 1) * 100 if base_price else 0
+        pct_of_mcap = (base_mcap / target_mcap) * 100 if target_mcap else 0
+        label = fmt_usd(target_mcap)
+        rows.append((hyp_price, label, target_mcap, None, pct_change, pct_of_mcap))
 
     rows.sort(key=lambda r: r[0], reverse=True)
 
@@ -180,7 +195,11 @@ async def cmd_portfoliosim(args: list) -> str:
             f"Example: `/portfoliosim 1000000 rize to eth link mantra`"
         )
 
-    token_map = await resolve_coin_ids(compare_tokens)
+    # Split mcap tokens from regular tokens
+    mcap_tokens = [(t, parse_mcap_token(t)) for t in compare_tokens if parse_mcap_token(t) is not None]
+    regular_tokens = [t for t in compare_tokens if parse_mcap_token(t) is None]
+
+    token_map = await resolve_coin_ids(regular_tokens)
     all_ids = list(set([base_id] + list(token_map.values())))
     markets_data = await _cached(f"mkts_{','.join(sorted(all_ids))}", get_markets(all_ids))
     if not markets_data:
@@ -227,6 +246,14 @@ async def cmd_portfoliosim(args: list) -> str:
         pct = ((bag_value / current_bag) - 1) * 100 if current_bag else 0
         label = sym(cid, orig)
         rows.append((hyp_price, label, target_mcap, target_rank, bag_value, pct))
+
+    # MCap target rows
+    for orig, target_mcap in mcap_tokens:
+        hyp_price = target_mcap / base_supply
+        bag_value = amount * hyp_price
+        pct = ((bag_value / current_bag) - 1) * 100 if current_bag else 0
+        label = fmt_usd(target_mcap)
+        rows.append((hyp_price, label, target_mcap, None, bag_value, pct))
 
     rows.sort(key=lambda r: r[0], reverse=True)
 
