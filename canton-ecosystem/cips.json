@@ -964,7 +964,7 @@
     "number": 107,
     "title": "24h Submission Delay for End-User CC Transactions",
     "type": "Standards Track",
-    "status": "Approved",
+    "status": "Final",
     "created": "2026-01-21",
     "approved": "2026-03-10",
     "description": "This CIP supports a 24 hours submission delay between preparing and\nexecution for all CC end-user transactions. Specifically this applies to all\ntoken standard operations making CC fully compliant with the token standard as\nwell as the CC specific public actions of creating, renewing, and\narchiving preapprovals, purchasing traffic, and tapping funds on\nDevNet."
