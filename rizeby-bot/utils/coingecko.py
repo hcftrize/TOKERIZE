@@ -249,6 +249,23 @@ def _parse_rank(token: str) -> int | None:
     return None
 
 
+def parse_mcap_token(token: str) -> float | None:
+    """
+    Return USD value if token is a mcap shorthand (e.g. '100m', '1b', '50k').
+    Case-insensitive. Returns None if not a mcap token.
+    Examples: '100m' → 100_000_000, '1.5b' → 1_500_000_000, '500k' → 500_000
+    """
+    t = token.strip().lower()
+    multipliers = {"k": 1_000, "m": 1_000_000, "b": 1_000_000_000}
+    if t and t[-1] in multipliers:
+        num = t[:-1]
+        try:
+            return float(num) * multipliers[t[-1]]
+        except ValueError:
+            return None
+    return None
+
+
 async def resolve_coin_id(token: str) -> str | None:
     """Resolve a ticker/name/rankN string to a CoinGecko coin ID."""
     rank = _parse_rank(token)
