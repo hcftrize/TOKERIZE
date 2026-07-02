@@ -514,7 +514,7 @@
     "number": 60,
     "title": "Add Zero Hash as SV of Weight 7.5",
     "type": "Governance",
-    "status": "Approved",
+    "status": "Final",
     "created": "2025-04-23",
     "approved": "2025-05-13",
     "description": "Add Zero Hash as SV of Weight 7.5"
@@ -634,7 +634,7 @@
     "number": 72,
     "title": "Add Fireblocks as an SV of Weight 5",
     "type": "Governance",
-    "status": "Approved",
+    "status": "Final",
     "created": "2025-07-30",
     "approved": "2025-08-11",
     "description": "* Add Fireblocks as an SV of Weight 5"
@@ -714,7 +714,7 @@
     "number": 80,
     "title": "Add Republic as an SV of Weight 6",
     "type": "Governance",
-    "status": "Approved",
+    "status": "Final",
     "created": "2025-09-18",
     "approved": "2025-10-06",
     "description": "* Add Republic as an SV of Weight 6."
@@ -734,7 +734,7 @@
     "number": 82,
     "title": "Establish a 5% Development Fund (Foundation-Governed)",
     "type": "Governance",
-    "status": "Active",
+    "status": "Final",
     "created": "2025-09-24",
     "approved": "2025-10-01",
     "description": "This CIP ratifies the creation of a Development Fund equal to 5% of all future CC mint emissions, allocated to a Foundation-governed Fund. The Fund exists to sustain long-term investment in the Canton protocol (core R&D, dev tools, security, audits, reference implementations, DeFi app(s) liquidity seeding, critical infra). The fund is prospective (no retroactive allocation) and is taken pro-rata from all issuance streams so that every pool contributes, reflecting that everyone benefits from protocol investment.\n\nA subsequent CIP will propose the implementation mechanics (addresses, start epoch/height, accounting hooks, spend process, guardrails)."
@@ -764,7 +764,7 @@
     "number": 85,
     "title": "Add Talos as Weight 6.5 SV",
     "type": "Governance",
-    "status": "Approved",
+    "status": "Final",
     "created": "2025-09-08",
     "approved": "2025-10-09",
     "description": "This CIP preserves Coin Metrics’ existing Weight 1.0 Super Validator under CIP-0046 and adds an escrowed, outcome-linked maximum earnable Weight of +6.5 for Talos. The incremental weight mints only upon Accountability Subcommittee verification of adoption milestones across:  \n\n* Canton Coin (CC) trading/custody readiness via Talos  \n* pX integration to Canton  \n* Measured production usage through defined trading and settlement volumes"
@@ -794,7 +794,7 @@
     "number": 89,
     "title": "Splice 0.5.0 / Canton 3.4 Upgrade",
     "type": "Standards Track",
-    "status": "Approved",
+    "status": "Final",
     "created": "2025-08-21",
     "approved": "2025-10-30",
     "description": "Splice 0.5.0 introduces new features and scaling improvements that rely on Canton 3.4. We recommend adopting Splice 0.5.0, which requires a Major Upgrade with Downtime, for the Super Validators and Validators, to move the network from Canton 3.3 to Canton 3.4. ."
@@ -824,7 +824,7 @@
     "number": 92,
     "title": "Controlled Transition to Dynamic Market Feeds Post-Listing of Canton Coin (CC)",
     "type": "Governance",
-    "status": "Approved",
+    "status": "Final",
     "created": "2025-10-31",
     "approved": "2025-11-07",
     "description": "This proposal recommends that Super Validator (SV) operators adopt a controlled, 10-day transition period following the spot listing of Canton Coin (CC) to move from the current fixed on-chain conversion rate mechanics toward fully dynamic, market-based price feeds.  \nDuring this transition period, each SV must update its vote for the on-chain median price at least once every 24 hours, using reasonable reference prices that reflect evolving market conditions. Each SV may independently migrate to its live market feed when, in its judgment, market liquidity and volatility conditions allow."
@@ -924,7 +924,7 @@
     "number": 103,
     "title": "dApp Standard",
     "type": "Standards Track",
-    "status": "Approved",
+    "status": "Active",
     "created": "2025-11-28",
     "approved": "2026-01-29",
     "description": "This proposal introduces a vendor-neutral **dApp API** that decouples network connectivity and key management from decentralized applications, while providing a standardized set of primitives for interacting with the Canton Network.\n\nUsing the dApp API, users can access any application with a validator and signing provider of their choice. In this model, dApp clients operate in conjunction with **Wallets**, which implement the dApp API, are trusted by the user, and enforce authorization to guard against malicious requests from untrusted dApps.\n\nThe design emphasizes a **minimal, interoperable surface** with strict, unambiguous semantics for requests, responses, and errors, while remaining flexible enough to support diverse Wallet architectures and deployment models.\n\nAs a result, any dApp client can seamlessly interoperate with any Wallet."
@@ -944,7 +944,7 @@
     "number": 105,
     "title": "Super Validator (SV) Locking & Long-Term Commitment Framework",
     "type": "Tokenomics",
-    "status": "Approved",
+    "status": "Active",
     "created": "2026-02-06",
     "approved": "2026-03-02",
     "description": "This proposal introduces a long-term locking and commitment framework for Super Validators\n(SVs) on the Canton Network.\nSVs may elect to lock a portion of their aggregate lifetime earned SV rewards in order to\nmaintain forward Super Validator Weight. This lock creates a visible, on-chain commitment to\nthe network and directly ties SV influence to long-term alignment.\nSV Weight is earned based on the percentage of lifetime SV rewards that are actively locked.\nSVs that choose not to participate, or that fall below required lock thresholds, earn proportionally\nreduced SV Weight or none at all.\n\nThis framework is designed to:\n- Align SV incentives with the long-term success of the network\n- Replace reputational assurances with cryptographic proof of alignment\n- Reduce incentives for short-term or opportunistic behavior\n\nParticipation in this framework is voluntary. The consequences of participation or\nnon-participation are transparent, objective, and applied uniformly across all Super Validators."

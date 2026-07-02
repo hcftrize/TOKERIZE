@@ -2561,6 +2561,21 @@
     "logo_local": "logos\\intellecteu.png"
   },
   {
+    "name": "Interstice Digital",
+    "slug": "interstice-digital",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a454dd84ca3f39a5b3fef0c_7cceca82-372a-4682-8c13-a87c1db60f0c.png",
+    "short_desc": "Compliant cross-chain swaps between Canton, Ethereum and Solana, built for companies with compliance",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "MARKET INFRASTRUCTURE",
+      "COMPLIANCE",
+      "INTEROPERABILITY"
+    ],
+    "detail_text": "Compliant cross-chain swaps between Canton, Ethereum and Solana, built for companies with compliance",
+    "logo_local": "logos\\interstice-digital.png"
+  },
+  {
     "name": "IPBlock LLC",
     "slug": "ipblock-llc",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69bdd75986443de1911761c0_ipblock.jpg",
