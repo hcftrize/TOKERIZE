@@ -2362,6 +2362,22 @@
     "logo_local": "logos\\helios-finance.png"
   },
   {
+    "name": "HestiaX",
+    "slug": "hestiax",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a4d88077b717469a784a440_0035d3cf-8a51-4ef4-b13f-881e773e00c8.png",
+    "short_desc": "Institutional green bond infrastructure for renewable energy portfolio financing",
+    "tags": [
+      "APPS (ALL)",
+      "VALIDATOR",
+      "FINANCING",
+      "TOKENIZED ASSETS",
+      "Network Utilities\nFINANCINGTOKENIZED ASSETS",
+      "Roles\nAPPS (ALL)VALIDATOR\nAPPS (ALL)VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nHestiaX\nhttps://hestiax.org/\nHestiaX is green bond institutional infrastructure for renewable energy portfolio financing. Renewable energy producers unlock institutional capital to scale BESS, solar, wind and hybrid portfolios, while institutional investors get access to renewable energy-backed yield opportunities.\nNetwork Utilities\nFINANCINGTOKENIZED ASSETS\nRoles\nAPPS (ALL)VALIDATOR\nAPPS (ALL)VALIDATOR",
+    "logo_local": "logos\\hestiax.png"
+  },
+  {
     "name": "Hex Trust",
     "slug": "hex-trust",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69bdd5e152ee35233268fd12_hextrust.jpg",
