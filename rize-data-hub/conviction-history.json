@@ -1683,6 +1683,10 @@
     {
       "date": "2026-07-10",
       "value": 924722764.61
+    },
+    {
+      "date": "2026-07-11",
+      "value": 924272764.61
     }
   ],
   "cex": [
@@ -3349,6 +3353,10 @@
     {
       "date": "2026-07-10",
       "value": 318152740.86
+    },
+    {
+      "date": "2026-07-11",
+      "value": 291699318.21
     }
   ],
   "unbonding": [],
@@ -3496,42 +3504,6 @@
       "from_label": "Kraken Cold 2",
       "to_label": "Kraken Hot 1",
       "tx": "0x0a8fa4406162816ed93aa926fa10e74b4662a5d3efc439742436d80982bb7654"
-    },
-    {
-      "date": "2026-06-10",
-      "amount": 9830493.98,
-      "from": "0xd2dd7b597fd2435b6db61ddf48544fd931e6869f",
-      "to": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
-      "from_label": "Kraken Cold 2",
-      "to_label": "Kraken Hot 1",
-      "tx": "0x24afd9430ef9dde1d61624a08416a6a086af035599f8e909c92f92f22b5505e9"
-    },
-    {
-      "date": "2026-06-10",
-      "amount": 19368048.7,
-      "from": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
-      "to": "0x7dafba1d69f6c01ae7567ffd7b046ca03b706f83",
-      "from_label": "Kraken Hot 1",
-      "to_label": "Kraken Cold 1",
-      "tx": "0x96144bc23eb09638b0287211b468932dfad6afc49a1a1aed3e1fe71bbc6979f2"
-    },
-    {
-      "date": "2026-06-10",
-      "amount": 10438221.0,
-      "from": "0xeb9ca8fdfac0652a97c0e1a48c1178d32d3a6b8f",
-      "to": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
-      "from_label": "0xeb9c…6b8f",
-      "to_label": "Kraken Hot 1",
-      "tx": "0x0d27e8a3b4f235c03dfdac3e8d14c7d495663453746082c7e59ac57f63722816"
-    },
-    {
-      "date": "2026-06-10",
-      "amount": 10438221.0,
-      "from": "0x9b0c45d46d386cedd98873168c36efd0dcba8d46",
-      "to": "0xeb9ca8fdfac0652a97c0e1a48c1178d32d3a6b8f",
-      "from_label": "Revolut",
-      "to_label": "0xeb9c…6b8f",
-      "tx": "0x7f549037a511835241c641815f207d7d3aceea11f57ae1edd8188326c93a5623"
     }
   ],
   "metadata": {
@@ -3549,7 +3521,7 @@
       "0x4D59BEC2b09052c60C6149c623fb3a461fB1Fe74",
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe"
     ],
-    "updated": "2026-07-10T23:59:19.506847+00:00"
+    "updated": "2026-07-11T23:59:24.657803+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
