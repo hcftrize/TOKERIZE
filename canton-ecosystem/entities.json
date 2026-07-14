@@ -1610,6 +1610,20 @@
     "logo_local": "logos\\eib.png"
   },
   {
+    "name": "Ekiden",
+    "slug": "ekiden",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a55064789267f0c43251876_cca5823c-1af6-4a0b-b820-717fca37df7b.png",
+    "short_desc": "Derivative markets for tokenized assets",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "MARKET INFRASTRUCTURE",
+      "EXCHANGES"
+    ],
+    "detail_text": "Derivative markets for tokenized assets",
+    "logo_local": "logos\\ekiden.png"
+  },
+  {
     "name": "Eleox",
     "slug": "eleox",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515d55e1b9e88b95170dd_logo_eleox.png",
