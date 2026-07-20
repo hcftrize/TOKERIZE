@@ -1715,6 +1715,10 @@
     {
       "date": "2026-07-18",
       "value": 924214498.76
+    },
+    {
+      "date": "2026-07-19",
+      "value": 924065021.33
     }
   ],
   "cex": [
@@ -3413,6 +3417,10 @@
     {
       "date": "2026-07-18",
       "value": 304710417.04
+    },
+    {
+      "date": "2026-07-19",
+      "value": 303267826.24
     }
   ],
   "unbonding": [],
@@ -3479,33 +3487,6 @@
       "from_label": "Revolut",
       "to_label": "0x15da…b0d7",
       "tx": "0xdfca020a6225044d49883ba40d209b2e3807dfdd190da73d1de6cf66e29bab07"
-    },
-    {
-      "date": "2026-06-18",
-      "amount": 6755108.0,
-      "from": "0xf8191d98ae98d2f7abdfb63a9b0b812b93c873aa",
-      "to": "0x51c72848c68a965f66fa7a88855f9f7784502a7f",
-      "from_label": "0xf819…73aa",
-      "to_label": "0x51c7…2a7f",
-      "tx": "0x078a38c923aa8cb9d88d9050f931e98d56e0270d3d1efb1e0f79cd077cdbbe61"
-    },
-    {
-      "date": "2026-06-18",
-      "amount": 39726605.0,
-      "from": "0x84b38bc60f3bd82640ecefa320dab2be62e2da15",
-      "to": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
-      "from_label": "0x84b3…da15",
-      "to_label": "Kraken Hot 1",
-      "tx": "0x735511d3e5c8319916b0661f79e5a0ac87aa0b9e874bffea08b2b6a176dc6965"
-    },
-    {
-      "date": "2026-06-18",
-      "amount": 39726605.0,
-      "from": "0xf8191d98ae98d2f7abdfb63a9b0b812b93c873aa",
-      "to": "0x84b38bc60f3bd82640ecefa320dab2be62e2da15",
-      "from_label": "0xf819…73aa",
-      "to_label": "0x84b3…da15",
-      "tx": "0xa4d2c54eed9aaf304fbbb0578b87f9e70ef79bbab510d8f63e82f53d0e3d64e0"
     }
   ],
   "metadata": {
@@ -3523,7 +3504,7 @@
       "0x4D59BEC2b09052c60C6149c623fb3a461fB1Fe74",
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe"
     ],
-    "updated": "2026-07-18T23:59:26.379197+00:00"
+    "updated": "2026-07-19T23:59:30.434393+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
