@@ -2572,6 +2572,25 @@
     "logo_local": "logos\\icapital.png"
   },
   {
+    "name": "Innowise",
+    "slug": "innowise",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a60adf3853f88fe626bd065_3dabae89-539e-4789-8cc7-9ce4b7498e9a.jpeg",
+    "short_desc": "A full-cycle systems integrator delivering enterprise-grade Daml applications and RWA solutions.",
+    "tags": [
+      "SERVICE PROVIDER",
+      "VALIDATOR",
+      "DEVELOPER TOOLS",
+      "PAYMENTS",
+      "STABLECOINS",
+      "Network Utilities\nDEVELOPER TOOLSPAYMENTSSTABLECOINSTOKENIZED ASSETSWALLETS",
+      "TOKENIZED ASSETS",
+      "WALLETS",
+      "Roles\nSERVICE PROVIDERVALIDATOR\nSERVICE PROVIDERVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nInnowise\nhttps://innowise.com/\nInnowise is a global software engineering company with 3,500+ IT professionals and nearly two decades of delivery experience across fintech, banking, and blockchain. With deep experience in custody API integrations, non-custodial wallet architectures, and compliance-aware smart contract design, Innowise helps enterprises bring real-world assets on-chain with the privacy and control Canton provides\nNetwork Utilities\nDEVELOPER TOOLSPAYMENTSSTABLECOINSTOKENIZED ASSETSWALLETS\nRoles\nSERVICE PROVIDERVALIDATOR\nSERVICE PROVIDERVALIDATOR",
+    "logo_local": "logos\\innowise.jpeg"
+  },
+  {
     "name": "IntellectEU",
     "slug": "intellecteu",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515d622669322a09cc0ed_logo_intellect_eu.png",
