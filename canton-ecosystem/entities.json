@@ -1521,6 +1521,24 @@
     "logo_local": "logos\\dtcc.svg"
   },
   {
+    "name": "DTEAM",
+    "slug": "dteam",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a631b46d42ea9c222e094f5_80dbfa39-95b5-4eae-9dd9-9e3dced2b704.png",
+    "short_desc": "Validator, Developer, Service provider for Canton Network",
+    "tags": [
+      "APPS (FEATURED)",
+      "SERVICE PROVIDER",
+      "VALIDATOR",
+      "DATA & ANALYTICS",
+      "DEVELOPER TOOLS",
+      "NAAS",
+      "Network Utilities\nDATA & ANALYTICSDEVELOPER TOOLSNAAS",
+      "Roles\nAPPS (FEATURED)SERVICE PROVIDERVALIDATOR\nAPPS (FEATURED)SERVICE PROVIDERVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nDTEAM\nhttps://dteam.tech/\nDTEAM is a reliable validator. We provide reliable infrastructure to support and scale projects effectively, along with building essential tools tailored for project communities, node operators and developers.\nNetwork Utilities\nDATA & ANALYTICSDEVELOPER TOOLSNAAS\nRoles\nAPPS (FEATURED)SERVICE PROVIDERVALIDATOR\nAPPS (FEATURED)SERVICE PROVIDERVALIDATOR",
+    "logo_local": "logos\\dteam.png"
+  },
+  {
     "name": "DV Chain",
     "slug": "dv-chain",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515d85893edab850f4dd1_DV-Chain-logo.png",
@@ -2570,6 +2588,25 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\niCapital\nhttps://www.icapitalnetwork.com\n\niCapital DLT is a distributed ledger platform on the Canton Network, that standardizes and automate alternative investment fund workflows for secure, real‑time lifecycle management.\n\nNetwork Utilities\nTOKENIZED ASSETS\nRoles\nAPPS (ALL)\nAPPS (ALL)",
     "logo_local": "logos\\icapital.png"
+  },
+  {
+    "name": "Innowise",
+    "slug": "innowise",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a60adf3853f88fe626bd065_3dabae89-539e-4789-8cc7-9ce4b7498e9a.jpeg",
+    "short_desc": "A full-cycle systems integrator delivering enterprise-grade Daml applications and RWA solutions.",
+    "tags": [
+      "SERVICE PROVIDER",
+      "VALIDATOR",
+      "DEVELOPER TOOLS",
+      "PAYMENTS",
+      "STABLECOINS",
+      "Network Utilities\nDEVELOPER TOOLSPAYMENTSSTABLECOINSTOKENIZED ASSETSWALLETS",
+      "TOKENIZED ASSETS",
+      "WALLETS",
+      "Roles\nSERVICE PROVIDERVALIDATOR\nSERVICE PROVIDERVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nInnowise\nhttps://innowise.com/\nInnowise is a global software engineering company with 3,500+ IT professionals and nearly two decades of delivery experience across fintech, banking, and blockchain. With deep experience in custody API integrations, non-custodial wallet architectures, and compliance-aware smart contract design, Innowise helps enterprises bring real-world assets on-chain with the privacy and control Canton provides\nNetwork Utilities\nDEVELOPER TOOLSPAYMENTSSTABLECOINSTOKENIZED ASSETSWALLETS\nRoles\nSERVICE PROVIDERVALIDATOR\nSERVICE PROVIDERVALIDATOR",
+    "logo_local": "logos\\innowise.jpeg"
   },
   {
     "name": "IntellectEU",
@@ -4708,6 +4745,20 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nzerohash\nhttps://zerohash.com/\n\nZerohash enables Canton Network infrastructure for its global client base, expanding trading, tokenization, and validator services across the Canton ecosystem. API and its embeddable dev-kit enables innovators to easily launch solutions across cross-border payments, commerce, trading, remittance, payroll, and tokenization and on/off-ramps.\n\nNetwork Utilities\nCUSTODYPAYMENTSSTABLECOINSDEVELOPER TOOLS\nRoles\nSUPER VALIDATORMARKET INFRASTRUCTURE\nSUPER VALIDATORMARKET INFRASTRUCTURE",
     "logo_local": "logos\\zerohash.jpg"
+  },
+  {
+    "name": "ZeroVaultID, Inc.",
+    "slug": "zerovaultid-inc",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a62ee59b8613a4e38613818_43ae1167-7223-48fd-bfba-b7e9674ca0fe.svg",
+    "short_desc": "Zero-knowledge compliance infrastructure for regulated on-chain finance. Live on Canton DevNet",
+    "tags": [
+      "APPS (ALL)",
+      "COMPLIANCE",
+      "Network Utilities\nCOMPLIANCE",
+      "Roles\nAPPS (ALL)\nAPPS (ALL)"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nZeroVaultID, Inc.\nhttps://www.zerovaultid.com\nZeroVaultID builds zero-knowledge compliance infrastructure for regulated on-chain finance. Institutions prove sanctions status, jurisdictional eligibility, and regulatory standing to counterparties without exposing underlying documents: a ZK compliance attestation that ports across rails. Cert Seal, our cross-rail compliance portability protocol, runs live on Canton DevNet through ZeroVaultID's own validator node (ML-DSA-87 post-quantum attested), with end-to-end settlement runs on the public global synchronizer. Our attestation anchor contract runs live on Base Sepolia and is verifiable on BaseScan. Proofs are generated with Noir/UltraHONK. Everything we ship is independently auditable from public URLs with standard tools; counterparties never need our API, or our word, to verify a compliance claim. Founded in New York. Patent-pending portfolio across the stack.\nNetwork Utilities\nCOMPLIANCE\nRoles\nAPPS (ALL)\nAPPS (ALL)",
+    "logo_local": "logos\\zerovaultid-inc.svg"
   },
   {
     "name": "Zinnia",

@@ -1088,5 +1088,15 @@
     "created": "2026-05-22",
     "approved": "2026-06-15",
     "description": "CIP-0096 removed validator liveness rewards. This introduced a\nbootstrapping problem: Most exchanges only support sending Canton Coin\nto parties that have preapprovals enabled. But enabling preapprovals\nrequires paying a CC fee for their expiry duration.\nThis CIP solves this bootstrapping problem by introducing a free base duration for preapprovals\n(defaulting to 90 days), which allows creating and renewing a\npreapproval using just traffic costs including using the free base traffic rate."
+  },
+  {
+    "id": "CIP-0120",
+    "number": 120,
+    "title": "Traffic-Based Validator Rewards and Confirming Validator Incentives",
+    "type": "Tokenomics",
+    "status": "Proposed",
+    "created": "2026-06-29",
+    "approved": "",
+    "description": "This proposal changes the calculation of validator rewards to be based on actual traffic usage rather than CC burn for traffic purchases, similar to the changes made for application rewards in CIP-0104. It introduces a reward split between the submitting validator and confirming validators. By reallocating a portion of the validator rewards to confirming validators, this CIP incentivizes the multi-hosting of parties across validators, enhancing network security and decentralization."
   }
 ]
