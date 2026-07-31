@@ -1,8 +1,9 @@
 Canton Ecosystem — Entities not found on cantonecosystem.com
-Checked: 2026-07-30
-Count: 1
+Checked: 2026-07-31
+Count: 2
 
 These entities exist in entities.json but were NOT found during scrape.
 Please check manually — remove from entities.json if confirmed gone.
 
 - CC Explorer (slug: cc-explorer)
+- Rocklik (slug: rocklik)
