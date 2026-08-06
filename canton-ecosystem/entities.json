@@ -3501,6 +3501,21 @@
     "logo_local": "logos\\obsidian-systems.png"
   },
   {
+    "name": "OKX",
+    "slug": "okx",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a73d414d7fc39a7c24bc068_Square%20DA%20Brand%20Social%20Template%20(1).svg",
+    "short_desc": "",
+    "tags": [
+      "MARKET INFRASTRUCTURE",
+      "VALIDATOR",
+      "EXCHANGES",
+      "Network Utilities\nEXCHANGES",
+      "Roles\nMARKET INFRASTRUCTUREVALIDATOR\nMARKET INFRASTRUCTUREVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nOKX\nhttps://www.okx.com/en-us/price/canton-network-cc\n\nCanton Coin (CC) is available for spot trading on OKX, expanding global access to the Canton Network ecosystem.\n\nNetwork Utilities\nEXCHANGES\nRoles\nMARKET INFRASTRUCTUREVALIDATOR\nMARKET INFRASTRUCTUREVALIDATOR",
+    "logo_local": "logos\\okx.svg"
+  },
+  {
     "name": "Oliver Wyman",
     "slug": "oliver-wyman",
     "logo_cdn": "https://cdn.prod.website-files.com/696805252243366e13a64c82/697a4b2e91c884840963f200_yellow-arrow-right.svg",
@@ -4275,6 +4290,21 @@
     ],
     "detail_text": "Deterministic OTC and asset execution layer for Canton Network.",
     "logo_local": "logos\\tiva.png"
+  },
+  {
+    "name": "ToTheMoon",
+    "slug": "tothemoon",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a73d57cdbf26c0b55c871b6_tothemoon.jpg",
+    "short_desc": "",
+    "tags": [
+      "MARKET INFRASTRUCTURE",
+      "VALIDATOR",
+      "EXCHANGES",
+      "Network Utilities\nEXCHANGES",
+      "Roles\nMARKET INFRASTRUCTUREVALIDATOR\nMARKET INFRASTRUCTUREVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nToTheMoon\nhttps://tothemoon.com/\n\nCanton Coin (CC) is available on Tothemoon through the CC/USDT and CC/USDC trading pairs, broadening access to the Canton Network ecosystem. Tothemoon\n\n‍\n\nNetwork Utilities\nEXCHANGES\nRoles\nMARKET INFRASTRUCTUREVALIDATOR\nMARKET INFRASTRUCTUREVALIDATOR",
+    "logo_local": "logos\\tothemoon.jpg"
   },
   {
     "name": "Trade.Fast",
