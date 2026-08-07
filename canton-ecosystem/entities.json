@@ -2043,6 +2043,20 @@
     "logo_local": "logos\\frax.png"
   },
   {
+    "name": "FTP Tech",
+    "slug": "ftp-tech",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a74a79f2c67f6b6c7882ba7_bec99f0f-29db-409d-9cce-53770dcd3d59.png",
+    "short_desc": "Validators / Web3 Developers",
+    "tags": [
+      "APPS (FEATURED)",
+      "DEVELOPER TOOLS",
+      "Network Utilities\nDEVELOPER TOOLS",
+      "Roles\nAPPS (FEATURED)\nAPPS (FEATURED)"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nFTP Tech\nhttps://www.ftptech.xyz\nWe run hackathons, build tools, ship products, and grow infrastructure and communities\nNetwork Utilities\nDEVELOPER TOOLS\nRoles\nAPPS (FEATURED)\nAPPS (FEATURED)",
+    "logo_local": "logos\\ftp-tech.png"
+  },
+  {
     "name": "Fìutur",
     "slug": "fìutur",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515cbf89fed9c7467e349_logo_fiutur.png",
