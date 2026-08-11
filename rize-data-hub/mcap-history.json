@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-10T03:06:24Z",
+  "updatedAt": "2026-08-11T02:59:34Z",
   "source": "DefiLlama (primary) + CoinGecko (fallback) \u2014 FDV = price x totalSupply",
   "series": [
     {
@@ -3781,11 +3781,19 @@
     },
     {
       "date": "2026-08-10",
-      "mcap": 11649911.21,
-      "fdv": 28153228.23,
+      "mcap": 11645023.55,
+      "fdv": 28141416.68,
       "tvl": 23000000.0,
-      "mcap_tvl": 0.5065,
-      "fdv_tvl": 1.2241
+      "mcap_tvl": 0.5063,
+      "fdv_tvl": 1.2235
+    },
+    {
+      "date": "2026-08-11",
+      "mcap": 11194439.15,
+      "fdv": 27052532.38,
+      "tvl": 23000000.0,
+      "mcap_tvl": 0.4867,
+      "fdv_tvl": 1.1762
     }
   ]
 }
