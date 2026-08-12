@@ -347,6 +347,25 @@
     "logo_local": "logos\\asterizm.jpeg"
   },
   {
+    "name": "Avicenne Studio",
+    "slug": "avicenne-studio",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a76208c0b4827bba33220c6_c23edf33-a072-41bf-9b54-688251de89ce.png",
+    "short_desc": "Blockchain engineering studio. We build institutional apps and tokenized assets on Canton",
+    "tags": [
+      "APPS (ALL)",
+      "SERVICE PROVIDER",
+      "VALIDATOR",
+      "DEVELOPER TOOLS",
+      "PAYMENTS",
+      "STABLECOINS",
+      "Network Utilities\nDEVELOPER TOOLSPAYMENTSSTABLECOINSTOKENIZED ASSETS",
+      "TOKENIZED ASSETS",
+      "Roles\nAPPS (ALL)SERVICE PROVIDERVALIDATOR\nAPPS (ALL)SERVICE PROVIDERVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nAvicenne Studio\nhttps://www.avicenne.studio/\n\nAvicenne Studio is a blockchain engineering and product studio working with financial institutions. We advise from the build side: the same teams that write the code review the architecture. Smart contract and Daml development, tokenization infrastructure, stablecoin rails, wallet and custody integration, vendor and technical due diligence, and target operating model work.\n\nOn Canton, Avicenne works as a service provider on Daml application design, architecture and vendor review, integration for banks and asset managers bringing assets on-chain, and executive-level Canton training.\n\nElsewhere we scaled USD0 into a top-10 stablecoin (~$1.8B TVL), delivered the first confidential Dutch auction platform with Zama ($121M committed), and shipped 2M+ transactions on Linea.\n\n\nNetwork Utilities\nDEVELOPER TOOLSPAYMENTSSTABLECOINSTOKENIZED ASSETS\nRoles\nAPPS (ALL)SERVICE PROVIDERVALIDATOR\nAPPS (ALL)SERVICE PROVIDERVALIDATOR",
+    "logo_local": "logos\\avicenne-studio.png"
+  },
+  {
     "name": "AXA IM",
     "slug": "axa-im",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515d83f27d79742e21f9f_logo_axa.png",
