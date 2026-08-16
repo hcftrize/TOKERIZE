@@ -3890,7 +3890,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
         },
         scales: {
           x: {
-            type: "time", time: { unit: "month" },
+            type: "time", time: { unit: "month", displayFormats: { month: "MMM yy", day: "MMM d, yyyy" }, tooltipFormat: "MMM d, yyyy" },
             grid: { color: "rgba(255,255,255,0.04)" },
             ticks: { color: "#b6c1d8", font: { size: 11 }, maxTicksLimit: 12 },
           },
@@ -3940,7 +3940,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
           },
         },
         scales: {
-          x: { type: "time", time: { unit: "month" }, grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#b6c1d8", font: { size: 11 }, maxTicksLimit: 12 } },
+          x: { type: "time", time: { unit: "month", displayFormats: { month: "MMM yy", day: "MMM d, yyyy" }, tooltipFormat: "MMM d, yyyy" }, grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#b6c1d8", font: { size: 11 }, maxTicksLimit: 12 } },
           y: { grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#b6c1d8", font: { size: 11 }, callback: v => v.toFixed(1) + "%" } },
         },
       },
