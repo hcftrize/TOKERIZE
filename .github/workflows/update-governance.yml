@@ -1,9 +1,6 @@
 name: Update Governance JSONs (Daily)
 
 on:
-  schedule:
-    # Daily at 02:00 UTC
-    - cron: "0 2 * * *"
   workflow_dispatch:
     inputs:
       subgraph:
