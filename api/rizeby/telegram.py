@@ -241,6 +241,16 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
             )
             _set_page(reply_chat_id, state_key, p, [raw_mode])
             if bot_mid: _cache_bot_msg(bot_mid, state_key, p, [raw_mode], reply_chat_id, reply_thread_id)
+        elif raw_mode and raw_mode not in valid_modes:
+            # /cclock (keyword) → search in all
+            query = " ".join(args)
+            bot_mid = await send_message(
+                reply_chat_id,
+                await cmd_cclock_search("all", query, 0),
+                thread_id=reply_thread_id,
+            )
+            _set_page(reply_chat_id, "cclock_search", 0, ["all", query])
+            if bot_mid: _cache_bot_msg(bot_mid, "cclock_search", 0, ["all", query], reply_chat_id, reply_thread_id)
         else:
             await send_message(reply_chat_id, await cmd_cclock_summary(), thread_id=reply_thread_id)
         return
@@ -531,6 +541,8 @@ Put any coin first to change the base asset.
 /ccallocation — Mint allocation by role
 /cclock — CC locking overview (SVs + FAs)
 /cclock sv · fa · assetissuer · all — Locking directory
+/cclock sv alert · fa alert · assetissuer alert — Alerts only
+/cclock (keyword) — Search across the full locking directory
 
 ━━ T-RIZE ECOSYSTEM ━━
 
@@ -640,7 +652,7 @@ async def register_commands() -> None:
     {"command": "ccprice",      "description": "Canton Coin price & stats"},
     {"command": "ccburnmint",   "description": "Burn/mint ratio — /ccburnmint · /ccburnmint 1w"},
     {"command": "ccallocation", "description": "Mint allocation by role"},
-    {"command": "cclock",       "description": "CC locking overview · /cclock sv · fa · assetissuer · all"},
+    {"command": "cclock",       "description": "CC locking · sv/fa/assetissuer/all · alert · or keyword search"},
     {"command": "cantonlist",   "description": "Browse all 290+ Canton entities"},
     {"command": "canton",       "description": "Search any Canton entity — /canton entity"},
     {"command": "ecosystem",    "description": "All T-RIZE partners — /ecosystem or /ecosystem name for deep-dive"},
