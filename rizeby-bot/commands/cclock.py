@@ -211,3 +211,126 @@ async def cmd_cclock_list(mode: str, page: int) -> str:
         "`/cclock sv` · `fa` · `assetissuer` · `all`",
     ]
     return "\n".join(lines)
+
+
+async def cmd_cclock_alert(mode: str, page: int) -> str:
+    """
+    /cclock sv alert | fa alert | assetissuer alert
+    Lists only entries with compliance issues (Below Requirement, Data Review, No Tier, Tier 2).
+    """
+    sv_data = await _fetch(SV_URL)
+    fa_data = await _fetch(FA_URL)
+
+    if mode == "sv":
+        all_rows = _build_sv_rows(sv_data or {})
+        # Alert = Not Tier 1 and not Escrow
+        rows = [("sv", r) for r in all_rows
+                if r.get("category") not in ("escrow_exempt", "ghost")
+                and r.get("tier") not in ("Tier 1", None)
+                or (r.get("tier") == "Tier 1" and (r.get("compliance_pct") or 100) < 70)]
+        # Simpler: keep SVs with tier != Tier 1 and not escrow
+        rows = [("sv", r) for r in all_rows
+                if r.get("tier") not in ("Tier 1",) and r.get("category") not in ("escrow_exempt", "ghost")]
+        title = "🔒 *CC Locking — SV Alerts*"
+        hint  = "_SVs below Tier 1 · ranked by CC locked_"
+    elif mode == "assetissuer":
+        all_rows = _build_fa_rows(fa_data or {}, asset_issuer_only=True)
+        rows = [("fa", r) for r in all_rows
+                if r.get("status_label") not in ("Meets Requirement",) and r.get("is_active")]
+        title = "🔒 *CC Locking — Asset Issuer Alerts*"
+        hint  = "_Asset Issuers not meeting 25M CC requirement_"
+    else:  # fa
+        all_rows = _build_fa_rows(fa_data or {})
+        rows = [("fa", r) for r in all_rows
+                if r.get("status_label") not in ("Meets Requirement",) and r.get("is_active")]
+        title = "🔒 *CC Locking — FA Alerts*"
+        hint  = "_FAs not meeting CC locking requirement_"
+
+    if not rows:
+        return f"✅ No alerts — all entries meet their locking requirements."
+
+    total       = len(rows)
+    total_pages = max(1, (total + PAGE_SIZE - 1) // PAGE_SIZE)
+    page        = max(0, min(page, total_pages - 1))
+    start       = page * PAGE_SIZE
+    page_rows   = rows[start:start + PAGE_SIZE]
+
+    lines = [
+        title, hint,
+        f"_Page {page+1}/{total_pages} · {total} alerts_",
+        "",
+    ]
+    for i, (kind, entry) in enumerate(page_rows, start=start+1):
+        if kind == "sv":
+            lines.append(_fmt_sv_entry(entry, i))
+        else:
+            lines.append(_fmt_fa_entry(entry, i))
+        lines.append("")
+
+    lines += [
+        "_Reply *next* or *page N* to navigate_",
+        "",
+        "`/cclock sv` · `fa` · `assetissuer` · `all`",
+    ]
+    return "\n".join(lines)
+
+
+async def cmd_cclock_search(mode: str, query: str, page: int) -> str:
+    """
+    Reply search within a cclock list.
+    Searches name, institution, app_name across the current mode.
+    """
+    sv_data = await _fetch(SV_URL)
+    fa_data = await _fetch(FA_URL)
+    q = query.lower().strip()
+
+    if mode == "sv":
+        all_rows = [("sv", r) for r in _build_sv_rows(sv_data or {})]
+    elif mode == "fa":
+        all_rows = [("fa", r) for r in _build_fa_rows(fa_data or {})]
+    elif mode == "assetissuer":
+        all_rows = [("fa", r) for r in _build_fa_rows(fa_data or {}, asset_issuer_only=True)]
+    else:  # all
+        sv_rows = [("sv", r) for r in _build_sv_rows(sv_data or {})]
+        fa_rows = [("fa", r) for r in _build_fa_rows(fa_data or {})]
+        all_rows = sorted(sv_rows + fa_rows,
+                          key=lambda x: x[1].get("locked_balance") or 0, reverse=True)
+
+    # Search: match query in name, institution, app_name
+    def matches(kind, entry):
+        fields = [
+            entry.get("name", ""),
+            entry.get("app_name", ""),
+            entry.get("institution", ""),
+        ]
+        return any(q in f.lower() for f in fields if f)
+
+    rows = [(k, r) for k, r in all_rows if matches(k, r)]
+
+    if not rows:
+        return f"🔍 No results for *{query}* in `cclock {mode}`."
+
+    total       = len(rows)
+    total_pages = max(1, (total + PAGE_SIZE - 1) // PAGE_SIZE)
+    page        = max(0, min(page, total_pages - 1))
+    start       = page * PAGE_SIZE
+    page_rows   = rows[start:start + PAGE_SIZE]
+
+    lines = [
+        f"🔍 *Search: {query}* in `cclock {mode}`",
+        f"_Page {page+1}/{total_pages} · {total} result(s)_",
+        "",
+    ]
+    for i, (kind, entry) in enumerate(page_rows, start=start+1):
+        if kind == "sv":
+            lines.append(_fmt_sv_entry(entry, i))
+        else:
+            lines.append(_fmt_fa_entry(entry, i))
+        lines.append("")
+
+    lines += [
+        "_Reply *next* or *page N* to navigate_",
+        "",
+        "`/cclock sv` · `fa` · `assetissuer` · `all`",
+    ]
+    return "\n".join(lines)

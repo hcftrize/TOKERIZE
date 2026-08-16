@@ -105,6 +105,11 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
             "cclock_sv": "cclock",
             "cclock_fa": "cclock",
             "cclock_assetissuer": "cclock",
+            "cclock_all_alert": "cclock",
+            "cclock_sv_alert": "cclock",
+            "cclock_fa_alert": "cclock",
+            "cclock_assetissuer_alert": "cclock",
+            "cclock_search": "cclock",
         }
         effective_cmd = cmd_map.get(state["cmd"], state["cmd"])
         await route_command(effective_cmd, state["args"], reply_chat_id,
@@ -157,7 +162,21 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
                 state["page"] = target
                 state["ts"] = time.time()
         if state:
-            await route_command(state["cmd"], state["args"], reply_chat_id,
+            cmd_map = {
+                "govbond_owner": "govbond",
+                "govwallet_timeline": "govwallet",
+                "cclock_all": "cclock",
+                "cclock_sv": "cclock",
+                "cclock_fa": "cclock",
+                "cclock_assetissuer": "cclock",
+                "cclock_all_alert": "cclock",
+                "cclock_sv_alert": "cclock",
+                "cclock_fa_alert": "cclock",
+                "cclock_assetissuer_alert": "cclock",
+                "cclock_search": "cclock",
+            }
+            effective_cmd = cmd_map.get(state["cmd"], state["cmd"])
+            await route_command(effective_cmd, state["args"], reply_chat_id,
                                 message_id, reply_thread_id)
         else:
             await send_message(reply_chat_id, "No active list to navigate.",
@@ -177,20 +196,51 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         from commands.cc import cmd_cc_allocation
         await send_message(reply_chat_id, await cmd_cc_allocation(args), thread_id=reply_thread_id)
 
-    if cmd_lower == "cclock":
-        from commands.cclock import cmd_cclock_summary, cmd_cclock_list
-        mode = args[0].lower().replace(" ", "") if args else None
-        valid_modes = ("all", "sv", "fa", "assetissuer")
-        if mode in valid_modes:
-            page = _get_page(reply_chat_id)
-            p = page["page"] if page and page["cmd"] == f"cclock_{mode}" else 0
+    if cmd_lower == "cclock_search":
+        # args = [mode, query_word1, query_word2, ...]
+        from commands.cclock import cmd_cclock_search
+        mode  = args[0] if args else "all"
+        query = " ".join(args[1:]) if len(args) > 1 else ""
+        page  = _get_page(reply_chat_id)
+        p = page["page"] if page and page["cmd"] == "cclock_search" else 0
+        if query:
             bot_mid = await send_message(
                 reply_chat_id,
-                await cmd_cclock_list(mode, p),
+                await cmd_cclock_search(mode, query, p),
                 thread_id=reply_thread_id,
             )
-            _set_page(reply_chat_id, f"cclock_{mode}", p, [mode])
-            if bot_mid: _cache_bot_msg(bot_mid, f"cclock_{mode}", p, [mode], reply_chat_id, reply_thread_id)
+            _set_page(reply_chat_id, "cclock_search", p, [mode, query])
+            if bot_mid: _cache_bot_msg(bot_mid, "cclock_search", p, [mode, query], reply_chat_id, reply_thread_id)
+        return
+
+    if cmd_lower == "cclock":
+        from commands.cclock import cmd_cclock_summary, cmd_cclock_list, cmd_cclock_alert, cmd_cclock_search
+        raw_mode = args[0].lower().replace(" ", "") if args else None
+        alert = len(args) >= 2 and args[1].lower() == "alert"
+        valid_modes = ("all", "sv", "fa", "assetissuer")
+
+        if raw_mode in valid_modes and alert:
+            state_key = f"cclock_{raw_mode}_alert"
+            page = _get_page(reply_chat_id)
+            p = page["page"] if page and page["cmd"] == state_key else 0
+            bot_mid = await send_message(
+                reply_chat_id,
+                await cmd_cclock_alert(raw_mode, p),
+                thread_id=reply_thread_id,
+            )
+            _set_page(reply_chat_id, state_key, p, [raw_mode, "alert"])
+            if bot_mid: _cache_bot_msg(bot_mid, state_key, p, [raw_mode, "alert"], reply_chat_id, reply_thread_id)
+        elif raw_mode in valid_modes:
+            state_key = f"cclock_{raw_mode}"
+            page = _get_page(reply_chat_id)
+            p = page["page"] if page and page["cmd"] == state_key else 0
+            bot_mid = await send_message(
+                reply_chat_id,
+                await cmd_cclock_list(raw_mode, p),
+                thread_id=reply_thread_id,
+            )
+            _set_page(reply_chat_id, state_key, p, [raw_mode])
+            if bot_mid: _cache_bot_msg(bot_mid, state_key, p, [raw_mode], reply_chat_id, reply_thread_id)
         else:
             await send_message(reply_chat_id, await cmd_cclock_summary(), thread_id=reply_thread_id)
         return
@@ -653,7 +703,7 @@ def parse_update(body: dict):
         return "cmd", (chat_id, "see wallet", [], msg_id, thread_id, reply_to_msg_id)
 
     if not is_command and first not in known_keywords:
-        # Check if user is replying to a paginated context (cantonlist, ecosystem, cantonboard)
+        # Check if user is replying to a paginated context (cantonlist, ecosystem, cantonboard, cclock)
         active_state = _pagination.get(chat_id)
         if active_state and (time.time() - active_state.get("ts", 0)) < PAGE_TTL:
             active_cmd = active_state.get("cmd", "")
@@ -663,6 +713,10 @@ def parse_update(body: dict):
                 return "cmd", (chat_id, "ecosystem", parts, msg_id, thread_id, reply_to_msg_id)
             if active_cmd == "cantonboard":
                 return "cmd", (chat_id, "cantonboard", parts, msg_id, thread_id, reply_to_msg_id)
+            if active_cmd.startswith("cclock_"):
+                # Reply text = search query within current cclock mode
+                mode = active_state.get("args", ["all"])[0] if active_state.get("args") else "all"
+                return "cmd", (chat_id, "cclock_search", [mode] + parts, msg_id, thread_id, reply_to_msg_id)
         # In groups: ignore plain text — don't spam error messages
         return None, None
 
