@@ -3651,13 +3651,13 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
               displayFormats: {month:'MMM yy', year:'yyyy'},
             },
             grid:  {color:'rgba(255,255,255,0.05)'},
-            ticks: {color:'rgba(182,193,216,0.7)', font:{family:'DM Mono',size:10}, maxRotation:0},
+            ticks: {color:'rgba(182,193,216,0.7)', font:{family:'monospace',size:10}, maxRotation:0},
           },
           yScore: {
             position: 'left',
             min: 0, max: 100,
             grid:  {color:'rgba(255,255,255,0.04)'},
-            ticks: {color:'rgba(182,193,216,0.5)', font:{family:'DM Mono',size:10}, callback: v => v},
+            ticks: {color:'rgba(182,193,216,0.5)', font:{family:'monospace',size:10}, callback: v => v},
           },
           yPrice: {
             position: 'right',
@@ -3961,7 +3961,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
     const tbody  = document.getElementById("lk-tbody");
 
     if (!_lkFiltered.length) {
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--muted);font-family:'DM Mono',monospace;font-size:13px">No entries found.</td></tr>';
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--muted);font-family:monospace;font-size:13px">No entries found.</td></tr>`;
       document.getElementById("lk-pagination").innerHTML = "";
       return;
     }
@@ -3994,7 +3994,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
         const color = pct >= 100 ? "var(--green)" : pct >= 70 ? "var(--gold)" : "var(--pink)";
         const label = pct.toFixed(1) + "%";
         compHtml = `<div class="lk-bar-wrap">
-          <span style="color:${color};font-family:'DM Mono',monospace;font-size:12px">${label}</span>
+          <span style="color:${color};font-family:monospace;font-size:12px">${label}</span>
           <div class="lk-bar"><div class="lk-bar-fill" style="width:${pct}%;background:${color}"></div></div>
         </div>`;
       }
@@ -4043,7 +4043,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
       }
     }
     pagHtml += `<button class="lk-page-btn" onclick="lkGoPage(${_lkPage+1})" ${_lkPage===totalPages?"disabled":""}>›</button>`;
-    pagHtml += `<span style="color:var(--muted);font-family:'DM Mono',monospace;font-size:12px;margin-left:8px">${_lkFiltered.length} entries</span>`;
+    pagHtml += `<span style="color:var(--muted);font-family:monospace;font-size:12px;margin-left:8px">${_lkFiltered.length} entries</span>`;
     pag.innerHTML = pagHtml;
   }
 
