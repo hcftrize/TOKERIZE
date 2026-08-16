@@ -119,7 +119,7 @@ def load_history() -> list:
 def save_json(path: str, obj) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w") as f:
-        json.dump(obj, f, separators=(",", ":"))
+        json.dump(obj, f, indent=2, ensure_ascii=False)
     print(f"Saved {path}")
 
 
