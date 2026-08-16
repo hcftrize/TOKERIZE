@@ -1258,7 +1258,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
       <!-- Panel 5 — CC Locking -->
       <div class="ctx-panel" id="ctx-panel-lock">
 
-        <!-- KPI row -->
+        <!-- KPI row 1 — CC amounts -->
         <div class="lk-kpi-row" id="lk-kpi-row">
           <div class="lk-kpi">
             <span class="lk-kpi-label">Total CC Locked</span>
@@ -1281,6 +1281,33 @@ html, body { overflow-x: hidden; max-width: 100%; }
             <span class="lk-kpi-value" id="lk-kpi-facount" style="color:var(--muted)">—</span>
           </div>
         </div>
+        <!-- KPI row 2 — % supply -->
+        <div class="lk-kpi-row" style="margin-top:10px">
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">% Supply Locked (All)</span>
+            <span class="lk-kpi-value" id="lk-kpi-pct-total" style="color:#98ffb6">—</span>
+          </div>
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">% Supply Locked (SVs)</span>
+            <span class="lk-kpi-value" id="lk-kpi-pct-sv" style="color:var(--cyan)">—</span>
+          </div>
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">% Supply Locked (FAs)</span>
+            <span class="lk-kpi-value" id="lk-kpi-pct-fa" style="color:var(--gold)">—</span>
+          </div>
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">USD Locked (All)</span>
+            <span class="lk-kpi-value" id="lk-kpi-usd-total" style="color:#98ffb6">—</span>
+          </div>
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">USD Locked (SVs)</span>
+            <span class="lk-kpi-value" id="lk-kpi-usd-sv" style="color:var(--cyan)">—</span>
+          </div>
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">USD Locked (FAs)</span>
+            <span class="lk-kpi-value" id="lk-kpi-usd-fa" style="color:var(--gold)">—</span>
+          </div>
+        </div>
 
         <!-- Chart toggle buttons -->
         <div style="margin:20px 0 10px;display:flex;gap:0;align-items:center;flex-wrap:wrap">
@@ -1288,6 +1315,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
           <button class="ctx-iv-btn"        id="lk-btn-sv"    onclick="lkFilter('sv')">SV Only</button>
           <button class="ctx-iv-btn"        id="lk-btn-fa"    onclick="lkFilter('fa')">FA Only</button>
           <button class="ctx-iv-btn"        id="lk-btn-pct"   onclick="lkFilter('pct')">% CC Supply</button>
+          <button class="ctx-iv-btn"        id="lk-btn-usd"   onclick="lkFilter('usd')">USD Locked</button>
         </div>
 
         <!-- Chart CC (absolute) -->
@@ -1299,6 +1327,11 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <div class="ctx-chart-wrap" id="lk-chart-pct-wrap" style="position:relative;display:none">
           <div class="ctx-loading" id="lk-chart-pct-loading">Loading supply data&hellip;</div>
           <canvas id="lk-chart-pct" style="display:none"></canvas>
+        </div>
+        <!-- Chart USD locked (hidden by default) -->
+        <div class="ctx-chart-wrap" id="lk-chart-usd-wrap" style="position:relative;display:none">
+          <div class="ctx-loading" id="lk-chart-usd-loading">Loading USD data&hellip;</div>
+          <canvas id="lk-chart-usd" style="display:none"></canvas>
         </div>
 
         <!-- Divider -->
@@ -3799,25 +3832,47 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
     document.getElementById("lk-kpi-fa").textContent      = lkFmtCC(faTotal) + " CC";
     document.getElementById("lk-kpi-svcount").textContent = svCount;
     document.getElementById("lk-kpi-facount").textContent = faCount;
+
+    // Row 2 — % supply from latest history entry
+    const latest = (_lkHist || []).filter(d => d.pct_total != null).slice(-1)[0];
+    if (latest) {
+      document.getElementById("lk-kpi-pct-total").textContent = latest.pct_total != null ? latest.pct_total.toFixed(2) + "%" : "—";
+      document.getElementById("lk-kpi-pct-sv").textContent    = latest.pct_sv    != null ? latest.pct_sv.toFixed(2)    + "%" : "—";
+      document.getElementById("lk-kpi-pct-fa").textContent    = latest.pct_fa    != null ? latest.pct_fa.toFixed(2)    + "%" : "—";
+    }
+    // USD locked — use live currentPrice if available
+    const livePrice = (typeof currentPrice !== "undefined" && currentPrice) ? currentPrice : null;
+    if (livePrice) {
+      document.getElementById("lk-kpi-usd-total").textContent = lkFmtUSD(combined * livePrice);
+      document.getElementById("lk-kpi-usd-sv").textContent    = lkFmtUSD(svTotal  * livePrice);
+      document.getElementById("lk-kpi-usd-fa").textContent    = lkFmtUSD(faTotal  * livePrice);
+    } else if (latest?.usd_total) {
+      document.getElementById("lk-kpi-usd-total").textContent = lkFmtUSD(latest.usd_total);
+      document.getElementById("lk-kpi-usd-sv").textContent    = lkFmtUSD(latest.usd_sv);
+      document.getElementById("lk-kpi-usd-fa").textContent    = lkFmtUSD(latest.usd_fa);
+    }
   }
 
   // ── Chart ─────────────────────────────────────────────────
   function lkFilter(mode) {
     _lkChartFilter = mode;
-    ["all","sv","fa","pct"].forEach(m => {
+    ["all","sv","fa","pct","usd"].forEach(m => {
       const btn = document.getElementById("lk-btn-"+m);
       if (btn) btn.classList.toggle("active", m === mode);
     });
-    // Toggle between CC chart and % supply chart
+    // Toggle between charts
     const ccWrap  = document.getElementById("lk-chart-wrap");
     const pctWrap = document.getElementById("lk-chart-pct-wrap");
+    const usdWrap = document.getElementById("lk-chart-usd-wrap");
+    [ccWrap, pctWrap, usdWrap].forEach(w => { if (w) w.style.display = "none"; });
     if (mode === "pct") {
-      if (ccWrap)  ccWrap.style.display  = "none";
       if (pctWrap) pctWrap.style.display = "block";
-      lkRenderPctChart();
+      setTimeout(() => lkRenderPctChart(), 10);
+    } else if (mode === "usd") {
+      if (usdWrap) usdWrap.style.display = "block";
+      setTimeout(() => lkRenderUsdChart(), 10);
     } else {
-      if (ccWrap)  ccWrap.style.display  = "block";
-      if (pctWrap) pctWrap.style.display = "none";
+      if (ccWrap) ccWrap.style.display = "block";
       lkRenderChart();
     }
   }
@@ -3901,6 +3956,60 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
               callback: v => lkFmtCC(v) + " CC",
             },
           },
+        },
+      },
+    });
+  }
+
+  function lkFmtUSD(n) {
+    if (!n && n !== 0) return "—";
+    if (n >= 1e9) return "$" + (n / 1e9).toFixed(2) + "B";
+    if (n >= 1e6) return "$" + (n / 1e6).toFixed(2) + "M";
+    if (n >= 1e3) return "$" + (n / 1e3).toFixed(1) + "K";
+    return "$" + n.toFixed(0);
+  }
+
+  // ── Chart USD Locked ──────────────────────────────────────────────────────
+  let _lkUsdChart = null;
+
+  function lkRenderUsdChart() {
+    if (!_lkHist) {
+      const loading = document.getElementById("lk-chart-usd-loading");
+      if (loading) loading.textContent = "Loading USD data…";
+      return;
+    }
+    const hist    = _lkHist.filter(d => d.usd_total != null);
+    const canvas  = document.getElementById("lk-chart-usd");
+    const loading = document.getElementById("lk-chart-usd-loading");
+    if (!hist.length) {
+      if (loading) loading.textContent = "No USD data yet — run FA scraper to populate.";
+      return;
+    }
+    if (loading) loading.style.display = "none";
+    canvas.style.display = "block";
+    const labels = hist.map(d => d.date);
+    const datasets = [
+      { label: "Total USD Locked", data: hist.map(d => d.usd_total), borderColor: "#98ffb6", backgroundColor: "rgba(152,255,182,0.06)", borderWidth: 2.5, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
+      { label: "SV USD Locked",    data: hist.map(d => d.usd_sv),    borderColor: "rgba(126,224,255,0.9)", backgroundColor: "rgba(126,224,255,0.06)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
+      { label: "FA USD Locked",    data: hist.map(d => d.usd_fa),    borderColor: "rgba(255,211,107,0.9)", backgroundColor: "rgba(255,211,107,0.06)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
+    ];
+    if (_lkUsdChart) { _lkUsdChart.destroy(); _lkUsdChart = null; }
+    _lkUsdChart = new Chart(canvas, {
+      type: "line", data: { labels, datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: { duration: 300 },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: true, labels: { color: "#b6c1d8", font: { family: "sans-serif", size: 12 }, boxWidth: 14 } },
+          tooltip: {
+            backgroundColor: "rgba(6,8,24,0.95)", borderColor: "rgba(126,224,255,0.2)", borderWidth: 1,
+            titleColor: "#7ee0ff", bodyColor: "#dce6f0",
+            callbacks: { label: ctx => " " + ctx.dataset.label + ": " + lkFmtUSD(ctx.raw) }
+          },
+        },
+        scales: {
+          x: { type: "time", time: { unit: "month", displayFormats: { month: "MMM yy", day: "MMM d, yyyy" }, tooltipFormat: "MMM d, yyyy" }, grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#b6c1d8", font: { size: 11 }, maxTicksLimit: 12 } },
+          y: { grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#b6c1d8", font: { size: 11 }, callback: v => lkFmtUSD(v) } },
         },
       },
     });
