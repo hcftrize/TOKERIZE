@@ -11,8 +11,9 @@ import urllib.request
 from datetime import datetime, timezone
 
 FA_API_URL = "https://lighthouse.xyz/api/featured-app-locking"
-CG_CC_URL  = "https://api.coingecko.com/api/v3/coins/canton-network"
-CG_KEY     = os.environ.get("COINGECKO_API_KEY", "")
+CG_CC_URL      = "https://api.coingecko.com/api/v3/coins/canton-network"
+CG_CC_HIST_URL = "https://api.coingecko.com/api/v3/coins/canton-network/market_chart"
+CG_KEY         = os.environ.get("COINGECKO_API_KEY", "")
 DATA_DIR = "rize-data-hub"
 FA_SNAPSHOT_PATH = os.path.join(DATA_DIR, "fa-locking.json")
 HISTORY_PATH = os.path.join(DATA_DIR, "locking-history.json")
@@ -34,22 +35,46 @@ def fetch_json(url: str, headers: dict = None) -> dict:
         return json.loads(resp.read().decode())
 
 
-def fetch_cc_supply() -> float | None:
-    """Fetch CC circulating supply from CoinGecko."""
+def fetch_cc_market() -> tuple[float | None, float | None]:
+    """Fetch CC circulating supply and current price from CoinGecko.
+    Returns (supply, price).
+    """
     try:
         headers = {}
         if CG_KEY:
             headers["x-cg-demo-api-key"] = CG_KEY
         data = fetch_json(CG_CC_URL, headers)
-        supply = data.get("market_data", {}).get("circulating_supply")
-        if supply:
-            print(f"CC circulating supply: {float(supply):,.0f}")
-            return float(supply)
-        print("Warning: could not parse CC supply from CoinGecko response")
-        return None
+        md     = data.get("market_data", {})
+        supply = md.get("circulating_supply")
+        price  = md.get("current_price", {}).get("usd")
+        supply = float(supply) if supply else None
+        price  = float(price)  if price  else None
+        print(f"CC supply: {supply:,.0f} | price: ${price}" if supply and price else "Warning: partial CoinGecko data")
+        return supply, price
     except Exception as e:
         print(f"Warning: CoinGecko fetch failed — {e}")
-        return None
+        return None, None
+
+
+def fetch_cc_price_history(days: int = 8) -> dict[str, float]:
+    """Fetch daily close prices for the last N days from CoinGecko.
+    Returns {date_str: close_price} e.g. {"2026-08-15": 0.0991}.
+    """
+    try:
+        headers = {"x-cg-demo-api-key": CG_KEY} if CG_KEY else {}
+        params  = f"?vs_currency=usd&days={days}&interval=daily"
+        data    = fetch_json(CG_CC_HIST_URL + params, headers)
+        prices  = data.get("prices", [])
+        result  = {}
+        for ts_ms, price in prices:
+            from datetime import datetime, timezone
+            date_str = datetime.fromtimestamp(ts_ms / 1000, tz=timezone.utc).strftime("%Y-%m-%d")
+            result[date_str] = float(price)
+        print(f"CC price history: {len(result)} days fetched")
+        return result
+    except Exception as e:
+        print(f"Warning: CoinGecko price history fetch failed — {e}")
+        return {}
 
 
 def parse_float(val) -> float:
@@ -191,48 +216,78 @@ def main():
     }
     save_json(FA_SNAPSHOT_PATH, snapshot)
 
-    # ── Fetch CC circulating supply from CoinGecko ───────────────────────────
-    cc_supply = fetch_cc_supply()
+    # ── Fetch CC market data from CoinGecko ──────────────────────────────────
+    cc_supply, cc_price = fetch_cc_market()
+
+    # ── Fetch CC price history to correct last 8 days ────────────────────────
+    price_history = fetch_cc_price_history(days=8)
 
     # ── Update history ────────────────────────────────────────────────────────
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     history = load_history()
 
+    # Correct prices for last 8 days using CoinGecko historical close prices
+    for entry in history:
+        date = entry.get("date", "")
+        if date in price_history and date != today:
+            hist_price = price_history[date]
+            entry["cc_price"]  = round(hist_price, 8)
+            sv = entry.get("sv", 0) or 0
+            fa = entry.get("fa", 0) or 0
+            entry["usd_sv"]    = round(sv * hist_price)
+            entry["usd_fa"]    = round(fa * hist_price)
+            entry["usd_total"] = round((sv + fa) * hist_price)
+
     existing = next((e for e in history if e.get("date") == today), None)
-    sv_locked = existing.get("sv", 0) if existing else 0
+    sv_locked    = existing.get("sv", 0) if existing else 0
     total_locked = sv_locked + total_fa_locked
 
     # Compute % of circulating supply locked
-    pct_sv    = round(sv_locked      / cc_supply * 100, 4) if cc_supply else None
-    pct_fa    = round(total_fa_locked / cc_supply * 100, 4) if cc_supply else None
-    pct_total = round(total_locked    / cc_supply * 100, 4) if cc_supply else None
+    pct_sv    = round(sv_locked       / cc_supply * 100, 4) if cc_supply else None
+    pct_fa    = round(total_fa_locked  / cc_supply * 100, 4) if cc_supply else None
+    pct_total = round(total_locked     / cc_supply * 100, 4) if cc_supply else None
+
+    # Compute USD values using today snapshot price
+    usd_sv    = round(sv_locked       * cc_price) if cc_price else None
+    usd_fa    = round(total_fa_locked  * cc_price) if cc_price else None
+    usd_total = round(total_locked     * cc_price) if cc_price else None
 
     if existing:
         existing["fa"]        = round(total_fa_locked)
         existing["total"]     = round(total_locked)
-        existing["supply"]    = round(cc_supply) if cc_supply else existing.get("supply")
+        existing["supply"]    = round(cc_supply)    if cc_supply else existing.get("supply")
+        existing["cc_price"]  = round(cc_price, 8)  if cc_price  else existing.get("cc_price")
         existing["pct_sv"]    = pct_sv
         existing["pct_fa"]    = pct_fa
         existing["pct_total"] = pct_total
+        existing["usd_sv"]    = usd_sv
+        existing["usd_fa"]    = usd_fa
+        existing["usd_total"] = usd_total
     else:
         history.append({
             "date":      today,
             "sv":        0,
             "fa":        round(total_fa_locked),
             "total":     round(total_fa_locked),
-            "supply":    round(cc_supply) if cc_supply else None,
+            "supply":    round(cc_supply)   if cc_supply else None,
+            "cc_price":  round(cc_price, 8) if cc_price  else None,
             "pct_sv":    pct_sv,
             "pct_fa":    pct_fa,
             "pct_total": pct_total,
+            "usd_sv":    usd_sv,
+            "usd_fa":    usd_fa,
+            "usd_total": usd_total,
         })
 
     history.sort(key=lambda e: e["date"])
     history = history[-730:]
     save_json(HISTORY_PATH, history)
 
-    print(f"Total FA locked (app-level, Approved only): {total_fa_locked:,.0f} CC")
+    print(f"Total FA locked: {total_fa_locked:,.0f} CC")
+    if cc_price:
+        print(f"USD locked — SV: ${usd_sv:,.0f} | FA: ${usd_fa:,.0f} | Total: ${usd_total:,.0f}")
     if cc_supply:
-        print(f"CC supply: {cc_supply:,.0f} | Locked %: SV={pct_sv}% FA={pct_fa}% Total={pct_total}%")
+        print(f"% supply — SV: {pct_sv}% | FA: {pct_fa}% | Total: {pct_total}%")
     print(f"History entries: {len(history)}")
 
 
