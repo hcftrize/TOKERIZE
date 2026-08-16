@@ -992,6 +992,19 @@ html, body { overflow-x: hidden; max-width: 100%; }
     .lk-filter-btn.active { border-right: 1px solid var(--cyan) !important; }
     .lk-filter-btn:hover { color: #fff; }
     .lk-filter-btn.active { color: var(--cyan); border-color: var(--cyan); background: rgba(126,224,255,0.07); }
+    .lk-dropdown {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted); font-family: 'Rajdhani', sans-serif;
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      padding: 7px 28px 7px 12px; outline: none; cursor: pointer;
+      transition: border-color .15s;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23b6c1d8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+    .lk-dropdown:focus { border-color: var(--cyan); color: #fff; }
+    .lk-dropdown option { background: #060818; color: #fff; }
     .lk-search {
       flex: 1; min-width: 180px; max-width: 280px;
       background: rgba(255,255,255,0.04);
@@ -1028,7 +1041,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
     .lk-tier-no      { color: var(--pink); }
     .lk-tier-pending { color: var(--muted); font-style: italic; }
     .lk-tier-escrow  { color: var(--muted); }
-    .lk-status { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .lk-status { display: flex; align-items: center; justify-content: flex-end; gap: 6px; white-space: nowrap; }
     .lk-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
     .lk-dot-ok      { background: var(--green); }
     .lk-dot-warn    { background: var(--gold); }
@@ -1050,7 +1063,20 @@ html, body { overflow-x: hidden; max-width: 100%; }
     @media(max-width:700px) {
       .lk-kpi { min-width: 100px; }
       .lk-kpi-value { font-size: 20px; }
-      .lk-search { max-width: 100%; }
+      .lk-dropdown {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted); font-family: 'Rajdhani', sans-serif;
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      padding: 7px 28px 7px 12px; outline: none; cursor: pointer;
+      transition: border-color .15s;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23b6c1d8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+    .lk-dropdown:focus { border-color: var(--cyan); color: #fff; }
+    .lk-dropdown option { background: #060818; color: #fff; }
+    .lk-search { max-width: 100%; }
     }
 
     .cbbi-zoom{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-right:none;padding:6px 16px;cursor:pointer;transition:color .15s,background .15s;}
@@ -1281,6 +1307,24 @@ html, body { overflow-x: hidden; max-width: 100%; }
               <button class="lk-filter-btn"        data-f="fa"     onclick="lkTableFilter('fa',this)">FA</button>
               <button class="lk-filter-btn"        data-f="escrow" onclick="lkTableFilter('escrow',this)">Escrow</button>
             </div>
+            <select class="lk-dropdown" id="lk-role-filter" onchange="lkDropFilter()">
+              <option value="">All Roles</option>
+              <option value="SV">SV</option>
+              <option value="App Provider">App Provider</option>
+              <option value="Asset Issuer">Asset Issuer</option>
+              <option value="Escrow Exempt">Escrow Exempt</option>
+            </select>
+            <select class="lk-dropdown" id="lk-status-filter" onchange="lkDropFilter()">
+              <option value="">All Statuses</option>
+              <option value="Tier 1">Tier 1</option>
+              <option value="Tier 2">Tier 2</option>
+              <option value="No Tier">No Tier</option>
+              <option value="Meets Requirement">Meets Requirement</option>
+              <option value="Below Requirement">Below Requirement</option>
+              <option value="Data Review">Data Review</option>
+              <option value="Pause / Revoke">Pause / Revoke</option>
+              <option value="Escrow">Escrow</option>
+            </select>
             <input class="lk-search" id="lk-search" type="text" placeholder="Search name…" oninput="lkTableSearch(this.value)">
           </div>
 
@@ -1294,9 +1338,9 @@ html, body { overflow-x: hidden; max-width: 100%; }
                   <th class="lk-th lk-th-sort" data-col="tier"       onclick="lkSort('tier')">Tier <span class="lk-sort-arrow" id="lk-arr-tier"></span></th>
                   <th class="lk-th lk-th-sort lk-th-num" data-col="locked" onclick="lkSort('locked')">Locked CC <span class="lk-sort-arrow" id="lk-arr-locked">↓</span></th>
                   <th class="lk-th lk-th-sort lk-th-num" data-col="compliance" onclick="lkSort('compliance')">Locked CC % <span class="lk-sort-arrow" id="lk-arr-compliance"></span></th>
-                  <th class="lk-th lk-th-sort lk-th-num" data-col="shortfall"  onclick="lkSort('shortfall')">Shortfall <span class="lk-sort-arrow" id="lk-arr-shortfall"></span></th>
-                  <th class="lk-th lk-th-sort lk-th-num" data-col="gap" onclick="lkSort('gap')">Gap to T1 <span class="lk-sort-arrow" id="lk-arr-gap"></span></th>
-                  <th class="lk-th lk-th-num">Status</th>
+                  <th class="lk-th lk-th-sort lk-th-num" data-col="shortfall"  onclick="lkSort('shortfall')">Shortfall (FA) <span class="lk-sort-arrow" id="lk-arr-shortfall"></span></th>
+                  <th class="lk-th lk-th-sort lk-th-num" data-col="gap" onclick="lkSort('gap')">Gap to T1 (SV) <span class="lk-sort-arrow" id="lk-arr-gap"></span></th>
+                  <th class="lk-th lk-th-num" style="text-align:right">Status</th>
                 </tr>
               </thead>
               <tbody id="lk-tbody">
@@ -3917,14 +3961,25 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
     lkRenderTable();
   }
 
+  function lkDropFilter() {
+    _lkPage = 1;
+    lkApplyFilter();
+    lkRenderTable();
+  }
+
   function lkApplyFilter() {
+    const roleVal   = (document.getElementById("lk-role-filter")   || {}).value || "";
+    const statusVal = (document.getElementById("lk-status-filter") || {}).value || "";
+
     _lkFiltered = _lkRows.filter(r => {
       const typeOk = _lkTableFilter === "all"
-        || (_lkTableFilter === "sv" && r._type === "sv")
-        || (_lkTableFilter === "fa" && r._type === "fa")
+        || (_lkTableFilter === "sv"     && r._type === "sv")
+        || (_lkTableFilter === "fa"     && r._type === "fa")
         || (_lkTableFilter === "escrow" && r._type === "escrow");
-      const searchOk = !_lkSearch || r.name.toLowerCase().includes(_lkSearch) || r.role.toLowerCase().includes(_lkSearch);
-      return typeOk && searchOk;
+      const searchOk  = !_lkSearch || r.name.toLowerCase().includes(_lkSearch) || r.role.toLowerCase().includes(_lkSearch);
+      const roleOk    = !roleVal   || r.role === roleVal;
+      const statusOk  = !statusVal || r.status === statusVal;
+      return typeOk && searchOk && roleOk && statusOk;
     });
     lkApplySort();
   }
