@@ -46,6 +46,12 @@ def classify_sv(sv: dict) -> str:
         return "hosted_sub" if sv.get("organization") else "hosted"
     return "other"
 
+# Canton PartyId nodes that appear as SVs in the API but are custodian wallets,
+# not independent Super Validators — excluded from snapshot and totals.
+EXCLUDED_SV_NAMES = {
+    "23d169c2-0909-4c70-81d1-1922de6febaa",
+}
+
 
 def compute_sv_total(data: dict) -> float:
     """
@@ -65,6 +71,8 @@ def compute_sv_total(data: dict) -> float:
     """
     total = 0.0
     for sv in data.get("svs", []):
+        if sv.get("name") in EXCLUDED_SV_NAMES:
+            continue
         cat = classify_sv(sv)
         locked = parse_float(sv.get("locked_balance", 0))
         if cat in ("org_aggregate", "standalone", "hosted"):
@@ -82,6 +90,8 @@ def build_sv_rows(data: dict) -> list:
     """
     rows = []
     for sv in data.get("svs", []):
+        if sv.get("name") in EXCLUDED_SV_NAMES:
+            continue
         cat = classify_sv(sv)
         # Skip sub-SVs belonging to an org — represented by their aggregate
         if cat in ("standalone_sub", "hosted_sub"):
