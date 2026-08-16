@@ -1287,12 +1287,18 @@ html, body { overflow-x: hidden; max-width: 100%; }
           <button class="ctx-iv-btn active" id="lk-btn-all"   onclick="lkFilter('all')">All</button>
           <button class="ctx-iv-btn"        id="lk-btn-sv"    onclick="lkFilter('sv')">SV Only</button>
           <button class="ctx-iv-btn"        id="lk-btn-fa"    onclick="lkFilter('fa')">FA Only</button>
+          <button class="ctx-iv-btn"        id="lk-btn-pct"   onclick="lkFilter('pct')">% CC Supply</button>
         </div>
 
-        <!-- Chart -->
+        <!-- Chart CC (absolute) -->
         <div class="ctx-chart-wrap" id="lk-chart-wrap" style="position:relative">
           <div class="ctx-loading" id="lk-chart-loading">Loading locking data&hellip;</div>
           <canvas id="lk-chart" style="display:none"></canvas>
+        </div>
+        <!-- Chart % supply (hidden by default) -->
+        <div class="ctx-chart-wrap" id="lk-chart-pct-wrap" style="position:relative;display:none">
+          <div class="ctx-loading" id="lk-chart-pct-loading">Loading supply data&hellip;</div>
+          <canvas id="lk-chart-pct" style="display:none"></canvas>
         </div>
 
         <!-- Divider -->
@@ -3798,10 +3804,22 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
   // ── Chart ─────────────────────────────────────────────────
   function lkFilter(mode) {
     _lkChartFilter = mode;
-    ["all","sv","fa"].forEach(m => {
-      document.getElementById("lk-btn-"+m).classList.toggle("active", m === mode);
+    ["all","sv","fa","pct"].forEach(m => {
+      const btn = document.getElementById("lk-btn-"+m);
+      if (btn) btn.classList.toggle("active", m === mode);
     });
-    lkRenderChart();
+    // Toggle between CC chart and % supply chart
+    const ccWrap  = document.getElementById("lk-chart-wrap");
+    const pctWrap = document.getElementById("lk-chart-pct-wrap");
+    if (mode === "pct") {
+      if (ccWrap)  ccWrap.style.display  = "none";
+      if (pctWrap) pctWrap.style.display = "block";
+      lkRenderPctChart();
+    } else {
+      if (ccWrap)  ccWrap.style.display  = "block";
+      if (pctWrap) pctWrap.style.display = "none";
+      lkRenderChart();
+    }
   }
 
   function lkRenderChart() {
@@ -3884,6 +3902,47 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
               callback: v => lkFmtCC(v) + " CC",
             },
           },
+        },
+      },
+    });
+  }
+
+  // ── Chart % CC Supply ────────────────────────────────────────────────────
+  let _lkPctChart = null;
+
+  function lkRenderPctChart() {
+    const hist    = (_lkHist || []).filter(d => d.pct_total != null);
+    const canvas  = document.getElementById("lk-chart-pct");
+    const loading = document.getElementById("lk-chart-pct-loading");
+    if (!hist.length) {
+      if (loading) loading.textContent = "No supply data yet — run FA scraper to populate.";
+      return;
+    }
+    if (loading) loading.style.display = "none";
+    canvas.style.display = "block";
+    const labels = hist.map(d => d.date);
+    const datasets = [
+      { label: "Total Locked %", data: hist.map(d => d.pct_total), borderColor: "rgba(255,255,255,0.7)", backgroundColor: "rgba(255,255,255,0.04)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
+      { label: "SV Locked %",    data: hist.map(d => d.pct_sv),    borderColor: "rgba(126,224,255,0.9)", backgroundColor: "rgba(126,224,255,0.06)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
+      { label: "FA Locked %",    data: hist.map(d => d.pct_fa),    borderColor: "rgba(255,211,107,0.9)", backgroundColor: "rgba(255,211,107,0.06)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
+    ];
+    if (_lkPctChart) { _lkPctChart.destroy(); _lkPctChart = null; }
+    _lkPctChart = new Chart(canvas, {
+      type: "line", data: { labels, datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: { duration: 300 },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: true, labels: { color: "#b6c1d8", font: { family: "sans-serif", size: 12 }, boxWidth: 14 } },
+          tooltip: {
+            backgroundColor: "rgba(6,8,24,0.95)", borderColor: "rgba(126,224,255,0.2)", borderWidth: 1,
+            titleColor: "#7ee0ff", bodyColor: "#dce6f0",
+            callbacks: { label: ctx => " " + ctx.dataset.label + ": " + (ctx.raw != null ? ctx.raw.toFixed(2) + "%" : "—") }
+          },
+        },
+        scales: {
+          x: { type: "time", time: { unit: "month" }, grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#b6c1d8", font: { size: 11 }, maxTicksLimit: 12 } },
+          y: { grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#b6c1d8", font: { size: 11 }, callback: v => v.toFixed(1) + "%" } },
         },
       },
     });
