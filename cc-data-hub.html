@@ -1043,7 +1043,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
     .lk-tier-escrow  { color: var(--muted); }
     .lk-status { display: flex; align-items: center; justify-content: flex-end; gap: 6px; white-space: nowrap; }
     .lk-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .lk-dot-ok      { background: var(--green); }
+    .lk-dot-ok      { background: #98ffb6; }
     .lk-dot-warn    { background: var(--gold); }
     .lk-dot-bad     { background: var(--pink); }
     .lk-dot-neutral { background: var(--muted); }
@@ -3857,12 +3857,11 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
     if (_lkChartFilter === "all") datasets.push({
       label: "Total Locked",
       data: hist.map(d => (d.sv || 0) + (d.fa || 0)),
-      borderColor: "rgba(255,255,255,0.5)",
-      backgroundColor: "rgba(255,255,255,0.03)",
-      borderWidth: 1.5,
-      borderDash: [4,3],
-      pointRadius: 0,
-      pointHoverRadius: 4,
+      borderColor: "#98ffb6",
+      backgroundColor: "rgba(152,255,182,0.06)",
+      borderWidth: 2.5,
+      pointRadius: hist.length > 60 ? 0 : 3,
+      pointHoverRadius: 5,
       fill: false,
       tension: 0.3,
     });
@@ -3922,7 +3921,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
     canvas.style.display = "block";
     const labels = hist.map(d => d.date);
     const datasets = [
-      { label: "Total Locked %", data: hist.map(d => d.pct_total), borderColor: "rgba(255,255,255,0.7)", backgroundColor: "rgba(255,255,255,0.04)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
+      { label: "Total Locked %", data: hist.map(d => d.pct_total), borderColor: "#98ffb6", backgroundColor: "rgba(152,255,182,0.06)", borderWidth: 2.5, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
       { label: "SV Locked %",    data: hist.map(d => d.pct_sv),    borderColor: "rgba(126,224,255,0.9)", backgroundColor: "rgba(126,224,255,0.06)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
       { label: "FA Locked %",    data: hist.map(d => d.pct_fa),    borderColor: "rgba(255,211,107,0.9)", backgroundColor: "rgba(255,211,107,0.06)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
     ];
@@ -4110,7 +4109,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
       let compHtml = '<span style="color:var(--muted)">—</span>';
       if (r.compliance !== null && r._type !== "escrow") {
         const pct   = Math.min(100, r.compliance || 0);
-        const color = pct >= 100 ? "var(--green)" : pct >= 70 ? "var(--gold)" : "var(--pink)";
+        const color = pct >= 100 ? "#98ffb6" : pct >= 70 ? "var(--gold)" : "var(--pink)";
         const label = pct.toFixed(1) + "%";
         compHtml = `<div class="lk-bar-wrap">
           <span style="color:${color};font-family:monospace;font-size:12px">${label}</span>
@@ -4123,7 +4122,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
       if (r._type === 'fa') {
         sfHtml = r.shortfall > 0
           ? `<span style="color:var(--pink)">${lkFmtCC(r.shortfall)} CC</span>`
-          : '<span style="color:var(--green)">0</span>';
+          : '<span style="color:#98ffb6">0</span>';
       } else {
         sfHtml = '<span style="color:var(--muted)">—</span>';
       }
