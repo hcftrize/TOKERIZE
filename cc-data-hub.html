@@ -954,6 +954,131 @@ html, body { overflow-x: hidden; max-width: 100%; }
     .ctx-iv-btn.active{color:var(--cyan);border-color:var(--cyan);background:rgba(126,224,255,0.07);}
   
     /* ── CBBI ── */
+        /* ── CC LOCKING PANEL ── */
+    .lk-kpi-row {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 4px;
+    }
+    .lk-kpi {
+      flex: 1; min-width: 130px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(180deg, rgba(126,224,255,0.03), transparent 60%), rgba(255,255,255,0.015);
+    }
+    .lk-kpi-label {
+      display: block;
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--muted); margin-bottom: 7px;
+    }
+    .lk-kpi-value {
+      display: block;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 26px; font-weight: 700; line-height: 1.05; color: #fff;
+    }
+    .lk-controls {
+      display: flex; gap: 12px; align-items: center;
+      flex-wrap: wrap; margin-bottom: 14px;
+    }
+    .lk-filter-group { display: flex; gap: 0; }
+    .lk-filter-btn {
+      font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--muted); background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.10); border-right: none;
+      padding: 7px 16px; cursor: pointer; white-space: nowrap;
+      transition: color .15s, background .15s, border-color .15s;
+    }
+    .lk-filter-btn:last-of-type { border-right: 1px solid rgba(255,255,255,0.10); }
+    .lk-filter-btn.active { border-right: 1px solid var(--cyan) !important; }
+    .lk-filter-btn:hover { color: #fff; }
+    .lk-filter-btn.active { color: var(--cyan); border-color: var(--cyan); background: rgba(126,224,255,0.07); }
+    .lk-dropdown {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted); font-family: 'Rajdhani', sans-serif;
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      padding: 7px 28px 7px 12px; outline: none; cursor: pointer;
+      transition: border-color .15s;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23b6c1d8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+    .lk-dropdown:focus { border-color: var(--cyan); color: #fff; }
+    .lk-dropdown option { background: #060818; color: #fff; }
+    .lk-search {
+      flex: 1; min-width: 180px; max-width: 280px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; font-family: 'DM Mono', monospace; font-size: 13px;
+      padding: 7px 14px; outline: none; transition: border-color .15s;
+    }
+    .lk-search::placeholder { color: var(--muted); }
+    .lk-search:focus { border-color: var(--cyan); }
+    .lk-table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 14px; }
+    .lk-th {
+      font-family: 'Trebuchet MS', sans-serif; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: var(--muted); padding: 10px 12px; text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      white-space: nowrap; background: rgba(255,255,255,0.02);
+    }
+    .lk-th-sort { cursor: pointer; user-select: none; }
+    .lk-th-sort:hover { color: #fff; }
+    .lk-th-num { text-align: right; }
+    .lk-sort-arrow { font-size: 10px; margin-left: 4px; opacity: 0.5; }
+    .lk-tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background .12s; }
+    .lk-tr:hover { background: rgba(255,255,255,0.025); }
+    .lk-td { font-family: 'DM Mono', monospace; font-size: 13px; color: #dce6f0; padding: 11px 12px; vertical-align: middle; }
+    .lk-td-num { text-align: right; }
+    .lk-td-name { font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 700; color: #fff; }
+    .lk-badge { display: inline-block; font-family: 'Trebuchet MS', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; padding: 3px 8px; border-radius: 2px; white-space: nowrap; }
+    .lk-badge-sv     { background: rgba(126,224,255,0.12); color: var(--cyan);  border: 1px solid rgba(126,224,255,0.25); }
+    .lk-badge-fa     { background: rgba(255,211,107,0.10); color: var(--gold);  border: 1px solid rgba(255,211,107,0.25); }
+    .lk-badge-ai     { background: rgba(255,138,216,0.10); color: var(--pink);  border: 1px solid rgba(255,138,216,0.25); }
+    .lk-badge-escrow { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid rgba(255,255,255,0.12); }
+    .lk-tier-1       { color: var(--cyan); font-weight: 700; }
+    .lk-tier-2       { color: var(--gold); font-weight: 700; }
+    .lk-tier-no      { color: var(--pink); }
+    .lk-tier-pending { color: var(--muted); font-style: italic; }
+    .lk-tier-escrow  { color: var(--muted); }
+    .lk-status { display: flex; align-items: center; justify-content: flex-end; gap: 6px; white-space: nowrap; }
+    .lk-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .lk-dot-ok      { background: var(--green); }
+    .lk-dot-warn    { background: var(--gold); }
+    .lk-dot-bad     { background: var(--pink); }
+    .lk-dot-neutral { background: var(--muted); }
+    .lk-bar-wrap { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+    .lk-bar { width: 60px; height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; flex-shrink: 0; }
+    .lk-bar-fill { height: 100%; border-radius: 3px; }
+    .lk-pagination { display: flex; gap: 6px; justify-content: center; align-items: center; margin-top: 18px; flex-wrap: wrap; }
+    .lk-page-btn {
+      font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700;
+      color: var(--muted); background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 6px 12px; cursor: pointer; transition: color .15s, border-color .15s;
+    }
+    .lk-page-btn:hover { color: #fff; }
+    .lk-page-btn.active { color: var(--cyan); border-color: var(--cyan); background: rgba(126,224,255,0.07); }
+    .lk-page-btn:disabled { opacity: 0.3; cursor: default; }
+    @media(max-width:700px) {
+      .lk-kpi { min-width: 100px; }
+      .lk-kpi-value { font-size: 20px; }
+      .lk-dropdown {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted); font-family: 'Rajdhani', sans-serif;
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      padding: 7px 28px 7px 12px; outline: none; cursor: pointer;
+      transition: border-color .15s;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23b6c1d8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+    .lk-dropdown:focus { border-color: var(--cyan); color: #fff; }
+    .lk-dropdown option { background: #060818; color: #fff; }
+    .lk-search { max-width: 100%; }
+    }
+
     .cbbi-zoom{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-right:none;padding:6px 16px;cursor:pointer;transition:color .15s,background .15s;}
     .cbbi-zoom:last-child{border-right:1px solid rgba(255,255,255,0.10);}
     .cbbi-zoom:hover{color:#fff;background:rgba(126,224,255,0.06);}
@@ -1070,6 +1195,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
           <option value="burn">Burn Activity</option>
           <option value="mint">Mint Activity</option>
           <option value="alloc">Mint Allocation</option>
+          <option value="lock">CC Locking</option>
         </select>
       </div>
       <!-- Desktop: tab buttons (hidden on mobile) -->
@@ -1078,6 +1204,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <button class="ctx-tab" onclick="ctxSwitch('burn',this)">Burn Activity</button>
         <button class="ctx-tab" onclick="ctxSwitch('mint',this)">Mint Activity</button>
         <button class="ctx-tab" onclick="ctxSwitch('alloc',this)">Mint Allocation</button>
+        <button class="ctx-tab" onclick="ctxSwitch('lock',this)">CC Locking</button>
       </div>
 
       <!-- Panel 1 — Burn/Mint Ratio -->
@@ -1111,7 +1238,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <!-- Cantonomics current state -->
         <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.07)">
           <div style="font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#fff;margin-bottom:6px">Cantonomics Current State</div>
-          <p style="font-family:'Trebuchet MS',sans-serif;font-size:14px;color:var(--muted);margin-bottom:16px;max-width:700px">Since January 2026, 62% of the total rewards pool go to featured applications, representing around 516 million CC shared among app providers every month.</p>
+          <p style="font-family:sans-serif;font-size:14px;color:var(--muted);margin-bottom:16px;max-width:700px">Since January 2026, 62% of the total rewards pool go to featured applications, representing around 516 million CC shared among app providers every month.</p>
           <div class="ctx-chart-wrap" id="ctx-chart-cantonomics-wrap" style="height:320px">
             <canvas id="ctx-chart-cantonomics"></canvas>
           </div>
@@ -1128,8 +1255,112 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <div class="ctx-kpi-row" id="ctx-kpi-alloc"></div>
       </div>
 
-    </section>
+      <!-- Panel 5 — CC Locking -->
+      <div class="ctx-panel" id="ctx-panel-lock">
 
+        <!-- KPI row -->
+        <div class="lk-kpi-row" id="lk-kpi-row">
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">Total CC Locked</span>
+            <span class="lk-kpi-value" id="lk-kpi-total">—</span>
+          </div>
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">SV Locking</span>
+            <span class="lk-kpi-value" id="lk-kpi-sv" style="color:var(--cyan)">—</span>
+          </div>
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">FA Locking</span>
+            <span class="lk-kpi-value" id="lk-kpi-fa" style="color:var(--gold)">—</span>
+          </div>
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">Active SVs</span>
+            <span class="lk-kpi-value" id="lk-kpi-svcount" style="color:var(--muted)">—</span>
+          </div>
+          <div class="lk-kpi">
+            <span class="lk-kpi-label">Active FAs</span>
+            <span class="lk-kpi-value" id="lk-kpi-facount" style="color:var(--muted)">—</span>
+          </div>
+        </div>
+
+        <!-- Chart toggle buttons -->
+        <div style="margin:20px 0 10px;display:flex;gap:0;align-items:center;flex-wrap:wrap">
+          <button class="ctx-iv-btn active" id="lk-btn-all"   onclick="lkFilter('all')">All</button>
+          <button class="ctx-iv-btn"        id="lk-btn-sv"    onclick="lkFilter('sv')">SV Only</button>
+          <button class="ctx-iv-btn"        id="lk-btn-fa"    onclick="lkFilter('fa')">FA Only</button>
+          <button class="ctx-iv-btn"        id="lk-btn-pct"   onclick="lkFilter('pct')">% CC Supply</button>
+        </div>
+
+        <!-- Chart CC (absolute) -->
+        <div class="ctx-chart-wrap" id="lk-chart-wrap" style="position:relative">
+          <div class="ctx-loading" id="lk-chart-loading">Loading locking data&hellip;</div>
+          <canvas id="lk-chart" style="display:none"></canvas>
+        </div>
+        <!-- Chart % supply (hidden by default) -->
+        <div class="ctx-chart-wrap" id="lk-chart-pct-wrap" style="position:relative;display:none">
+          <div class="ctx-loading" id="lk-chart-pct-loading">Loading supply data&hellip;</div>
+          <canvas id="lk-chart-pct" style="display:none"></canvas>
+        </div>
+
+        <!-- Divider -->
+        <div style="margin:32px 0 20px;border-top:1px solid rgba(255,255,255,0.07);padding-top:24px">
+          <div style="font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#fff;margin-bottom:16px">Locking Directory</div>
+
+          <!-- Filter + Search bar -->
+          <div class="lk-controls">
+            <div class="lk-filter-group">
+              <button class="lk-filter-btn active" data-f="all"    onclick="lkTableFilter('all',this)">All</button>
+              <button class="lk-filter-btn"        data-f="sv"     onclick="lkTableFilter('sv',this)">SV</button>
+              <button class="lk-filter-btn"        data-f="fa"     onclick="lkTableFilter('fa',this)">FA</button>
+              <button class="lk-filter-btn"        data-f="escrow" onclick="lkTableFilter('escrow',this)">Escrow</button>
+            </div>
+            <select class="lk-dropdown" id="lk-role-filter" onchange="lkDropFilter()">
+              <option value="">All Roles</option>
+              <option value="SV">SV</option>
+              <option value="App Provider">App Provider</option>
+              <option value="Asset Issuer">Asset Issuer</option>
+              <option value="Escrow Exempt">Escrow Exempt</option>
+            </select>
+            <select class="lk-dropdown" id="lk-status-filter" onchange="lkDropFilter()">
+              <option value="">All Statuses</option>
+              <option value="Tier 1">Tier 1</option>
+              <option value="Tier 2">Tier 2</option>
+              <option value="No Tier">No Tier</option>
+              <option value="Meets Requirement">Meets Requirement</option>
+              <option value="Below Requirement">Below Requirement</option>
+              <option value="Data Review">Data Review</option>
+              <option value="Pause / Revoke">Pause / Revoke</option>
+              <option value="Escrow">Escrow</option>
+            </select>
+            <input class="lk-search" id="lk-search" type="text" placeholder="Search name…" oninput="lkTableSearch(this.value)">
+          </div>
+
+          <!-- Table -->
+          <div class="table-wrap">
+            <table class="lk-table" id="lk-table">
+              <thead>
+                <tr>
+                  <th class="lk-th lk-th-sort" data-col="name"       onclick="lkSort('name')">Name <span class="lk-sort-arrow" id="lk-arr-name"></span></th>
+                  <th class="lk-th lk-th-sort" data-col="role"       onclick="lkSort('role')">Role <span class="lk-sort-arrow" id="lk-arr-role"></span></th>
+                  <th class="lk-th lk-th-sort" data-col="tier"       onclick="lkSort('tier')">Tier <span class="lk-sort-arrow" id="lk-arr-tier"></span></th>
+                  <th class="lk-th lk-th-sort lk-th-num" data-col="locked" onclick="lkSort('locked')">Locked CC <span class="lk-sort-arrow" id="lk-arr-locked">↓</span></th>
+                  <th class="lk-th lk-th-sort lk-th-num" data-col="compliance" onclick="lkSort('compliance')">Locked CC % <span class="lk-sort-arrow" id="lk-arr-compliance"></span></th>
+                  <th class="lk-th lk-th-sort lk-th-num" data-col="shortfall"  onclick="lkSort('shortfall')">Shortfall (FA) <span class="lk-sort-arrow" id="lk-arr-shortfall"></span></th>
+                  <th class="lk-th lk-th-sort lk-th-num" data-col="gap" onclick="lkSort('gap')">Gap to T1 (SV) <span class="lk-sort-arrow" id="lk-arr-gap"></span></th>
+                  <th class="lk-th lk-th-num" style="text-align:right">Status</th>
+                </tr>
+              </thead>
+              <tbody id="lk-tbody">
+                <tr><td colspan="8" style="text-align:center;padding:32px;color:var(--muted);font-family:'DM Mono',monospace;font-size:13px">Loading data…</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="lk-pagination" id="lk-pagination"></div>
+        </div>
+      </div>
+
+    </section>
 
     <!-- ── SECTION 3 : MARKET CONTEXT ── -->
     <section class="section" id="mktctx-section">
@@ -1160,13 +1391,13 @@ html, body { overflow-x: hidden; max-width: 100%; }
       <div class="ctx-panel" id="mktctx-panel-cbbi">
         <div style="display:flex;gap:16px;margin-bottom:22px;flex-wrap:wrap;align-items:stretch">
           <div style="flex:0 0 auto;min-width:186px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 26px;border:1px solid rgba(126,224,255,0.14);background:linear-gradient(180deg,rgba(126,224,255,0.04),transparent)">
-            <span style="font-family:'Trebuchet MS',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px;text-align:center">Confidence at the peak</span>
+            <span style="font-family:sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px;text-align:center">Confidence at the peak</span>
             <span id="cbbi-score-val" style="font-family:'Rajdhani',sans-serif;font-size:72px;font-weight:700;line-height:1;color:#fff">—</span>
             <span style="font-family:'Rajdhani',sans-serif;font-size:16px;color:var(--muted);margin-top:4px">/ 100</span>
             <span id="cbbi-score-date" style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:10px">—</span>
           </div>
           <div style="flex:1;min-width:200px;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:20px 24px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.01)">
-            <span style="font-family:'Trebuchet MS',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted)">Cycle Signal</span>
+            <span style="font-family:sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted)">Cycle Signal</span>
             <div style="width:100%;height:5px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden">
               <div id="cbbi-signal-bar" style="height:100%;width:0%;border-radius:3px;transition:width .8s ease,background .8s ease"></div>
             </div>
@@ -1217,7 +1448,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
           <input type="text" id="add-compare-input-footer"
             placeholder="Add any crypto to compare&hellip;"
             autocomplete="off" spellcheck="false"
-            style="width:100%;padding:10px 14px;background:rgba(5,14,34,0.8);border:1px solid rgba(126,224,255,0.28);color:var(--text);font-family:'Trebuchet MS',sans-serif;font-size:15px;outline:none"/>
+            style="width:100%;padding:10px 14px;background:rgba(5,14,34,0.8);border:1px solid rgba(126,224,255,0.28);color:var(--text);font-family:sans-serif;font-size:15px;outline:none"/>
           <div class="autocomplete-dropdown" id="add-compare-autocomplete-footer"></div>
         </div>
         <button id="add-compare-btn-footer" class="add-btn" disabled>+ Add</button>
@@ -1248,7 +1479,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
           <input type="text" id="add-compare-input"
             placeholder="Add any crypto to compare&hellip;"
             autocomplete="off" spellcheck="false"
-            style="width:100%;padding:10px 14px;background:rgba(5,14,34,0.8);border:1px solid rgba(126,224,255,0.28);color:var(--text);font-family:'Trebuchet MS',sans-serif;font-size:15px;outline:none"/>
+            style="width:100%;padding:10px 14px;background:rgba(5,14,34,0.8);border:1px solid rgba(126,224,255,0.28);color:var(--text);font-family:sans-serif;font-size:15px;outline:none"/>
           <div class="autocomplete-dropdown" id="add-compare-autocomplete"></div>
         </div>
         <button id="add-compare-btn" class="add-btn" disabled>+ Add</button>
@@ -1279,7 +1510,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
           <input type="text" id="add-compare-input-bag"
             placeholder="Add any crypto to compare&hellip;"
             autocomplete="off" spellcheck="false"
-            style="width:100%;padding:10px 14px;background:rgba(5,14,34,0.8);border:1px solid rgba(126,224,255,0.28);color:var(--text);font-family:'Trebuchet MS',sans-serif;font-size:15px;outline:none"/>
+            style="width:100%;padding:10px 14px;background:rgba(5,14,34,0.8);border:1px solid rgba(126,224,255,0.28);color:var(--text);font-family:sans-serif;font-size:15px;outline:none"/>
           <div class="autocomplete-dropdown" id="add-compare-autocomplete-bag"></div>
         </div>
         <button id="add-compare-btn-bag" class="add-btn" disabled>+ Add</button>
@@ -1318,7 +1549,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
           <input type="text" id="add-ratio-input"
             placeholder="Add any crypto to compare&hellip;"
             autocomplete="off" spellcheck="false"
-            style="width:100%;padding:10px 14px;background:rgba(5,14,34,0.8);border:1px solid rgba(126,224,255,0.28);color:var(--text);font-family:'Trebuchet MS',sans-serif;font-size:15px;outline:none"/>
+            style="width:100%;padding:10px 14px;background:rgba(5,14,34,0.8);border:1px solid rgba(126,224,255,0.28);color:var(--text);font-family:sans-serif;font-size:15px;outline:none"/>
           <div class="autocomplete-dropdown" id="add-ratio-autocomplete"></div>
         </div>
         <button id="add-ratio-btn" class="add-btn" disabled>+ Add</button>
@@ -2548,6 +2779,8 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
     ctxActiveTab = tab;
     // If data already loaded, render the newly visible chart
     if (ctxData) ctxRender(tab);
+    // CC Locking lazy load
+    if (tab === "lock" && typeof lkLoad === "function") lkLoad();
   }
 
   async function ctxLoad() {
@@ -3471,13 +3704,13 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
               displayFormats: {month:'MMM yy', year:'yyyy'},
             },
             grid:  {color:'rgba(255,255,255,0.05)'},
-            ticks: {color:'rgba(182,193,216,0.7)', font:{family:'DM Mono',size:10}, maxRotation:0},
+            ticks: {color:'rgba(182,193,216,0.7)', font:{family:'monospace',size:10}, maxRotation:0},
           },
           yScore: {
             position: 'left',
             min: 0, max: 100,
             grid:  {color:'rgba(255,255,255,0.04)'},
-            ticks: {color:'rgba(182,193,216,0.5)', font:{family:'DM Mono',size:10}, callback: v => v},
+            ticks: {color:'rgba(182,193,216,0.5)', font:{family:'monospace',size:10}, callback: v => v},
           },
           yPrice: {
             position: 'right',
@@ -3497,6 +3730,465 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
     });
 
   }
+
+  // ═══════════════════════════════════════════════════════════
+  //   CC LOCKING MODULE
+  // ═══════════════════════════════════════════════════════════
+
+  const LK_SV_URL   = "https://raw.githubusercontent.com/hcftrize/TOKERIZE/main/rize-data-hub/sv-locking.json";
+  const LK_FA_URL   = "https://raw.githubusercontent.com/hcftrize/TOKERIZE/main/rize-data-hub/fa-locking.json";
+  const LK_HIST_URL = "https://raw.githubusercontent.com/hcftrize/TOKERIZE/main/rize-data-hub/locking-history.json";
+
+  let _lkSV = null, _lkFA = null, _lkHist = null;
+  let _lkChart = null;
+  let _lkRows = [];         // merged table rows
+  let _lkFiltered = [];     // after filter+search
+  let _lkTableFilter = "all";
+  let _lkSearch = "";
+  let _lkSort = { col: "locked", dir: "desc" };
+  let _lkPage = 1;
+  const LK_PAGE_SIZE = 20;
+  let _lkChartFilter = "all";
+  let _lkLoaded = false;
+
+  // ── Formatters ────────────────────────────────────────────
+  function lkFmtCC(n) {
+    if (!n && n !== 0) return "—";
+    if (n >= 1e9) return (n / 1e9).toFixed(2) + "B";
+    if (n >= 1e6) return (n / 1e6).toFixed(2) + "M";
+    if (n >= 1e3) return (n / 1e3).toFixed(1) + "K";
+    return n.toFixed(0);
+  }
+  function lkFmtPct(n) {
+    if (n === null || n === undefined) return "—";
+    return (parseFloat(n) * (n > 1 ? 1 : 100)).toFixed(1) + "%";
+  }
+
+  // ── Load data ─────────────────────────────────────────────
+  async function lkLoad() {
+    if (_lkLoaded) return;
+    _lkLoaded = true;
+    try {
+      const [svRes, faRes, histRes] = await Promise.all([
+        fetch(LK_SV_URL).then(r => r.json()),
+        fetch(LK_FA_URL).then(r => r.json()),
+        fetch(LK_HIST_URL).then(r => r.json()),
+      ]);
+      _lkSV   = svRes;
+      _lkFA   = faRes;
+      _lkHist = histRes;
+      lkRenderKPI();
+      lkRenderChart();
+      lkBuildRows();
+      lkRenderTable();
+    } catch(e) {
+      document.getElementById("lk-chart-loading").textContent = "Could not load locking data.";
+    }
+  }
+
+  // ── KPI row ───────────────────────────────────────────────
+  function lkRenderKPI() {
+    const svTotal  = _lkSV?.total_sv_locked || 0;
+    const faTotal  = _lkFA?.summary?.total_locked_app_level || 0;
+    const combined = svTotal + faTotal;
+    const svCount  = (_lkSV?.svs || []).filter(s => !["escrow_exempt","ghost"].includes(s.category)).length;
+    const faCount  = (_lkFA?.apps || []).filter(a => a.is_active).length;
+
+    document.getElementById("lk-kpi-total").textContent   = lkFmtCC(combined) + " CC";
+    document.getElementById("lk-kpi-sv").textContent      = lkFmtCC(svTotal) + " CC";
+    document.getElementById("lk-kpi-fa").textContent      = lkFmtCC(faTotal) + " CC";
+    document.getElementById("lk-kpi-svcount").textContent = svCount;
+    document.getElementById("lk-kpi-facount").textContent = faCount;
+  }
+
+  // ── Chart ─────────────────────────────────────────────────
+  function lkFilter(mode) {
+    _lkChartFilter = mode;
+    ["all","sv","fa","pct"].forEach(m => {
+      const btn = document.getElementById("lk-btn-"+m);
+      if (btn) btn.classList.toggle("active", m === mode);
+    });
+    // Toggle between CC chart and % supply chart
+    const ccWrap  = document.getElementById("lk-chart-wrap");
+    const pctWrap = document.getElementById("lk-chart-pct-wrap");
+    if (mode === "pct") {
+      if (ccWrap)  ccWrap.style.display  = "none";
+      if (pctWrap) pctWrap.style.display = "block";
+      lkRenderPctChart();
+    } else {
+      if (ccWrap)  ccWrap.style.display  = "block";
+      if (pctWrap) pctWrap.style.display = "none";
+      lkRenderChart();
+    }
+  }
+
+  function lkRenderChart() {
+    const hist = (_lkHist || []).filter(d => d.sv || d.fa);
+    if (!hist.length) return;
+    const labels = hist.map(d => d.date);
+    const wrap   = document.getElementById("lk-chart-wrap");
+    const canvas = document.getElementById("lk-chart");
+    document.getElementById("lk-chart-loading").style.display = "none";
+    canvas.style.display = "block";
+
+    const datasets = [];
+    if (_lkChartFilter !== "fa") datasets.push({
+      label: "SV Locking",
+      data: hist.map(d => d.sv || 0),
+      borderColor: "rgba(126,224,255,0.9)",
+      backgroundColor: "rgba(126,224,255,0.08)",
+      borderWidth: 2,
+      pointRadius: hist.length > 60 ? 0 : 3,
+      pointHoverRadius: 5,
+      fill: _lkChartFilter === "sv",
+      tension: 0.3,
+    });
+    if (_lkChartFilter !== "sv") datasets.push({
+      label: "FA Locking",
+      data: hist.map(d => d.fa || 0),
+      borderColor: "rgba(255,211,107,0.9)",
+      backgroundColor: "rgba(255,211,107,0.08)",
+      borderWidth: 2,
+      pointRadius: hist.length > 60 ? 0 : 3,
+      pointHoverRadius: 5,
+      fill: _lkChartFilter === "fa",
+      tension: 0.3,
+    });
+    if (_lkChartFilter === "all") datasets.push({
+      label: "Total Locked",
+      data: hist.map(d => (d.sv || 0) + (d.fa || 0)),
+      borderColor: "rgba(255,255,255,0.5)",
+      backgroundColor: "rgba(255,255,255,0.03)",
+      borderWidth: 1.5,
+      borderDash: [4,3],
+      pointRadius: 0,
+      pointHoverRadius: 4,
+      fill: false,
+      tension: 0.3,
+    });
+
+    if (_lkChart) { _lkChart.destroy(); _lkChart = null; }
+    _lkChart = new Chart(canvas, {
+      type: "line",
+      data: { labels, datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        animation: { duration: 300 },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: {
+            display: true,
+            labels: { color: "#b6c1d8", font: { family: "Trebuchet MS", size: 12 }, boxWidth: 14 }
+          },
+          tooltip: {
+            backgroundColor: "rgba(6,8,24,0.95)",
+            borderColor: "rgba(126,224,255,0.2)", borderWidth: 1,
+            titleColor: "#7ee0ff", bodyColor: "#dce6f0",
+            callbacks: {
+              label: ctx => " " + ctx.dataset.label + ": " + lkFmtCC(ctx.raw) + " CC"
+            }
+          },
+        },
+        scales: {
+          x: {
+            type: "time", time: { unit: "month" },
+            grid: { color: "rgba(255,255,255,0.04)" },
+            ticks: { color: "#b6c1d8", font: { size: 11 }, maxTicksLimit: 12 },
+          },
+          y: {
+            grid: { color: "rgba(255,255,255,0.04)" },
+            ticks: {
+              color: "#b6c1d8", font: { size: 11 },
+              callback: v => lkFmtCC(v) + " CC",
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // ── Chart % CC Supply ────────────────────────────────────────────────────
+  let _lkPctChart = null;
+
+  function lkRenderPctChart() {
+    const hist    = (_lkHist || []).filter(d => d.pct_total != null);
+    const canvas  = document.getElementById("lk-chart-pct");
+    const loading = document.getElementById("lk-chart-pct-loading");
+    if (!hist.length) {
+      if (loading) loading.textContent = "No supply data yet — run FA scraper to populate.";
+      return;
+    }
+    if (loading) loading.style.display = "none";
+    canvas.style.display = "block";
+    const labels = hist.map(d => d.date);
+    const datasets = [
+      { label: "Total Locked %", data: hist.map(d => d.pct_total), borderColor: "rgba(255,255,255,0.7)", backgroundColor: "rgba(255,255,255,0.04)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
+      { label: "SV Locked %",    data: hist.map(d => d.pct_sv),    borderColor: "rgba(126,224,255,0.9)", backgroundColor: "rgba(126,224,255,0.06)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
+      { label: "FA Locked %",    data: hist.map(d => d.pct_fa),    borderColor: "rgba(255,211,107,0.9)", backgroundColor: "rgba(255,211,107,0.06)", borderWidth: 2, pointRadius: hist.length > 60 ? 0 : 3, pointHoverRadius: 5, fill: false, tension: 0.3 },
+    ];
+    if (_lkPctChart) { _lkPctChart.destroy(); _lkPctChart = null; }
+    _lkPctChart = new Chart(canvas, {
+      type: "line", data: { labels, datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: { duration: 300 },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: true, labels: { color: "#b6c1d8", font: { family: "sans-serif", size: 12 }, boxWidth: 14 } },
+          tooltip: {
+            backgroundColor: "rgba(6,8,24,0.95)", borderColor: "rgba(126,224,255,0.2)", borderWidth: 1,
+            titleColor: "#7ee0ff", bodyColor: "#dce6f0",
+            callbacks: { label: ctx => " " + ctx.dataset.label + ": " + (ctx.raw != null ? ctx.raw.toFixed(2) + "%" : "—") }
+          },
+        },
+        scales: {
+          x: { type: "time", time: { unit: "month" }, grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#b6c1d8", font: { size: 11 }, maxTicksLimit: 12 } },
+          y: { grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#b6c1d8", font: { size: 11 }, callback: v => v.toFixed(1) + "%" } },
+        },
+      },
+    });
+  }
+
+  // ── Table builder ─────────────────────────────────────────
+  function lkBuildRows() {
+    _lkRows = [];
+
+    // SV rows
+    for (const sv of (_lkSV?.svs || [])) {
+      const isEscrow = sv.category === "escrow_exempt" || sv.is_ghost;
+      _lkRows.push({
+        _type:      isEscrow ? "escrow" : "sv",
+        name:       sv.name,
+        role:       isEscrow ? "Escrow Exempt" : "SV",
+        tier:       sv.tier || (isEscrow ? "Escrow" : "—"),
+        locked:     sv.locked_balance || 0,
+        compliance: sv.compliance_pct != null ? parseFloat(sv.compliance_pct) : null,
+        shortfall:  sv.shortfall || 0,
+        gap:        (sv.tier && sv.tier !== 'Tier 1' && !sv.is_ghost && sv.category !== 'escrow_exempt') ? (sv.shortfall || 0) : 0,
+        breaches:   sv.breaches_35d,
+        status:     lkSVStatus(sv),
+        is_agg:     sv.is_aggregate,
+        is_ghost:   sv.is_ghost,
+      });
+    }
+
+    // FA rows
+    for (const fa of (_lkFA?.apps || [])) {
+      _lkRows.push({
+        _type:      "fa",
+        name:       fa.app_name + (fa.institution ? " · " + fa.institution : ""),
+        role:       fa.asset_issuer ? "Asset Issuer" : "App Provider",
+        tier:       "—",
+        locked:     fa.locked_balance || 0,
+        compliance: fa.meets_requirement ? 100 : (fa.locked_balance && fa.required_lock ? (fa.locked_balance / fa.required_lock * 100) : 0),
+        shortfall:  fa.shortfall || 0,
+        gap:        0,
+        breaches:   null,
+        status:     fa.status_label || "—",
+        is_agg:     false,
+        is_ghost:   false,
+        asset_issuer: fa.asset_issuer,
+        is_active:  fa.is_active,
+      });
+    }
+
+    lkApplyFilter();
+  }
+
+  function lkSVStatus(sv) {
+    if (sv.is_ghost || sv.category === "escrow_exempt") return "Escrow";
+    const tier = (sv.tier || "").toLowerCase();
+    if (tier.includes("tier 1") || tier === "1") return "Tier 1";
+    if (tier.includes("tier 2") || tier === "2") return "Tier 2";
+    if (tier.includes("no tier") || tier === "no tier") return "No Tier";
+    return sv.tier || "Pending";
+  }
+
+  // ── Filter + Search + Sort ────────────────────────────────
+  function lkTableFilter(f, btn) {
+    _lkTableFilter = f;
+    document.querySelectorAll(".lk-filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    _lkPage = 1;
+    lkApplyFilter();
+    lkRenderTable();
+  }
+
+  function lkTableSearch(val) {
+    _lkSearch = val.toLowerCase();
+    _lkPage = 1;
+    lkApplyFilter();
+    lkRenderTable();
+  }
+
+  function lkDropFilter() {
+    _lkPage = 1;
+    lkApplyFilter();
+    lkRenderTable();
+  }
+
+  function lkApplyFilter() {
+    const roleVal   = (document.getElementById("lk-role-filter")   || {}).value || "";
+    const statusVal = (document.getElementById("lk-status-filter") || {}).value || "";
+
+    _lkFiltered = _lkRows.filter(r => {
+      const typeOk = _lkTableFilter === "all"
+        || (_lkTableFilter === "sv"     && r._type === "sv")
+        || (_lkTableFilter === "fa"     && r._type === "fa")
+        || (_lkTableFilter === "escrow" && r._type === "escrow");
+      const searchOk  = !_lkSearch || r.name.toLowerCase().includes(_lkSearch) || r.role.toLowerCase().includes(_lkSearch);
+      const roleOk    = !roleVal   || r.role === roleVal;
+      const statusOk  = !statusVal || r.status === statusVal;
+      return typeOk && searchOk && roleOk && statusOk;
+    });
+    lkApplySort();
+  }
+
+  function lkSort(col) {
+    if (_lkSort.col === col) {
+      _lkSort.dir = _lkSort.dir === "desc" ? "asc" : "desc";
+    } else {
+      _lkSort.col = col;
+      _lkSort.dir = col === "name" || col === "role" || col === "tier" ? "asc" : "desc";
+    }
+    document.querySelectorAll(".lk-sort-arrow").forEach(el => el.textContent = "");
+    const arr = document.getElementById("lk-arr-" + col);
+    if (arr) arr.textContent = _lkSort.dir === "desc" ? "↓" : "↑";
+    _lkPage = 1;
+    lkApplySort();
+    lkRenderTable();
+  }
+
+  function lkApplySort() {
+    const { col, dir } = _lkSort;
+    const mul = dir === "desc" ? -1 : 1;
+    _lkFiltered.sort((a, b) => {
+      let va = a[col], vb = b[col];
+      if (col === "tier") {
+        const order = {"Tier 1":0,"Tier 2":1,"No Tier":2,"Pending":3,"Escrow":4,"—":5};
+        va = order[va] ?? 9; vb = order[vb] ?? 9;
+        return (va - vb) * mul;
+      }
+      if (typeof va === "string") return va.localeCompare(vb) * mul;
+      return ((va || 0) - (vb || 0)) * mul;
+    });
+  }
+
+  // ── Render table ──────────────────────────────────────────
+  function lkRenderTable() {
+    const start  = (_lkPage - 1) * LK_PAGE_SIZE;
+    const page   = _lkFiltered.slice(start, start + LK_PAGE_SIZE);
+    const tbody  = document.getElementById("lk-tbody");
+
+    if (!_lkFiltered.length) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--muted);font-family:monospace;font-size:13px">No entries found.</td></tr>`;
+      document.getElementById("lk-pagination").innerHTML = "";
+      return;
+    }
+
+    tbody.innerHTML = page.map(r => {
+      // Role badge
+      const roleBadge = r._type === "escrow"
+        ? '<span class="lk-badge lk-badge-escrow">Escrow</span>'
+        : r._type === "sv"
+          ? '<span class="lk-badge lk-badge-sv">SV</span>'
+          : r.asset_issuer
+            ? '<span class="lk-badge lk-badge-ai">Asset Issuer</span>'
+            : '<span class="lk-badge lk-badge-fa">App Provider</span>';
+
+      // Tier
+      const tierClass = r.tier === "Tier 1" ? "lk-tier-1"
+        : r.tier === "Tier 2" ? "lk-tier-2"
+        : r.tier === "No Tier" ? "lk-tier-no"
+        : r.tier === "Escrow" ? "lk-tier-escrow"
+        : "lk-tier-pending";
+      const tierHtml = `<span class="${tierClass}">${r.tier || "—"}</span>`;
+
+      // Locked CC
+      const lockedHtml = r.locked > 0 ? lkFmtCC(r.locked) + " CC" : '<span style="color:var(--muted)">0</span>';
+
+      // Compliance bar
+      let compHtml = '<span style="color:var(--muted)">—</span>';
+      if (r.compliance !== null && r._type !== "escrow") {
+        const pct   = Math.min(100, r.compliance || 0);
+        const color = pct >= 100 ? "var(--green)" : pct >= 70 ? "var(--gold)" : "var(--pink)";
+        const label = pct.toFixed(1) + "%";
+        compHtml = `<div class="lk-bar-wrap">
+          <span style="color:${color};font-family:monospace;font-size:12px">${label}</span>
+          <div class="lk-bar"><div class="lk-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+        </div>`;
+      }
+
+      // Shortfall — only for FA with a fixed CC requirement
+      let sfHtml;
+      if (r._type === 'fa') {
+        sfHtml = r.shortfall > 0
+          ? `<span style="color:var(--pink)">${lkFmtCC(r.shortfall)} CC</span>`
+          : '<span style="color:var(--green)">0</span>';
+      } else {
+        sfHtml = '<span style="color:var(--muted)">—</span>';
+      }
+
+      // Gap to Tier 1 — only for SVs not already Tier 1
+      let gapHtml;
+      if (r._type === 'sv' && r.gap > 0) {
+        gapHtml = `<span style="color:var(--gold)">${lkFmtCC(r.gap)} CC</span>`;
+      } else {
+        gapHtml = '<span style="color:var(--muted)">—</span>';
+      }
+
+      // Status
+      let dotClass = "lk-dot-neutral";
+      let statusText = r.status || "—";
+      if (statusText === "Tier 1" || statusText === "Meets Requirement") dotClass = "lk-dot-ok";
+      else if (statusText === "Tier 2") dotClass = "lk-dot-warn";
+      else if (["No Tier","Below Requirement"].includes(statusText)) dotClass = "lk-dot-bad";
+      else if (statusText === "Escrow") dotClass = "lk-dot-neutral";
+
+      const statusHtml = `<div class="lk-status"><span class="lk-dot ${dotClass}"></span><span style="font-size:12px">${statusText}</span></div>`;
+
+      // Name
+      const nameHtml = r.name + (r.is_agg ? ' <span style="font-size:10px;color:var(--muted)">ORG</span>' : "");
+
+      return `<tr class="lk-tr">
+        <td class="lk-td lk-td-name">${nameHtml}</td>
+        <td class="lk-td">${roleBadge}</td>
+        <td class="lk-td">${tierHtml}</td>
+        <td class="lk-td lk-td-num">${lockedHtml}</td>
+        <td class="lk-td lk-td-num">${compHtml}</td>
+        <td class="lk-td lk-td-num">${sfHtml}</td>
+        <td class="lk-td lk-td-num">${gapHtml}</td>
+        <td class="lk-td">${statusHtml}</td>
+      </tr>`;
+    }).join("");
+
+    // Pagination
+    const totalPages = Math.ceil(_lkFiltered.length / LK_PAGE_SIZE);
+    const pag = document.getElementById("lk-pagination");
+    if (totalPages <= 1) { pag.innerHTML = ""; return; }
+
+    let pagHtml = "";
+    pagHtml += `<button class="lk-page-btn" onclick="lkGoPage(${_lkPage-1})" ${_lkPage===1?"disabled":""}>‹</button>`;
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || Math.abs(i - _lkPage) <= 2) {
+        pagHtml += `<button class="lk-page-btn ${i===_lkPage?"active":""}" onclick="lkGoPage(${i})">${i}</button>`;
+      } else if (Math.abs(i - _lkPage) === 3) {
+        pagHtml += `<span style="color:var(--muted);padding:0 4px">…</span>`;
+      }
+    }
+    pagHtml += `<button class="lk-page-btn" onclick="lkGoPage(${_lkPage+1})" ${_lkPage===totalPages?"disabled":""}>›</button>`;
+    pagHtml += `<span style="color:var(--muted);font-family:monospace;font-size:12px;margin-left:8px">${_lkFiltered.length} entries</span>`;
+    pag.innerHTML = pagHtml;
+  }
+
+  function lkGoPage(p) {
+    const total = Math.ceil(_lkFiltered.length / LK_PAGE_SIZE);
+    _lkPage = Math.max(1, Math.min(p, total));
+    lkRenderTable();
+    // No scroll on pagination — smoother UX
+  }
+
+  // CC Locking tab: lkLoad() is called directly from ctxSwitch above
+
   </script>
 
 

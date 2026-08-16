@@ -11,6 +11,8 @@ import urllib.request
 from datetime import datetime, timezone
 
 FA_API_URL = "https://lighthouse.xyz/api/featured-app-locking"
+CG_CC_URL  = "https://api.coingecko.com/api/v3/coins/canton-network"
+CG_KEY     = os.environ.get("COINGECKO_API_KEY", "")
 DATA_DIR = "rize-data-hub"
 FA_SNAPSHOT_PATH = os.path.join(DATA_DIR, "fa-locking.json")
 HISTORY_PATH = os.path.join(DATA_DIR, "locking-history.json")
@@ -19,10 +21,35 @@ HISTORY_PATH = os.path.join(DATA_DIR, "locking-history.json")
 ACTIVE_STATUSES = {"3-Approved"}
 
 
-def fetch_json(url: str) -> dict:
-    req = urllib.request.Request(url, headers={"Accept": "application/json", "User-Agent": "tokerize-scraper/1.0"})
+def fetch_json(url: str, headers: dict = None) -> dict:
+    req = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/json",
+            "User-Agent": "tokerize-scraper/1.0",
+            **(headers or {}),
+        }
+    )
     with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode())
+
+
+def fetch_cc_supply() -> float | None:
+    """Fetch CC circulating supply from CoinGecko."""
+    try:
+        headers = {}
+        if CG_KEY:
+            headers["x-cg-demo-api-key"] = CG_KEY
+        data = fetch_json(CG_CC_URL, headers)
+        supply = data.get("market_data", {}).get("circulating_supply")
+        if supply:
+            print(f"CC circulating supply: {float(supply):,.0f}")
+            return float(supply)
+        print("Warning: could not parse CC supply from CoinGecko response")
+        return None
+    except Exception as e:
+        print(f"Warning: CoinGecko fetch failed — {e}")
+        return None
 
 
 def parse_float(val) -> float:
@@ -164,27 +191,48 @@ def main():
     }
     save_json(FA_SNAPSHOT_PATH, snapshot)
 
+    # ── Fetch CC circulating supply from CoinGecko ───────────────────────────
+    cc_supply = fetch_cc_supply()
+
     # ── Update history ────────────────────────────────────────────────────────
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     history = load_history()
 
     existing = next((e for e in history if e.get("date") == today), None)
+    sv_locked = existing.get("sv", 0) if existing else 0
+    total_locked = sv_locked + total_fa_locked
+
+    # Compute % of circulating supply locked
+    pct_sv    = round(sv_locked      / cc_supply * 100, 4) if cc_supply else None
+    pct_fa    = round(total_fa_locked / cc_supply * 100, 4) if cc_supply else None
+    pct_total = round(total_locked    / cc_supply * 100, 4) if cc_supply else None
+
     if existing:
-        existing["fa"] = round(total_fa_locked)
-        existing["total"] = round(existing.get("sv", 0) + total_fa_locked)
+        existing["fa"]        = round(total_fa_locked)
+        existing["total"]     = round(total_locked)
+        existing["supply"]    = round(cc_supply) if cc_supply else existing.get("supply")
+        existing["pct_sv"]    = pct_sv
+        existing["pct_fa"]    = pct_fa
+        existing["pct_total"] = pct_total
     else:
         history.append({
-            "date": today,
-            "sv": 0,               # Will be filled by sv scraper
-            "fa": round(total_fa_locked),
-            "total": round(total_fa_locked),
+            "date":      today,
+            "sv":        0,
+            "fa":        round(total_fa_locked),
+            "total":     round(total_fa_locked),
+            "supply":    round(cc_supply) if cc_supply else None,
+            "pct_sv":    pct_sv,
+            "pct_fa":    pct_fa,
+            "pct_total": pct_total,
         })
 
     history.sort(key=lambda e: e["date"])
     history = history[-730:]
-
     save_json(HISTORY_PATH, history)
+
     print(f"Total FA locked (app-level, Approved only): {total_fa_locked:,.0f} CC")
+    if cc_supply:
+        print(f"CC supply: {cc_supply:,.0f} | Locked %: SV={pct_sv}% FA={pct_fa}% Total={pct_total}%")
     print(f"History entries: {len(history)}")
 
 
