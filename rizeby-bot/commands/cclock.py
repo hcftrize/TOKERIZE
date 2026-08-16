@@ -92,6 +92,8 @@ async def cmd_cclock_summary() -> str:
         "`/cclock fa` — Featured Apps",
         "`/cclock assetissuer` — Asset Issuers",
         "`/cclock all` — Full directory",
+        "`/cclock sv alert` · `fa alert` · `assetissuer alert`",
+        "`/cclock (keyword)` — Search full directory",
     ]
     return "\n".join(lines)
 
@@ -268,9 +270,11 @@ async def cmd_cclock_alert(mode: str, page: int) -> str:
         lines.append("")
 
     lines += [
-        "_Reply *next* or *page N* to navigate_",
+        "_Reply *next* · *page N* · or a *keyword* to search_",
         "",
         "`/cclock sv` · `fa` · `assetissuer` · `all`",
+        "`/cclock sv alert` · `fa alert` · `assetissuer alert`",
+        "`/cclock (keyword)` — search full directory",
     ]
     return "\n".join(lines)
 
@@ -329,8 +333,10 @@ async def cmd_cclock_search(mode: str, query: str, page: int) -> str:
         lines.append("")
 
     lines += [
-        "_Reply *next* or *page N* to navigate_",
+        "_Reply *next* · *page N* · or a *keyword* to search_",
         "",
         "`/cclock sv` · `fa` · `assetissuer` · `all`",
+        "`/cclock sv alert` · `fa alert` · `assetissuer alert`",
+        "`/cclock (keyword)` — search full directory",
     ]
     return "\n".join(lines)
