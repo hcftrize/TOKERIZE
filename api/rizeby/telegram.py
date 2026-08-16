@@ -98,7 +98,14 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
             await send_message(reply_chat_id, "No active list to navigate. Run a command first.",
                                thread_id=reply_thread_id)
             return
-        cmd_map = {"govbond_owner": "govbond", "govwallet_timeline": "govwallet"}
+        cmd_map = {
+            "govbond_owner": "govbond",
+            "govwallet_timeline": "govwallet",
+            "cclock_all": "cclock",
+            "cclock_sv": "cclock",
+            "cclock_fa": "cclock",
+            "cclock_assetissuer": "cclock",
+        }
         effective_cmd = cmd_map.get(state["cmd"], state["cmd"])
         await route_command(effective_cmd, state["args"], reply_chat_id,
                             message_id, reply_thread_id)
@@ -169,6 +176,23 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
     if cmd_lower in ("ccallocation", "ccalloc"):
         from commands.cc import cmd_cc_allocation
         await send_message(reply_chat_id, await cmd_cc_allocation(args), thread_id=reply_thread_id)
+
+    if cmd_lower == "cclock":
+        from commands.cclock import cmd_cclock_summary, cmd_cclock_list
+        mode = args[0].lower().replace(" ", "") if args else None
+        valid_modes = ("all", "sv", "fa", "assetissuer")
+        if mode in valid_modes:
+            page = _get_page(reply_chat_id)
+            p = page["page"] if page and page["cmd"] == f"cclock_{mode}" else 0
+            bot_mid = await send_message(
+                reply_chat_id,
+                await cmd_cclock_list(mode, p),
+                thread_id=reply_thread_id,
+            )
+            _set_page(reply_chat_id, f"cclock_{mode}", p, [mode])
+            if bot_mid: _cache_bot_msg(bot_mid, f"cclock_{mode}", p, [mode], reply_chat_id, reply_thread_id)
+        else:
+            await send_message(reply_chat_id, await cmd_cclock_summary(), thread_id=reply_thread_id)
         return
 
     # ── Price & market ────────────────────────────────────────────────────
@@ -455,6 +479,8 @@ Put any coin first to change the base asset.
 /ccprice — Canton Coin price & stats
 /ccburnmint · /ccburnmint 1w — Burn/mint ratio
 /ccallocation — Mint allocation by role
+/cclock — CC locking overview (SVs + FAs)
+/cclock sv · fa · assetissuer · all — Locking directory
 
 ━━ T-RIZE ECOSYSTEM ━━
 
@@ -564,6 +590,7 @@ async def register_commands() -> None:
     {"command": "ccprice",      "description": "Canton Coin price & stats"},
     {"command": "ccburnmint",   "description": "Burn/mint ratio — /ccburnmint · /ccburnmint 1w"},
     {"command": "ccallocation", "description": "Mint allocation by role"},
+    {"command": "cclock",       "description": "CC locking overview · /cclock sv · fa · assetissuer · all"},
     {"command": "cantonlist",   "description": "Browse all 290+ Canton entities"},
     {"command": "canton",       "description": "Search any Canton entity — /canton entity"},
     {"command": "ecosystem",    "description": "All T-RIZE partners — /ecosystem or /ecosystem name for deep-dive"},
