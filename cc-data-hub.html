@@ -988,7 +988,8 @@ html, body { overflow-x: hidden; max-width: 100%; }
       padding: 7px 16px; cursor: pointer; white-space: nowrap;
       transition: color .15s, background .15s, border-color .15s;
     }
-    .lk-filter-btn:last-child { border-right: 1px solid rgba(255,255,255,0.10); }
+    .lk-filter-btn:last-of-type { border-right: 1px solid rgba(255,255,255,0.10); }
+    .lk-filter-btn.active { border-right: 1px solid var(--cyan) !important; }
     .lk-filter-btn:hover { color: #fff; }
     .lk-filter-btn.active { color: var(--cyan); border-color: var(--cyan); background: rgba(126,224,255,0.07); }
     .lk-search {
@@ -1292,13 +1293,14 @@ html, body { overflow-x: hidden; max-width: 100%; }
                   <th class="lk-th lk-th-sort" data-col="role"       onclick="lkSort('role')">Role <span class="lk-sort-arrow" id="lk-arr-role"></span></th>
                   <th class="lk-th lk-th-sort" data-col="tier"       onclick="lkSort('tier')">Tier <span class="lk-sort-arrow" id="lk-arr-tier"></span></th>
                   <th class="lk-th lk-th-sort lk-th-num" data-col="locked" onclick="lkSort('locked')">Locked CC <span class="lk-sort-arrow" id="lk-arr-locked">↓</span></th>
-                  <th class="lk-th lk-th-sort lk-th-num" data-col="compliance" onclick="lkSort('compliance')">Compliance <span class="lk-sort-arrow" id="lk-arr-compliance"></span></th>
+                  <th class="lk-th lk-th-sort lk-th-num" data-col="compliance" onclick="lkSort('compliance')">Locked CC % <span class="lk-sort-arrow" id="lk-arr-compliance"></span></th>
                   <th class="lk-th lk-th-sort lk-th-num" data-col="shortfall"  onclick="lkSort('shortfall')">Shortfall <span class="lk-sort-arrow" id="lk-arr-shortfall"></span></th>
+                  <th class="lk-th lk-th-sort lk-th-num" data-col="gap" onclick="lkSort('gap')">Gap to T1 <span class="lk-sort-arrow" id="lk-arr-gap"></span></th>
                   <th class="lk-th lk-th-num">Status</th>
                 </tr>
               </thead>
               <tbody id="lk-tbody">
-                <tr><td colspan="7" style="text-align:center;padding:32px;color:var(--muted);font-family:'DM Mono',monospace;font-size:13px">Loading data…</td></tr>
+                <tr><td colspan="8" style="text-align:center;padding:32px;color:var(--muted);font-family:'DM Mono',monospace;font-size:13px">Loading data…</td></tr>
               </tbody>
             </table>
           </div>
@@ -1308,6 +1310,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
         </div>
       </div>
 
+    </section>
 
     <!-- ── SECTION 3 : MARKET CONTEXT ── -->
     <section class="section" id="mktctx-section">
@@ -3857,6 +3860,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
         locked:     sv.locked_balance || 0,
         compliance: sv.compliance_pct != null ? parseFloat(sv.compliance_pct) : null,
         shortfall:  sv.shortfall || 0,
+        gap:        (sv.tier && sv.tier !== 'Tier 1' && !sv.is_ghost && sv.category !== 'escrow_exempt') ? (sv.shortfall || 0) : 0,
         breaches:   sv.breaches_35d,
         status:     lkSVStatus(sv),
         is_agg:     sv.is_aggregate,
@@ -3874,6 +3878,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
         locked:     fa.locked_balance || 0,
         compliance: fa.meets_requirement ? 100 : (fa.locked_balance && fa.required_lock ? (fa.locked_balance / fa.required_lock * 100) : 0),
         shortfall:  fa.shortfall || 0,
+        gap:        0,
         breaches:   null,
         status:     fa.status_label || "—",
         is_agg:     false,
@@ -3961,7 +3966,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
     const tbody  = document.getElementById("lk-tbody");
 
     if (!_lkFiltered.length) {
-      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--muted);font-family:monospace;font-size:13px">No entries found.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--muted);font-family:monospace;font-size:13px">No entries found.</td></tr>`;
       document.getElementById("lk-pagination").innerHTML = "";
       return;
     }
@@ -3999,10 +4004,23 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
         </div>`;
       }
 
-      // Shortfall
-      const sfHtml = r.shortfall > 0
-        ? `<span style="color:var(--pink)">${lkFmtCC(r.shortfall)} CC</span>`
-        : '<span style="color:var(--green)">0</span>';
+      // Shortfall — only for FA with a fixed CC requirement
+      let sfHtml;
+      if (r._type === 'fa') {
+        sfHtml = r.shortfall > 0
+          ? `<span style="color:var(--pink)">${lkFmtCC(r.shortfall)} CC</span>`
+          : '<span style="color:var(--green)">0</span>';
+      } else {
+        sfHtml = '<span style="color:var(--muted)">—</span>';
+      }
+
+      // Gap to Tier 1 — only for SVs not already Tier 1
+      let gapHtml;
+      if (r._type === 'sv' && r.gap > 0) {
+        gapHtml = `<span style="color:var(--gold)">${lkFmtCC(r.gap)} CC</span>`;
+      } else {
+        gapHtml = '<span style="color:var(--muted)">—</span>';
+      }
 
       // Status
       let dotClass = "lk-dot-neutral";
@@ -4024,6 +4042,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
         <td class="lk-td lk-td-num">${lockedHtml}</td>
         <td class="lk-td lk-td-num">${compHtml}</td>
         <td class="lk-td lk-td-num">${sfHtml}</td>
+        <td class="lk-td lk-td-num">${gapHtml}</td>
         <td class="lk-td">${statusHtml}</td>
       </tr>`;
     }).join("");
@@ -4051,7 +4070,7 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
     const total = Math.ceil(_lkFiltered.length / LK_PAGE_SIZE);
     _lkPage = Math.max(1, Math.min(p, total));
     lkRenderTable();
-    document.getElementById("ctx-panel-lock").scrollIntoView({ behavior: "smooth", block: "start" });
+    // No scroll on pagination — smoother UX
   }
 
   // CC Locking tab: lkLoad() is called directly from ctxSwitch above
