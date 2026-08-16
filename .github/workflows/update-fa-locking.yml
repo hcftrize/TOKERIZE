@@ -2,33 +2,44 @@ name: Update FA Locking Data
 
 on:
   schedule:
-    # Every day at 06:30 UTC (30 min after SV scraper, so history merges cleanly)
     - cron: "30 6 * * *"
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Run FA locking scraper
         run: python scripts/scrape_fa_locking.py
 
-      - name: Commit & push JSON files
+      - name: Commit and push to dev
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "tokerize-bot"
+          git config user.email "bot@tokerize.com"
           git add rize-data-hub/fa-locking.json rize-data-hub/locking-history.json
-          git diff --cached --quiet && echo "No changes" && exit 0
-          git commit -m "chore: update fa-locking data $(date -u +%Y-%m-%d)"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore(data): fa-locking $(date -u +%Y-%m-%d)"
+            git push origin dev
+          fi
+
+      - name: Push data files to main
+        run: |
+          git fetch origin main
+          git checkout main
+          git checkout dev -- rize-data-hub/fa-locking.json rize-data-hub/locking-history.json
+          git add rize-data-hub/fa-locking.json rize-data-hub/locking-history.json
+          git diff --staged --quiet || git commit -m "chore(data): fa-locking $(date -u +%Y-%m-%d)"
+          git push origin main
