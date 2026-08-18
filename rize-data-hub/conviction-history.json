@@ -1831,6 +1831,10 @@
     {
       "date": "2026-08-16",
       "value": 924461104.46
+    },
+    {
+      "date": "2026-08-18",
+      "value": 924436609.35
     }
   ],
   "cex": [
@@ -3645,6 +3649,10 @@
     {
       "date": "2026-08-16",
       "value": 354293198.69
+    },
+    {
+      "date": "2026-08-18",
+      "value": 320712188.81
     }
   ],
   "unbonding": [],
@@ -3675,24 +3683,6 @@
       "from_label": "0x15da…b0d7",
       "to_label": "Revolut",
       "tx": "0xce60e49dd09e042fc0fb138894e3230f4fb94915da75f040f6cdf4eadd7f7157"
-    },
-    {
-      "date": "2026-07-17",
-      "amount": 15246087.0,
-      "from": "0x9b0c45d46d386cedd98873168c36efd0dcba8d46",
-      "to": "0x15da7556d5ed888306839bed06f868aeaedcb0d7",
-      "from_label": "Revolut",
-      "to_label": "0x15da…b0d7",
-      "tx": "0x53cc6f3b54bd6c66a73eb0d794e047d8e95b6a392c231af2a4bef53bf640a02c"
-    },
-    {
-      "date": "2026-07-17",
-      "amount": 7372419.0,
-      "from": "0x15da7556d5ed888306839bed06f868aeaedcb0d7",
-      "to": "0x9b0c45d46d386cedd98873168c36efd0dcba8d46",
-      "from_label": "0x15da…b0d7",
-      "to_label": "Revolut",
-      "tx": "0x3fc97bfa7e4e9e4a665390dafd4cd53e267f979f709304b287acd2b391cf4841"
     }
   ],
   "metadata": {
@@ -3710,7 +3700,7 @@
       "0x4D59BEC2b09052c60C6149c623fb3a461fB1Fe74",
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe"
     ],
-    "updated": "2026-08-16T23:59:23.593035+00:00"
+    "updated": "2026-08-18T06:11:58.682484+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
