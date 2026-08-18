@@ -626,6 +626,34 @@
     "logo_local": "logos\\blockdaemon.png"
   },
   {
+    "name": "Blueprint",
+    "slug": "blueprint",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a7cc9cb6dbe25b797e20d94_acea2117-a948-4204-8438-3b2d4edca286.jpeg",
+    "short_desc": "Full-stack Canton infrastructure: validator, data, and payments.",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "FINANCIAL INSTITUTIONS",
+      "DATA & ANALYTICS",
+      "DEVELOPER TOOLS",
+      "EXCHANGES",
+      "Network Utilities\nDATA & ANALYTICSDEVELOPER TOOLSEXCHANGESFORENSICS & SECURITYINTEROPERABILITYPAYMENTSSTABLECOINSTOKENIZED ASSETSWALLETS",
+      "FORENSICS & SECURITY",
+      "INTEROPERABILITY",
+      "PAYMENTS",
+      "STABLECOINS",
+      "TOKENIZED ASSETS",
+      "WALLETS",
+      "Roles\nAPPS (ALL)APPS (FEATURED)FINANCIAL INSTITUTIONSMARKET INFRASTRUCTURESERVICE PROVIDERSUPER VALIDATORVALIDATOR\nAPPS (ALL)APPS (FEATURED)FINANCIAL INSTITUTIONSMARKET INFRASTRUCTURESERVICE PROVIDERSUPER VALIDATORVALIDATOR",
+      "MARKET INFRASTRUCTURE",
+      "SERVICE PROVIDER",
+      "SUPER VALIDATOR",
+      "VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nBlueprint\nhttps://theblueprint.xyz\nBlueprint is an infrastructure and developer tools company for the Canton Network. We operate validator and indexing infrastructure on MainNet and build the data, analytics, and payment rails that power applications and AI agents. ccscan (ccscan.xyz) is a full-history Canton block explorer and chain data API with 32 REST endpoints, an OpenAPI specification, documentation, an MCP server for AI agents, and self-service API keys. It reads across all 13 Super Validator scans with automatic failover, providing a live network dashboard, governance and Super Validator reward analytics, and complete per-party transaction history and holdings. ccledger (ccledger.xyz) is a non-custodial records and payments API that lets applications and AI agents write immutable on-chain records or move Canton Coin directly from a user's own wallet with a single REST or MCP call, without running a validator node or writing Daml. Non-custody is enforced by design, so we never hold customer funds or private key\nNetwork Utilities\nDATA & ANALYTICSDEVELOPER TOOLSEXCHANGESFORENSICS & SECURITYINTEROPERABILITYPAYMENTSSTABLECOINSTOKENIZED ASSETSWALLETS\nRoles\nAPPS (ALL)APPS (FEATURED)FINANCIAL INSTITUTIONSMARKET INFRASTRUCTURESERVICE PROVIDERSUPER VALIDATORVALIDATOR\nAPPS (ALL)APPS (FEATURED)FINANCIAL INSTITUTIONSMARKET INFRASTRUCTURESERVICE PROVIDERSUPER VALIDATORVALIDATOR",
+    "logo_local": "logos\\blueprint.jpeg"
+  },
+  {
     "name": "BNP Paribas",
     "slug": "bnp-paribas",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515d2c191af001597326f_BNP-Paribas-SA-1.png",
