@@ -46,7 +46,97 @@ CEX_ADDRESSES = {
 
 
 
-def rpc(method, params, url=None):
+BASE_BLOCK_TIME = 2
+BLOCKS_PER_DAY  = 86400 // BASE_BLOCK_TIME  # ~43200
+
+
+def _get_block_timestamp(block_num):
+    res = rpc('eth_getBlockByNumber', [hex(block_num), False])
+    if res and res.get('result'):
+        return int(res['result']['timestamp'], 16)
+    return None
+
+
+def _find_block_at_end_of_day(target_date_str):
+    """Binary search for the last block before midnight UTC of target_date+1."""
+    target     = datetime.strptime(target_date_str, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+    end_of_day = int((target + timedelta(days=1)).timestamp())
+
+    res = rpc('eth_blockNumber', [])
+    if not res or not res.get('result'):
+        return None
+    current_block = int(res['result'], 16)
+
+    now_ts     = int(datetime.now(timezone.utc).timestamp())
+    secs_ago   = now_ts - end_of_day
+    blocks_ago = secs_ago // BASE_BLOCK_TIME
+    lo = max(0, current_block - blocks_ago - BLOCKS_PER_DAY)
+    hi = min(current_block, current_block - blocks_ago + BLOCKS_PER_DAY)
+
+    iterations = 0
+    while lo < hi and iterations < 30:
+        mid = (lo + hi) // 2
+        ts  = _get_block_timestamp(mid)
+        if ts is None:
+            break
+        if ts < end_of_day:
+            lo = mid + 1
+        else:
+            hi = mid
+        iterations += 1
+        time.sleep(0.1)
+
+    return lo - 1
+
+
+def _get_bonded_at_block(block_num):
+    padded = '000000000000000000000000' + GOV_CONTRACT[2:].lower()
+    res = rpc('eth_call', [{'to': RIZE_TOKEN, 'data': '0x70a08231' + padded}, hex(block_num)])
+    if not res or not res.get('result') or res['result'] == '0x':
+        return 0.0
+    try:
+        return int(res['result'], 16) / DECIMALS
+    except Exception:
+        return 0.0
+
+
+def backfill_missing_bonded(history):
+    """
+    Check last 7 days — if any bonded[] point is missing, fetch it historically.
+    Runs silently if nothing is missing (normal case).
+    """
+    today        = date.today().isoformat()
+    bonded_dates = {p['date'] for p in history.get('bonded', [])}
+    missing      = []
+
+    for i in range(1, 8):  # yesterday back to 7 days ago
+        d = (date.today() - timedelta(days=i)).isoformat()
+        if d not in bonded_dates:
+            missing.append(d)
+
+    if not missing:
+        return  # nothing to do
+
+    print(f'\n⚠️  Backfilling {len(missing)} missing bonded point(s): {missing}')
+    bonded_map = {p['date']: p['value'] for p in history.get('bonded', [])}
+
+    for d in sorted(missing):
+        print(f'  Patching {d}...')
+        block = _find_block_at_end_of_day(d)
+        if not block:
+            print(f'  Could not find block for {d} — skipping')
+            continue
+        bonded_val = _get_bonded_at_block(block)
+        bonded_map[d] = round(bonded_val, 2)
+        print(f'  → {bonded_val:,.0f} RIZE bonded')
+        time.sleep(0.3)
+
+    history['bonded'] = [{'date': d, 'value': v}
+                         for d, v in sorted(bonded_map.items())]
+    print(f'  Backfill done.')
+
+
+
     endpoint = url or ALCHEMY_URL
     payload = json.dumps({
         'jsonrpc': '2.0', 'id': 1,
@@ -180,6 +270,9 @@ def main():
             existing_hashes.add(w['tx'])
     history['whales'] = [w for w in history['whales'] if w.get('date', '') >= cutoff30d]
     history['whales'].sort(key=lambda x: x['date'], reverse=True)
+
+    # Backfill any missing bonded points in the last 7 days
+    backfill_missing_bonded(history)
 
     # Update metadata
     history.setdefault('metadata', {})['updated'] = datetime.now(timezone.utc).isoformat()
