@@ -125,7 +125,7 @@ async def cmd_canton(args: list) -> str:
             if l.lower() in skip or l.startswith("http") or l == name:
                 continue
             real_lines.append(l)
-        desc = " ".join(real_lines[:3])[:600]
+        desc = " ".join(real_lines)[:4096]
         if not desc:
             desc = short_desc
     elif short_desc:
