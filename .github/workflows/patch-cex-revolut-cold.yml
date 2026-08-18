@@ -1,0 +1,45 @@
+name: Patch CEX — Add Revolut Cold History
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run Revolut Cold patch
+        env:
+          ALCHEMY_RPC_URL: ${{ secrets.ALCHEMY_RPC_URL }}
+        run: python scripts/patch_cex_revolut_cold.py
+
+      - name: Commit and push to dev
+        run: |
+          git config user.name  "tokerize-bot"
+          git config user.email "bot@tokerize.com"
+          git add rize-data-hub/conviction-history.json
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore(data): patch cex — add Revolut Cold history"
+            git push origin dev
+          fi
+
+      - name: Push to main
+        run: |
+          git fetch origin main
+          git checkout main
+          git checkout dev -- rize-data-hub/conviction-history.json
+          git add rize-data-hub/conviction-history.json
+          git diff --staged --quiet || git commit -m "chore(data): patch cex — add Revolut Cold history (main sync)"
+          git push origin main
