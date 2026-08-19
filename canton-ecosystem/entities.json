@@ -2300,6 +2300,22 @@
     "logo_local": "logos\\gravity-team.jpeg"
   },
   {
+    "name": "Grofty Labs",
+    "slug": "grofty-labs",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a83c4a58db4139203ee47f8_c58e9238-8dba-48d6-ba25-ba843ec3a31d.jpeg",
+    "short_desc": "Grofty Wallet is non-custodial browser extension wallet designed for the Canton Network.",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "VALIDATOR",
+      "WALLETS",
+      "Network Utilities\nWALLETS",
+      "Roles\nAPPS (ALL)APPS (FEATURED)VALIDATOR\nAPPS (ALL)APPS (FEATURED)VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nGrofty Labs\nhttps://grofty.cc\nGrofty Wallet is a browser extension wallet that emphasizes security and UX. It's a non-custodial wallet that lives in the user's browser as an extension. Grofty uses external Party IDs, which allows the same wallet to be used in any application on the network. Built around the Canton Coin Standard and CIP-56, we natively support holding, sending, bridging, and swapping CC, USDCx, and any asset built using this standard.\nNetwork Utilities\nWALLETS\nRoles\nAPPS (ALL)APPS (FEATURED)VALIDATOR\nAPPS (ALL)APPS (FEATURED)VALIDATOR",
+    "logo_local": "logos\\grofty-labs.jpeg"
+  },
+  {
     "name": "GS DAP",
     "slug": "gs-dap",
     "logo_cdn": "https://cdn.prod.website-files.com/696805252243366e13a64c82/697a4b2e91c884840963f200_yellow-arrow-right.svg",
@@ -4043,6 +4059,28 @@
     ],
     "detail_text": "SBI Group is a founding partner of the Canton Network and a Super Validator.",
     "logo_local": "logos\\sbi-group.png"
+  },
+  {
+    "name": "Securosys SA",
+    "slug": "securosys-sa",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a84b7e4ad2fd7fde31cde51_securosys_logo.jpg",
+    "short_desc": "Swiss-made HSMs protecting validator and custody keys for institutional digital assets.",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "INDUSTRY BODIES",
+      "COMPLIANCE",
+      "CUSTODY",
+      "EXCHANGES",
+      "Network Utilities\nCOMPLIANCECUSTODYEXCHANGESPAYMENTSTOKENIZED ASSETSWALLETS",
+      "PAYMENTS",
+      "TOKENIZED ASSETS",
+      "WALLETS",
+      "Roles\nAPPS (ALL)APPS (FEATURED)INDUSTRY BODIESMARKET INFRASTRUCTURE\nAPPS (ALL)APPS (FEATURED)INDUSTRY BODIESMARKET INFRASTRUCTURE",
+      "MARKET INFRASTRUCTURE"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nSecurosys SA\nhttps://www.securosys.com\nSecurosys secures the keys behind institutional finance. Founded in Zurich in 2014, its Swiss-made Primus HSMs and Cloud HSM protect the Swiss interbank payment network, digital asset custodians, and tokenization platforms. Policy-based approvals, fine-grained blockchain signing control, and post-quantum-ready algorithms let institutions hold custody and validator keys with provable control.\nNetwork Utilities\nCOMPLIANCECUSTODYEXCHANGESPAYMENTSTOKENIZED ASSETSWALLETS\nRoles\nAPPS (ALL)APPS (FEATURED)INDUSTRY BODIESMARKET INFRASTRUCTURE\nAPPS (ALL)APPS (FEATURED)INDUSTRY BODIESMARKET INFRASTRUCTURE",
+    "logo_local": "logos\\securosys-sa.jpg"
   },
   {
     "name": "Sekoya Labs",
