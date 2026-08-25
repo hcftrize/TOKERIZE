@@ -361,6 +361,16 @@ async def cmd_govbond(args: list) -> str:
 
     # Timeline from bond-states events (pre-computed)
     events = state.get("events", [])
+    # Inject releases from bond-lifecycle (not in bond-states events)
+    lc_data = lc if isinstance(lc, dict) else {}
+    for e in lc_data.get("tokensReleasedEvents", []):
+        if str(e.get("nftId", "")) == str(nft_id):
+            events = list(events) + [{
+                "ts"   : int(e.get("timestamp", 0)),
+                "date" : e.get("date") or ts_to_date(e.get("timestamp", 0)),
+                "type" : "Release",
+                "delta": -parse_amt(e.get("amount", 0)),
+            }]
     timeline = sorted(events, key=lambda e: e.get("ts", 0), reverse=True)
 
     # First created date
@@ -570,6 +580,15 @@ async def cmd_govwallet(args: list, page: int = 0) -> str:
         s = bond_states.get(str(nid), {})
         for ev in (s.get("events") or []):
             all_events.append({**ev, "_nftId": nid})
+    # Inject releases from bond-lifecycle (not in bond-states events)
+    for e in releases:
+        all_events.append({
+            "ts"    : int(e.get("timestamp", 0)),
+            "date"  : e.get("date") or ts_to_date(e.get("timestamp", 0)),
+            "type"  : "Release",
+            "delta" : -parse_amt(e.get("amount", 0)),
+            "_nftId": str(e.get("nftId", "")),
+        })
     all_events.sort(key=lambda e: e.get("ts", 0), reverse=True)
 
     lines = [
