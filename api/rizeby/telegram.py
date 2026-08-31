@@ -10,6 +10,11 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'rizeby-b
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", "")
 TG_API = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 
+# Private "vault" channel with the Chainlink memes/gifs/videos. The bot is
+# admin there so copyMessage() can pull from it, but the channel itself is
+# never named to users — copyMessage() sends with no "Forwarded from" tag.
+CHAINLINK_MEME_CHANNEL_ID = -1001539496298
+
 # ── Pagination state ──────────────────────────────────────────────────────────
 _pagination: dict = {}
 PAGE_TTL = 600  # 10 min
@@ -428,6 +433,18 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         from commands.fun import cmd_insult
         await send_message(reply_chat_id, await cmd_insult(args), thread_id=reply_thread_id)
 
+    elif cmd_lower in ("chainlinkmeme", "clmeme"):
+        from commands.fun import cmd_chainlinkmeme_id
+        copied = None
+        for _ in range(3):
+            copied = await copy_message(reply_chat_id, CHAINLINK_MEME_CHANNEL_ID,
+                                        cmd_chainlinkmeme_id(), thread_id=reply_thread_id)
+            if copied:
+                break
+        if not copied:
+            await send_message(reply_chat_id, "Couldn't fetch a meme right now, try again.",
+                               thread_id=reply_thread_id)
+
     elif cmd_lower in ("help", "commands", ""):
         await send_message(reply_chat_id, HELP_TEXT, thread_id=reply_thread_id)
 
@@ -565,6 +582,7 @@ Put any coin first to change the base asset.
 
 /sayhello — GM
 /insult — Get roasted
+/chainlinkmeme — Random meme/gif/video from the vault (alias: /clmeme)
 
 ━━ NAVIGATION ━━
 
@@ -629,6 +647,27 @@ async def send_photo(chat_id: int, photo_bytes: bytes, caption: str = "",
     return None
 
 
+async def copy_message(chat_id: int, from_chat_id: int, message_id: int,
+                       thread_id: int = None) -> int | None:
+    """Re-post a message (photo/video/animation) from another chat as if it
+    were a fresh message from this bot — no 'Forwarded from' tag, no trace
+    of the source chat. Used to pull memes from the private vault channel
+    without exposing it. Returns the new message_id, or None on failure
+    (e.g. the source message_id doesn't exist / isn't visible to the bot)."""
+    payload = {"chat_id": chat_id, "from_chat_id": from_chat_id, "message_id": message_id}
+    if thread_id:
+        payload["message_thread_id"] = thread_id
+    try:
+        async with httpx.AsyncClient(timeout=15) as client:
+            r = await client.post(f"{TG_API}/copyMessage", json=payload)
+            data = r.json()
+            if data.get("ok"):
+                return data["result"]["message_id"]
+    except Exception:
+        pass
+    return None
+
+
 async def register_commands() -> None:
     """Register bot commands for the Telegram command list dropdown."""
     commands = [
@@ -665,6 +704,7 @@ async def register_commands() -> None:
     {"command": "cantongov",    "description": "Active Canton governance proposals"},
     {"command": "sayhello",     "description": "GM"},
     {"command": "insult",       "description": "Get roasted"},
+    {"command": "chainlinkmeme","description": "Random Chainlink meme/gif/video from the vault"},
 ]
     try:
         async with httpx.AsyncClient(timeout=10) as client:
