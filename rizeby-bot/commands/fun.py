@@ -1,4 +1,4 @@
-"""Commands: /sayhello, /insult — 200+ entries each."""
+"""Commands: /sayhello, /insult, /chainlinkmeme — 200+ entries each."""
 import random
 
 GREETINGS = [
@@ -298,3 +298,15 @@ async def cmd_sayhello(args: list) -> str:
 
 async def cmd_insult(args: list) -> str:
     return f"🔥 {random.choice(INSULTS)}"
+
+
+# ── /chainlinkmeme ────────────────────────────────────────────────────────
+# Random meme/gif/video pulled from a private "vault" channel via
+# copyMessage() (see telegram.py) — no "Forwarded from" tag is added, so the
+# source channel is never exposed to whoever runs the command.
+CHAINLINK_MEME_MAX_ID = 2746  # bump this to the latest message_id whenever new memes are added
+
+
+def cmd_chainlinkmeme_id() -> int:
+    """Pick a random message_id in the vault channel to copy."""
+    return random.randint(1, CHAINLINK_MEME_MAX_ID)
