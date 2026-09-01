@@ -1,5 +1,5 @@
 Canton Ecosystem — Entities not found on cantonecosystem.com
-Checked: 2026-08-31
+Checked: 2026-09-01
 Count: 2
 
 These entities exist in entities.json but were NOT found during scrape.
