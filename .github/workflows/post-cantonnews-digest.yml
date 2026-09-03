@@ -33,4 +33,5 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CANTONNEWS_DIGEST_CHAT_ID: ${{ secrets.CANTONNEWS_DIGEST_CHAT_ID }}
+          CANTONNEWS_DIGEST_THREAD_IDS: ${{ secrets.CANTONNEWS_DIGEST_THREAD_IDS }}
         run: python scripts/post_cantonnews_digest.py
