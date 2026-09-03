@@ -50,14 +50,14 @@ def _relative_time(iso: str | None) -> str:
 
 
 def _format_article_block(a: dict) -> str:
-    """*Title* · Xh ago\n\nDescription... [Read more](url)"""
+    """● *Title* · Xh ago\n\nDescription... [Read more](url)"""
     when  = _relative_time(a.get("published_at"))
     title = a.get("title", "—")
     desc  = (a.get("description") or "").strip()
     url   = a.get("url", SITE_URL)
 
     body = f"{desc} [Read more]({url})" if desc else f"[Read more]({url})"
-    return f"*{title}* · {when}\n\n{body}"
+    return f"● *{title}* · {when}\n\n{body}"
 
 
 async def cmd_cantonnews(args: list, page: int = 0) -> str:
