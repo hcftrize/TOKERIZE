@@ -1,12 +1,11 @@
 name: Update Canton News
 
 on:
+  # Triggered by cron-job.org hitting the GitHub API's workflow_dispatch
+  # endpoint once a day, same pattern as the rest of the TOKERIZE workflows —
+  # no native schedule: here, so there's only one place (cron-job.org) that
+  # controls timing for this job.
   workflow_dispatch:
-  schedule:
-    # Runs once a day. Cron is UTC — this isn't time-critical (unlike the
-    # digest post, which self-gates on Paris local time), so a fixed UTC
-    # hour is fine here.
-    - cron: "0 5 * * *"
 
 permissions:
   contents: write
