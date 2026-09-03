@@ -3878,7 +3878,17 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
   }
 
   function lkRenderChart() {
-    const hist = (_lkHist || []).filter(d => d.sv || d.fa);
+    // A day is only plotted if it actually has real data for what this view needs.
+    // "sv"/"fa" views: skip a day if that side's own value is missing or 0.
+    // "all" (combined) view: skip a day if EITHER side is missing/0 — otherwise a gap
+    // on one side (e.g. a failed scraper run) silently drags the "Total Locked" line
+    // down for that day. This also auto-handles any future "0" the same way, not just
+    // fully-missing dates.
+    const hist = (_lkHist || []).filter(d => {
+      if (_lkChartFilter === "sv") return !!d.sv;
+      if (_lkChartFilter === "fa") return !!d.fa;
+      return !!d.sv && !!d.fa;
+    });
     if (!hist.length) return;
     const labels = hist.map(d => d.date);
     const wrap   = document.getElementById("lk-chart-wrap");
@@ -3989,7 +3999,10 @@ const altLabel = altScore !== null ? altScore + "/100" : "N/A";
       if (loading) loading.textContent = "Loading USD data…";
       return;
     }
-    const hist    = _lkHist.filter(d => d.usd_total != null);
+    // Same rule as the "all" CC view: skip a day unless BOTH usd_sv and usd_fa are
+    // real (non-zero, non-null) data points, so a missing/failed side doesn't drag
+    // the combined lines down for that day.
+    const hist    = _lkHist.filter(d => !!d.usd_sv && !!d.usd_fa);
     const canvas  = document.getElementById("lk-chart-usd");
     const loading = document.getElementById("lk-chart-usd-loading");
     if (!hist.length) {
