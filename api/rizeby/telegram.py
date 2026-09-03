@@ -360,7 +360,9 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
             _set_page(reply_chat_id, "ecosystem", 0, [])
         await send_message(reply_chat_id, await cmd_ecosystem(entity_args), thread_id=reply_thread_id)
 
-    elif cmd_lower.startswith("canton") and cmd_lower not in ("cantongov", "cantonboard", "cantonlist"):
+    elif cmd_lower.startswith("canton") and cmd_lower not in (
+        "cantongov", "cantonboard", "cantonlist", "cantonnews", "cantonnews_search",
+    ):
         from commands.ecosystem import cmd_canton
         parts = cmd_lower[len("canton"):].strip().split() + args
         await send_message(reply_chat_id, await cmd_canton([a for a in parts if a]), thread_id=reply_thread_id)
