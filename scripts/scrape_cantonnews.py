@@ -78,11 +78,6 @@ SKIP_HREF_SNIPPETS = (
     "discord", "linkedin.com", "facebook.com",
 )
 
-# "INSTITUTIONS · 12H AGO" / "ECOSYSTEM · 1D AGO" — the badge line at the
-# top of a card. We only use this to split off the category; the "ago"
-# part is discarded (see module docstring).
-CATEGORY_TIME_RE = re.compile(r"^(.*?)\s*[·•]\s*\d+\s*[a-z]+\s*ago$", re.I)
-
 # Trailing "Read →" / "Read more" call-to-action line at the end of a card.
 CTA_RE = re.compile(r"^read\b.{0,20}$", re.I)
 
@@ -100,6 +95,22 @@ def _parse_card_text(raw_text: str) -> dict | None:
     """
     Split a listing-card's full inner_text() into {title, category, description}.
 
+    The badge line looks like "INSTITUTIONS · 12H AGO" for a recent article,
+    but cantonnews.org switches to an absolute date once an article is more
+    than about a week old — "INSTITUTIONS · JUN 25" — with no "ago" at all.
+    Rather than pattern-match the time text (which we discard either way;
+    see module docstring), we just split on the first "·"/"•" and only
+    trust it as a real category badge if the left side reads like one of
+    the site's category labels: ALL CAPS, no digits, no hyphen/slash (so a
+    hyphenated ticker-style title like "T-RIZE · A New Era..." isn't
+    mistaken for one — those are short ALL CAPS too), and either multiple
+    words or a single word of at least 5 letters (every real category seen
+    so far — INSTITUTIONS, TECHNOLOGY, ECOSYSTEM — clears that easily; a
+    stray 2-4 letter acronym doesn't). Being conservative here matters more
+    than catching every category: missing one just drops that article into
+    an "OTHER" bucket in the weekly digest, whereas a false positive would
+    silently eat part of the real title.
+
     Returns None for anything that doesn't look like a real article card
     (too few lines to be title+description — this is what filters out
     plain nav links like "Canton Today").
@@ -110,10 +121,20 @@ def _parse_card_text(raw_text: str) -> dict | None:
 
     category = None
     idx = 0
-    m = CATEGORY_TIME_RE.match(lines[0])
-    if m:
-        category = m.group(1).strip()
-        idx = 1
+    first = lines[0]
+    sep = "·" if "·" in first else ("•" if "•" in first else None)
+    if sep:
+        left = first.split(sep, 1)[0].strip()
+        looks_like_category = (
+            2 <= len(left) <= 40
+            and left.isupper()
+            and not any(ch.isdigit() for ch in left)
+            and "-" not in left and "/" not in left
+            and (" " in left or len(left) >= 5)
+        )
+        if looks_like_category:
+            category = left
+            idx = 1
 
     if idx >= len(lines):
         return None
