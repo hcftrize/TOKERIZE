@@ -387,6 +387,14 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         bot_mid = await send_message(reply_chat_id, await cmd_cantongov(args, page=p), thread_id=reply_thread_id)
         if bot_mid: _cache_bot_msg(bot_mid, "cantongov", p, args, reply_chat_id, reply_thread_id)
 
+    elif cmd_lower in ("cantonnews", "cnews"):
+        from commands.cantonnews import cmd_cantonnews
+        page = _get_page(reply_chat_id)
+        p = page["page"] if page and page["cmd"] == "cantonnews" else 0
+        _set_page(reply_chat_id, "cantonnews", p, args)
+        bot_mid = await send_message(reply_chat_id, await cmd_cantonnews(args, page=p), thread_id=reply_thread_id)
+        if bot_mid: _cache_bot_msg(bot_mid, "cantonnews", p, args, reply_chat_id, reply_thread_id)
+
     # ── Governance hub ────────────────────────────────────────────────────
     elif cmd_lower in ("govflows", "flows"):
         from commands.governance import cmd_govflows
@@ -587,6 +595,7 @@ Put any coin first to change the base asset.
 /cip — Latest CIPs · reply next for more
 /cip 0116 — Specific CIP deep-dive
 /cantongov — Active governance proposals
+/cantonnews — Latest Canton news · reply next for more (alias: /cnews)
 
 ━━ FUN ━━
 
@@ -713,6 +722,7 @@ async def register_commands() -> None:
     {"command": "kairos",       "description": "Kairos Digital Loan Notes"},
     {"command": "cip",          "description": "Latest CIPs · reply next for more — /cip 0116 for specific CIP"},
     {"command": "cantongov",    "description": "Active Canton governance proposals"},
+    {"command": "cantonnews",   "description": "Latest Canton news · reply next for more"},
     {"command": "sayhello",     "description": "GM"},
     {"command": "insult",       "description": "Get roasted"},
     {"command": "chainlinkmeme","description": "Random Chainlink meme/gif/video from the vault"},
