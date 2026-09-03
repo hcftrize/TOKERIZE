@@ -61,6 +61,16 @@ which the workflow commits back to the repo after every run. A delete
 failure (message already gone, past Telegram's edit window, missing
 rights, ...) is logged but never blocks posting the new message.
 
+No-op when nothing changed: before touching Telegram at all, each run
+compares the digest text it just built against a hash of what's already
+posted for that thread (also in digest-state.json). If they match — e.g.
+a same-day catch-up run (Sunday evening) finds no new articles beyond
+what the regular run already posted that day — it skips straight past
+both the delete and the repost and moves on to the next thread. This is
+what makes an extra catch-up run safe to schedule "just in case": on a
+quiet day it does nothing at all instead of shuffling an identical
+message to a new message_id for no reason.
+
 Env vars required:
     TELEGRAM_TOKEN               — bot token (same one telegram.py uses)
     CANTONNEWS_DIGEST_CHAT_ID    — target chat: numeric id, or "@TOKERIZE"
@@ -74,6 +84,7 @@ Env vars required:
 Usage:
     python scripts/post_cantonnews_digest.py
 """
+import hashlib
 import json
 import os
 import sys
@@ -283,6 +294,10 @@ def main():
                     f"({prev_monday.strftime('%d/%m')}–{prev_sunday_end.strftime('%d/%m')}):")
 
     messages = build_digest_texts(week_articles, monday, note=note)
+    # Fingerprint of this run's content — same for every thread, since they
+    # all get the identical digest text. Used below to skip entirely when a
+    # run (e.g. the Sunday catch-up) finds nothing has changed.
+    content_hash = hashlib.sha256("\x00".join(messages).encode("utf-8")).hexdigest()
 
     today_str = now_utc.strftime("%Y-%m-%d")
     is_monday = now_utc.weekday() == 0  # Mon=0, UTC — see module docstring: never
@@ -294,6 +309,10 @@ def main():
     for thread_id in THREAD_IDS:
         key = str(thread_id) if thread_id is not None else "default"
         prev = state.get(key) or {}
+
+        if prev.get("content_hash") == content_hash and prev.get("message_ids"):
+            print(f"⏭️  No change for thread {thread_id!r} since the last post — skipping (no delete, no repost).")
+            continue
 
         if not is_monday:
             for mid in prev.get("message_ids", []):
@@ -327,7 +346,7 @@ def main():
         # actually sent — a total failure should leave yesterday's (still-live)
         # message_ids in place for the next run to retry deleting.
         if sent_ids:
-            state[key] = {"date": today_str, "message_ids": sent_ids}
+            state[key] = {"date": today_str, "message_ids": sent_ids, "content_hash": content_hash}
 
     save_state(state)
 
