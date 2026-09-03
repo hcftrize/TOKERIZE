@@ -22,6 +22,7 @@ URLS = {
     "unbondingQueue":f"{RAW_MAIN}/rize-data-hub/unbonding-queue.json",
     "cips":          f"{RAW_MAIN}/canton-ecosystem/cips.json",
     "entities":      f"{RAW_DEV}/canton-ecosystem/entities.json",
+    "cantonnews":    f"{RAW_MAIN}/canton-ecosystem/news.json",
 }
 
 # ── Simple TTL cache ──────────────────────────────────────────────────────────
@@ -61,3 +62,4 @@ async def get_mcap_history():   return await load_json("mcapHistory")
 async def get_unbonding_queue():return await load_json("unbondingQueue")
 async def get_cips():           return await load_json("cips")
 async def get_entities():       return await load_json("entities")
+async def get_cantonnews():     return await load_json("cantonnews")
