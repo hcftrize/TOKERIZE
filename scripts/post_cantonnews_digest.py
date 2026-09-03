@@ -1,8 +1,15 @@
 """
 post_cantonnews_digest.py
 ==========================
-Posts a weekly digest of Canton news (Monday → Sunday, Europe/Paris) to one
-or more Telegram topics, once a day around noon Europe/Paris time.
+Posts a weekly digest of Canton news (Monday → Sunday, UTC) to one or more
+Telegram topics, once a day.
+
+Weeks are computed in UTC on purpose (not Europe/Paris): every cron-job.org
+trigger for this project is set in plain UTC, and keeping the script's own
+week/day boundary in UTC too means "today" and "is it Monday" inside the
+script always agree with whatever time the trigger actually fired at —
+no separate DST-aware reasoning needed to avoid a run near midnight
+landing on the wrong side of the week boundary.
 
 Why "every day" for a "weekly" digest: it re-posts the running tally of
 *this* week's articles each day (Mon: just Monday's articles, ...,
@@ -30,14 +37,16 @@ Multiple destinations: all 3 targets are topics inside the *same* group
 is topic 1, t.me/TOKERIZE/3429/44896 is topic 3429. So one chat_id, a list
 of thread_ids, same digest message(s) posted once per thread_id.
 
-Scheduling: this script has no time-of-day logic of its own, and no
-memory of whether it already ran today — it just posts whenever it's run.
-The daily 12:00 Europe/Paris trigger (already DST-safe, since it's a
-local-time schedule) lives outside GitHub Actions, same as the rest of
-the TOKERIZE workflows: an external scheduler (cron-job.org) calls the
-GitHub API's workflow_dispatch endpoint for post-cantonnews-digest.yml
-once a day. Running it by hand any other time (testing, wanting to
-re-post) just posts again — that's intentional.
+Scheduling: this script has no time-of-day logic of its own beyond the
+UTC week/day boundary described above — it just posts whenever it's run.
+The daily trigger lives outside GitHub Actions, same as the rest of the
+TOKERIZE workflows: an external scheduler (cron-job.org) calls the GitHub
+API's workflow_dispatch endpoint for post-cantonnews-digest.yml, in UTC.
+Running it by hand any other time (testing, wanting to re-post) just
+posts again — that's intentional. This also makes an extra same-day
+catch-up run (e.g. late Sunday, to pick up news published after the
+regular run) safe to schedule at any UTC time up to 23:59 UTC without
+it accidentally being treated as "already Monday".
 
 Self-cleaning history: to avoid one Telegram message per day piling up for
 the same week, each run deletes the *previous* day's digest message(s) in
@@ -52,6 +61,16 @@ which the workflow commits back to the repo after every run. A delete
 failure (message already gone, past Telegram's edit window, missing
 rights, ...) is logged but never blocks posting the new message.
 
+No-op when nothing changed: before touching Telegram at all, each run
+compares the digest text it just built against a hash of what's already
+posted for that thread (also in digest-state.json). If they match — e.g.
+a same-day catch-up run (Sunday evening) finds no new articles beyond
+what the regular run already posted that day — it skips straight past
+both the delete and the repost and moves on to the next thread. This is
+what makes an extra catch-up run safe to schedule "just in case": on a
+quiet day it does nothing at all instead of shuffling an identical
+message to a new message_id for no reason.
+
 Env vars required:
     TELEGRAM_TOKEN               — bot token (same one telegram.py uses)
     CANTONNEWS_DIGEST_CHAT_ID    — target chat: numeric id, or "@TOKERIZE"
@@ -65,16 +84,14 @@ Env vars required:
 Usage:
     python scripts/post_cantonnews_digest.py
 """
+import hashlib
 import json
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
 import httpx
-
-PARIS = ZoneInfo("Europe/Paris")
 
 NEWS_PATH  = Path("canton-ecosystem/news.json")
 STATE_PATH = Path("canton-ecosystem/digest-state.json")
@@ -95,9 +112,9 @@ THREAD_IDS: list[int | None] = (
 CHUNK_BUDGET = 3500
 
 
-def week_bounds(now_paris: datetime) -> tuple[datetime, datetime]:
-    """Monday 00:00:00 -> Sunday 23:59:59, both tz-aware in Europe/Paris."""
-    monday = now_paris - timedelta(days=now_paris.weekday())
+def week_bounds(now_utc: datetime) -> tuple[datetime, datetime]:
+    """Monday 00:00:00 -> Sunday 23:59:59, both tz-aware in UTC."""
+    monday = now_utc - timedelta(days=now_utc.weekday())
     monday = monday.replace(hour=0, minute=0, second=0, microsecond=0)
     sunday_end = monday + timedelta(days=7) - timedelta(seconds=1)
     return monday, sunday_end
@@ -111,14 +128,14 @@ def load_articles() -> list[dict]:
 
 
 def articles_in_range(articles: list[dict], start: datetime, end: datetime) -> list[dict]:
-    """All articles with published_at inside [start, end] (Paris-local), oldest first."""
+    """All articles with published_at inside [start, end] (UTC), oldest first."""
     result = []
     for a in articles:
         iso = a.get("published_at")
         if not iso:
             continue
         try:
-            dt = datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(PARIS)
+            dt = datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(timezone.utc)
         except Exception:
             continue
         if start <= dt <= end:
@@ -258,8 +275,8 @@ def main():
         print("Missing TELEGRAM_TOKEN or CANTONNEWS_DIGEST_CHAT_ID — aborting.")
         sys.exit(1)
 
-    now_paris = datetime.now(PARIS)
-    monday, sunday_end = week_bounds(now_paris)
+    now_utc = datetime.now(timezone.utc)
+    monday, sunday_end = week_bounds(now_utc)
     articles = load_articles()
 
     week_articles = articles_in_range(articles, monday, sunday_end)
@@ -277,17 +294,25 @@ def main():
                     f"({prev_monday.strftime('%d/%m')}–{prev_sunday_end.strftime('%d/%m')}):")
 
     messages = build_digest_texts(week_articles, monday, note=note)
+    # Fingerprint of this run's content — same for every thread, since they
+    # all get the identical digest text. Used below to skip entirely when a
+    # run (e.g. the Sunday catch-up) finds nothing has changed.
+    content_hash = hashlib.sha256("\x00".join(messages).encode("utf-8")).hexdigest()
 
-    today_str = now_paris.strftime("%Y-%m-%d")
-    is_monday = now_paris.weekday() == 0  # Mon=0 — see module docstring: never
-                                            # delete "yesterday" on a Monday, since
-                                            # that's last Sunday's sealed recap.
+    today_str = now_utc.strftime("%Y-%m-%d")
+    is_monday = now_utc.weekday() == 0  # Mon=0, UTC — see module docstring: never
+                                          # delete "yesterday" on a Monday, since
+                                          # that's last Sunday's sealed recap.
     state = load_state()
 
     failures = 0
     for thread_id in THREAD_IDS:
         key = str(thread_id) if thread_id is not None else "default"
         prev = state.get(key) or {}
+
+        if prev.get("content_hash") == content_hash and prev.get("message_ids"):
+            print(f"⏭️  No change for thread {thread_id!r} since the last post — skipping (no delete, no repost).")
+            continue
 
         if not is_monday:
             for mid in prev.get("message_ids", []):
@@ -321,7 +346,7 @@ def main():
         # actually sent — a total failure should leave yesterday's (still-live)
         # message_ids in place for the next run to retry deleting.
         if sent_ids:
-            state[key] = {"date": today_str, "message_ids": sent_ids}
+            state[key] = {"date": today_str, "message_ids": sent_ids, "content_hash": content_hash}
 
     save_state(state)
 
