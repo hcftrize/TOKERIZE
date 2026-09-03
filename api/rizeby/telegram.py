@@ -388,12 +388,34 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         if bot_mid: _cache_bot_msg(bot_mid, "cantongov", p, args, reply_chat_id, reply_thread_id)
 
     elif cmd_lower in ("cantonnews", "cnews"):
-        from commands.cantonnews import cmd_cantonnews
+        if args:
+            # /cantonnews t-rize → search directly, same as /cclock (keyword)
+            from commands.cantonnews import cmd_cantonnews_search
+            query = " ".join(args).strip()
+            bot_mid = await send_message(reply_chat_id, await cmd_cantonnews_search(query, 0), thread_id=reply_thread_id)
+            _set_page(reply_chat_id, "cantonnews_search", 0, args)
+            if bot_mid: _cache_bot_msg(bot_mid, "cantonnews_search", 0, args, reply_chat_id, reply_thread_id)
+        else:
+            from commands.cantonnews import cmd_cantonnews
+            page = _get_page(reply_chat_id)
+            p = page["page"] if page and page["cmd"] == "cantonnews" else 0
+            _set_page(reply_chat_id, "cantonnews", p, args)
+            bot_mid = await send_message(reply_chat_id, await cmd_cantonnews(args, page=p), thread_id=reply_thread_id)
+            if bot_mid: _cache_bot_msg(bot_mid, "cantonnews", p, args, reply_chat_id, reply_thread_id)
+
+    elif cmd_lower == "cantonnews_search":
+        # Internal pseudo-command: reached via a plain-text reply to a
+        # /cantonnews or search-results message (see the reply-interception
+        # logic below), or via "next"/"page N" while browsing search
+        # results (args carry the same query forward — see cmd_map note).
+        from commands.cantonnews import cmd_cantonnews_search
+        query = " ".join(args).strip()
         page = _get_page(reply_chat_id)
-        p = page["page"] if page and page["cmd"] == "cantonnews" else 0
-        _set_page(reply_chat_id, "cantonnews", p, args)
-        bot_mid = await send_message(reply_chat_id, await cmd_cantonnews(args, page=p), thread_id=reply_thread_id)
-        if bot_mid: _cache_bot_msg(bot_mid, "cantonnews", p, args, reply_chat_id, reply_thread_id)
+        p = page["page"] if page and page["cmd"] == "cantonnews_search" else 0
+        if query:
+            bot_mid = await send_message(reply_chat_id, await cmd_cantonnews_search(query, p), thread_id=reply_thread_id)
+            _set_page(reply_chat_id, "cantonnews_search", p, args)
+            if bot_mid: _cache_bot_msg(bot_mid, "cantonnews_search", p, args, reply_chat_id, reply_thread_id)
 
     # ── Governance hub ────────────────────────────────────────────────────
     elif cmd_lower in ("govflows", "flows"):
@@ -596,6 +618,7 @@ Put any coin first to change the base asset.
 /cip 0116 — Specific CIP deep-dive
 /cantongov — Active governance proposals
 /cantonnews — Latest Canton news · reply next for more (alias: /cnews)
+/cantonnews t-rize — Search Canton news by keyword
 
 ━━ FUN ━━
 
@@ -791,6 +814,10 @@ def parse_update(body: dict):
                 # Reply text = search query within current cclock mode
                 mode = active_state.get("args", ["all"])[0] if active_state.get("args") else "all"
                 return "cmd", (chat_id, "cclock_search", [mode] + parts, msg_id, thread_id, reply_to_msg_id)
+            if active_cmd in ("cantonnews", "cantonnews_search"):
+                # Reply text = search query — works replying to either the
+                # base /cantonnews list or an existing search result
+                return "cmd", (chat_id, "cantonnews_search", parts, msg_id, thread_id, reply_to_msg_id)
         # In groups: ignore plain text — don't spam error messages
         return None, None
 
