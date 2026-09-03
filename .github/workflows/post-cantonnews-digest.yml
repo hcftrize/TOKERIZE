@@ -1,0 +1,37 @@
+name: Post Canton News Digest
+
+on:
+  # Triggered by cron-job.org (or whatever fires your other TOKERIZE
+  # workflows) hitting the GitHub API's workflow_dispatch endpoint once a
+  # day at 12:00 Europe/Paris. No schedule: here — the external cron
+  # already handles the timezone/DST side, so there's no need to also run
+  # this hourly and self-gate on the time. Running it by hand any other
+  # time just posts the digest again, on purpose.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install httpx
+
+      - name: Post digest
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CANTONNEWS_DIGEST_CHAT_ID: ${{ secrets.CANTONNEWS_DIGEST_CHAT_ID }}
+          CANTONNEWS_DIGEST_THREAD_IDS: ${{ secrets.CANTONNEWS_DIGEST_THREAD_IDS }}
+        run: python scripts/post_cantonnews_digest.py
