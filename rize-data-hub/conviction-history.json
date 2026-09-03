@@ -1895,6 +1895,10 @@
     {
       "date": "2026-09-01",
       "value": 862402402.78
+    },
+    {
+      "date": "2026-09-02",
+      "value": 862597545.62
     }
   ],
   "cex": [
@@ -3773,10 +3777,32 @@
     {
       "date": "2026-09-01",
       "value": 479824500.52
+    },
+    {
+      "date": "2026-09-02",
+      "value": 483854426.69
     }
   ],
   "unbonding": [],
   "whales": [
+    {
+      "date": "2026-09-02",
+      "amount": 8746828.8,
+      "from": "0x504ce9e51e508c85a161058c12e970a903d482fc",
+      "to": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
+      "from_label": "0x504c…82fc",
+      "to_label": "Kraken Hot 1",
+      "tx": "0x40e075d9f5756d7710af9a70a209fb11d8714e482673b1291b136370511b5258"
+    },
+    {
+      "date": "2026-09-02",
+      "amount": 195710320.0,
+      "from": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
+      "to": "0x9b0c45d46d386cedd98873168c36efd0dcba8d46",
+      "from_label": "Kraken Hot 1",
+      "to_label": "Revolut",
+      "tx": "0xa3150d7e78c90541ea729ea5fed47dfce7945700f36578591cc6f5b21439151d"
+    },
     {
       "date": "2026-09-01",
       "amount": 15243568.0,
@@ -3974,7 +4000,7 @@
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe",
       "0x15Da7556D5ED888306839bed06f868AeaeDCb0d7"
     ],
-    "updated": "2026-09-01T23:59:23.245059+00:00"
+    "updated": "2026-09-02T23:59:19.590150+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
