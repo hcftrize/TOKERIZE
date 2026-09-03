@@ -445,6 +445,16 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
             await send_message(reply_chat_id, "Couldn't fetch a meme right now, try again.",
                                thread_id=reply_thread_id)
 
+    elif cmd_lower in ("timeguessr",):
+        # Plain URL button — works in groups (unlike web_app buttons, which
+        # Telegram restricts to private chats). Just opens Telegram's
+        # built-in browser (or the system browser) at TimeGuessr's real site.
+        markup = {"inline_keyboard": [[
+            {"text": "🕹 Play TimeGuessr", "url": "https://timeguessr.com/play"}
+        ]]}
+        await send_message(reply_chat_id, "Guess where and when 🌍🕰️", markup,
+                           thread_id=reply_thread_id)
+
     elif cmd_lower in ("help", "commands", ""):
         await send_message(reply_chat_id, HELP_TEXT, thread_id=reply_thread_id)
 
@@ -583,6 +593,7 @@ Put any coin first to change the base asset.
 /sayhello — GM
 /insult — Get roasted
 /chainlinkmeme — Random meme/gif/video from the vault (alias: /clmeme)
+/timeguessr — Play TimeGuessr (opens in Telegram's browser)
 
 ━━ NAVIGATION ━━
 
@@ -705,6 +716,7 @@ async def register_commands() -> None:
     {"command": "sayhello",     "description": "GM"},
     {"command": "insult",       "description": "Get roasted"},
     {"command": "chainlinkmeme","description": "Random Chainlink meme/gif/video from the vault"},
+    {"command": "timeguessr",   "description": "Play TimeGuessr — guess where & when a photo was taken"},
 ]
     try:
         async with httpx.AsyncClient(timeout=10) as client:
