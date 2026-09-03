@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   digest:
@@ -35,3 +35,20 @@ jobs:
           CANTONNEWS_DIGEST_CHAT_ID: ${{ secrets.CANTONNEWS_DIGEST_CHAT_ID }}
           CANTONNEWS_DIGEST_THREAD_IDS: ${{ secrets.CANTONNEWS_DIGEST_THREAD_IDS }}
         run: python scripts/post_cantonnews_digest.py
+
+      - name: Commit digest state
+        # Tracks the message_id(s) of the digest just posted, so tomorrow's run
+        # knows what to delete before reposting (see post_cantonnews_digest.py
+        # docstring). Committed even if the "Post digest" step above failed
+        # midway, so any messages that DID send are still remembered.
+        if: always()
+        run: |
+          git config user.name  "tokerize-bot"
+          git config user.email "bot@tokerize.com"
+          git add canton-ecosystem/digest-state.json
+          if git diff --cached --quiet; then
+            echo "No state changes."
+          else
+            git commit -m "chore(digest): update message state $(date -u +%Y-%m-%d)"
+            git push origin main
+          fi

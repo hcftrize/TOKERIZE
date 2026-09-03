@@ -39,6 +39,19 @@ GitHub API's workflow_dispatch endpoint for post-cantonnews-digest.yml
 once a day. Running it by hand any other time (testing, wanting to
 re-post) just posts again — that's intentional.
 
+Self-cleaning history: to avoid one Telegram message per day piling up for
+the same week, each run deletes the *previous* day's digest message(s) in
+a thread right before posting the new one — except when today is Monday,
+because "yesterday" is then last Sunday's fully-sealed weekly recap, which
+must stay forever. Net effect: only one "live" message per thread while
+the week is in progress, and exactly one permanent message per week once
+Sunday's recap lands. The message_id(s) to delete are captured straight
+from Telegram's sendMessage response each time a message is posted (no
+manual bookkeeping) and persisted in canton-ecosystem/digest-state.json,
+which the workflow commits back to the repo after every run. A delete
+failure (message already gone, past Telegram's edit window, missing
+rights, ...) is logged but never blocks posting the new message.
+
 Env vars required:
     TELEGRAM_TOKEN               — bot token (same one telegram.py uses)
     CANTONNEWS_DIGEST_CHAT_ID    — target chat: numeric id, or "@TOKERIZE"
@@ -64,6 +77,7 @@ import httpx
 PARIS = ZoneInfo("Europe/Paris")
 
 NEWS_PATH  = Path("canton-ecosystem/news.json")
+STATE_PATH = Path("canton-ecosystem/digest-state.json")
 SITE_URL   = "https://cantonnews.org/news"
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN", "")
@@ -111,6 +125,41 @@ def articles_in_range(articles: list[dict], start: datetime, end: datetime) -> l
             result.append(a)
     result.sort(key=lambda a: a.get("published_at") or "")
     return result
+
+
+def load_state() -> dict:
+    """
+    {thread_key: {"date": "YYYY-MM-DD", "message_ids": [...]}} — thread_key is
+    str(thread_id), or "default" when posting with no thread_id at all.
+    Missing/corrupt file just means "nothing to delete yet" — never fatal.
+    """
+    if not STATE_PATH.exists():
+        return {}
+    try:
+        return json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"Warning: could not read {STATE_PATH} — {e}")
+        return {}
+
+
+def save_state(state: dict) -> None:
+    STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    STATE_PATH.write_text(json.dumps(state, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def delete_message(chat_id: str, message_id: int, thread_id: int | None) -> bool:
+    """Best-effort delete — logs and returns False rather than raising, so a
+    message that's already gone or outside Telegram's delete window never
+    stops the new digest from posting."""
+    resp = httpx.post(
+        f"{TG_API}/deleteMessage",
+        json={"chat_id": chat_id, "message_id": message_id},
+        timeout=15,
+    )
+    if resp.status_code == 200:
+        return True
+    print(f"⚠️ Could not delete message {message_id} (thread {thread_id}): {resp.status_code} {resp.text}")
+    return False
 
 
 def _pack_paragraphs(paragraphs: list[str], budget: int) -> list[str]:
@@ -229,8 +278,22 @@ def main():
 
     messages = build_digest_texts(week_articles, monday, note=note)
 
+    today_str = now_paris.strftime("%Y-%m-%d")
+    is_monday = now_paris.weekday() == 0  # Mon=0 — see module docstring: never
+                                            # delete "yesterday" on a Monday, since
+                                            # that's last Sunday's sealed recap.
+    state = load_state()
+
     failures = 0
     for thread_id in THREAD_IDS:
+        key = str(thread_id) if thread_id is not None else "default"
+        prev = state.get(key) or {}
+
+        if not is_monday:
+            for mid in prev.get("message_ids", []):
+                delete_message(CHAT_ID, mid, thread_id)
+
+        sent_ids = []
         for text in messages:
             payload = {
                 "chat_id": CHAT_ID,
@@ -246,9 +309,21 @@ def main():
             if resp.status_code != 200:
                 print(f"❌ Telegram API error for thread {thread_id}: {resp.status_code} {resp.text}")
                 failures += 1
-            else:
-                suffix = f" ({len(messages)} part(s))" if len(messages) > 1 else ""
-                print(f"✅ Posted to thread {thread_id!r}{suffix}.")
+                continue
+
+            suffix = f" ({len(messages)} part(s))" if len(messages) > 1 else ""
+            print(f"✅ Posted to thread {thread_id!r}{suffix}.")
+            msg_id = (resp.json() or {}).get("result", {}).get("message_id")
+            if msg_id is not None:
+                sent_ids.append(msg_id)
+
+        # Only overwrite this thread's stored state if at least one message
+        # actually sent — a total failure should leave yesterday's (still-live)
+        # message_ids in place for the next run to retry deleting.
+        if sent_ids:
+            state[key] = {"date": today_str, "message_ids": sent_ids}
+
+    save_state(state)
 
     if failures:
         sys.exit(1)
