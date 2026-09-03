@@ -802,10 +802,19 @@ def parse_update(body: dict):
         return "cmd", (chat_id, "see wallet", [], msg_id, thread_id, reply_to_msg_id)
 
     if not is_command and first not in known_keywords:
-        # Check if user is replying to a paginated context (cantonlist, ecosystem, cantonboard, cclock)
-        active_state = _pagination.get(chat_id)
-        if active_state and (time.time() - active_state.get("ts", 0)) < PAGE_TTL:
-            active_cmd = active_state.get("cmd", "")
+        # Only treat free text as a search/lookup continuation if it's an
+        # actual reply to one of RizeBy's own messages — checked via the
+        # bot-message cache (same one "next"/"page N" cross-user replies
+        # use), keyed by reply_to_msg_id. Previously this fell back to
+        # "is there still a recently-active list in this chat?"
+        # (_pagination.get(chat_id)) regardless of whether the incoming
+        # message was a reply at all — so ANY plain-text chat message sent
+        # within the 10-minute pagination window (e.g. someone just
+        # saying "Enjoy 😍") got swallowed as a search query. A reply is
+        # now required.
+        cached = _get_cached_bot_msg(reply_to_msg_id) if reply_to_msg_id is not None else None
+        if cached:
+            active_cmd = cached.get("cmd", "")
             if active_cmd == "cantonlist":
                 return "cmd", (chat_id, "canton", parts, msg_id, thread_id, reply_to_msg_id)
             if active_cmd == "ecosystem":
@@ -814,7 +823,7 @@ def parse_update(body: dict):
                 return "cmd", (chat_id, "cantonboard", parts, msg_id, thread_id, reply_to_msg_id)
             if active_cmd.startswith("cclock_"):
                 # Reply text = search query within current cclock mode
-                mode = active_state.get("args", ["all"])[0] if active_state.get("args") else "all"
+                mode = cached.get("args", ["all"])[0] if cached.get("args") else "all"
                 return "cmd", (chat_id, "cclock_search", [mode] + parts, msg_id, thread_id, reply_to_msg_id)
             if active_cmd in ("cantonnews", "cantonnews_search"):
                 # Reply text = search query — works replying to either the
