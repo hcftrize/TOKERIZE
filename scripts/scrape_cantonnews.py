@@ -6,15 +6,34 @@ Scraped with cantonnews.org's written permission.
 
 Every run:
   1. Walks all listing pages (https://cantonnews.org/news?page=N) to get the
-     full CURRENT set of {title, url} on the site.
+     full CURRENT set of {title, category, description, url} on the site.
   2. Diffs against the existing news.json (keyed by article URL, which is
-     stable even if a title gets edited):
-       - new URL              → fetch its article page once for the precise
-                                 `article:published_time` meta tag, add it.
-       - known URL, new title → title updated in place, published_at kept.
-       - known URL, missing   → dropped entirely (matches what cantonnews.org
-                                 itself shows — no "ghost" entries).
+     stable even if a title/description gets edited):
+       - new URL                         → fetch its article page once for
+                                            the precise `article:published_time`
+                                            meta tag, add it.
+       - known URL                       → title/category/description
+                                            refreshed in place, published_at
+                                            kept (no need to re-fetch it).
+       - known URL, missing from the live set → dropped entirely (matches
+                                            what cantonnews.org itself shows
+                                            — no "ghost" entries).
   3. Writes canton-ecosystem/news.json, sorted newest-first.
+
+Card parsing: each listing-page article is one <a> wrapping several
+block-level children — a "CATEGORY · Xh ago" badge, the title, a
+description paragraph, and a "Read →" button. `.inner_text()` on the
+whole card returns all of that as separate lines (block elements force a
+line break; the relative-time text does NOT — see _parse_card_text below,
+which splits it back into fields). Cards that don't have this shape (e.g.
+a plain nav link) come back as None and are skipped — this is also what
+filters out non-article chrome like the "Canton Today" link.
+
+We deliberately do NOT store the site's own "Xh ago" / "Xd ago" text —
+it's a snapshot frozen at scrape time and goes stale the moment the page
+isn't re-scraped (a 2-day-old article scraped once would say "2d ago"
+forever). The bot recomputes a live relative time from published_at
+instead — see rizeby-bot/commands/cantonnews.py.
 
 Safety valve: if a full re-scrape suddenly finds far fewer articles than are
 already on record, that almost certainly means the site didn't load fully or
@@ -59,6 +78,14 @@ SKIP_HREF_SNIPPETS = (
     "discord", "linkedin.com", "facebook.com",
 )
 
+# "INSTITUTIONS · 12H AGO" / "ECOSYSTEM · 1D AGO" — the badge line at the
+# top of a card. We only use this to split off the category; the "ago"
+# part is discarded (see module docstring).
+CATEGORY_TIME_RE = re.compile(r"^(.*?)\s*[·•]\s*\d+\s*[a-z]+\s*ago$", re.I)
+
+# Trailing "Read →" / "Read more" call-to-action line at the end of a card.
+CTA_RE = re.compile(r"^read\b.{0,20}$", re.I)
+
 
 def normalize_article_url(href: str) -> str:
     """Turn a possibly-relative href into an absolute, query/fragment-free URL."""
@@ -67,6 +94,41 @@ def normalize_article_url(href: str) -> str:
     else:
         url = BASE_URL + "/" + href.lstrip("/")
     return url.split("?")[0].split("#")[0].rstrip("/")
+
+
+def _parse_card_text(raw_text: str) -> dict | None:
+    """
+    Split a listing-card's full inner_text() into {title, category, description}.
+
+    Returns None for anything that doesn't look like a real article card
+    (too few lines to be title+description — this is what filters out
+    plain nav links like "Canton Today").
+    """
+    lines = [l.strip() for l in raw_text.split("\n") if l.strip()]
+    if len(lines) < 2:
+        return None
+
+    category = None
+    idx = 0
+    m = CATEGORY_TIME_RE.match(lines[0])
+    if m:
+        category = m.group(1).strip()
+        idx = 1
+
+    if idx >= len(lines):
+        return None
+
+    title = lines[idx]
+    idx += 1
+    if len(title) < 8:  # filters out stray short nav labels
+        return None
+
+    desc_lines = lines[idx:]
+    while desc_lines and CTA_RE.match(desc_lines[-1]):
+        desc_lines.pop()
+    description = " ".join(desc_lines).strip()
+
+    return {"title": title, "category": category, "description": description}
 
 
 async def get_total_pages(page) -> int:
@@ -84,12 +146,14 @@ async def get_total_pages(page) -> int:
 
 async def scrape_listing_page(page, n: int) -> list[dict]:
     """
-    Returns [{title, url}] for listing page n, newest-first as shown on site.
+    Returns [{title, category, description, url}] for listing page n,
+    newest-first as shown on site.
 
-    NOTE: selector is a broad heuristic (any link with substantial text,
-    minus known non-article patterns). If this ever returns 0 results or a
-    pile of nav junk, open cantonnews.org/news in DevTools and swap in the
-    real article-card selector — same caveat scrape_canton.py documents for
+    NOTE: link selection is a broad heuristic (any link, minus known
+    non-article href patterns, then filtered by _parse_card_text's shape
+    check). If this ever returns 0 results or a pile of nav junk, open
+    cantonnews.org/news in DevTools and check whether the card markup
+    changed — same caveat scrape_canton.py documents for
     cantonecosystem.com's markup.
     """
     url = LIST_URL if n == 1 else f"{LIST_URL}?page={n}"
@@ -106,13 +170,14 @@ async def scrape_listing_page(page, n: int) -> list[dict]:
         article_url = normalize_article_url(href)
         if "cantonnews.org" not in article_url or article_url == LIST_URL.rstrip("/"):
             continue
-        title = (await a.inner_text() or "").strip()
-        if len(title) < 12:  # filters out nav labels, icons, "Read more" stubs
+        raw_text = await a.inner_text() or ""
+        parsed = _parse_card_text(raw_text)
+        if not parsed:
             continue
         if article_url in seen:
             continue
         seen.add(article_url)
-        items.append({"title": title, "url": article_url})
+        items.append({**parsed, "url": article_url})
     return items
 
 
@@ -184,10 +249,13 @@ async def main():
         for it in live_unique:
             prior = existing_by_url.get(it["url"])
             if prior:
-                # Title may have been edited on the site — refresh it, but keep
-                # the published_at we already captured (no need to re-fetch).
+                # Title/category/description may have been edited on the
+                # site — refresh them, but keep the published_at we
+                # already captured (no need to re-fetch it).
                 final.append({
                     "title": it["title"],
+                    "category": it.get("category"),
+                    "description": it.get("description"),
                     "url": it["url"],
                     "published_at": prior.get("published_at"),
                 })
@@ -195,6 +263,8 @@ async def main():
                 published_at = await scrape_published_at(page, it["url"])
                 final.append({
                     "title": it["title"],
+                    "category": it.get("category"),
+                    "description": it.get("description"),
                     "url": it["url"],
                     "published_at": published_at,
                 })

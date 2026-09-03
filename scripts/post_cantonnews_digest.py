@@ -77,27 +77,43 @@ def load_articles() -> list[dict]:
     return raw.get("articles", raw) if isinstance(raw, dict) else raw
 
 
-def fmt_date(iso: str | None) -> str:
-    if not iso:
-        return "—"
-    try:
-        return datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(PARIS).strftime("%d/%m")
-    except Exception:
-        return "—"
-
-
 def build_digest_text(week_articles: list[dict], monday: datetime, sunday_end: datetime) -> str:
+    """
+    Condensed, titles-only digest grouped by category, so a whole week fits
+    in one message:
+
+        *INSTITUTIONS* :
+        Title one [Read more](url)
+        Title two [Read more](url)
+
+        *ECOSYSTEM* :
+        Title three [Read more](url)
+
+    Articles with no category (parsing miss, or the site card had none)
+    land in an "OTHER" group rather than being dropped.
+    """
     header = f"🗞 *Canton News — Week of {monday.strftime('%d/%m')}*"
     if not week_articles:
         body = "_No new Canton news this week so far._"
     else:
-        lines = []
+        groups: dict[str, list[dict]] = {}
+        order: list[str] = []
         for a in week_articles:
-            title = a.get("title", "—")
-            date  = fmt_date(a.get("published_at"))
-            url   = a.get("url", SITE_URL)
-            lines.append(f'"{title}" ({date}) : [Read more]({url})')
-        body = "\n".join(lines)
+            cat = (a.get("category") or "OTHER").upper()
+            if cat not in groups:
+                groups[cat] = []
+                order.append(cat)
+            groups[cat].append(a)
+
+        blocks = []
+        for cat in order:
+            block_lines = [f"*{cat}* :"]
+            for a in groups[cat]:
+                title = a.get("title", "—")
+                url   = a.get("url", SITE_URL)
+                block_lines.append(f"{title} [Read more]({url})")
+            blocks.append("\n".join(block_lines))
+        body = "\n\n".join(blocks)
 
     return "\n\n".join([
         header,
