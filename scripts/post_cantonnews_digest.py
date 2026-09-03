@@ -80,13 +80,17 @@ def load_articles() -> list[dict]:
 def build_digest_text(week_articles: list[dict], monday: datetime, sunday_end: datetime) -> str:
     """
     Condensed, titles-only digest grouped by category, so a whole week fits
-    in one message:
+    in one message. A blank line after every title keeps it readable on
+    mobile:
 
         *INSTITUTIONS* :
+
         Title one [Read more](url)
+
         Title two [Read more](url)
 
         *ECOSYSTEM* :
+
         Title three [Read more](url)
 
     Articles with no category (parsing miss, or the site card had none)
@@ -107,18 +111,19 @@ def build_digest_text(week_articles: list[dict], monday: datetime, sunday_end: d
 
         blocks = []
         for cat in order:
-            block_lines = [f"*{cat}* :"]
+            block_lines = [f"*{cat}* :", ""]
             for a in groups[cat]:
                 title = a.get("title", "—")
                 url   = a.get("url", SITE_URL)
                 block_lines.append(f"{title} [Read more]({url})")
-            blocks.append("\n".join(block_lines))
+                block_lines.append("")
+            blocks.append("\n".join(block_lines).rstrip())
         body = "\n\n".join(blocks)
 
     return "\n\n".join([
         header,
         body,
-        f"For the full history, use /cantonnews · {SITE_URL}",
+        "For the full history, use /cantonnews",
     ])
 
 
