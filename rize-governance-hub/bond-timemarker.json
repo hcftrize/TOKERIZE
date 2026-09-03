@@ -3,7 +3,7 @@
   "scraped_at": "2026-04-28T13:30:24.437581+00:00",
   "bootstrap": true,
   "counts": {
-    "bondTimeMarkerSnapshots": 341
+    "bondTimeMarkerSnapshots": 342
   },
   "data": {
     "bondTimeMarkerSnapshots": [
@@ -3075,8 +3075,17 @@
         "poolId": 2,
         "blockNumber": "50744298",
         "timestamp": "1788277943"
+      },
+      {
+        "id": "0xd938c769ed2ecdcf93da40deadb7fa94aece4d37b52e958ab3b1c6a4f8da5e7a-50805493-tm",
+        "nftId": "10029",
+        "timeMarker": "1779021912",
+        "amount": "499999.9956",
+        "poolId": 2,
+        "blockNumber": "50805493",
+        "timestamp": "1788400333"
       }
     ]
   },
-  "updated_at": "2026-09-02T05:31:52.752901+00:00"
+  "updated_at": "2026-09-03T05:31:51.024220+00:00"
 }
