@@ -11,6 +11,30 @@ LIGHTHOUSE_BASE = "https://lighthouse.cantonloop.com/api"
 CIP_GITHUB_URL  = "https://github.com/canton-foundation/cips"
 
 
+def _md_safe(text) -> str:
+    """
+    Telegram's legacy 'Markdown' parse_mode has NO escape syntax — an odd
+    number of *, _, or ` characters anywhere in the message text makes the
+    Bot API reject the ENTIRE send with 400 Bad Request (silently, from
+    the user's point of view: the bot just never replies — this is
+    exactly what was breaking /cip 71, 61, 57, and 10 other CIPs whose
+    descriptions use "*" as a plain GitHub-markdown bullet marker).
+    Since this text comes straight from cips.json / the Lighthouse API —
+    content we don't control and can't rely on staying "safe" —
+    neutralize Telegram's formatting characters on every dynamic field
+    rather than trying to keep them balanced. "*" becomes "•" so bullet
+    lists still read fine.
+    """
+    if not text:
+        return text
+    return (
+        str(text)
+        .replace("*", "•")
+        .replace("_", "-")
+        .replace("`", "'")
+    )
+
+
 async def cmd_cip(args: list, page: int = 0) -> str:
     cips = await get_cips()
     if not cips:
@@ -31,11 +55,11 @@ async def cmd_cip(args: list, page: int = 0) -> str:
             return f"CIP #{args[0]} not found. Type `/cip` to see latest CIPs."
 
         cip_id   = match.get("id", f"CIP-{match.get('number','?')}")
-        title    = match.get("title", "—")
-        status   = match.get("status", "—")
-        category = match.get("type", "—")
+        title    = _md_safe(match.get("title", "—"))
+        status   = _md_safe(match.get("status", "—"))
+        category = _md_safe(match.get("type", "—"))
         created  = match.get("created", "—")
-        desc     = match.get("description", "No description.")
+        desc     = _md_safe(match.get("description", "No description."))
         if len(desc) > 800:
             desc = desc[:800] + "…"
 
@@ -62,9 +86,9 @@ async def cmd_cip(args: list, page: int = 0) -> str:
     lines = [f"*Latest Canton CIPs* — Page {page+1}/{total_pages}", ""]
     for c in page_cips:
         cip_id   = c.get("id", f"CIP-{c.get('number','?')}")
-        title    = c.get("title", "—")
-        status   = c.get("status", "—")
-        category = c.get("type", "—")
+        title    = _md_safe(c.get("title", "—"))
+        status   = _md_safe(c.get("status", "—"))
+        category = _md_safe(c.get("type", "—"))
         lines += [f"*{cip_id}*", f"  {title}", f"  {status} · {category}", ""]
 
     lines += [
@@ -106,7 +130,7 @@ async def cmd_cantongov(args: list, page: int = 0) -> str:
     for r in all_proposals:
         proposals.append({
             "id":     r.get("id", "—"),
-            "title":  (r.get("reason_body") or "")[:100] + ("…" if len(r.get("reason_body","")) > 100 else ""),
+            "title":  _md_safe((r.get("reason_body") or "")[:100] + ("…" if len(r.get("reason_body","")) > 100 else "")),
             "status": r.get("status", "—"),
             "accept": int(r.get("accept_votes") or 0),
             "reject": int(r.get("reject_votes") or 0),
