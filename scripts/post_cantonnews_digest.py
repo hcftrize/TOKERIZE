@@ -188,7 +188,7 @@ def build_digest_texts(week_articles: list[dict], monday: datetime, note: str | 
         for a in items[1:]:
             paragraphs.append(_article_line(a))
 
-    footer = "For the full history, use /cantonnews"
+    footer = "Full history: /cantonnews"
     body_chunks = _pack_paragraphs(paragraphs, CHUNK_BUDGET)
 
     if len(body_chunks) == 1:
