@@ -542,8 +542,6 @@ async def cmd_volume(args: list) -> str:
     lines = [
         "🔊 *RIZE Volume*",
         "",
-        "*RIZE Volume Data*",
-        "",
         f"Today: {money(live_vol)}",
         f"Yesterday: {money(yesterday_vol)}",
         "",
