@@ -538,6 +538,7 @@ async def cmd_volume(args: list) -> str:
         f"7D Daily Avg: {money(avg_last(7))}",
         f"1M Daily Avg: {money(avg_last(30))}",
         f"3M Daily Avg: {money(avg_last(90))}",
+        f"1Y Daily Avg: {money(avg_last(365))}",
         "",
         "*Cumulative RIZE Volume*",
         f"7D: {money(sum_last(7))}",
