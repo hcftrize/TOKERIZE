@@ -124,6 +124,33 @@ body{font-family:'Rajdhani',sans-serif;background:var(--white);color:var(--text)
 @media(max-width:900px){.ceb-grid{grid-template-columns:repeat(3,1fr);}.ceb-controls,.ceb-count,.ceb-grid,.ceb-pagination{padding-left:16px;padding-right:16px;}}
 @media(max-width:600px){.ceb-grid{grid-template-columns:repeat(2,1fr);}}
 
+/* ═══════ ARC ECOSYSTEM BROWSER ═══════ */
+.aeb-controls{padding:20px 32px 0;display:flex;flex-direction:column;gap:12px;}
+.aeb-search{font-family:'DM Mono',monospace;font-size:13px;padding:10px 16px;border:1px solid #dde4ed;background:#fff;color:#111;outline:none;width:100%;max-width:420px;transition:border-color 0.2s;}
+.aeb-search:focus{border-color:var(--navy);}
+.aeb-filters{display:flex;flex-wrap:wrap;gap:6px;}
+.aeb-tag{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 14px;border:1px solid #dde4ed;background:#fff;color:#666;cursor:pointer;transition:all 0.15s;}
+.aeb-tag:hover{border-color:var(--navy);color:var(--navy);}
+.aeb-tag.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+.aeb-count{padding:12px 32px 0;font-family:'DM Mono',monospace;font-size:11px;color:#aaa;letter-spacing:0.5px;}
+.aeb-grid{padding:16px 32px 0;display:grid;grid-template-columns:repeat(6,1fr);gap:12px;}
+.aeb-bubble{display:flex;flex-direction:column;align-items:center;padding:14px 8px;border:1px solid #e8e8e8;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s;text-align:center;background:#fafafa;min-height:110px;justify-content:center;}
+.aeb-bubble:hover{border-color:var(--navy);box-shadow:0 2px 8px rgba(13,45,78,0.08);}
+.aeb-bubble.on{border-color:var(--navy);background:#eef3f8;}
+.aeb-bubble.priority{border-color:#b8cce0;}
+.aeb-logo{width:56px;height:56px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:8px;background:#f0f0f0;border:1px solid #e0e0e0;flex-shrink:0;}
+.aeb-logo img{width:100%;height:100%;object-fit:contain;padding:6px;border-radius:50%;}
+.aeb-logo.dark{background:#111;border-color:#333;}
+.aeb-logo.initials{background:var(--navy);font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:#fff;}
+.aeb-name{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;color:#000;line-height:1.2;}
+.aeb-pagination{display:flex;align-items:center;justify-content:center;gap:4px;padding:20px 32px 8px;}
+.aeb-pg-btn{min-width:32px;height:32px;padding:0 8px;border:1px solid #dde4ed;background:#fff;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:var(--navy);transition:all 0.15s;display:flex;align-items:center;justify-content:center;}
+.aeb-pg-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.aeb-pg-btn.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+.aeb-pg-btn:disabled{opacity:0.25;cursor:not-allowed;}
+@media(max-width:900px){.aeb-grid{grid-template-columns:repeat(3,1fr);}.aeb-controls,.aeb-count,.aeb-grid,.aeb-pagination{padding-left:16px;padding-right:16px;}}
+@media(max-width:600px){.aeb-grid{grid-template-columns:repeat(2,1fr);}}
+
 /* ═══════ RIZE NETWORK MAP STYLES ═══════ */
 .rn-map-area{margin:20px 0 0;background:#fff;border-top:1px solid #dde4ed;position:relative;overflow:hidden;}
 #rn-svg{display:block;width:100%;}
@@ -913,6 +940,47 @@ function closeRnFullscreen(){
   </div><!-- end lc-body -->
 </div>
 
+<!-- ── CONTAINER 6: ARC ECOSYSTEM BROWSER ── -->
+<div class="lc collapsed" id="aeb-lc">
+  <div class="lc-header" onclick="toggleLc('aeb-lc')">
+    <div class="lc-header-text">
+      <h2>Arc Ecosystem</h2>
+      <p>Businesses, infrastructure providers and organizations building on Arc</p>
+    </div>
+    <div class="lc-toggle"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="#0d2d4e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="lc-body collapsed" id="aeb-lc-body">
+
+    <!-- Search + Filters -->
+    <div class="aeb-controls">
+      <input class="aeb-search" id="aeb-search" type="text" placeholder="Search entities…" oninput="aebFilter()"/>
+      <div class="aeb-filters" id="aeb-filters">
+        <button class="aeb-tag on" data-tag="ALL" onclick="aebSetTag(this)">All</button>
+      </div>
+    </div>
+
+    <!-- Count -->
+    <div class="aeb-count" id="aeb-count"></div>
+
+    <!-- Top Pagination -->
+    <div class="aeb-pagination" id="aeb-pagination-top"></div>
+
+    <!-- Grid -->
+    <div class="aeb-grid" id="aeb-grid"></div>
+
+    <!-- Pagination -->
+    <div class="aeb-pagination" id="aeb-pagination"></div>
+
+    <!-- Info box -->
+    <div class="info-box" id="aeb-box">
+      <p class="ib-prompt">Click on any entity to learn about their role in the Arc ecosystem.</p>
+      <div class="ib-title" id="aeb-title"></div>
+      <div class="ib-text" id="aeb-text"></div>
+    </div>
+
+  </div><!-- end lc-body -->
+</div>
+
 
 </div><!-- end eco-wrap -->
 
@@ -1451,6 +1519,230 @@ document.addEventListener("DOMContentLoaded", function() {
     .catch(function(err) {
       document.getElementById('ceb-count').textContent = 'Could not load ecosystem data.';
       console.error('CEB load error:', err);
+    });
+
+
+  /* ═══════════════════════════════════════════════════
+     ARC ECOSYSTEM BROWSER
+  ═══════════════════════════════════════════════════ */
+  const AEB_JSON = 'https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/arc-ecosystem/arcentities.json';
+  const AEB_LOGO_BASE = 'https://cdn.jsdelivr.net/gh/hcftrize/TOKERIZE@dev/arc-ecosystem/logos/';
+  // Exact filename map — fill in manually as entities are added (same pattern as CEB_FILES).
+  // Until a slug is listed here, its logo falls back to e.logo_local below.
+  const AEB_FILES={};
+  const AEB_PER_PAGE = 48;
+
+  // Priority order — T-RIZE first, then institutionals, then alpha.
+  // Slugs confirmed directly against arc.io/ecosystem (a few differ from a
+  // naive slug of the name — e.g. Standard Chartered → 'scb', Commerzbank → 'commerzbank-2').
+  // 't-rize' isn't live on arc.io/ecosystem yet; this stays ready for it
+  // once it's added to arcentities.json by hand.
+  const AEB_PRIORITY = [
+    't-rize','blackrock','bny','goldman-sachs','hsbc','societe-generale',
+    'sbi-holdings','scb','securitize','state-street','mastercard','visa',
+    'wisdomtree','emirates-nbd','first-abu-dhabi-bank','centrifuge',
+    'cumberland','chainlink','commerzbank-2','galaxy','coinbase','bybit','aws'
+  ];
+
+  let aebAll = [];       // all entities sorted (priority first, then alpha)
+  let aebFiltered = [];  // after search+tag filter
+  let aebPage = 0;
+  let aebActiveTag = 'ALL';
+  let aebActiveBubble = null;
+
+  function aebSlugMatch(slug, priorities) {
+    return priorities.indexOf(slug) !== -1;
+  }
+
+  function aebCleanTags(tags) {
+    // Arc's tags come straight from clean fs-list-field data (no scraped
+    // boilerplate to strip, unlike Canton's cebCleanTags) — just trim + dedupe.
+    var seen = {};
+    return (tags || []).filter(function(t) {
+      var clean = (t || '').trim();
+      if (!clean) return false;
+      var key = clean.toUpperCase();
+      if (seen[key]) return false;
+      seen[key] = true;
+      return true;
+    });
+  }
+
+  function aebSort(entities) {
+    var priority = [];
+    var rest = [];
+    entities.forEach(function(e) {
+      if (aebSlugMatch(e.slug, AEB_PRIORITY)) priority.push(e);
+      else rest.push(e);
+    });
+    priority.sort(function(a,b) {
+      var ai = AEB_PRIORITY.indexOf(a.slug);
+      var bi = AEB_PRIORITY.indexOf(b.slug);
+      return ai - bi;
+    });
+    rest.sort(function(a,b){ return a.name.localeCompare(b.name); });
+    return priority.concat(rest);
+  }
+
+  function aebBuildFilters(entities) {
+    var tagSet = {};
+    entities.forEach(function(e) {
+      aebCleanTags(e.tags||[]).forEach(function(t) {
+        tagSet[t.toUpperCase()] = true;
+      });
+    });
+    var tags = Object.keys(tagSet).sort();
+    var container = document.getElementById('aeb-filters');
+    tags.forEach(function(tag) {
+      var btn = document.createElement('button');
+      btn.className = 'aeb-tag';
+      btn.dataset.tag = tag;
+      btn.textContent = tag;
+      btn.onclick = function(){ aebSetTag(btn); };
+      container.appendChild(btn);
+    });
+  }
+
+  window.aebSetTag = function(btn) {
+    document.querySelectorAll('.aeb-tag').forEach(function(b){ b.classList.remove('on'); });
+    btn.classList.add('on');
+    aebActiveTag = btn.dataset.tag;
+    aebPage = 0;
+    aebApplyFilter();
+  };
+
+  window.aebFilter = function() {
+    aebPage = 0;
+    aebApplyFilter();
+  };
+
+  function aebApplyFilter() {
+    var q = (document.getElementById('aeb-search').value||'').toLowerCase().trim();
+    aebFiltered = aebAll.filter(function(e) {
+      var matchTag = aebActiveTag === 'ALL' ||
+        aebCleanTags(e.tags||[]).some(function(t){ return t.toUpperCase() === aebActiveTag; });
+      var matchQ = !q ||
+        e.name.toLowerCase().includes(q) ||
+        (e.description||'').toLowerCase().includes(q);
+      return matchTag && matchQ;
+    });
+    aebRender();
+  }
+
+  function aebRender() {
+    var total = aebFiltered.length;
+    var pages = Math.ceil(total / AEB_PER_PAGE);
+    if (aebPage >= pages) aebPage = Math.max(0, pages - 1);
+    var start = aebPage * AEB_PER_PAGE;
+    var slice = aebFiltered.slice(start, start + AEB_PER_PAGE);
+
+    // Count
+    document.getElementById('aeb-count').textContent =
+      total + ' ' + (total === 1 ? 'entity' : 'entities') +
+      (total < aebAll.length ? ' (filtered)' : '');
+
+    // Build pagination HTML (shared between top and bottom)
+    function buildPagHtml() {
+      if (pages <= 1) return '';
+      var h = '<button class="aeb-pg-btn" onclick="aebGoPage('+(aebPage-1)+')" '+(aebPage===0?'disabled':'')+'>&#8592;</button>';
+      for (var i=0; i<pages; i++) {
+        h += '<button class="aeb-pg-btn'+(i===aebPage?' on':'')+'" onclick="aebGoPage('+i+')">'+(i+1)+'</button>';
+      }
+      h += '<button class="aeb-pg-btn" onclick="aebGoPage('+(aebPage+1)+')" '+(aebPage>=pages-1?'disabled':'')+'>&#8594;</button>';
+      return h;
+    }
+
+    // Top pagination
+    var pgTop = document.getElementById('aeb-pagination-top');
+    if (pgTop) pgTop.innerHTML = buildPagHtml();
+
+    // Grid
+    var grid = document.getElementById('aeb-grid');
+    grid.innerHTML = slice.map(function(e) {
+      var isPriority = aebSlugMatch(e.slug, AEB_PRIORITY);
+      var logoFile = AEB_FILES[e.slug];
+      var logoUrl = logoFile
+        ? AEB_LOGO_BASE + logoFile
+        : (e.logo_local ? AEB_LOGO_BASE + e.logo_local.replace(/\\\\/g, '/').replace(/\\/g, '/').replace('logos/', '') : null);
+      var initials = e.name.split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2).toUpperCase();
+      var logoHtml = logoUrl
+        ? '<div class="aeb-logo"><img src="' + logoUrl + '" alt="' + e.name + '" onerror="this.parentElement.className=\'aeb-logo initials\';this.parentElement.textContent=\'' + initials + '\'"/></div>'
+        : '<div class="aeb-logo initials">' + initials + '</div>';
+      return '<div class="aeb-bubble' + (isPriority ? ' priority' : '') + '" id="aeb-b-' + e.slug + '" onclick="aebPick(\'' + e.slug + '\')">'
+        + logoHtml
+        + '<div class="aeb-name">' + e.name + '</div>'
+        + '</div>';
+    }).join('');
+
+    // Bottom pagination
+    var pgEl = document.getElementById('aeb-pagination');
+    if (pgEl) pgEl.innerHTML = buildPagHtml();
+  }
+
+  window.aebGoPage = function(p) {
+    aebPage = p;
+    aebRender();
+  };
+
+  window.aebPick = function(slug) {
+    var e = aebAll.find(function(x){ return x.slug === slug; });
+    if (!e) return;
+
+    // Toggle
+    if (aebActiveBubble === slug) {
+      aebActiveBubble = null;
+      document.querySelectorAll('.aeb-bubble').forEach(function(b){ b.classList.remove('on'); });
+      var box = document.getElementById('aeb-box');
+      box.querySelector('.ib-prompt').style.display = '';
+      document.getElementById('aeb-title').style.display = 'none';
+      document.getElementById('aeb-text').style.display = 'none';
+      return;
+    }
+
+    aebActiveBubble = slug;
+    document.querySelectorAll('.aeb-bubble').forEach(function(b){ b.classList.remove('on'); });
+    var el = document.getElementById('aeb-b-' + slug);
+    if (el) el.classList.add('on');
+
+    var box = document.getElementById('aeb-box');
+    box.querySelector('.ib-prompt').style.display = 'none';
+    var titleEl = document.getElementById('aeb-title');
+    var textEl = document.getElementById('aeb-text');
+    titleEl.style.display = 'block';
+    textEl.style.display = 'block';
+
+    // Clean tags for display
+    var cleanTags = aebCleanTags(e.tags||[]);
+    var tagLine = cleanTags.length ? '<span style="font-family:\'DM Mono\',monospace;font-size:11px;color:#888;display:block;margin-bottom:10px;">' + cleanTags.join(' · ') + '</span>' : '';
+
+    titleEl.textContent = e.name;
+    // Arc has no separate detail page — description comes straight from
+    // the listing page itself. A few entities have none; those just show
+    // the tag line with no body text.
+    var bodyText = (e.description || '').trim();
+    if (bodyText.toLowerCase().startsWith(e.name.toLowerCase())) {
+      bodyText = bodyText.slice(e.name.length).replace(/^[\s\n\r]+/, '');
+    }
+    textEl.innerHTML = tagLine + bodyText.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+
+    box.scrollIntoView({behavior:'smooth', block:'nearest'});
+  };
+
+  // Load JSON and init
+  fetch(AEB_JSON)
+    .then(function(r){ return r.json(); })
+    .then(function(data) {
+      data.forEach(function(e) {
+        e.tags = aebCleanTags(e.tags||[]);
+      });
+      aebAll = aebSort(data);
+      aebFiltered = aebAll.slice();
+      aebBuildFilters(aebAll);
+      aebRender();
+    })
+    .catch(function(err) {
+      document.getElementById('aeb-count').textContent = 'Could not load ecosystem data.';
+      console.error('AEB load error:', err);
     });
 
 
