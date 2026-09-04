@@ -19,6 +19,7 @@ URLS = {
     "bondStates":    f"{RAW_GOV}/bond-states.json",
     "poolConfig":    f"{RAW_GOV}/pool-config.json",
     "mcapHistory":   f"{RAW_MAIN}/rize-data-hub/mcap-history.json",
+    "volumeHistory": f"{RAW_MAIN}/rize-data-hub/volume-history.json",
     "unbondingQueue":f"{RAW_MAIN}/rize-data-hub/unbonding-queue.json",
     "cips":          f"{RAW_MAIN}/canton-ecosystem/cips.json",
     "entities":      f"{RAW_DEV}/canton-ecosystem/entities.json",
@@ -59,6 +60,7 @@ async def get_bond_created():   return await load_json("bondCreated")
 async def get_bond_lifecycle(): return await load_json("bondLifecycle")
 async def get_bond_states():    return await load_json("bondStates")
 async def get_mcap_history():   return await load_json("mcapHistory")
+async def get_volume_history(): return await load_json("volumeHistory")
 async def get_unbonding_queue():return await load_json("unbondingQueue")
 async def get_cips():           return await load_json("cips")
 async def get_entities():       return await load_json("entities")
