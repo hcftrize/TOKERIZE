@@ -33,7 +33,12 @@ jobs:
       - name: Check for changes
         id: changes
         run: |
-          git diff --quiet arc-ecosystem/arcentities.json || echo "changed=true" >> $GITHUB_OUTPUT
+          # git diff ignores untracked files — on the very first run
+          # arcentities.json doesn't exist in the repo yet, so a plain
+          # `git diff --quiet` would silently see "no changes" and skip the
+          # commit. git status --porcelain catches both a brand-new file
+          # and a modified tracked one.
+          [ -n "$(git status --porcelain arc-ecosystem/arcentities.json)" ] && echo "changed=true" >> $GITHUB_OUTPUT || true
           [ -f HANDLE-THIS-BEFORE-PULL/arc_missing_entities.txt ] && echo "changed=true" >> $GITHUB_OUTPUT || true
 
       - name: Commit and push if changes
