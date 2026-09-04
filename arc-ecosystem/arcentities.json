@@ -1,0 +1,1554 @@
+[
+  {
+    "name": "Aave",
+    "slug": "aave",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900dc93490611b54729de1b_Logomark-dark.svg",
+    "description": "Aave is an Open Source Protocol to create Non-Custodial Liquidity Markets to earn interest on supplying and borrowing assets",
+    "external_url": "https://aave.com/",
+    "tags": [
+      "Financial Services",
+      "Borrow/Lend"
+    ],
+    "logo_local": "logos\\aave.svg"
+  },
+  {
+    "name": "Absa",
+    "slug": "absa-ywxd0",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/693187304c807d0ace36d656_Absa%20logo%20badge_RGB_Passion_PNG.png",
+    "description": "With Absa Digital Banking services, you can open a bank account, get a loan, or sign up for internet banking quickly.",
+    "external_url": "https://www.absa.co.za/personal/",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\absa-ywxd0.png"
+  },
+  {
+    "name": "Across",
+    "slug": "across",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd17220510c245fc5c4bae_Across%20Logomark%20Aqua%20Circle.svg",
+    "description": "Across uses an intent-based design to deliver near-instant transfers.",
+    "external_url": "https://across.to/",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\across.svg"
+  },
+  {
+    "name": "Alchemy",
+    "slug": "alchemy",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbd65066ce5c45d267be27_alchemy-mark-blue-gradient.svg",
+    "description": "Build and scale apps onchain with Alchemy's RPC APIs, data APIs, and developer tools across 100+ blockchains.",
+    "external_url": "https://www.alchemy.com",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\alchemy.svg"
+  },
+  {
+    "name": "AllUnity",
+    "slug": "allunity",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/695fe1b471d894335b2b9fa5_AU-logo.jpg",
+    "description": "AllUnity is a regulated e-money institute, building the next generation of digital payments infrastructure.",
+    "external_url": "https://allunity.com/",
+    "tags": [
+      "Issuers",
+      "Stablecoin Issuers"
+    ],
+    "logo_local": "logos\\allunity.jpg"
+  },
+  {
+    "name": "Auros",
+    "slug": "auros",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900d4971e59f9db04f66f37_Auros-Logo-Black.svg",
+    "description": "Auros Global is a proprietary crypto trading firm delivering institutional liquidity, advanced market making, and more.",
+    "external_url": "https://www.auros.global/",
+    "tags": [
+      "Trading",
+      "Market Makers"
+    ],
+    "logo_local": "logos\\auros.svg"
+  },
+  {
+    "name": "Avenia",
+    "slug": "avenia",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbd718b88c79624388e504_avenia-icon.svg",
+    "description": "Power your product with real-time, cross-border payment capabilities. From PIX in Brazil to global stablecoin flows.",
+    "external_url": "https://avenia.io/",
+    "tags": [
+      "Issuers",
+      "Stablecoin Issuers",
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\avenia.svg"
+  },
+  {
+    "name": "AWS",
+    "slug": "aws",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fff59b031c3fc27aa4e20e_Amazon_Web_Services-Logo.wine.png",
+    "description": "Amazon Web Services offers reliable, scalable, and inexpensive cloud computing services.",
+    "external_url": "https://aws.amazon.com/",
+    "tags": [
+      "Payments",
+      "Enterprises"
+    ],
+    "logo_local": "logos\\aws.png"
+  },
+  {
+    "name": "Axelar",
+    "slug": "axelar",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/693194bf9a1af940e00adf58_Logomark%20black.png",
+    "description": "Axelar is a decentralized network and development platform securely connecting the world's blockchains.",
+    "external_url": "https://www.axelar.network/",
+    "tags": [
+      "Developer Tools",
+      "Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\axelar.png"
+  },
+  {
+    "name": "B2C2",
+    "slug": "b2c2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900d4d86cd4c3c2a98dbe86_B2C2_Colour_Logo.png",
+    "description": "Institutional solutions for Asset Managers, Funds, Banks, Brokers, Exchanges, DATs, Fintechs, and Crypto Projects.",
+    "external_url": "https://www.b2c2.com/",
+    "tags": [
+      "Trading",
+      "Market Makers"
+    ],
+    "logo_local": "logos\\b2c2.png"
+  },
+  {
+    "name": "Bank Frick",
+    "slug": "bank-frick",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbd7d81a420d2fcf8ee29e_bankfrick-icon.svg",
+    "description": "",
+    "external_url": "https://www.bankfrick.li/en",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\bank-frick.svg"
+  },
+  {
+    "name": "BDACS (KRW1)",
+    "slug": "bdacs-krw1-2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/693187c663bdbaf3ca02e2c8_%5BBDACS%5DLOGO_Horizon.png",
+    "description": "The only institutional-grade digital asset custody service in Korea.",
+    "external_url": "https://krw1.kr/",
+    "tags": [
+      "Issuers",
+      "Stablecoin Issuers"
+    ],
+    "logo_local": "logos\\bdacs-krw1-2.png"
+  },
+  {
+    "name": "BitGo",
+    "slug": "bitgo",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fff9093fe36d2f5f6dfa1d_BitGo_Logo.png",
+    "description": "BitGo's prime platform brings trading, financing, collateral management, and settlement together into one operational flow.",
+    "external_url": "https://www.bitgo.com/",
+    "tags": [
+      "Financial Services",
+      "Custodians"
+    ],
+    "logo_local": "logos\\bitgo.png"
+  },
+  {
+    "name": "Bitso / Juno",
+    "slug": "bitso-juno",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900d5095deb956f5b0735a6_Juno-Logo-NoCaps.png",
+    "description": "Invest in crypto, bitcoin, ethereum, and global stocks. Earn yields, send, and receive money securely with Bitso.",
+    "external_url": "https://buildwithjuno.com/en-US",
+    "tags": [
+      "Issuers",
+      "Stablecoin Issuers"
+    ],
+    "logo_local": "logos\\bitso-juno.png"
+  },
+  {
+    "name": "Bitvavo",
+    "slug": "bitvavo",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fff5da6ab2b93711a003e4_bitvavo-mark-and-logo-black.png",
+    "description": "Bitvavo enables you to earn passive returns on your crypto.",
+    "external_url": "https://bitvavo.com/en",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\bitvavo.png"
+  },
+  {
+    "name": "BlackRock",
+    "slug": "blackrock",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fffa71ebcaee49faa00df3_blackrock-logo-1.svg",
+    "description": "BlackRock is the world's largest asset manager and a fiduciary, providing investment management, risk management, and more.",
+    "external_url": "https://www.blackrock.com/us/individual",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets",
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\blackrock.svg"
+  },
+  {
+    "name": "Blockdaemon",
+    "slug": "blockdaemon",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd16e00a1722c911996a98_Blockdaemon-Badge-Purple.svg",
+    "description": "Trusted by 400+ institutions to launch, secure, and scale digital asset products across custody, tokenization and more.",
+    "external_url": "https://www.blockdaemon.com/",
+    "tags": [
+      "Infrastructure",
+      "Analytics"
+    ],
+    "logo_local": "logos\\blockdaemon.svg"
+  },
+  {
+    "name": "Blockradar",
+    "slug": "blockradar",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/695d54d23699edb39fe9a5ec_blockradar-icon.svg",
+    "description": "Blockradar enables fast, low-cost money transfers for individuals across borders with stablecoins.",
+    "external_url": "https://blockradar.co",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\blockradar.svg"
+  },
+  {
+    "name": "Blockscout",
+    "slug": "blockscout",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd1693c81ea40549a75b31_blockscout-icon.svg",
+    "description": "Blockscout is an open-source block explorer available for all Ethereum Virtual Machine (EVM) based chains.",
+    "external_url": "https://www.blockscout.com/",
+    "tags": [
+      "Infrastructure",
+      "Analytics",
+      "RPC Providers"
+    ],
+    "logo_local": "logos\\blockscout.svg"
+  },
+  {
+    "name": "BNY",
+    "slug": "bny",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69000ba51ab8f99f889556ca_BNY_logo_2024.svg.png",
+    "description": "BNY is a global financial services platforms company at the heart of the world's capital markets.",
+    "external_url": "https://www.bny.com/corporate/global/en.html",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\bny.png"
+  },
+  {
+    "name": "Brex",
+    "slug": "brex",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbd9844a1fe16cb69fe00b_brex-icon.svg",
+    "description": "Simplify expense management with Brex's finance platform.",
+    "external_url": "https://www.brex.com/",
+    "tags": [],
+    "logo_local": "logos\\brex.svg"
+  },
+  {
+    "name": "Bridge",
+    "slug": "bridge",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd16415277266bdbbdbb9c_bridge-icon.svg",
+    "description": "A stablecoin platform built for developers. Enable quick, easy, and cost-effective global money movement.",
+    "external_url": "https://www.bridge.xyz/",
+    "tags": [
+      "Developer Tools",
+      "Tools",
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\bridge.svg"
+  },
+  {
+    "name": "Bron",
+    "slug": "bron",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbb19afaa2183a52f1d1c5_Bron%20logo%20sq.svg",
+    "description": "Bron is a non-custodial wallet that lets you lose devices, passwords, and backups.",
+    "external_url": "https://bron.org/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\bron.svg"
+  },
+  {
+    "name": "BTG Pactual",
+    "slug": "btg-pactual",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbdb2fd262988a300a3e12_btgpactual-icon.svg",
+    "description": "BTG Pactual is a federally chartered bank offering banking, investment, credit, mortgage, & cross-border financial services.",
+    "external_url": "https://www.btgpactual.us/",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\btg-pactual.svg"
+  },
+  {
+    "name": "Bybit",
+    "slug": "bybit",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fff664f1d4ebb37b6aa576_bybit-logo_brandlogos.net_viubj-512x512.png",
+    "description": "Crypto trading experience elevated. Buy, sell, trade BTC, altcoins & NFTs.",
+    "external_url": "https://www.bybit.com/en",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\bybit.png"
+  },
+  {
+    "name": "Cactus Custody",
+    "slug": "cactus-custody",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a83b5cd4b6972db3ab020c8_6a83b5ccd4b17475d5af105d_cactus-custody-logo.png",
+    "description": "Cactus Custody is a qualified custodian acting within regulatory guidelines to provide custody services for institutions.",
+    "external_url": "https://www.mycactus.com/",
+    "tags": [
+      "Financial Services",
+      "Custodians"
+    ],
+    "logo_local": "logos\\cactus-custody.png"
+  },
+  {
+    "name": "Careem",
+    "slug": "careem",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbdcc3df02625c3cac2dd9_careem.avif",
+    "description": "Careem makes it easier to move around, order food and groceries, manage payments, and more.",
+    "external_url": "https://www.careem.com/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\careem.avif"
+  },
+  {
+    "name": "Catena Labs",
+    "slug": "catena-labs",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbddab65d23850904bf2a9_Catena-icon.svg",
+    "description": "Catena is the banking and governance platform for AI agents that supports payments, treasury, and other services.",
+    "external_url": "https://catenalabs.com/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\catena-labs.svg"
+  },
+  {
+    "name": "Centrifuge",
+    "slug": "centrifuge",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900dddac70d84fd07dcf2b3_logomark-dark.svg",
+    "description": "Centrifuge is the platform for tokenized real-world assets, providing the infrastructure to tokenize, manage, and invest.",
+    "external_url": "https://centrifuge.io/",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\centrifuge.svg"
+  },
+  {
+    "name": "CFi",
+    "slug": "cfi",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/693193dd014ebfc70bcb8516_image_720.png",
+    "description": "Trade forex, stocks, indices, commodities, ETFs and more with CFI.",
+    "external_url": "https://www.cfi.ag/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\cfi.png"
+  },
+  {
+    "name": "Chainalysis",
+    "slug": "chainanalysis",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69fe60126109ba8fcd60cb02_Chainalysis_Mark_RGB_Orange.svg",
+    "description": "Chainalysis combines blockchain data and AI to help government agencies, crypto businesses, and financial institutions.",
+    "external_url": "https://www.chainalysis.com/",
+    "tags": [
+      "Infrastructure",
+      "Analytics"
+    ],
+    "logo_local": "logos\\chainanalysis.svg"
+  },
+  {
+    "name": "Chainlink",
+    "slug": "chainlink",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fffb074f79406a3b36d2ca_Chainlink_Logo_Blue.svg.png",
+    "description": "Chainlink is a leading decentralized oracle network that acts as crucial infrastructure for the blockchain industry.",
+    "external_url": "https://chain.link/",
+    "tags": [
+      "Developer Tools",
+      "Crosschain",
+      "Oracles"
+    ],
+    "logo_local": "logos\\chainlink.png"
+  },
+  {
+    "name": "Chronicle Labs",
+    "slug": "chronicle-labs",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a2305e453bbfbad35eaf4f6_Chronicle_Green-Logo.png",
+    "description": "Chronicle Labs provides cost-efficient, decentralized, and verifiable blockchain oracles. Secure data feeds for Web3.",
+    "external_url": "https://chroniclelabs.org/",
+    "tags": [
+      "Developer Tools",
+      "Oracles"
+    ],
+    "logo_local": "logos\\chronicle-labs.png"
+  },
+  {
+    "name": "Cloudflare",
+    "slug": "cloudflare",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbdedf334d8ed344ca181a_cloudflare-icon.svg",
+    "description": "One platform for your apps, agents, and workforce. Build, secure, and scale without managing infrastructure.",
+    "external_url": "https://www.cloudflare.com/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\cloudflare.svg"
+  },
+  {
+    "name": "Coinbase",
+    "slug": "coinbase",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fff8662cabb6a83be7fbce_Coinbase.svg%20(1).png",
+    "description": "Coinbase is a secure online platform for buying, selling, transferring, and storing cryptocurrency.",
+    "external_url": "https://www.coinbase.com/",
+    "tags": [
+      "Trading",
+      "CEXs",
+      "Financial Services",
+      "Custodians"
+    ],
+    "logo_local": "logos\\coinbase.png"
+  },
+  {
+    "name": "Coincheck",
+    "slug": "coincheck",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fff6dcd4da5d59bb4d2000_ccg%20logo%20(1).svg",
+    "description": "Buy and sell cryptocurrency for as little as 500 JPY 24/7. Transfer & Deposit funds instantly.",
+    "external_url": "https://coincheck.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\coincheck.svg"
+  },
+  {
+    "name": "Commerzbank",
+    "slug": "commerzbank-2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6931882e2b90a9f4d3623462_CB-2022-Logo_centered_RGB_positive.png",
+    "description": "Commerzbank is the leading bank for the German Mittelstand and a strong partner for around 24,000 corporate client groups.",
+    "external_url": "https://www.commerzbank.de/group/",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\commerzbank-2.png"
+  },
+  {
+    "name": "Copper",
+    "slug": "copper",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900d645d336a98436515ebb_Copper%20logo%20(4).png",
+    "description": "Copper is a digital asset infrastructure provider offering custody, prime services, and collateral management.",
+    "external_url": "https://copper.co/en",
+    "tags": [
+      "Financial Services",
+      "Custodians"
+    ],
+    "logo_local": "logos\\copper.png"
+  },
+  {
+    "name": "Copperx",
+    "slug": "copperx",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69319187a6d5259dd7998dee_Copperx.svg",
+    "description": "Accept stablecoin payments, open financial accounts, and send money globally with Copperx.",
+    "external_url": "http://copperx.io/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\copperx.svg"
+  },
+  {
+    "name": "Corpay",
+    "slug": "corpay",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900d67855379d9a2f979ac3_Corpay_Logo_RedCaret_RGB.svg",
+    "description": "Corpay gives you the tools to move money securely and stay confident in every transaction.",
+    "external_url": "https://www.corpay.com/",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\corpay.svg"
+  },
+  {
+    "name": "Crossmint",
+    "slug": "crossmint",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd155a120921d12e223675_crossmint-mark-green.svg",
+    "description": "All-in-one stablecoin infrastructure for enterprises.",
+    "external_url": "https://www.crossmint.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\crossmint.svg"
+  },
+  {
+    "name": "Cumberland",
+    "slug": "cumberland",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fffe526176dc96ae525651_cumberland-1.webp",
+    "description": "Cumberland provides deep, dependable liquidity in cryptoassets.",
+    "external_url": "https://www.cumberland.io/",
+    "tags": [
+      "Trading",
+      "Market Makers"
+    ],
+    "logo_local": "logos\\cumberland.webp"
+  },
+  {
+    "name": "Curve",
+    "slug": "curve",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69009e8512a9ffeab77e7983_CRV-200x200-transparent.png",
+    "description": "Curve Finance is a decentralized exchange (DEX) specifically optimized for swapping assets with similar values.",
+    "external_url": "https://www.curve.finance/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\curve.png"
+  },
+  {
+    "name": "Deutsche Bank",
+    "slug": "deutsche-bank",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fffabb25afb016ba2323ff_DB.png",
+    "description": "Deutsche Bank is one of the world's leading financial services providers.",
+    "external_url": "https://www.db.com/",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\deutsche-bank.png"
+  },
+  {
+    "name": "DFNS",
+    "slug": "dfns",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a76caafaaea940810054210_6a76caafe1dd29d210ffa3d4_dfns-logo.svg",
+    "description": "Core banking platform for digital assets. DFNS enables banks, fintechs, and businesses around the world to run financial ops.",
+    "external_url": "https://dfns.co/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services",
+      "Tools"
+    ],
+    "logo_local": "logos\\dfns.svg"
+  },
+  {
+    "name": "Dinari",
+    "slug": "dinari",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a83b9503824da071f077f94_6a83b95080a7281f7040cf5a_dinari-logo.png",
+    "description": "Dinari is a tokenized securities platform that issues 1:1 backed dShare tokens representing US stocks, ETFs, and more.",
+    "external_url": "https://dinari.com/",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\dinari.png"
+  },
+  {
+    "name": "dLocal",
+    "slug": "dlocal",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbdfb437fcda6a5d35064d_dLocal_icon_color.svg",
+    "description": "dLocal simplifies cross-border payments in emerging markets.",
+    "external_url": "https://www.dlocal.com/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\dlocal.svg"
+  },
+  {
+    "name": "Dromos Labs",
+    "slug": "dromos-labs",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd14e924a1c7acfeb176e1_Dromos%20Logo%20Symbol.svg",
+    "description": "Dromos Labs builds decentralized systems and infrastructure that give users greater stake and control in the new economy.",
+    "external_url": "https://dromos.xyz/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\dromos-labs.svg"
+  },
+  {
+    "name": "dRPC",
+    "slug": "drpc",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/693189f3f45a0c21e76aa407_dRPC_fullcollor_black-2-png.webp",
+    "description": "dRPC provides modular RPC solutions to launch, scale, and monitor your blockchain data infrastructure.",
+    "external_url": "https://drpc.org/",
+    "tags": [
+      "Infrastructure",
+      "RPC Providers"
+    ],
+    "logo_local": "logos\\drpc.webp"
+  },
+  {
+    "name": "Dynamic",
+    "slug": "dynamic",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd14b4a6585fdb17dae834_dynamic-icon.svg",
+    "description": "Dynamic combines authentication, smart wallets, and secure key management into one flexible SDK.",
+    "external_url": "https://www.dynamic.xyz/",
+    "tags": [],
+    "logo_local": "logos\\dynamic.svg"
+  },
+  {
+    "name": "EBANX",
+    "slug": "ebanx",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe017f089a745be9dd1ed_EBANX-logo-blue.svg",
+    "description": "EBANX leads in providing alternative payment methods like digital wallets, instant payments, mobile money, and vouchers.",
+    "external_url": "https://www.ebanx.com/",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\ebanx.svg"
+  },
+  {
+    "name": "Elliptic",
+    "slug": "elliptic",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900d6cdd62ab7d26eac56f9_elliptic-logo-black.svg",
+    "description": "Blockchain analytics for financial crime risk management and regulatory compliance in crypto and digital assets.",
+    "external_url": "https://www.elliptic.co/",
+    "tags": [
+      "Infrastructure",
+      "Analytics"
+    ],
+    "logo_local": "logos\\elliptic.svg"
+  },
+  {
+    "name": "Emirates NBD",
+    "slug": "emirates-nbd",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900da2f2799038dcbb57333_emirates-nbd.svg",
+    "description": "Experience tailored banking services with Emirates NBD, one of the UAE's top banks.",
+    "external_url": "https://www.emiratesnbd.com/en",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\emirates-nbd.svg"
+  },
+  {
+    "name": "Exodus",
+    "slug": "exodus",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe0b98635f0b30354af30_Exodus_symbol.svg",
+    "description": "Exodus makes it easy to buy and sell crypto using your credit or debit card, bank account, Apple Pay, or Google Pay.",
+    "external_url": "https://www.exodus.com",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\exodus.svg"
+  },
+  {
+    "name": "Fireblocks",
+    "slug": "fireblocks",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900daae9b765d70fc08501f_Logotype-Network_Navy.svg",
+    "description": "Fireblocks offers enterprise grade digital asset and stablecoin infrastructure that powers financial possibility.",
+    "external_url": "https://fireblocks.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\fireblocks.svg"
+  },
+  {
+    "name": "First Abu Dhabi Bank",
+    "slug": "first-abu-dhabi-bank",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900db57ec04602aca880848_FAB-logo-400x400.png",
+    "description": "First Abu Dhabi Bank provides corporate and institutional products and services to large corporate, investment grade clients.",
+    "external_url": "https://www.bankfab.com/en-ae/personal",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\first-abu-dhabi-bank.png"
+  },
+  {
+    "name": "FIS",
+    "slug": "fis",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe1da225b50a37335654e_FIS_Logo_Green.svg",
+    "description": "FIS is fintech for bold ideas. FIS is behind the financial technology that transforms how we live, work and play.",
+    "external_url": "https://www.fisglobal.com/",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\fis.svg"
+  },
+  {
+    "name": "Fluid",
+    "slug": "fluid",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900e10b5adc0e69ee07601a_fluid-icon.svg",
+    "description": "Fluid makes lending and borrowing on DeFi easier, safer, and more efficient.",
+    "external_url": "https://fluid.io/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\fluid.svg"
+  },
+  {
+    "name": "Forte AUD",
+    "slug": "forte",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe23ec7329ee0ab66b5ba_Forte.svg",
+    "description": "AUDF provides simple, fast, and cost-effective access to cryptocurrency via a digital asset pegged to the Australian dollar.",
+    "external_url": "https://www.forteaud.com/",
+    "tags": [
+      "Issuers",
+      "Stablecoin Issuers"
+    ],
+    "logo_local": "logos\\forte.svg"
+  },
+  {
+    "name": "Forte Securities",
+    "slug": "forte-securities",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe41a4b9d288ed469bedf_forte-securities-icon.svg",
+    "description": "Forte Securities is an independent and global financial group offering brokerage, custody and asset management.",
+    "external_url": "https://fortesecurities.com/",
+    "tags": [
+      "Trading",
+      "Market Makers"
+    ],
+    "logo_local": "logos\\forte-securities.svg"
+  },
+  {
+    "name": "Fun.xyz",
+    "slug": "fun-xyz",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd146c435fbeb9f716d377_funxyz-icon.svg",
+    "description": "Fun offers high converting rails to execute blockchain actions. Optimize your funding rails, reach new customers, and more.",
+    "external_url": "http://fun.xyz",
+    "tags": [],
+    "logo_local": "logos\\fun-xyz.svg"
+  },
+  {
+    "name": "Galaxy",
+    "slug": "galaxy",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900dbae9f4652baeabfe978_Galaxy_Lockup_Horizontal_Black.png",
+    "description": "Galaxy is a global leader in digital assets and AI infrastructure, serves institutions, startups, protocols, and investors.",
+    "external_url": "https://www.galaxy.com/",
+    "tags": [
+      "Trading",
+      "Market Makers"
+    ],
+    "logo_local": "logos\\galaxy.png"
+  },
+  {
+    "name": "GetLiquid",
+    "slug": "getliquid",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a2b0d1281b21a7ea54082a6_logo-primary.svg",
+    "description": "GetLiquid standardizes how private credit transactions are structured, funded, tracked, and managed.",
+    "external_url": "https://www.getliquid.io/",
+    "tags": [
+      "Financial Services",
+      "Borrow/Lend"
+    ],
+    "logo_local": "logos\\getliquid.svg"
+  },
+  {
+    "name": "Goldman Sachs",
+    "slug": "goldman-sachs",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fffba17b536e6f963ffee6_golden-sachs.svg",
+    "description": "The Goldman Sachs Group, Inc. is a leading global investment banking, securities, and asset and wealth management firm.",
+    "external_url": "https://www.goldmansachs.com/",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\goldman-sachs.svg"
+  },
+  {
+    "name": "Hashkey",
+    "slug": "hashkey-2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6931898b18d709a190ef7167_20251024-125744.png",
+    "description": "HashKey Global is licensed by the Bermuda Monetary Authority (BMA), ensuring a secure and compliant trading environment.",
+    "external_url": "https://www.hashkey.com/en-US/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\hashkey-2.png"
+  },
+  {
+    "name": "Hecto Financial",
+    "slug": "hecto-financial-2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69318aae2fa5b7288d558547_Hecto%20Financial_o_h.png",
+    "description": "Hecto Financial Co., Ltd., a fintech company, provides fintech platform services in South Korea.",
+    "external_url": "https://www.hectogroup.com/",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\hecto-financial-2.png"
+  },
+  {
+    "name": "Hecto Innovation",
+    "slug": "hecto-innovation-2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6936df39a272acd7cec42b42_Hecto%20Innovation_o_h.png",
+    "description": "Hecto Innovation Co., Ltd. operates as an IT platform company in the field of information security primarily in Korea.",
+    "external_url": "https://www.hectogroup.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\hecto-innovation-2.png"
+  },
+  {
+    "name": "Hibachi",
+    "slug": "hibachi",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a03f1532e6730fa87645a96_hitachi-logo-mark.png",
+    "description": "Hibachi is building a stablecoin-native FX exchange where currencies trade on a live orderbook with transparent pricing.",
+    "external_url": "https://hibachi.xyz/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\hibachi.png"
+  },
+  {
+    "name": "HIFI",
+    "slug": "hifi",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a76c811f973d99b13c7fda9_6a76c811b8c787e161c075c1_hifi-logo.png",
+    "description": "A composable API platform for moving money at scale. Move, convert, and compile value across stablecoins and bank rails.",
+    "external_url": "https://www.hifi.com/",
+    "tags": [
+      "Developer Tools",
+      "Tools",
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\hifi.png"
+  },
+  {
+    "name": "HSBC",
+    "slug": "hsbc",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900dbe1cf51f7baaf2b8533_HSBC.png",
+    "description": "A British universal bank and financial services group headquartered in London, England.",
+    "external_url": "https://www.us.hsbc.com/",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\hsbc.png"
+  },
+  {
+    "name": "Hurupay",
+    "slug": "hurupay",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6931927b18d709a190f2f493_hurupay-final-logo.jpg",
+    "description": "Get a USD and EUR bank account with your name to receive or send money globally with Hurupay.",
+    "external_url": "https://www.hurupay.com/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\hurupay.jpg"
+  },
+  {
+    "name": "JPYC",
+    "slug": "jpyc",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69318bb4566033cae926a16d_jpyc_logo_text_color.png",
+    "description": "JPYC is a stablecoin linked to the Japanese yen, which can be used to purchase NFTs or exchange crypto assets for goods.",
+    "external_url": "https://corporate.jpyc.co.jp/en",
+    "tags": [
+      "Issuers",
+      "Stablecoin Issuers"
+    ],
+    "logo_local": "logos\\jpyc.png"
+  },
+  {
+    "name": "Keyrock",
+    "slug": "keyrock",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900e1519f258f328ca00578_Keyrock_Logo_01_RGB_Black.svg",
+    "description": "Keyrock has been boosting digital assets with tailored liquidity solutions since 2017.",
+    "external_url": "https://keyrock.com/",
+    "tags": [
+      "Trading",
+      "Market Makers"
+    ],
+    "logo_local": "logos\\keyrock.svg"
+  },
+  {
+    "name": "Kraken",
+    "slug": "kraken",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe502f5456af65703e98f_kraken-icon.svg",
+    "description": "Own the power of your money with Kraken. Trade crypto, stocks, futures, staking and more.",
+    "external_url": "https://www.kraken.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\kraken.svg"
+  },
+  {
+    "name": "Kyobo Life",
+    "slug": "kyobo-life-2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69318c12a26808313c0bb4e0_KyoboLife_ci_horizontal_en.png",
+    "description": "Kyobo provides optimum insurance coverage and on-going services.",
+    "external_url": "https://www.kyobo.com/dgt/web/company-introduction/en-main",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\kyobo-life-2.png"
+  },
+  {
+    "name": "LayerZero",
+    "slug": "layerzero",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900dfef2b1a23501670b341_LayerZero_emblem.svg",
+    "description": "LayerZero builds technology that makes decentralization possible, scalable, and inevitable.",
+    "external_url": "http://layerzero.network/",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\layerzero.svg"
+  },
+  {
+    "name": "Ledger",
+    "slug": "ledger",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe5e84ec2263793433914_ledger-icon.svg",
+    "description": "Ledger empowers you to build your portfolio: buy, swap, stake, spend with the simplicity of exchanges & security of a signer.",
+    "external_url": "https://www.ledger.com/",
+    "tags": [],
+    "logo_local": "logos\\ledger.svg"
+  },
+  {
+    "name": "LianLian",
+    "slug": "lianlian-2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69318c8eace1b551f1f0b92c_%E8%93%9D%E8%89%B2%E9%80%8F%E6%98%8E%E5%BA%95.png",
+    "description": "Enjoy a seamless and secure cross-border payment experience with LianLian Global.",
+    "external_url": "https://lianlianglobal.com/en",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\lianlian-2.png"
+  },
+  {
+    "name": "Luno (ZARU)",
+    "slug": "luno-zaru",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a5f6e073539ff67511f606b_ZARU%20Stack%20L%20Dark%20(1).svg",
+    "description": "A global crypto investment platform offering simple, secure access to digital assets.",
+    "external_url": "https://zaru.network/",
+    "tags": [
+      "Issuers",
+      "Stablecoin Issuers"
+    ],
+    "logo_local": "logos\\luno-zaru.svg"
+  },
+  {
+    "name": "Maple",
+    "slug": "maple",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900d56d012d389e7faa891a_%24SYRUP.svg",
+    "description": "Maple is an onchain Asset Manager with decades of traditional finance and crypto experience.",
+    "external_url": "https://maple.finance/",
+    "tags": [
+      "Financial Services",
+      "Borrow/Lend"
+    ],
+    "logo_local": "logos\\maple.svg"
+  },
+  {
+    "name": "Mastercard",
+    "slug": "mastercard",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe6774896869e72c76905_ma_symbol.svg",
+    "description": "Mastercard is is an American multinational payment card services corporation.",
+    "external_url": "https://www.mastercard.com/us/en.html",
+    "tags": [],
+    "logo_local": "logos\\mastercard.svg"
+  },
+  {
+    "name": "Mercoin",
+    "slug": "mercoin-2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69318cf6581198300ec9d7b0_mercoin_logo_bk.png",
+    "description": "Mercoin creates products that help people unleash their potential, empowering them to create and circulate value.",
+    "external_url": "https://about.mercoin.com/en/",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\mercoin-2.png"
+  },
+  {
+    "name": "MetaMask",
+    "slug": "metamask",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe69c3c2919551840f621_MetaMask-icon-fox-with-margins.svg",
+    "description": "MetaMask is a secure and flexible crypto wallet, trusted by millions of users to buy, sell, and swap digital assets.",
+    "external_url": "https://metamask.io/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\metamask.svg"
+  },
+  {
+    "name": "Morpho",
+    "slug": "morpho",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900dd4d5ab8afd5b17ea7e3_Morpho-with-background-logo.svg",
+    "description": "Morpho is an open credit network that connects lenders and borrowers to the best possible opportunities worldwide.",
+    "external_url": "https://morpho.org/",
+    "tags": [
+      "Financial Services",
+      "Borrow/Lend"
+    ],
+    "logo_local": "logos\\morpho.svg"
+  },
+  {
+    "name": "Noah",
+    "slug": "noah",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe7587a22c257245454af_noah-icon.svg",
+    "description": "Noah provides a unified API to easily integrate stablecoin payments into your platform.",
+    "external_url": "https://noah.io/",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\noah.svg"
+  },
+  {
+    "name": "Nuvei",
+    "slug": "nuvei",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe79f5ade899ed1e1c1ec_Nuvei_Square-white.svg",
+    "description": "Navai unifies pay-ins, payouts, and data on one intelligent platform",
+    "external_url": "https://www.nuvei.com/",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\nuvei.svg"
+  },
+  {
+    "name": "Ormi Labs",
+    "slug": "ormi-labs",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a2b054e6a90ea1377bb54fc_ormi-symbol-dark.svg",
+    "description": "Ormi gives high-throughput Web3 apps access to real-time and historical data at sub-second latency.",
+    "external_url": "https://ormilabs.com/",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\ormi-labs.svg"
+  },
+  {
+    "name": "Pairpoint",
+    "slug": "pairpoint-by-vodafone",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe816c0d1d51101c02ba1_pairpoint-icon.svg",
+    "description": "Pairpoint enables IoT devices to securely connect, transact, and communicate autonomously using SIM and blockchain tech",
+    "external_url": "https://pairpoint.io/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\pairpoint-by-vodafone.svg"
+  },
+  {
+    "name": "Paysafe",
+    "slug": "paysafe",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe8b3689d1834834e5021_paysafe-icon-180x180.png",
+    "description": "Paysafe has a payment solution for every business and can help SMs to",
+    "external_url": "https://www.paysafe.com",
+    "tags": [],
+    "logo_local": "logos\\paysafe.png"
+  },
+  {
+    "name": "PhotonPay",
+    "slug": "photonpay",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900e285fb1b40140db37dc9_photonpay-icon.svg",
+    "description": "Simplify your global business payment with PhotonPay: global accounts, multi-currency cards, online payments, embedded financ",
+    "external_url": "https://www.photonpay.com/",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\photonpay.svg"
+  },
+  {
+    "name": "Pimlico",
+    "slug": "pimilico",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd13ab4bb4bb22a0b54c12_pimlico-icon.svg",
+    "description": "Pimlico is an account abstraction infrastructure platform powering Ethereum's transition to ERC-4337 smart accounts.",
+    "external_url": "https://www.pimlico.io/",
+    "tags": [],
+    "logo_local": "logos\\pimilico.svg"
+  },
+  {
+    "name": "Privy",
+    "slug": "privy",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd1312a4091121d979e970_privy-icon.png",
+    "description": "Privy powers the complete wallet stack — from key management to user onboarding.",
+    "external_url": "https://www.privy.io/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\privy.png"
+  },
+  {
+    "name": "QuickNode",
+    "slug": "quicknode",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd12d85ce3de4f3d2cdcb6_quicknode-icon.svg",
+    "description": "Quicknode's global network delivers real-time blockchain data with unmatched speed, reliability, and uptime.",
+    "external_url": "https://www.quicknode.com/",
+    "tags": [
+      "Infrastructure",
+      "RPC Providers"
+    ],
+    "logo_local": "logos\\quicknode.svg"
+  },
+  {
+    "name": "Rainbow",
+    "slug": "rainbow",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe95edd9ebf17c66f3c31_rainbow-medium.png",
+    "description": "Explore NFTs and DeFi on Ethereum, Polygon, Optimism, Arbitrum, BSC, Base, and Zora with Rainbow.",
+    "external_url": "https://rainbow.me/en-us/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\rainbow.png"
+  },
+  {
+    "name": "Ramp",
+    "slug": "ramp",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbea2329b035a8c156c938_Ramp-Symbol-RGB-Slate-0125.svg",
+    "description": "Make expense management easy with Ramp's spend management platform.",
+    "external_url": "https://www.ramp.com",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\ramp.svg"
+  },
+  {
+    "name": "Ramp Network",
+    "slug": "ramp-network",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbea83f9fa8fe4a0a81be6_RAMP_logo_Digital__icon.svg",
+    "description": "Ramp Network enables seamless crypto buying, selling, and swapping directly within apps or wallets with KYC verification.",
+    "external_url": "https://rampnetwork.com/",
+    "tags": [],
+    "logo_local": "logos\\ramp-network.svg"
+  },
+  {
+    "name": "RedStone",
+    "slug": "redstone",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69f4de69424130faf2615ac3_RedStone_logo.svg",
+    "description": "RedStone powers onchain data for DeFi protocols, RWA platforms, and asset managers.",
+    "external_url": "https://www.redstone.finance/",
+    "tags": [
+      "Developer Tools",
+      "Oracles"
+    ],
+    "logo_local": "logos\\redstone.svg"
+  },
+  {
+    "name": "Robinhood",
+    "slug": "robinhood",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900e318d7464a6b99501838_RH_symbol_black.svg",
+    "description": "Robinhood is a financial services company providing a trading platformfor stocks, ETFs, and more.",
+    "external_url": "https://robinhood.com",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\robinhood.svg"
+  },
+  {
+    "name": "SafePal",
+    "slug": "safepal",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a85b391a5fd4ff967c9a514_6a85b3910bea516ce878e37a_safepal-logo.png",
+    "description": "SafePal securely stores your crypto assets in a simple and easy way.",
+    "external_url": "https://www.safepal.com/en/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\safepal.png"
+  },
+  {
+    "name": "Sasai Fintech",
+    "slug": "sasai-fintech",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbed66a75d75b8da1b8aa9_sansai-logo.png",
+    "description": "Sasai is a fintech and platform service provider empowering businesses to grow through simplified payment solutions.",
+    "external_url": "https://sasaifintech.com/",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\sasai-fintech.png"
+  },
+  {
+    "name": "SBI Holdings",
+    "slug": "sbi-holdings",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900e364e45b7924525fe88f_SBI_Holdings.png",
+    "description": "SBI Holdings is a financial services company group based in Tokyo, Japan.",
+    "external_url": "https://www.sbigroup.co.jp/english/",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\sbi-holdings.png"
+  },
+  {
+    "name": "Securitize",
+    "slug": "securitize",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fffc4c93a4d68c843c8ce6_securitize.svg",
+    "description": "Securitize is a leader in tokenizing real-world assets.",
+    "external_url": "https://securitize.io/",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\securitize.svg"
+  },
+  {
+    "name": "Sequence",
+    "slug": "sequence",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69319047c4dd0765349754f9_Sequence%20logo%20-%20Horizontal%20main.png",
+    "description": "Sequence is modular crypto infrastructure that unifies wallets, 1-click cross-chain payments, and real-time data layers.",
+    "external_url": "https://sequence.xyz/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\sequence.png"
+  },
+  {
+    "name": "Societe Generale",
+    "slug": "societe-generale",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd127f7e98595191d65e71_societe-general-icon.svg",
+    "description": "A European leader in financial services forover 150 years.",
+    "external_url": "https://www.societegenerale.com/en",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\societe-generale.svg"
+  },
+  {
+    "name": "Stablecorp",
+    "slug": "stablecorp",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbf49134b8eddc013bbc28_stablecorp.svg",
+    "description": "Stablecorp is a leading Canadian fintech firm building digital money infrastructure to support the global payments space.",
+    "external_url": "https://www.stablecorp.ca/",
+    "tags": [
+      "Issuers",
+      "Stablecoin Issuers"
+    ],
+    "logo_local": "logos\\stablecorp.svg"
+  },
+  {
+    "name": "Standard Chartered",
+    "slug": "scb",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900e44af6a120ce9658f854_scb.svg",
+    "description": "A global bank connecting corporate, institutional and affluent clients to sustainable growth opportunities.",
+    "external_url": "https://www.sc.com/en/",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\scb.svg"
+  },
+  {
+    "name": "Stargate",
+    "slug": "stargate",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd11b9f7a9ab1b2e573e01_stargate-icon.svg",
+    "description": "Bridge native USDC, USDT, ETH, BTC, and OFTs across 80+ chains using Stargate.",
+    "external_url": "https://stargate.finance/",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\stargate.svg"
+  },
+  {
+    "name": "State Street",
+    "slug": "state-street",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fffa1bf4abf93ab8263516_State-street-logo-final.svg.png",
+    "description": "State Street Corporation is a premier American financial holding company headquartered in Boston, MA.",
+    "external_url": "https://www.statestreet.com/us/en",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\state-street.png"
+  },
+  {
+    "name": "Sumitomo Corporation",
+    "slug": "sumitomo-corporation-2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69318d69ba3424e4bd070680_SumitomoCorporation-logo.svg",
+    "description": "Sumitomo Corporation is a leading integrated trading company engaged in diverse businesses based on its global network.",
+    "external_url": "https://www.sumitomocorp.com/en/global",
+    "tags": [
+      "Payments",
+      "Enterprises"
+    ],
+    "logo_local": "logos\\sumitomo-corporation-2.svg"
+  },
+  {
+    "name": "Superface",
+    "slug": "superface",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/693190a637836d519a72602b_icon.png",
+    "description": "An LLM-powered automation agent that connects to all your systems enabling you to automate tasks using natural language.",
+    "external_url": "http://superface.ai",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\superface.png"
+  },
+  {
+    "name": "Superform",
+    "slug": "superform",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900e049efbf01e880c4e2ab_Superform_Brandmark.svg",
+    "description": "Superform is a DeFi protocol that allows you to save, swap, send, and earn.",
+    "external_url": "https://www.superform.xyz/",
+    "tags": [
+      "Financial Services",
+      "Yield"
+    ],
+    "logo_local": "logos\\superform.svg"
+  },
+  {
+    "name": "Taurus",
+    "slug": "taurus",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbf68e9cbf70c2e3e77e6b_Taurus_Wordmark_FullColourDark_RGB.svg",
+    "description": "Taurus offers enterprise-grade custody, tokenization, and trading solutions.",
+    "external_url": "https://www.taurushq.com/",
+    "tags": [
+      "Financial Services",
+      "Custodians"
+    ],
+    "logo_local": "logos\\taurus.svg"
+  },
+  {
+    "name": "Tenderly",
+    "slug": "tenderly",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd120f907452fc9f98409b_Tenderly%20Symbol.svg",
+    "description": "Tenderly provides full-stack infrastructure for web3 professionals.",
+    "external_url": "https://tenderly.co/",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\tenderly.svg"
+  },
+  {
+    "name": "thirdweb",
+    "slug": "thirdweb",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbf6f8342b123c44122c39_thirdweb-icon.svg",
+    "description": "Build on internet capital markets with infrastructure for agents to discover, pay for, and interact with services and APIs.",
+    "external_url": "https://thirdweb.com/",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\thirdweb.svg"
+  },
+  {
+    "name": "Transak",
+    "slug": "transak",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd0108ee31fc7f0e42d662_transak-icon.svg",
+    "description": "Transak is a developer integration toolkit to let users buy/sell crypto in any app, website or web plugin.",
+    "external_url": "https://transak.com/",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\transak.svg"
+  },
+  {
+    "name": "TRM",
+    "slug": "trm",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd0f25053bcfddb65184f2_trm-icon.svg",
+    "description": "TRM Labs' trusted blockchain intelligence allows you to detect and monitor crypto crime and conduct investigations.",
+    "external_url": "https://www.trmlabs.com/",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\trm.svg"
+  },
+  {
+    "name": "Turnkey",
+    "slug": "turnkey",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd0f62e32065ffea007630_turnkey-icon.png",
+    "description": "Turnkey is private key management made simple.",
+    "external_url": "https://turnkey.com?utm_source=partner&utm_medium=blog&utm_campaign=arc",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\turnkey.png"
+  },
+  {
+    "name": "Utila",
+    "slug": "utila",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a3b1a3820b7ce6076ce4753_Utila%20Logo%20icon%20-%20Dark.svg",
+    "description": "",
+    "external_url": "https://utila.io/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\utila.svg"
+  },
+  {
+    "name": "Visa",
+    "slug": "visa",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd0f8d58458969f956af75_visa-brandmark-blue-1960x622.png",
+    "description": "Visa Inc. is a global payments technology company that facilitates electronic funds transfers across more than 200 countries.",
+    "external_url": "https://usa.visa.com/",
+    "tags": [
+      "Payments",
+      "Enterprises"
+    ],
+    "logo_local": "logos\\visa.png"
+  },
+  {
+    "name": "Vultisig",
+    "slug": "vultisig",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900e1e5e7ec4f7eb3069832_vultisig-icon.svg",
+    "description": "Vultisig uses multi-party computation to achieve native multi-factor authentication.",
+    "external_url": "https://vultisig.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\vultisig.svg"
+  },
+  {
+    "name": "WheelX",
+    "slug": "wheelx",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a1f1f8b46f984a4e57a1251_wheelX.png",
+    "description": "WheelX is an AI-powered bridge & swap aggregator that enables cross-chain swapping of any token between multi-chains.",
+    "external_url": "https://wheelx.fi/",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\wheelx.png"
+  },
+  {
+    "name": "WisdomTree",
+    "slug": "wisdomtree",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd0fe47bdd06f933b42010_wisdomtree.png",
+    "description": "WisdomTree, Inc. is a global exchange-traded fund and exchange-traded product sponsor and asset manager.",
+    "external_url": "https://www.wisdomtreeconnect.com/",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\wisdomtree.png"
+  },
+  {
+    "name": "WorldPay",
+    "slug": "worldpay-2",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6931858de4041edf29ce8dcf_Worldpay_logo_b_rgb.png",
+    "description": "Worldpay powers global commerce by providing exceptional payments technology and expertise to businesses.",
+    "external_url": "https://www.worldpay.com/en",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\worldpay-2.png"
+  },
+  {
+    "name": "Wormhole",
+    "slug": "wormhole",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd102391e05fe3438b1781_Logomark%20black.svg",
+    "description": "Wormhole connects blockchains with secure, open-source multichain infrastructure.",
+    "external_url": "https://wormhole.com/",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\wormhole.svg"
+  },
+  {
+    "name": "Yellow Card",
+    "slug": "yellow-card",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd107e52be5d2a8d27cdae_yellowcard-icon.svg",
+    "description": "Yellow Card is one of the largest licensed stablecoin infrastructure providers, operating across 34 countries.",
+    "external_url": "https://yellowcard.io/",
+    "tags": [
+      "Payments",
+      "PSPs"
+    ],
+    "logo_local": "logos\\yellow-card.svg"
+  },
+  {
+    "name": "Zerion",
+    "slug": "zerion",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a8382e7b04b4556ab563f8e_6a8382e635624994e7ea8d39_zerion-logo.svg",
+    "description": "",
+    "external_url": "https://zerion.io/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\zerion.svg"
+  },
+  {
+    "name": "ZeroDev",
+    "slug": "zerodev",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd10e7f0bb57d288ddfef7_zerodev-icon.svg",
+    "description": "ZeroDev is the most powerful smart account solution for Web3 UX.",
+    "external_url": "https://zerodev.app/",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\zerodev.svg"
+  },
+  {
+    "name": "zkp2p",
+    "slug": "zkp2p",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69318df44c807d0ace38f366_zkp2p.png",
+    "description": "ZKP2P is the first trust-minimized onramp and offramp protocol powered by advanced cryptography.",
+    "external_url": "http://zkp2p.xyz",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\zkp2p.png"
+  },
+  {
+    "name": "Zodia Custody",
+    "slug": "zodia-custody",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd112ffd4917e1b6750918_zodia-icon.svg",
+    "description": "Zodia Custody offers digital assets that meet rigorous criteria for quality, safety, and regulatory compliance.",
+    "external_url": "https://zodia-custody.com",
+    "tags": [
+      "Trading",
+      "Market Makers",
+      "Financial Services",
+      "Custodians"
+    ],
+    "logo_local": "logos\\zodia-custody.svg"
+  },
+  {
+    "name": "Zodia Markets",
+    "slug": "zodia-markets",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/693186bcdb800c3839107744_ZM_Logo_Horizontal_RGB_Master.svg",
+    "description": "Zodia Markets' mission is to be the most trusted and reliable partner for your institutional crypto trading.",
+    "external_url": "https://zodiamarkets.com/",
+    "tags": [
+      "Trading",
+      "Market Makers"
+    ],
+    "logo_local": "logos\\zodia-markets.svg"
+  }
+]
