@@ -1,9 +1,9 @@
 """
-Commands: /ecosystem, /canton, /cantonboard, /rwa, /vision87, /vision60, /kairos
+Commands: /ecosystem, /canton, /cantonboard, /rwa, /vision87, /vision60, /kairos, /arc
 Bonus: /name or /entity triggers auto-lookup.
 Exact data from rize-ecosystem hub.
 """
-from utils.github_data import get_entities
+from utils.github_data import get_entities, get_arc_entities
 from utils.fuzzy import find_entity
 
 TRIZE_ECOSYSTEM = [{"id": "canton", "name": "Canton Network", "tag": "BLOCKCHAIN", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/canton-DxoXFUH1.png", "text": "The name 'Canton' comes from Switzerland — a federated nation where each city runs its own rules but interoperates under one country. This is exactly how Canton Network works: every application has its own governance, its own privacy controls, down to the sub-transaction level, while maintaining full native composability with every other application on the network. Most blockchains force a trade-off — build public and expose everything, or build private and lose interoperability. Canton removes that trade-off entirely. Launched in May 2023 by a consortium including Goldman Sachs, BNP Paribas, Deutsche Börse, Cboe, and Digital Asset, Canton processes over $2 trillion in monthly transactions and safeguards $4+ trillion in digital assets. T-RIZE operates as a Premier Member, Validator, and RWA issuer on Canton, leveraging its privacy-enabled rails for compliant issuance, registry, and post-trade lifecycle management of tokenized real-world assets."}, {"id": "particula", "name": "Particula", "tag": "SERVICES", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/particula-CblFVUrc.png", "text": "Particula is an independent digital asset risk rating agency — the first to issue a pre-issuance risk rating on the Canton Network, assigning a B+ rating to T-RIZE's KAI18-1 tokenized instrument. Particula provides real-time risk monitoring, credit analysis, and due diligence infrastructure for tokenized assets. In a market where institutional investors require rigorous risk frameworks before deploying capital on-chain, Particula fills a critical gap by bringing traditional structured finance rating methodologies to the blockchain. Their independence and methodology have made them a cornerstone of institutional credibility in the RWA space."}, {"id": "chainlink", "name": "Chainlink", "tag": "ORACLE", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/chainlink-CuysSQmw.png", "text": "Chainlink is the world's leading decentralized oracle network, securing over $75 billion in smart contract value across 1,800+ integrations. For T-RIZE, Chainlink provides the oracle infrastructure that acts as an external data integrity layer — reducing data manipulation risk by introducing an independent verification source via Merkle root. Chainlink's CCIP enables T-RIZE to connect tokenized assets across multiple blockchain ecosystems including Avalanche and Base, while Proof of Reserve capabilities ensure transparent, verifiable backing for digital assets."}, {"id": "digitalasset", "name": "Digital Asset", "tag": "INFRASTRUCTURE", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/digitalAsset-DXdPSw_s.png", "text": "Digital Asset is the technology company behind DAML (Digital Asset Modeling Language) — the smart contract language that powers the Canton Network. Co-founded by Yuval Rooz and Blythe Masters (former JPMorgan head of global commodities), Digital Asset has raised $300M+ from investors including Goldman Sachs, Citigroup, JPMorgan, and Deutsche Börse. DAML is the programming language used by T-RIZE to deploy its tokenization applications on Canton, making Digital Asset the foundational technology layer beneath every T-RIZE structured product."}, {"id": "fireblocks", "name": "Fireblocks", "tag": "CUSTODIAN", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/fireblocks-BizZbcST.png", "text": "Fireblocks is the leading enterprise digital asset security platform, trusted by over 1,800 financial institutions including BNY Mellon, BNP Paribas, and Goldman Sachs to secure $4 trillion+ in digital asset transfers. Fireblocks supports a wide range of custody architectures and compositions for institutional deployments. As an example of one possible architecture, in the Kairos Digital Loan Notes (KAI18-1) deal, T-RIZE deliberately separated the Fireblocks MPC signature environment from the Canton node — a security design choice highlighted in Particula's B+ rating report, ensuring no single point of compromise for that specific instrument."}, {"id": "republic", "name": "Republic", "tag": "INVESTMENT", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/republic-DwRcX6x0.png", "text": "Republic is one of the world's leading regulated investment platforms with over 3 million users, $3 billion in deployed capital, and more than 2,500 ventures backed across 150+ countries. Backed by Valor Equity Partners, Galaxy Interactive, and HOF Capital, Republic brings unparalleled retail and accredited investor distribution reach to T-RIZE's tokenized real estate offerings. T-RIZE partnered with Republic to distribute Vision 60 — the first new-construction real estate equity tokenization natively issued on Canton Network."}, {"id": "texture", "name": "Texture Capital", "tag": "INVESTMENT", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/texture-CdcnIvxs.png", "text": "Texture Capital is a SEC-registered broker-dealer and FINRA member that serves as the primary US distribution infrastructure for T-RIZE's tokenized offerings, including Vision 87. As a registered Alternative Trading System (ATS), Texture Capital enables compliant primary issuance and secondary market trading for security tokens — one of the few regulated platforms in the US capable of handling Reg D 506(c) digital securities offerings."}, {"id": "base", "name": "Base", "tag": "BLOCKCHAIN", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/base-DzeCCRUV.png", "text": "Base is a secure, low-cost, developer-friendly Ethereum L2 incubated by Coinbase, one of the world's largest crypto exchanges. T-RIZE uses Base as one of the EVM-compatible deployment networks for its tokenized real estate offerings including Vision 60. Base provides low-cost execution, robust security, and seamless integration with Ethereum and capital markets ecosystems — offering a strong foundation for tokenized financial products alongside Avalanche and Canton Network."}, {"id": "cantonfoundation", "name": "Canton Foundation", "tag": "FOUNDATION", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/cantonFoundation-Cs_Kzuz4.png", "text": "The Canton Foundation is the governing body of the Canton Network, responsible for the network's strategic direction, governance framework, and ecosystem development. Madani Boukalba (T-RIZE CEO) was announced as a board member of the Canton Foundation in December 2025, elevating T-RIZE to a premier position within the network's governance structure. The Foundation oversees the world's most significant institutional blockchain infrastructure, with participation from Goldman Sachs, BNP Paribas, DTCC, Euroclear, and BNY Mellon."}, {"id": "kaiko", "name": "Kaiko", "tag": "SERVICES", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/kaiko-D9u99Orf.png", "text": "Kaiko is the global independent leader in digital asset market data, analytics, crypto indices, and pricing for institutional investors. With coverage of 120,000+ instruments across 100+ exchanges and trusted by the world's leading financial institutions, Kaiko provides the institutional-grade market data infrastructure that underpins price discovery, risk management, and compliance for tokenized asset markets. Their data feeds are used by central banks, asset managers, and regulators globally."}, {"id": "dfns", "name": "DFNS", "tag": "CUSTODIAN", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/dfns-xlbSi2Fj.png", "text": "DFNS is a keyless crypto custody infrastructure provider offering MPC-based wallet-as-a-service for institutions. DFNS enables financial institutions to manage digital asset custody without private key exposure — a critical requirement for regulated entities handling tokenized securities. Their infrastructure supports T-RIZE's institutional-grade custody requirements, enabling seamless integration with existing financial workflows while maintaining the security standards demanded by global regulators."}, {"id": "aerodrome", "name": "Aerodrome", "tag": "DEX", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/aerodrome-CWA_aXvm.png", "text": "Aerodrome is a leading decentralized exchange built on Base, designed to serve as the primary liquidity hub for the Base ecosystem. Through its DeFi rails, Aerodrome provides RIZE token holders on-chain access to decentralized trading — making RIZE accessible in DeFi. Aerodrome is then a long-term DeFi infrastructure supporting RIZE accessibility and deployment."}, {"id": "arrakis", "name": "Arrakis", "tag": "LIQUIDITY", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/arrakis-DYsZCI7p.png", "text": "Arrakis provides automated liquidity management and market making on decentralized exchanges, with a focus on Aerodrome on Base. For RIZE, Arrakis actively manages liquidity positions to ensure efficient, tight-spread trading on-chain — maintaining the depth and consistency that traders and investors require for smooth entry and exit into RIZE positions in DeFi."}, {"id": "bitpanda", "name": "Bitpanda", "tag": "EXCHANGE", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/bitpanda-BmVJTn2R.png", "text": "Bitpanda is Europe's leading digital investment platform, regulated across multiple European jurisdictions and serving 6+ million customers. Headquartered in Vienna, Bitpanda provides retail and institutional investors with access to cryptocurrencies, stocks, ETFs, and metals. Bitpanda lists the RIZE token, providing European retail investors with a regulated, compliant access point to RIZE trading — making it the EU-focused counterpart to Kraken and MEXC in the RIZE exchange ecosystem."}, {"id": "kraken", "name": "Kraken", "tag": "EXCHANGE", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/kraken-Bk9Og8uZ.png", "text": "Kraken is one of the world's oldest and most trusted cryptocurrency exchanges, founded in 2011 and serving institutional and retail clients across 190+ countries. Kraken Pro handles institutional crypto trading with deep liquidity across hundreds of trading pairs. As a T-RIZE ecosystem partner and the primary exchange where RIZE token is listed with USD pairs, Kraken provides the regulated exchange infrastructure and liquidity access that institutional investors require for digital asset exposure."}, {"id": "mexc", "name": "MEXC", "tag": "EXCHANGE", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/MEXC-Dba-BYSi.png", "text": "MEXC is a leading global centralized cryptocurrency exchange with $2B+ in daily trading volume, serving 10+ million users across 200+ countries. MEXC provides deep liquidity for the RIZE token and serves as a key access point for Asian and emerging market investors seeking exposure to the T-RIZE ecosystem. Their broad geographic reach complements Kraken's institutional focus, together providing RIZE with global exchange coverage across diverse investor profiles."}, {"id": "revolut", "name": "Revolut", "tag": "EXCHANGE", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/revolut-DUlyhaUO.png", "text": "Revolut is a global financial super-app with 45+ million customers across 38 countries, offering banking, payments, and cryptocurrency trading. With $33B+ valuation and a European banking license, Revolut represents one of the most significant retail fintech platforms globally. RIZE is already listed on Revolut and Revolut X, giving tens of millions of mainstream financial consumers direct access to the RIZE token through one of the world's most widely used financial apps."}, {"id": "erc3643", "name": "ERC3643", "tag": "STANDARD", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/erc3643-BucHG6vK.png", "text": "ERC3643 (T-REX) is the leading token standard for compliant security tokens on EVM-compatible blockchains, developed by Tokeny Solutions. In simple terms, it adds a compliance layer directly into the token itself — meaning that before any transfer happens, the token automatically checks whether the recipient is authorized to hold it (KYC verified, accredited investor, correct jurisdiction). Think of it as a smart contract that acts as both the asset and its own compliance officer. This makes it impossible to accidentally transfer a regulated security to an ineligible investor — a fundamental requirement for institutional adoption. T-RIZE's tokenization architecture is built around ERC3643, ensuring every tokenized asset maintains full regulatory integrity across jurisdictions."}, {"id": "ets", "name": "ÉTS", "tag": "ACADEMIC", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/ets-BfEhYmAW.png", "text": "École de Technologie Supérieure (ÉTS) is one of Canada's leading engineering and technology universities, part of the Université du Québec network. T-RIZE co-leads the first Industrial Research Chair in Tokenization & Federated Learning at ÉTS, supported by the Government of Canada. T-RIZE Lab at ÉTS develops privacy-preserving decentralized machine learning models and cross-institution risk analytics frameworks for regulated markets — advancing the academic and scientific foundation of institutional tokenization."}, {"id": "hashlock", "name": "Hashlock", "tag": "SECURITY", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/hashlock-Fo8KZBPk.png", "text": "Hashlock is a leading blockchain security firm providing smart contract auditing, penetration testing, and security advisory services. As a T-RIZE ecosystem partner, Hashlock contributes to the security infrastructure that underpins T-RIZE's on-chain deployments — ensuring that smart contracts governing tokenized assets meet the highest security standards before institutional capital is committed. Their security audits provide an essential layer of assurance for institutional investors evaluating T-RIZE's tokenized instruments."}, {"id": "ekitas", "name": "Ekitas", "tag": "SERVICES", "img": "https://raw.githubusercontent.com/hcftrize/TOKERIZE/dev/assets/ekitas-DkaDd5gO.png", "text": "Ekitas is a Laval-based law firm and tax advisory practice specializing in business law, tax planning, and corporate structuring. In the context of T-RIZE's RWA deals, Ekitas plays a key role in designing the corporate and fiscal frameworks that govern tokenized asset transactions — ensuring that the legal structures surrounding each deal are optimized for investor protection, tax efficiency, and regulatory compliance. Their partnership with T-RIZE reflects the critical importance of sound legal and fiscal architecture in making institutional tokenization both viable and responsible."}]
@@ -60,7 +60,7 @@ async def cmd_ecosystem(args: list) -> str:
             "",
         ]
         for e in TRIZE_ECOSYSTEM:
-            lines.append(f"\u2022 *{e['name']}* \u2014 {e['tag']}")
+            lines.append(f"• *{e['name']}* — {e['tag']}")
         lines += ["", "_Reply with a partner name to learn more._"]
         return "\n".join(lines)
     query  = " ".join(args)
@@ -194,3 +194,94 @@ async def cmd_vision60(args: list) -> str:
 async def cmd_kairos(args: list) -> str:
     d = next((x for x in RWA_DEALS if x["id"] == "kairos"), None)
     return _fmt_deal(d) if d else "Not found."
+
+
+# ── /arc ──────────────────────────────────────────────────────────────────────
+# Arc Ecosystem — mirrors /canton (search) + /cantonlist (browse) in a SINGLE
+# command, per spec. Data comes from arc-ecosystem/arcentities.json (scraped
+# by scripts/scrape_arc.py), same shape as Canton's entities.json but with a
+# single "description" field instead of short_desc/detail_text (Arc has no
+# separate detail page — see scrape_arc.py's docstring).
+
+# Same whitelist/order as AEB_PRIORITY in rizeecosystem.html — keep both in
+# sync if the priority list ever changes. Slugs confirmed directly against
+# arc.io/ecosystem (a couple differ from a naive slug of the name).
+ARC_PRIORITY = [
+    "t-rize", "blackrock", "bny", "goldman-sachs", "hsbc", "societe-generale",
+    "sbi-holdings", "scb", "securitize", "state-street", "mastercard", "visa",
+    "wisdomtree", "emirates-nbd", "first-abu-dhabi-bank", "centrifuge",
+    "cumberland", "chainlink", "commerzbank-2", "galaxy", "coinbase", "bybit", "aws",
+]
+
+ARC_PER_PAGE = 20
+
+
+def _arc_sort(entities: list) -> list:
+    """Priority whitelist first (in ARC_PRIORITY order), then alphabetical —
+    mirrors AEB_PRIORITY / aebSort() on the website exactly."""
+    priority, rest = [], []
+    for e in entities:
+        if e.get("slug") in ARC_PRIORITY:
+            priority.append(e)
+        else:
+            rest.append(e)
+    priority.sort(key=lambda e: ARC_PRIORITY.index(e.get("slug")))
+    rest.sort(key=lambda e: e.get("name", "").lower())
+    return priority + rest
+
+
+def _fmt_arc(e: dict) -> str:
+    name = e.get("name", "Unknown")
+    tags = [str(t).strip() for t in e.get("tags", []) if str(t).strip()]
+    tag_str = " · ".join(tags)
+    desc = (e.get("description") or "").strip()
+
+    lines = [f"*{name}*"]
+    if tag_str:
+        lines.append(f"_{tag_str}_")
+    lines.append("")
+    if desc:
+        lines.append(desc[:4095] + ("..." if len(desc) > 4095 else ""))
+    return "\n".join(lines)
+
+
+async def cmd_arc(args: list, page: int = 0) -> str:
+    """
+    /arc              → paginated browse of the full Arc ecosystem
+                         (priority whitelist first, then alphabetical)
+    /arc t-rize        → entity search — category/subcategory + description
+    /arc blackrock     → same
+    """
+    entities = await get_arc_entities()
+    if not entities:
+        return "Could not load Arc entities data."
+
+    if args:
+        query  = " ".join(args)
+        entity = find_entity(query, entities)
+        if not entity:
+            return f"No Arc entity found for *{query}*.\n\nTry: `/arc t-rize` `/arc blackrock` `/arc chainlink`"
+        return _fmt_arc(entity)
+
+    ordered      = _arc_sort(entities)
+    total        = len(ordered)
+    total_pages  = (total - 1) // ARC_PER_PAGE + 1 if total else 1
+    start        = page * ARC_PER_PAGE
+    page_ents    = ordered[start:start + ARC_PER_PAGE]
+
+    lines = [
+        "\U0001f537 *Arc Ecosystem — All Entities*",
+        f"_Page {page + 1}/{total_pages} · {total} entities_",
+        "",
+    ]
+    for e in page_ents:
+        name = e.get("name", "?")
+        tags = [str(t).strip() for t in e.get("tags", []) if str(t).strip()]
+        lines.append(f"• *{name}*" + (f" — {tags[0]}" if tags else ""))
+
+    lines += [
+        "",
+        "_Reply with a name to learn more, or type `/arc {name}`_",
+        "_Reply *next* for more · Reply *page N* to jump to page N_",
+    ]
+    return "\n".join(lines)
