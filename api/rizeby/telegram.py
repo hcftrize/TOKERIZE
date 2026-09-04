@@ -618,7 +618,7 @@ Put any coin first to change the base asset.
 /cantonboard name — Member background
 /rwa — T-RIZE RWA deals overview
 /vision87 · /vision60 · /kairos — Deal details
-/cantonnews · /cnews — Latest Canton news · reply next for more
+/cantonnews · /cnews — Latest Canton news
 /cantonnews t-rize — Search Canton news by keyword
 
 ━━ CANTON GOVERNANCE ━━
@@ -631,8 +631,8 @@ Put any coin first to change the base asset.
 
 /sayhello — GM
 /insult — Get roasted
-/chainlinkmeme — Random meme/gif/video from the vault (alias: /clmeme)
-/timeguessr — Play TimeGuessr (opens in Telegram's browser)
+/chainlinkmeme · /clmeme — Chainlink memes
+/timeguessr — Play TimeGuessr
 
 ━━ NAVIGATION ━━
 
