@@ -1321,6 +1321,18 @@
     ],
     "logo_local": "logos\\superform.svg"
   },
+    {
+    "name": "T-RIZE",
+    "slug": "t-rize",
+    "logo_cdn": "",
+    "description": "",
+    "external_url": "",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\trizelogo.png"
+  },
   {
     "name": "Taurus",
     "slug": "taurus",
