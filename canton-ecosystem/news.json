@@ -1,7 +1,70 @@
 {
-  "updated_at": "2026-09-03T11:14:45+00:00",
-  "count": 264,
+  "updated_at": "2026-09-04T06:32:17+00:00",
+  "count": 273,
   "articles": [
+    {
+      "title": "Rocky Wallet Plans Support for Hecto Assets on Canton",
+      "category": "ECOSYSTEM",
+      "description": "Rocky plans to support Hecto ecosystem assets in Rocky Wallet and make the wallet available as a connection inside Hecto products. Technical details and release timing are still to come.",
+      "url": "https://cantonnews.org/rocky-wallet-plans-support-for-hecto-assets-on-canton",
+      "published_at": "2026-09-04T06:04:31.291+00:00"
+    },
+    {
+      "title": "Five North Launches Paid Plans for Lighthouse API",
+      "category": "TECHNOLOGY",
+      "description": "Five North has introduced paid Lighthouse API plans alongside its continuing free tier. The new structure offers different levels of access for projects using Canton data.",
+      "url": "https://cantonnews.org/five-north-launches-paid-plans-for-lighthouse-api",
+      "published_at": "2026-09-04T05:47:43.236+00:00"
+    },
+    {
+      "title": "Alpend Completes Major Protocol Upgrade on Canton",
+      "category": "TECHNOLOGY",
+      "description": "Alpend has upgraded its Canton money market with multiparty hosting, distributed protocol controls and a Halborn-audited codebase. The upgrade also raises supply caps and introduces Ascent 2 rewards for migrated positions.",
+      "url": "https://cantonnews.org/alpend-completes-major-protocol-upgrade-on-canton",
+      "published_at": "2026-09-04T05:27:21.017+00:00"
+    },
+    {
+      "title": "eesee Outlines Plans for a Connected Financial Hub on Canton",
+      "category": "TOKENIZATION",
+      "description": "eesee has outlined plans to connect its launchpad with portfolio tracking and vaults on Canton. The company reports 91 launches and more than $10.9 million raised through its existing launchpad.",
+      "url": "https://cantonnews.org/eesee-outlines-plans-for-a-connected-financial-hub-on-canton",
+      "published_at": "2026-09-04T04:31:21.354+00:00"
+    },
+    {
+      "title": "Canton Development Fund Pays 9.37 Million CC Across Eight Milestones",
+      "category": "TECHNOLOGY",
+      "description": "The Canton Development Fund has paid 9,368,809 CC across eight completed milestones covering application rewards, token support, wallet infrastructure, testing, developer tools and governance.",
+      "url": "https://cantonnews.org/canton-development-fund-pays-9-37-million-cc-across-eight-milestones",
+      "published_at": "2026-09-04T03:42:50.463+00:00"
+    },
+    {
+      "title": "Canton Approves 15 Validator Operators as 25 More Enter Review",
+      "category": "TECHNOLOGY",
+      "description": "Fifteen organizations can now begin deploying Canton validator infrastructure, while a new group of 25 applicants enters community review. MainNet access still requires a separate allocation.",
+      "url": "https://cantonnews.org/canton-approves-15-validator-operators-as-25-more-enter-review",
+      "published_at": "2026-09-03T23:47:24.128+00:00"
+    },
+    {
+      "title": "DSRV Brings Canton Into ITCEN Group’s Live Cafe Payment System",
+      "category": "TECHNOLOGY",
+      "description": "South Korean infrastructure provider DSRV has moved ITCEN Group’s Cafe de CEN ordering and payment service onto Canton, connecting it with the group’s ERP for real-time order, payment and settlement processing.",
+      "url": "https://cantonnews.org/dsrv-brings-canton-into-itcen-group-s-live-cafe-payment-system",
+      "published_at": "2026-09-03T23:45:30.292+00:00"
+    },
+    {
+      "title": "Canton Loop Opens TestNet Trial for New Transaction Fee Model",
+      "category": "TECHNOLOGY",
+      "description": "Canton Loop has opened limited TestNet access to a new fee model that shows users the network cost before they approve a transaction.",
+      "url": "https://cantonnews.org/canton-loop-opens-testnet-trial-for-new-transaction-fee-model",
+      "published_at": "2026-09-03T23:44:54.877+00:00"
+    },
+    {
+      "title": "Temple Digital Group and HIFI Partner to Enable Direct Bank-to-Canton Funding and Settlement",
+      "category": "ECOSYSTEM",
+      "description": "Temple Digital Group and HIFI have partnered to enable direct bank-to-Canton funding and withdrawal, allowing Temple users to deposit US dollars, trade on Canton, and withdraw back to their bank account 24/7 through HIFI's stablecoin conversion infrastructure.",
+      "url": "https://cantonnews.org/temple-digital-group-and-hifi-partner-to-enable-direct-bank-to-canton-funding-and-settlement",
+      "published_at": "2026-09-03T16:48:32.385+00:00"
+    },
     {
       "title": "HashKey Joins DTCC Tokenization Working Group as First Asian Digital Asset Provider",
       "category": "INSTITUTIONS",
