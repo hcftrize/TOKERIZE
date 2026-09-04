@@ -356,6 +356,20 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         _set_page(reply_chat_id, "cantonlist", p, args)
         await _cmd_cantonlist(reply_chat_id, p, thread_id=reply_thread_id)
 
+    elif cmd_lower == "arc":
+        # /arc merges search (like /canton) and browse+paginate (like
+        # /cantonlist) into ONE command: args → entity lookup, no args →
+        # paginated list of the whole Arc ecosystem.
+        from commands.ecosystem import cmd_arc
+        if args:
+            await send_message(reply_chat_id, await cmd_arc(args), thread_id=reply_thread_id)
+        else:
+            page = _get_page(reply_chat_id)
+            p = page["page"] if page and page["cmd"] == "arc" else 0
+            _set_page(reply_chat_id, "arc", p, [])
+            bot_mid = await send_message(reply_chat_id, await cmd_arc([], page=p), thread_id=reply_thread_id)
+            if bot_mid: _cache_bot_msg(bot_mid, "arc", p, [], reply_chat_id, reply_thread_id)
+
     elif cmd_lower.startswith("ecosystem"):
         from commands.ecosystem import cmd_ecosystem
         parts = cmd_lower[len("ecosystem"):].strip().split() + args
@@ -621,6 +635,11 @@ Put any coin first to change the base asset.
 /cantonnews · /cnews — Latest Canton news
 /cantonnews t-rize — Search Canton news by keyword
 
+━━ ARC ECOSYSTEM ━━
+
+/arc — Browse all Arc entities · reply next for more
+/arc t-rize · /arc blackrock — Search any Arc entity
+
 ━━ CANTON GOVERNANCE ━━
 
 /cip — Latest CIPs · reply next for more
@@ -752,6 +771,7 @@ async def register_commands() -> None:
     {"command": "vision60",     "description": "Vision 60 by Ste-Rose deal"},
     {"command": "kairos",       "description": "Kairos Digital Loan Notes"},
     {"command": "cantonnews",   "description": "Latest Canton news · reply next for more"},
+    {"command": "arc",          "description": "Arc ecosystem — /arc to browse, /arc name to search"},
     {"command": "cip",          "description": "Latest CIPs · reply next for more — /cip 0116 for specific CIP"},
     {"command": "cantongov",    "description": "Active Canton governance proposals"},
     {"command": "sayhello",     "description": "GM"},
@@ -827,6 +847,8 @@ def parse_update(body: dict):
                 return "cmd", (chat_id, "ecosystem", parts, msg_id, thread_id, reply_to_msg_id)
             if active_cmd == "cantonboard":
                 return "cmd", (chat_id, "cantonboard", parts, msg_id, thread_id, reply_to_msg_id)
+            if active_cmd == "arc":
+                return "cmd", (chat_id, "arc", parts, msg_id, thread_id, reply_to_msg_id)
             if active_cmd.startswith("cclock_"):
                 # Reply text = search query within current cclock mode
                 mode = cached.get("args", ["all"])[0] if cached.get("args") else "all"
