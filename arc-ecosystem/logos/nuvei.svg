@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clippath-2);
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath-6);
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+
+      .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-width: 0px;
+      }
+
+      .cls-7 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-8 {
+        clip-path: url(#clippath-4);
+      }
+
+      .cls-4 {
+        fill: #081f2c;
+      }
+
+      .cls-9 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-10 {
+        clip-path: url(#clippath-3);
+      }
+
+      .cls-5 {
+        fill: #e40946;
+      }
+
+      .cls-6 {
+        fill: #fff;
+      }
+
+      .cls-11 {
+        clip-path: url(#clippath-5);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-3" x="31.5" y="70.5" width="136.9" height="45.6"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="cls-3" x="31.5" y="70.5" width="136.9" height="45.6"/>
+    </clipPath>
+    <clipPath id="clippath-2">
+      <rect class="cls-3" x="31.5" y="70.5" width="136.9" height="45.6"/>
+    </clipPath>
+    <clipPath id="clippath-3">
+      <rect class="cls-3" x="31.5" y="70.5" width="136.9" height="45.6"/>
+    </clipPath>
+    <clipPath id="clippath-4">
+      <rect class="cls-3" x="31.5" y="70.5" width="136.9" height="45.6"/>
+    </clipPath>
+    <clipPath id="clippath-5">
+      <rect class="cls-3" x="31.5" y="70.5" width="136.9" height="45.6"/>
+    </clipPath>
+    <clipPath id="clippath-6">
+      <rect class="cls-3" x="31.5" y="70.5" width="136.9" height="45.6"/>
+    </clipPath>
+  </defs>
+  <rect class="cls-6" y="0" width="200" height="200"/>
+  <g id="Vector_Smart_Object" data-name="Vector Smart Object">
+    <g class="cls-9">
+      <g>
+        <g class="cls-7">
+          <path class="cls-4" d="M51.9,97.9c0-3.7-1.9-5-4.9-5s-4.7,1.6-5.9,2.9v19.4h-9.6v-30h9.6v2.6l-1.2,2.2c1.8-2.1,6.5-5.6,11.6-5.6s10,4,10,9.5v21.3h-9.6v-17.3Z"/>
+        </g>
+        <g class="cls-1">
+          <path class="cls-4" d="M84.8,110.9c-1.9,2.1-6.3,5.2-11.4,5.2s-9.9-3.9-9.9-9.4v-21.5h9.6v17.5c0,3.6,1.9,4.9,5,4.9s4.6-1.5,5.7-2.9v-19.5h9.6v30.1h-9.6v-2.2l1-2.2Z"/>
+        </g>
+        <g class="cls-10">
+          <path class="cls-4" d="M140.9,84.5c8.9,0,15.4,6.5,15.4,16.8v2.1h-20.7l-.8-1.1c0,.4.1.9.2,1.3.7,2.7,3.3,5.1,7.6,5.1s5.7-1.1,7.4-2.6l4,6c-3,2.7-8,4-12.6,4-9.3,0-16.4-6-16.4-15.8-.2-8.8,6.4-15.8,15.9-15.8M134.7,97.1h12.4c-.2-2.1-1.8-5.2-6.2-5.2s-5.8,3-6.2,5.2"/>
+        </g>
+        <g class="cls-8">
+          <rect class="cls-4" x="158.2" y="85.2" width="9.6" height="30.1"/>
+        </g>
+        <g class="cls-11">
+          <polygon class="cls-4" points="117.1 85.2 110.7 103.2 110.9 105.9 103.5 85.2 95.3 85.2 95.3 90.1 105.2 115.3 115.5 115.3 127.3 85.2 117.1 85.2"/>
+        </g>
+        <g class="cls-2">
+          <path class="cls-5" d="M157.5,75.9c0-3.1,2.4-5.5,5.5-5.5s5.5,2.4,5.5,5.5-2.4,5.5-5.5,5.5-5.5-2.4-5.5-5.5"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
