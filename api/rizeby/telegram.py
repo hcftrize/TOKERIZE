@@ -276,6 +276,10 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         from commands.price import cmd_tvl
         await send_message(reply_chat_id, await cmd_tvl(args), thread_id=reply_thread_id)
 
+    elif cmd_lower == "volume":
+        from commands.market import cmd_volume
+        await send_message(reply_chat_id, await cmd_volume(args), thread_id=reply_thread_id)
+
     elif cmd_lower in ("perf", "performance"):
         from commands.market import cmd_perf
         await send_message(reply_chat_id, await cmd_perf(args), thread_id=reply_thread_id)
@@ -565,6 +569,7 @@ HELP_TEXT = """
 /chart 1h · /chart 4h · /chart 1w — any timeframe
 /chart cc · /chart eth 4h — any coin, any timeframe
 /tvl — TVL, MCap/TVL, FDV/TVL
+/volume — Daily/avg/cumulative volume, perf & ATH days
 /market — Assets dominance, Fear&Greed, AltSzn
 
 ━━ ANALYSIS ━━
@@ -613,14 +618,14 @@ Put any coin first to change the base asset.
 /cantonboard name — Member background
 /rwa — T-RIZE RWA deals overview
 /vision87 · /vision60 · /kairos — Deal details
+/cantonnews · /cnews — Latest Canton news · reply next for more
+/cantonnews t-rize — Search Canton news by keyword
 
 ━━ CANTON GOVERNANCE ━━
 
 /cip — Latest CIPs · reply next for more
 /cip 0116 — Specific CIP deep-dive
 /cantongov — Active governance proposals
-/cantonnews — Latest Canton news · reply next for more (alias: /cnews)
-/cantonnews t-rize — Search Canton news by keyword
 
 ━━ FUN ━━
 
@@ -720,6 +725,7 @@ async def register_commands() -> None:
     {"command": "p",            "description": "RIZE price, MCap, ATH, Vol, TVL — /p cc /p eth /p ondo for any coin"},
     {"command": "chart",        "description": "RIZE/USD daily chart — /chart 1h /chart 4h /chart 1w any timeframe"},
     {"command": "tvl",          "description": "TVL, MCap/TVL, FDV/TVL"},
+    {"command": "volume",       "description": "RIZE volume — daily, cumulative, perf & ATH days"},
     {"command": "market",       "description": "Assets dominance, Fear & Greed, AltSzn"},
     {"command": "perf",         "description": "Performance 7D / 30D / 90D — put any token first to change base"},
     {"command": "pricesim",     "description": "Price sim vs other mcaps — /pricesim (tickers)"},
@@ -745,9 +751,9 @@ async def register_commands() -> None:
     {"command": "vision87",     "description": "Vision 87 by Champfleury deal"},
     {"command": "vision60",     "description": "Vision 60 by Ste-Rose deal"},
     {"command": "kairos",       "description": "Kairos Digital Loan Notes"},
+    {"command": "cantonnews",   "description": "Latest Canton news · reply next for more"},
     {"command": "cip",          "description": "Latest CIPs · reply next for more — /cip 0116 for specific CIP"},
     {"command": "cantongov",    "description": "Active Canton governance proposals"},
-    {"command": "cantonnews",   "description": "Latest Canton news · reply next for more"},
     {"command": "sayhello",     "description": "GM"},
     {"command": "insult",       "description": "Get roasted"},
     {"command": "chainlinkmeme","description": "Random Chainlink meme/gif/video from the vault"},

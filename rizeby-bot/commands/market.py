@@ -1,5 +1,5 @@
 """
-Commands: /perf, /pricesim, /portfoliosim, /arbitrage, /market
+Commands: /perf, /pricesim, /portfoliosim, /arbitrage, /market, /volume
 Mobile-friendly text format. Cache TTL 5min.
 """
 import httpx
@@ -457,5 +457,104 @@ async def cmd_market(args: list) -> str:
             score = int(last.get("value", 0) if isinstance(last, dict) else last)
             season = "Altcoin Season 🟢" if score >= 75 else "Neutral ⚪" if score >= 50 else "Bitcoin Season 🟠"
             lines += [f"BTC/Alt Season: {season}", f"ALTSZN Score: {score}/100"]
+
+    return "\n".join(lines)
+
+
+async def cmd_volume(args: list) -> str:
+    """
+    RIZE volume: live 24h (CoinGecko) + historical series from
+    rize-data-hub/volume-history.json (same file + KPIs as the site's
+    "RIZE Volume" panel — see rzRenderVolumePanel() in the data hub HTML).
+
+    volume-history.json only ever contains COMPLETE days (today's partial
+    volume is deliberately excluded until 00:15 UTC the next day), so
+    series[-1] is always "yesterday" — matching the website panel exactly.
+    "Daily" is the one live number, fetched fresh from CoinGecko the same
+    way /price and /tvl do; everything else is derived from the JSON.
+    """
+    import asyncio
+    from datetime import datetime
+    from utils.github_data import get_volume_history
+
+    history, detail = await asyncio.gather(
+        get_volume_history(),
+        _cached(f"detail_{RIZE_ID}", get_coin_detail(RIZE_ID)),
+    )
+
+    series = (history or {}).get("series", []) if isinstance(history, dict) else []
+    if not series:
+        return "Could not load RIZE volume data."
+
+    volumes = [p.get("volume", 0) or 0 for p in series]
+    dates   = [p.get("date", "")  for p in series]
+    yesterday_vol = volumes[-1]
+
+    live_vol = None
+    if detail:
+        live_vol = detail.get("market_data", {}).get("total_volume", {}).get("usd")
+    if not live_vol:
+        live_vol = yesterday_vol  # fallback if the live CoinGecko call fails
+
+    def avg_last(n):
+        s = volumes[-n:]
+        return sum(s) / len(s) if s else None
+
+    def sum_last(n):
+        return sum(volumes[-n:]) if len(volumes) >= n else None
+
+    def period_pct(n):
+        """% change of the sum of the last n complete days vs the n days before that."""
+        if len(volumes) < 2 * n:
+            return None
+        recent = sum(volumes[-n:])
+        prior  = sum(volumes[-2*n:-n])
+        return ((recent - prior) / prior) * 100 if prior else None
+
+    pct_1d = ((live_vol - yesterday_vol) / yesterday_vol) * 100 if yesterday_vol else None
+
+    def arrow(v):
+        if v is None: return "—"
+        return f"{'📈' if v > 0 else '📉'} {fmt_pct(v)}"
+
+    def money(v):
+        return fmt_usd(v) if v is not None else "—"
+
+    def fmt_ath_date(d):
+        try:
+            dt = datetime.strptime(d, "%Y-%m-%d")
+            return f"{dt.strftime('%b')} {dt.day}, {dt.year}"
+        except Exception:
+            return d
+
+    ath_days = sorted(zip(dates, volumes), key=lambda x: x[1], reverse=True)[:5]
+
+    lines = [
+        "🔊 *RIZE Volume*",
+        "",
+        "*RIZE Volume Data*",
+        f"Daily: {money(live_vol)}",
+        f"Yesterday: {money(yesterday_vol)}",
+        f"7D Daily Avg: {money(avg_last(7))}",
+        f"1M Daily Avg: {money(avg_last(30))}",
+        f"3M Daily Avg: {money(avg_last(90))}",
+        "",
+        "*Cumulative RIZE Volume*",
+        f"7D: {money(sum_last(7))}",
+        f"30D: {money(sum_last(30))}",
+        f"90D: {money(sum_last(90))}",
+        f"1Y: {money(sum_last(365))}",
+        f"All-Time: {money(sum(volumes))}",
+        "",
+        "*RIZE Volume Perf*",
+        f"1D: {arrow(pct_1d)}",
+        f"7D: {arrow(period_pct(7))}",
+        f"30D: {arrow(period_pct(30))}",
+        f"90D: {arrow(period_pct(90))}",
+        "",
+        "*Volume ATH Days*",
+    ]
+    for d, v in ath_days:
+        lines.append(f"{fmt_ath_date(d)} : {money(v)}")
 
     return "\n".join(lines)
