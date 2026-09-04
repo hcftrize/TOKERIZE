@@ -500,6 +500,16 @@ async def cmd_volume(args: list) -> str:
         s = volumes[-n:]
         return sum(s) / len(s) if s else None
 
+    def weekly_avg(n):
+        """Average weekly (7d) volume over the last n days — i.e. the daily
+        average for that period expressed as a week's worth. Mathematically
+        this is just avg_last(n) * 7 (any way you slice n days into weeks,
+        the mean weekly total works out the same), so it's not new
+        information vs the daily avg above — just the trader-friendlier
+        "weekly" framing instead of a per-day number."""
+        a = avg_last(n)
+        return a * 7 if a is not None else None
+
     def sum_last(n):
         return sum(volumes[-n:]) if len(volumes) >= n else None
 
@@ -533,25 +543,28 @@ async def cmd_volume(args: list) -> str:
         "🔊 *RIZE Volume*",
         "",
         "*RIZE Volume Data*",
-        f"Daily: {money(live_vol)}",
+        f"Today: {money(live_vol)}",
         f"Yesterday: {money(yesterday_vol)}",
-        f"7D Daily Avg: {money(avg_last(7))}",
+        f"1W Daily Avg: {money(avg_last(7))}",
         f"1M Daily Avg: {money(avg_last(30))}",
         f"3M Daily Avg: {money(avg_last(90))}",
         f"1Y Daily Avg: {money(avg_last(365))}",
         "",
+        f"1M Weekly Avg: {money(weekly_avg(30))}",
+        f"3M Weekly Avg: {money(weekly_avg(90))}",
+        "",
         "*Cumulative RIZE Volume*",
-        f"7D: {money(sum_last(7))}",
-        f"30D: {money(sum_last(30))}",
-        f"90D: {money(sum_last(90))}",
+        f"1W: {money(sum_last(7))}",
+        f"1M: {money(sum_last(30))}",
+        f"3M: {money(sum_last(90))}",
         f"1Y: {money(sum_last(365))}",
         f"All-Time: {money(sum(volumes))}",
         "",
         "*RIZE Volume Perf*",
         f"1D: {arrow(pct_1d)}",
-        f"7D: {arrow(period_pct(7))}",
-        f"30D: {arrow(period_pct(30))}",
-        f"90D: {arrow(period_pct(90))}",
+        f"1W: {arrow(period_pct(7))}",
+        f"1M: {arrow(period_pct(30))}",
+        f"3M: {arrow(period_pct(90))}",
         "",
         "*Volume ATH Days*",
     ]
