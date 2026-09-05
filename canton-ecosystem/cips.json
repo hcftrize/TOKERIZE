@@ -1098,5 +1098,15 @@
     "created": "2026-06-29",
     "approved": "",
     "description": "This proposal changes the calculation of validator rewards to be based on actual traffic usage rather than CC burn for traffic purchases, similar to the changes made for application rewards in CIP-0104. It introduces a reward split between the submitting validator and confirming validators. By reallocating a portion of the validator rewards to confirming validators, this CIP incentivizes the multi-hosting of parties across validators, enhancing network security and decentralization."
+  },
+  {
+    "id": "CIP-0122",
+    "number": 122,
+    "title": "Add TreasurySpring as a Super Validator",
+    "type": "Governance",
+    "status": "Proposed",
+    "created": "2026-06-16",
+    "approved": "",
+    "description": "This CIP proposes that TreasurySpring Management (Jersey) Limited (TreasurySpring) be admitted as a Super Validator applicant with a core maximum earnable SV reward weight of 5, plus an additional accelerated-delivery bonus of up to 0.5. The application uses a milestone-based representative-SV structure, with rewards initially escrowed and unlocked only when the objective on-chain RWA outstanding and utility milestones as set out in this CIP are met.\n\nThe proposal is designed around three steps:\n\n  1. on-chain migration through TreasurySpring-controlled local-party infrastructure;\n\n  2. sustained high-quality on-chain RWA outstanding, measured as Fixed Term Funds (FTFs) represented on Canton; and\n\n  3. wallet-driven utility, including external wallet holdings, wallet-initiated transactions, and collateral use.\n\nTreasurySpring's value proposition is that it can bring billions of dollars of natively issued, high-quality treasury assets on-chain under a legally robust, privacy-preserving register model that is uniquely suited to Canton."
   }
 ]
