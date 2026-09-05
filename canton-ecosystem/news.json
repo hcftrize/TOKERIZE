@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-09-04T06:32:17+00:00",
-  "count": 273,
+  "updated_at": "2026-09-05T06:32:02+00:00",
+  "count": 281,
   "articles": [
+    {
+      "title": "TreasurySpring’s $4 Billion Canton Plan Enters Governance Vote",
+      "category": "INSTITUTIONS",
+      "description": "TreasurySpring’s Super Validator proposal has entered formal Canton voting. It begins with a $10 million Fixed Term Fund target and lays out a proposed path to $4 billion outstanding on Canton within 12 months of approval.",
+      "url": "https://cantonnews.org/treasuryspring-s-4-billion-canton-plan-enters-governance-vote",
+      "published_at": "2026-09-05T04:51:06.843+00:00"
+    },
+    {
+      "title": "Hashrupt Presents Six Verity Products on Canton",
+      "category": "TECHNOLOGY",
+      "description": "Hashrupt has presented six products built around Verity, its shared platform on Canton. They cover lending, treasury, invoicing, project work and fundraising, with additional Settla and Backr features still in development.",
+      "url": "https://cantonnews.org/hashrupt-presents-six-verity-products-on-canton",
+      "published_at": "2026-09-05T04:50:46.621+00:00"
+    },
+    {
+      "title": "FTP Tech Resubmits Featured App Application for Canton x402 Payments",
+      "category": "TECHNOLOGY",
+      "description": "FTP Tech has resubmitted its Featured App application for x402 tools on Canton. The service lets AI agents pay for individual online requests from their own wallets using Canton Coin or USDCx.",
+      "url": "https://cantonnews.org/ftp-tech-resubmits-featured-app-application-for-canton-x402-payments",
+      "published_at": "2026-09-05T04:50:09.331+00:00"
+    },
+    {
+      "title": "Digital Asset CEO Confirms September CIP Draft for Network-Wide CC Burning",
+      "category": "TECHNOLOGY",
+      "description": "Digital Asset CEO Yuval Rooz has confirmed that the Canton Improvement Proposal extending CC burning and validator rewards to every synchronizer on the Canton Network remains on track for submission this month, following earlier remarks from co-founder Shaul Kfir outlining the plan.",
+      "url": "https://cantonnews.org/digital-asset-ceo-confirms-september-cip-draft-for-network-wide-cc-burning",
+      "published_at": "2026-09-04T19:35:57.685+00:00"
+    },
+    {
+      "title": "Digital Asset Releases Canton 3.5.16 With Reliability Improvements",
+      "category": "TECHNOLOGY",
+      "description": "Canton 3.5.16 is now available with reliability fixes, stronger timestamp validation, lower memory use during one internal process and expanded API documentation.",
+      "url": "https://cantonnews.org/digital-asset-releases-canton-3-5-16-with-reliability-improvements",
+      "published_at": "2026-09-04T14:30:19.766+00:00"
+    },
+    {
+      "title": "Fireblocks Maps Out Institutional Collateral Workflows on Canton",
+      "category": "INSTITUTIONS",
+      "description": "Fireblocks has published a practical guide to the Canton tools it supports for institutional collateral workflows, covering custody, wallets, validator options, contract calls, transaction approvals and reporting.",
+      "url": "https://cantonnews.org/fireblocks-maps-out-institutional-collateral-workflows-on-canton",
+      "published_at": "2026-09-04T14:30:03.913+00:00"
+    },
+    {
+      "title": "South Korea Sets Roadmap for Tokenized Stocks, Bonds and Funds",
+      "category": "TOKENIZATION",
+      "description": "South Korea will begin the first phase of its tokenized securities roadmap in February 2027. The plan starts with institutional funds and bonds, unlisted shares and fractional investments, with later phases planned for public securities and onchain settlement.",
+      "url": "https://cantonnews.org/south-korea-sets-roadmap-for-tokenized-stocks-bonds-and-funds",
+      "published_at": "2026-09-04T10:51:19.052+00:00"
+    },
+    {
+      "title": "Tradecraft Reports More Than $3 Million in Canton TVL",
+      "category": "ECOSYSTEM",
+      "description": "Tradecraft reports that the total value locked across its Canton liquidity pools has passed $3 million. The figure measures assets held in the pools that support trading on the platform.",
+      "url": "https://cantonnews.org/tradecraft-reports-more-than-3-million-in-canton-tvl",
+      "published_at": "2026-09-04T10:26:17.592+00:00"
+    },
     {
       "title": "Rocky Wallet Plans Support for Hecto Assets on Canton",
       "category": "ECOSYSTEM",
