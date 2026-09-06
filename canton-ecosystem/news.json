@@ -1,7 +1,21 @@
 {
-  "updated_at": "2026-09-05T06:32:02+00:00",
-  "count": 281,
+  "updated_at": "2026-09-06T06:32:01+00:00",
+  "count": 283,
   "articles": [
+    {
+      "title": "Squid Intents Launches Multi-Chain Swaps for Canton",
+      "category": "TECHNOLOGY",
+      "description": "Squid Intents is now live on Canton, adding routes from supported assets on 30 chains, new liquidity for CC swaps and integration tools for wallets and applications.",
+      "url": "https://cantonnews.org/squid-intents-launches-multi-chain-swaps-for-canton",
+      "published_at": "2026-09-05T15:55:14.799+00:00"
+    },
+    {
+      "title": "Ones Unveils Canton Business Account and Confirms MVP Is Ready",
+      "category": "TECHNOLOGY",
+      "description": "Ones has introduced a financial platform for individuals, businesses and AI agents. Its business account is being built on Canton and is designed to bring payments, cards, payroll, invoicing, treasury and team management into one place.",
+      "url": "https://cantonnews.org/ones-unveils-canton-business-account-and-confirms-mvp-is-ready",
+      "published_at": "2026-09-05T15:55:05.968+00:00"
+    },
     {
       "title": "TreasurySpring’s $4 Billion Canton Plan Enters Governance Vote",
       "category": "INSTITUTIONS",
