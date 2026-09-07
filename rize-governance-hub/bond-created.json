@@ -4,7 +4,7 @@
   "bootstrap": true,
   "counts": {
     "bondCreatedEvents": 10181,
-    "increaseBondEvents": 345,
+    "increaseBondEvents": 348,
     "bonds": 10181
   },
   "data": {
@@ -115106,6 +115106,33 @@
         "blockNumber": "50931288",
         "timestamp": "1788651923",
         "txHash": "0x94253bcd67cc6f037ac88cb61f338e7eb642ec911aaad0974845cbf2846656b2"
+      },
+      {
+        "id": "0xddcba7944ee3afd645b3c75dc78b39bd846a14da199f472a8e1b9d4885fe6582-50955393",
+        "nftId": "10166",
+        "amount": "7944.0708",
+        "date": "2026-09-06",
+        "blockNumber": "50955393",
+        "timestamp": "1788700133",
+        "txHash": "0xddcba7944ee3afd645b3c75dc78b39bd846a14da199f472a8e1b9d4885fe6582"
+      },
+      {
+        "id": "0x1d70c45fea767b356df8d891614344db43f4544b8add08919fd3777f0d60ec40-50957917",
+        "nftId": "10166",
+        "amount": "7984.3391",
+        "date": "2026-09-06",
+        "blockNumber": "50957917",
+        "timestamp": "1788705181",
+        "txHash": "0x1d70c45fea767b356df8d891614344db43f4544b8add08919fd3777f0d60ec40"
+      },
+      {
+        "id": "0x90d666e91aa4d599daa1ecdd72e02509883b7b1245ae60f482b069e1c173fa8a-50959301",
+        "nftId": "10166",
+        "amount": "5328.7081",
+        "date": "2026-09-06",
+        "blockNumber": "50959301",
+        "timestamp": "1788707949",
+        "txHash": "0x90d666e91aa4d599daa1ecdd72e02509883b7b1245ae60f482b069e1c173fa8a"
       }
     ],
     "bonds": [
@@ -247262,10 +247289,10 @@
         "createdAtDate": "2026-07-22",
         "createdAtTimestamp": "1784751133",
         "createdAtBlock": "48980893",
-        "totalDeposited": "22075.2771",
-        "increaseCount": 1,
-        "lastDepositDate": "2026-08-10",
-        "lastDepositTimestamp": "1786371971"
+        "totalDeposited": "43332.3951",
+        "increaseCount": 4,
+        "lastDepositDate": "2026-09-06",
+        "lastDepositTimestamp": "1788707949"
       },
       {
         "id": "10167",
@@ -247464,5 +247491,5 @@
       }
     ]
   },
-  "updated_at": "2026-09-06T05:31:47.261664+00:00"
+  "updated_at": "2026-09-07T05:31:42.964061+00:00"
 }
