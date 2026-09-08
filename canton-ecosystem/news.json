@@ -1,7 +1,14 @@
 {
-  "updated_at": "2026-09-07T06:32:09+00:00",
-  "count": 283,
+  "updated_at": "2026-09-08T06:32:04+00:00",
+  "count": 284,
   "articles": [
+    {
+      "title": "HANDL Plans to Route All Transactions Through Canton",
+      "category": "TECHNOLOGY",
+      "description": "HANDL plans to route all transactions through Canton for privacy as it prepares to begin the countdown to its 2.0 update.",
+      "url": "https://cantonnews.org/handl-plans-to-route-all-transactions-through-canton",
+      "published_at": "2026-09-07T16:23:04.255+00:00"
+    },
     {
       "title": "Squid Intents Launches Multi-Chain Swaps for Canton",
       "category": "TECHNOLOGY",
