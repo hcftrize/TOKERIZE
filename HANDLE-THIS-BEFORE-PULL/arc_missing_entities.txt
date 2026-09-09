@@ -1,5 +1,5 @@
 Arc Ecosystem — Entities not found on arc.io/ecosystem
-Checked: 2026-09-08
+Checked: 2026-09-09
 Count: 1
 
 These entities exist in arcentities.json but were NOT found during scrape.
