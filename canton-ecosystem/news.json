@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-08T06:32:04+00:00",
-  "count": 284,
+  "updated_at": "2026-09-09T06:32:14+00:00",
+  "count": 288,
   "articles": [
+    {
+      "title": "HackCanton Season 3 Sets September 17 Start and October 21 Final",
+      "category": "ECOSYSTEM",
+      "description": "HackCanton Season 3 opens September 17, with submissions due October 9 and the Grand Final on October 21. Registration is open to solo builders and teams.",
+      "url": "https://cantonnews.org/hackcanton-season-3-sets-september-17-start-and-october-21-final",
+      "published_at": "2026-09-09T03:32:10.17+00:00"
+    },
+    {
+      "title": "CanTrustAI Adds Three Payment Options for AI Access on Canton",
+      "category": "TECHNOLOGY",
+      "description": "CanTrustAI now accepts USDCx, cETH and USDxlr for individual AI requests, expanding the payment options for its existing Canton-based service.",
+      "url": "https://cantonnews.org/cantrustai-adds-three-payment-options-for-ai-access-on-canton",
+      "published_at": "2026-09-09T03:26:00.114+00:00"
+    },
+    {
+      "title": "Ekiden Goes Live on Canton Mainnet as First CLOB-Based Derivatives Exchange",
+      "category": "ECOSYSTEM",
+      "description": "Ekiden has launched its mainnet on Canton Network, becoming the first order book-based derivatives exchange on the network, with controlled access beginning with the top 100 traders from its testnet leaderboard.",
+      "url": "https://cantonnews.org/ekiden-goes-live-on-canton-mainnet-as-first-clob-based-derivatives-exchange",
+      "published_at": "2026-09-08T13:57:00.848+00:00"
+    },
+    {
+      "title": "Hanwha Positions Across Three Blockchain Layers as Korea Sets 2027 Tokenized Securities Roadmap",
+      "category": "INSTITUTIONS",
+      "description": "Hanwha Investment and Securities has completed a tokenized securities platform on Avalanche, completing a three-layer infrastructure position spanning issuance through Securitize, institutional settlement through Canton Network and Digital Asset, and secondary market liquidity through Avalanche, as Korea's FSC sets its 2027 tokenized securities roadmap.",
+      "url": "https://cantonnews.org/hanwha-positions-across-three-blockchain-layers-as-korea-sets-2027-tokenized-securities-roadmap",
+      "published_at": "2026-09-08T12:39:29.767+00:00"
+    },
     {
       "title": "HANDL Plans to Route All Transactions Through Canton",
       "category": "TECHNOLOGY",
