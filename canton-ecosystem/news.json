@@ -1,7 +1,84 @@
 {
-  "updated_at": "2026-09-09T06:32:14+00:00",
-  "count": 288,
+  "updated_at": "2026-09-10T06:33:07+00:00",
+  "count": 299,
   "articles": [
+    {
+      "title": "Canborsa opens Trading Arena with rewards of up to 16,000 USDC",
+      "category": "ECOSYSTEM",
+      "description": "Canborsa’s month-long perpetuals competition rewards the top 40 traders. Its prize pool starts at 300 USDC and grows to 16,000 USDC if total campaign volume reaches $40 million.",
+      "url": "https://cantonnews.org/canborsa-opens-trading-arena-with-rewards-of-up-to-16-000-usdc",
+      "published_at": "2026-09-10T06:24:31.428+00:00"
+    },
+    {
+      "title": "Cantex opens trading in four Trakx crypto indices",
+      "category": "ECOSYSTEM",
+      "description": "Cantex has added Trakx indices covering AI, DeFi, smart-contract blockchains and RWA-related tokens, giving traders access to four themed crypto baskets on Canton.",
+      "url": "https://cantonnews.org/cantex-opens-trading-in-four-trakx-crypto-indices",
+      "published_at": "2026-09-10T06:24:16.02+00:00"
+    },
+    {
+      "title": "Canton approves 25 new validator operators",
+      "category": "TECHNOLOGY",
+      "description": "Canton has approved 25 validator applicants, including BLOSAFE, BTCS S.A. and InfraDAO. The operators can proceed with onboarding, with MainNet access requiring a separate allocation.",
+      "url": "https://cantonnews.org/canton-approves-25-new-validator-operators",
+      "published_at": "2026-09-10T06:23:59.293+00:00"
+    },
+    {
+      "title": "Circle’s USYC clears committee review for Canton Featured App status",
+      "category": "INSTITUTIONS",
+      "description": "Circle’s USYC has cleared Canton’s Tokenomics review. A Super Validator vote is the next step toward Featured App status.",
+      "url": "https://cantonnews.org/circle-s-usyc-clears-committee-review-for-canton-featured-app-status",
+      "published_at": "2026-09-10T04:17:47.851+00:00"
+    },
+    {
+      "title": "DSRV adds Canton Coin custody for institutional clients",
+      "category": "INSTITUTIONS",
+      "description": "DSRV has added Canton Coin to its digital-asset custody service, expanding its support for institutions and businesses using Canton.",
+      "url": "https://cantonnews.org/dsrv-adds-canton-coin-custody-for-institutional-clients",
+      "published_at": "2026-09-10T04:17:24.406+00:00"
+    },
+    {
+      "title": "Cashen’s Canton Marketplace Grows to 65+ Platforms",
+      "category": "ECOSYSTEM",
+      "description": "Cashen’s latest figures show 65+ platforms onboarded and 330M+ CC in active locks across its marketplace for Featured Apps, Super Validators and institutional coin suppliers.",
+      "url": "https://cantonnews.org/cashen-s-canton-marketplace-grows-to-65-platforms",
+      "published_at": "2026-09-10T04:16:54.524+00:00"
+    },
+    {
+      "title": "Canton Network Receives 22 New Validator Applications Spanning Finance, Infrastructure, and Real-World Use Cases",
+      "category": "ECOSYSTEM",
+      "description": "Twenty-two organisations have submitted Canton Network validator applications ahead of a September 16 deadline, including enterprise tooling firms, cross-chain RWA infrastructure providers, and a broad cohort of Indonesian applicants building specific use case templates on Canton's privacy architecture.",
+      "url": "https://cantonnews.org/canton-network-receives-22-new-validator-applications-spanning-finance-infrastructure-and-real-world-use-cases",
+      "published_at": "2026-09-09T16:13:48.119+00:00"
+    },
+    {
+      "title": "LSEG Super Validator Proposal Opens for Discussion on Canton",
+      "category": "INSTITUTIONS",
+      "description": "A new proposal would bring London Stock Exchange Group into Canton’s Super Validator program, with milestone-based rewards and commitments reviewed by the network’s governance committees.",
+      "url": "https://cantonnews.org/lseg-super-validator-proposal-opens-for-discussion-on-canton",
+      "published_at": "2026-09-09T15:02:44.395+00:00"
+    },
+    {
+      "title": "CC Leads Canborsa’s Latest Weekly Trading Update",
+      "category": "ECOSYSTEM",
+      "description": "Canton Coin was Canborsa’s most-traded asset in its September 7 weekly update, which included $1,187,222 in trading volume and 1,310 trades.",
+      "url": "https://cantonnews.org/cc-leads-canborsa-s-latest-weekly-trading-update",
+      "published_at": "2026-09-09T14:58:14.389+00:00"
+    },
+    {
+      "title": "Temple Opens Bitcoin and Gold Trading Pair on Canton",
+      "category": "TOKENIZATION",
+      "description": "Temple has opened a Bitcoin and gold market on Canton, pairing BitSafe’s CBTC with Ember Protocol’s eXAU. The pair joins existing USDCx markets for both assets.",
+      "url": "https://cantonnews.org/temple-opens-bitcoin-and-gold-trading-pair-on-canton",
+      "published_at": "2026-09-09T14:54:30.915+00:00"
+    },
+    {
+      "title": "Swap Monster Adds cETH Trading on Canton",
+      "category": "ECOSYSTEM",
+      "description": "Swap Monster has added onRails’ cETH, bringing another trading option for ETH on Canton. Participants request private quotes, with payment and the asset settling together.",
+      "url": "https://cantonnews.org/swap-monster-adds-ceth-trading-on-canton",
+      "published_at": "2026-09-09T14:50:30.845+00:00"
+    },
     {
       "title": "HackCanton Season 3 Sets September 17 Start and October 21 Final",
       "category": "ECOSYSTEM",
