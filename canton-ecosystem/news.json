@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-10T06:33:07+00:00",
-  "count": 299,
+  "updated_at": "2026-09-11T06:32:20+00:00",
+  "count": 303,
   "articles": [
+    {
+      "title": "Zenith holds Tier 1 Super Validator status on Canton",
+      "category": "TECHNOLOGY",
+      "description": "Zenith combines its Tier 1 Super Validator role with work to bring Ethereum applications to Canton. Its participation spans network operations, governance committees and a development program with rewards tied to verified milestones.",
+      "url": "https://cantonnews.org/zenith-holds-tier-1-super-validator-status-on-canton",
+      "published_at": "2026-09-10T13:28:24.041+00:00"
+    },
+    {
+      "title": "Lattice adds cETH to its Canton finance tools",
+      "category": "TECHNOLOGY",
+      "description": "Lattice now supports cETH, allowing finance teams to track balances, approve activity and reconcile wrapped ETH alongside their other Canton assets.",
+      "url": "https://cantonnews.org/lattice-adds-ceth-to-its-canton-finance-tools",
+      "published_at": "2026-09-10T13:16:20.646+00:00"
+    },
+    {
+      "title": "TreasurySpring’s Canton plan wins approval with a $5 billion target",
+      "category": "INSTITUTIONS",
+      "description": "TreasurySpring’s approved proposal sets a 12-month target of $5 billion in outstanding fund shares recorded on Canton, with Super Validator rewards tied to delivery and ongoing activity.",
+      "url": "https://cantonnews.org/treasuryspring-s-canton-plan-wins-approval-with-a-5-billion-target",
+      "published_at": "2026-09-10T06:40:28.822+00:00"
+    },
+    {
+      "title": "Broadridge launches DLX for tokenized markets with Canton support",
+      "category": "INSTITUTIONS",
+      "description": "Broadridge has launched DLX, bringing tokenized asset services into one platform with capabilities to connect to DTCC’s Tokenization Service through Canton and other networks.",
+      "url": "https://cantonnews.org/broadridge-launches-dlx-for-tokenized-markets-with-canton-support",
+      "published_at": "2026-09-10T06:40:12.173+00:00"
+    },
     {
       "title": "Canborsa opens Trading Arena with rewards of up to 16,000 USDC",
       "category": "ECOSYSTEM",
