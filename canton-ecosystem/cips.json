@@ -1104,9 +1104,9 @@
     "number": 121,
     "title": "Shinhan Asset Management Super Validator Weight 10",
     "type": "Governance",
-    "status": "Proposed",
+    "status": "Approved",
     "created": "2026-08-14",
-    "approved": "",
+    "approved": "2026-09-11",
     "description": "This CIP proposes granting Shinhan Asset Management, an affiliate of Shinhan Financial Group, participation as a Super Validator (SV) with a maximum Weight of 10.\n\nGiven Shinhan Asset Management's position within Shinhan Financial Group and the Group's strategic importance to the Korean financial system, Shinhan Asset Management's participation is expected to advance institutional adoption of the Canton Network in Korea, support the development of regulated capital-markets use cases, and contribute meaningfully to network governance and growth.\n\nThis CIP establishes an umbrella, milestone-based program through which Shinhan Asset Management can earn SV Weight of up to 10 by delivering initiatives that materially advance the Canton ecosystem. These initiatives are expected to involve relevant Shinhan Financial Group affiliates, including Shinhan Bank, Shinhan Securities, and Shinhan Fund Partners.\n\nThis program contains confidential commitments to the ecosystem. Those commitments and milestones have been agreed with the Tokenomics and Accountability Committees and will be made available to the public when appropriate.\n\n- **Total Earnable Weight:** 10 (maximum)\n- **Accrual Destination:** Escrow, consistent with existing SV escrow mechanics\n- **Confidentiality:** The Accountability Committee will review the milestones and inform the Super Validators when they have been met"
   },
   {
