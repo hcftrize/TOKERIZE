@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-09-11T06:32:20+00:00",
-  "count": 303,
+  "updated_at": "2026-09-12T06:32:13+00:00",
+  "count": 311,
   "articles": [
+    {
+      "title": "Goldman Sachs Proposed as Super Validator on Canton Network in New Governance Proposal",
+      "category": "INSTITUTIONS",
+      "description": "A governance proposal has been submitted to designate Goldman Sachs as a Canton Network Super Validator with a maximum weight of 10, under a confidential milestone-based programme agreed with the Canton Foundation.",
+      "url": "https://cantonnews.org/goldman-sachs-proposed-as-super-validator-on-canton-network-in-new-governance-proposal",
+      "published_at": "2026-09-11T16:58:12.24+00:00"
+    },
+    {
+      "title": "Twelve organisations receive Canton MainNet validator allocations",
+      "category": "ECOSYSTEM",
+      "description": "Utila, BitSafe and Sats Terminal are among 12 organisations named in a new Canton MainNet allocation notice, with one validator node allocated to each.",
+      "url": "https://cantonnews.org/twelve-organisations-receive-canton-mainnet-validator-allocations",
+      "published_at": "2026-09-11T09:37:17.877+00:00"
+    },
+    {
+      "title": "Canton 3.5.17 brings fixes for network operators",
+      "category": "TECHNOLOGY",
+      "description": "Canton’s latest maintenance release addresses memory-related crashes and connection problems, with additional improvements to processing and configuration.",
+      "url": "https://cantonnews.org/canton-3-5-17-brings-fixes-for-network-operators",
+      "published_at": "2026-09-11T09:36:55.602+00:00"
+    },
+    {
+      "title": "Canborsa adds dynamic funding and payment history",
+      "category": "ECOSYSTEM",
+      "description": "Canborsa has introduced funding rates that respond to market conditions, alongside a history showing traders the funding payments they have made and received.",
+      "url": "https://cantonnews.org/canborsa-adds-dynamic-funding-and-payment-history",
+      "published_at": "2026-09-11T09:36:06.035+00:00"
+    },
+    {
+      "title": "Edel integrates Alpaca’s brokerage and equity-data infrastructure",
+      "category": "TECHNOLOGY",
+      "description": "Edel has added Alpaca Markets’ brokerage and equity-data infrastructure as it develops products connecting traditional finance with onchain markets.",
+      "url": "https://cantonnews.org/edel-integrates-alpaca-s-brokerage-and-equity-data-infrastructure",
+      "published_at": "2026-09-11T09:35:47.79+00:00"
+    },
+    {
+      "title": "Canton Wallet SDK 1.5.0 improves token-lock handling",
+      "category": "TECHNOLOGY",
+      "description": "Canton’s wallet developer toolkit has been updated with better handling of expiring token locks, a public-registry access fix and a new trade example.",
+      "url": "https://cantonnews.org/canton-wallet-sdk-1-5-0-improves-token-lock-handling",
+      "published_at": "2026-09-11T09:34:45.641+00:00"
+    },
+    {
+      "title": "The Tie examines where privacy belongs in Canton’s financial markets",
+      "category": "TECHNOLOGY",
+      "description": "The Tie’s final Canton report explores how financial transactions can remain private while giving authorised participants access to the records they need.",
+      "url": "https://cantonnews.org/the-tie-examines-where-privacy-belongs-in-canton-s-financial-markets",
+      "published_at": "2026-09-11T09:34:07.494+00:00"
+    },
+    {
+      "title": "Tenkai’s Canton swaps gain recognition under network reward rules",
+      "category": "TECHNOLOGY",
+      "description": "Canton’s Tokenomics Committee has approved delivery-versus-payment treatment for qualifying Tenkai swaps, building on the platform’s existing Featured App status.",
+      "url": "https://cantonnews.org/tenkai-s-canton-swaps-gain-recognition-under-network-reward-rules",
+      "published_at": "2026-09-11T09:33:09.082+00:00"
+    },
     {
       "title": "Zenith holds Tier 1 Super Validator status on Canton",
       "category": "TECHNOLOGY",
