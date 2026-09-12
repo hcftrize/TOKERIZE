@@ -147,6 +147,18 @@
     "logo_local": "logos\\bdacs-krw1-2.png"
   },
   {
+    "name": "Binance Wallet",
+    "slug": "binance-wallet",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6aa35649e889367018fa9870_6aa35648d2d2a1e8d32598d6_binance-wallet-logo.png",
+    "description": "",
+    "external_url": "https://web3.binance.com/en-ZA/about?chain=bsc",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\binance-wallet.png"
+  },
+  {
     "name": "BitGo",
     "slug": "bitgo",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fff9093fe36d2f5f6dfa1d_BitGo_Logo.png",
@@ -438,6 +450,18 @@
       "CEXs"
     ],
     "logo_local": "logos\\coincheck.svg"
+  },
+  {
+    "name": "CoinGecko",
+    "slug": "coingecko",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6aa35d5189d5294d8a9db5c3_6aa35d50fa954cb2558fcdf5_coingecko-logo.png",
+    "description": "",
+    "external_url": "https://www.coingecko.com/",
+    "tags": [
+      "Infrastructure",
+      "Analytics"
+    ],
+    "logo_local": "logos\\coingecko.png"
   },
   {
     "name": "Commerzbank",
@@ -771,6 +795,22 @@
     "logo_local": "logos\\goldman-sachs.svg"
   },
   {
+    "name": "Goldsky",
+    "slug": "goldsky",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6aa35d2f01438cf0b62985b3_goldsky-logo-circular-large.png",
+    "description": "",
+    "external_url": "https://goldsky.com/",
+    "tags": [
+      "Infrastructure",
+      "Analytics",
+      "RPC Providers",
+      "Developer Tools",
+      "Crosschain",
+      "Oracles"
+    ],
+    "logo_local": "logos\\goldsky.png"
+  },
+  {
     "name": "Hashkey",
     "slug": "hashkey-2",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6931898b18d709a190ef7167_20251024-125744.png",
@@ -1029,6 +1069,18 @@
       "PSPs"
     ],
     "logo_local": "logos\\nuvei.svg"
+  },
+  {
+    "name": "OKX Wallet",
+    "slug": "okx-wallet",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6aa359cce7e90f36e38417be_6aa359caef6ebdd92aa0aac7_okx-wallet-logo.svg",
+    "description": "",
+    "external_url": "https://web3.okx.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\okx-wallet.svg"
   },
   {
     "name": "Ormi Labs",
