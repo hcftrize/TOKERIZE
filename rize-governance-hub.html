@@ -422,11 +422,11 @@
           <div class="wm-badge"><span class="wm-text-tokerize">TOKERIZE.TOP</span></div>
           <button class="screenshot-btn" onclick="govScreenshot('mp-conviction','conviction')">&#128247;<span class="screenshot-label"> Screenshot</span></button>
         </div>
-        <p class="section-sub">Live view of RIZE bonded in governance vs available on exchanges. Tracks governance conviction in real time from Base RPC.</p>
+        <p class="section-sub">Live view of RIZE bonded in governance. Tracks governance conviction in real time from Base RPC.</p>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px">
-          <div id="conv-chart-label" style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted)">RIZE Bonded vs On Exchanges</div>
+          <div id="conv-chart-label" style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted)">RIZE Bonded</div>
           <div class="conv-toggle-row" style="margin:0">
-            <button class="conv-toggle active" onclick="convSwitchChart('main',this)">Bonded / Exchanges</button>
+            <button class="conv-toggle active" onclick="convSwitchChart('main',this)">Bonded</button>
             <button class="conv-toggle" onclick="convSwitchChart('unbonding',this)">Governance Flows</button>
             <button class="conv-toggle" onclick="convSwitchChart('unbqueue',this)">Unbonding Queue</button>
           </div>
@@ -443,7 +443,6 @@
         <div class="ctx-kpi-row" style="margin-top:16px">
           <div class="ctx-kpi"><span class="ctx-kpi-label"><span class="conv-live-dot"></span>Total Bonded <span class="conv-live-badge">LIVE</span></span><span class="ctx-kpi-value" id="conv-live-bonded">—</span><span class="conv-delta-sub" id="conv-live-bonded-usd">&nbsp;</span></div>
           <div class="ctx-kpi"><span class="ctx-kpi-label"><span class="conv-live-dot"></span>Unbonding Queue <span class="conv-live-badge">LIVE</span></span><span class="ctx-kpi-value" id="conv-live-unbonding">—</span><span class="conv-delta-sub" id="conv-live-unbonding-usd">&nbsp;</span></div>
-          <div class="ctx-kpi"><span class="ctx-kpi-label">On Exchanges <span style="font-size:9px;color:var(--muted)">(last snapshot)</span></span><span class="ctx-kpi-value" id="conv-live-cex">—</span><span class="conv-delta-sub" id="conv-live-cex-usd">&nbsp;</span></div>
         </div>
         <div class="conv-sep"></div>
         <div class="conv-section-title">Governance Flows</div>
@@ -452,14 +451,6 @@
           <div class="conv-delta-box"><span class="conv-delta-label">7d Bonded</span><span class="conv-delta-value" id="conv-gov-7d">—</span><span class="conv-delta-sub" id="conv-gov-7d-sub">&nbsp;</span></div>
           <div class="conv-delta-box"><span class="conv-delta-label">30d Bonded</span><span class="conv-delta-value" id="conv-gov-30d">—</span><span class="conv-delta-sub" id="conv-gov-30d-sub">&nbsp;</span></div>
           <div class="conv-delta-box"><span class="conv-delta-label">90d Bonded</span><span class="conv-delta-value" id="conv-gov-90d">—</span><span class="conv-delta-sub" id="conv-gov-90d-sub">&nbsp;</span></div>
-        </div>
-        <div class="conv-sep"></div>
-        <div class="conv-section-title">Exchanges Net Flow</div>
-        <div class="conv-delta-grid">
-          <div class="conv-delta-box"><span class="conv-delta-label">24h Net Flow</span><span class="conv-delta-value" id="conv-delta-1d">—</span><span class="conv-delta-sub" id="conv-delta-1d-sub">&nbsp;</span></div>
-          <div class="conv-delta-box"><span class="conv-delta-label">7d Net Flow</span><span class="conv-delta-value" id="conv-delta-7d">—</span><span class="conv-delta-sub" id="conv-delta-7d-sub">&nbsp;</span></div>
-          <div class="conv-delta-box"><span class="conv-delta-label">30d Net Flow</span><span class="conv-delta-value" id="conv-delta-30d">—</span><span class="conv-delta-sub" id="conv-delta-30d-sub">&nbsp;</span></div>
-          <div class="conv-delta-box"><span class="conv-delta-label">90d Net Flow</span><span class="conv-delta-value" id="conv-delta-90d">—</span><span class="conv-delta-sub" id="conv-delta-90d-sub">&nbsp;</span></div>
         </div>
         <div class="conv-sep"></div>
         <div class="conv-section-title">Whale Movements — Transactions &gt; 5M RIZE</div>
@@ -1482,12 +1473,10 @@ async function initConviction() {
     const res=await fetch(HISTORY_URL);
     if(!res.ok) throw new Error('No history');
     const d=await res.json();
-    const govSeries=d.bonded||[]; const cexSeries=d.cex||[];
+    const govSeries=d.bonded||[];
     const whales=d.whales||[]; const addrLabels=d.address_labels||{};
     const govLabels=govSeries.map(e=>{const dt=new Date((e.date||e[0])+'T00:00:00Z');return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'2-digit'});});
     const govData=govSeries.map(e=>e.value||e[1]);
-    const cexData=cexSeries.map(e=>e.value||e[1]);
-    const cexLabels=cexSeries.map(e=>{const dt=new Date((e.date||e[0])+'T00:00:00Z');return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'2-digit'});});
 
     const cv=document.getElementById('conv-chart-main');
     document.getElementById('conv-loading-main').style.display='none'; cv.style.display='block';
@@ -1496,11 +1485,10 @@ async function initConviction() {
     opts.plugins.legend={display:true,labels:{color:'#b6c1d8',font:{size:13},boxWidth:12,padding:16}};
     opts.scales.y.ticks.callback=v=>fmt(v,0);
     opts.plugins.tooltip.callbacks.label=c=>` ${c.dataset.label}: ${fmt(c.parsed.y,2)} RIZE`;
-    const masterL=govLabels.length>=cexLabels.length?govLabels:cexLabels;
+    const masterL=govLabels;
     const pad=(a,l)=>a.length<l?[...Array(l-a.length).fill(null),...a]:a;
     rzCharts.convMain=new Chart(cv.getContext('2d'),{type:'line',data:{labels:masterL,datasets:[
       {label:'RIZE Bonded (Gov)',data:pad(govData,masterL.length),borderColor:'#7ee0ff',backgroundColor:'rgba(126,224,255,0.10)',fill:true,tension:0.25,pointRadius:0,borderWidth:2.5,spanGaps:true},
-      {label:'RIZE On Exchanges',data:pad(cexData,masterL.length),borderColor:'#ff8ad8',backgroundColor:'rgba(255,138,216,0.08)',fill:true,tension:0.25,pointRadius:0,borderWidth:2,spanGaps:true},
     ]},options:opts});
 
     const fd=[],fl=[];
@@ -1516,17 +1504,6 @@ async function initConviction() {
       if(pi>=0){const delta=tv-govData[pi];const k=days===1?'1d':`${days}d`;
         const el=document.getElementById(`conv-gov-${k}`);if(el){el.textContent=(delta>=0?'+':'')+fmt(delta,2)+' RIZE';el.style.color=delta>=0?'#98ffb6':'var(--pink)';}}
     });
-    if(cexData.length>1){
-      const rawCex=cexSeries.map(e=>e.date||e[0]);
-      [1,7,30,90].forEach(days=>{
-        const past=new Date();past.setDate(past.getDate()-days);
-        const pk=past.toISOString().slice(0,10);
-        const pi=rawCex.findIndex(d=>d>=pk);
-        if(pi>=0){const delta=cexData[cexData.length-1]-cexData[pi];const k=days===1?'1d':`${days}d`;
-          const el=document.getElementById(`conv-delta-${k}`);if(el){el.textContent=(delta>=0?'+':'')+fmt(delta,2)+' RIZE';el.style.color=delta<=0?'#98ffb6':'var(--pink)';}}
-      });
-      document.getElementById('conv-live-cex').textContent=fmt(cexData[cexData.length-1],2)+' RIZE';
-    }
     convRenderWhalesGov(whales,addrLabels);
   } catch(e){ console.warn('Conviction history:',e); }
 
