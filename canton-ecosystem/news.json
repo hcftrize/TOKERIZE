@@ -1,20 +1,20 @@
 {
-  "updated_at": "2026-09-13T06:32:31+00:00",
+  "updated_at": "2026-09-13T22:32:09+00:00",
   "count": 315,
   "articles": [
+    {
+      "title": "Hong Kong Sets Out Roadmap to 3.5-Second Bond Settlement, With Canton Network in the Architecture",
+      "category": "INSTITUTIONS",
+      "description": "Hong Kong's Digital Bond Development White Paper 2026 outlines a three-stage roadmap to 3.5-second bond settlement by 2030, with Canton Network named among the chains the proposed ChainFusion clearing architecture is designed to connect.",
+      "url": "https://cantonnews.org/hong-kong-sets-out-roadmap-to-3-5-second-bond-settlement-with-canton-network-in-the-architecture",
+      "published_at": "2026-09-13T18:49:34.448+00:00"
+    },
     {
       "title": "Canton Network Continues to Lead All Blockchains in 30-Day Revenue",
       "category": "ANALYSIS",
       "description": "Canton Network has generated $50.2 million in 30-day fees, continuing to lead all blockchains globally ahead of Robinhood Chain, Tron, and Base by a significant margin, according to DeFiLlama data.",
       "url": "https://cantonnews.org/canton-network-continues-to-lead-all-blockchains-in-30-day-revenue",
       "published_at": "2026-09-12T21:52:43.647+00:00"
-    },
-    {
-      "title": "Shinhan Asset Management secures approval for Canton Super Validator program",
-      "category": "INSTITUTIONS",
-      "description": "Shinhan Asset Management has won approval for a Canton Super Validator program focused on institutional adoption in Korea. It can earn up to weight 10 by completing agreed milestones.",
-      "url": "https://cantonnews.org/shinhan-asset-management-secures-approval-for-canton-super-validator-program",
-      "published_at": "2026-09-12T10:28:31.081+00:00"
     },
     {
       "title": "Temple passes one billion CC burned on Canton",
