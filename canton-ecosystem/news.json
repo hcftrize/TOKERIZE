@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-12T06:32:13+00:00",
-  "count": 311,
+  "updated_at": "2026-09-13T06:32:31+00:00",
+  "count": 315,
   "articles": [
+    {
+      "title": "Canton Network Continues to Lead All Blockchains in 30-Day Revenue",
+      "category": "ANALYSIS",
+      "description": "Canton Network has generated $50.2 million in 30-day fees, continuing to lead all blockchains globally ahead of Robinhood Chain, Tron, and Base by a significant margin, according to DeFiLlama data.",
+      "url": "https://cantonnews.org/canton-network-continues-to-lead-all-blockchains-in-30-day-revenue",
+      "published_at": "2026-09-12T21:52:43.647+00:00"
+    },
+    {
+      "title": "Shinhan Asset Management secures approval for Canton Super Validator program",
+      "category": "INSTITUTIONS",
+      "description": "Shinhan Asset Management has won approval for a Canton Super Validator program focused on institutional adoption in Korea. It can earn up to weight 10 by completing agreed milestones.",
+      "url": "https://cantonnews.org/shinhan-asset-management-secures-approval-for-canton-super-validator-program",
+      "published_at": "2026-09-12T10:28:31.081+00:00"
+    },
+    {
+      "title": "Temple passes one billion CC burned on Canton",
+      "category": "ECOSYSTEM",
+      "description": "Temple has passed one billion Canton Coin burned for the network. The milestone follows its January trading launch and an expansion into markets including tokenized gold and silver.",
+      "url": "https://cantonnews.org/temple-passes-one-billion-cc-burned-on-canton",
+      "published_at": "2026-09-12T10:28:22.757+00:00"
+    },
+    {
+      "title": "a16z crypto proposed for Canton Super Validator role",
+      "category": "INSTITUTIONS",
+      "description": "A new Canton proposal would bring a16z crypto into the Super Validator program, with up to weight 10 linked to agreed milestones. The draft was submitted on September 11.",
+      "url": "https://cantonnews.org/a16z-crypto-proposed-for-canton-super-validator-role",
+      "published_at": "2026-09-12T10:28:16.32+00:00"
+    },
     {
       "title": "Goldman Sachs Proposed as Super Validator on Canton Network in New Governance Proposal",
       "category": "INSTITUTIONS",
