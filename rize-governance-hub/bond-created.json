@@ -4,7 +4,7 @@
   "bootstrap": true,
   "counts": {
     "bondCreatedEvents": 10186,
-    "increaseBondEvents": 350,
+    "increaseBondEvents": 351,
     "bonds": 10186
   },
   "data": {
@@ -115206,6 +115206,15 @@
         "blockNumber": "51222330",
         "timestamp": "1789234007",
         "txHash": "0xb8e6c5b9953fbf0f1114ce8c58031df7a145755c1001460d492a5c46f32c9c4f"
+      },
+      {
+        "id": "0xcfdc9f590259d6e51928946f3dae6d9972990bdc7aae283d88497b8815652f9e-51273510",
+        "nftId": "10171",
+        "amount": "10990",
+        "date": "2026-09-13",
+        "blockNumber": "51273510",
+        "timestamp": "1789336367",
+        "txHash": "0xcfdc9f590259d6e51928946f3dae6d9972990bdc7aae283d88497b8815652f9e"
       }
     ],
     "bonds": [
@@ -247427,10 +247436,10 @@
         "createdAtDate": "2026-08-10",
         "createdAtTimestamp": "1786366555",
         "createdAtBlock": "49788604",
-        "totalDeposited": "33806.88",
-        "increaseCount": 1,
-        "lastDepositDate": "2026-08-23",
-        "lastDepositTimestamp": "1787489575"
+        "totalDeposited": "44796.88",
+        "increaseCount": 2,
+        "lastDepositDate": "2026-09-13",
+        "lastDepositTimestamp": "1789336367"
       },
       {
         "id": "10172",
@@ -247629,5 +247638,5 @@
       }
     ]
   },
-  "updated_at": "2026-09-13T05:31:58.823835+00:00"
+  "updated_at": "2026-09-14T05:31:51.261688+00:00"
 }
