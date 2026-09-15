@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-09-14T06:32:15+00:00",
-  "count": 315,
+  "updated_at": "2026-09-15T06:32:14+00:00",
+  "count": 321,
   "articles": [
+    {
+      "title": "Edel joins DTC’s digital assets working group",
+      "category": "INSTITUTIONS",
+      "description": "Edel has joined the industry working group helping shape the DTCC Tokenization Service. The Canton builder will contribute feedback alongside major financial institutions ahead of the service’s planned launch later this year.",
+      "url": "https://cantonnews.org/edel-joins-dtc-s-digital-assets-working-group",
+      "published_at": "2026-09-15T06:24:04.765+00:00"
+    },
+    {
+      "title": "P2P Company seeks Featured App status for Canton escrow trading",
+      "category": "ECOSYSTEM",
+      "description": "P2P Company has applied for Featured App status for its live Canton escrow service. The platform supports peer-to-peer trades of CC, CBTC and cETH, with buyers paying sellers directly in stablecoins or local currency.",
+      "url": "https://cantonnews.org/p2p-company-seeks-featured-app-status-for-canton-escrow-trading",
+      "published_at": "2026-09-15T06:23:55.027+00:00"
+    },
+    {
+      "title": "Utila highlights Canton in new blockchain privacy guide for banks",
+      "category": "TECHNOLOGY",
+      "description": "Utila’s new guide explores how banks can use blockchains while keeping sensitive financial information private. Canton features alongside Aleo and Zama, with a focus on controlling who can see transaction details.",
+      "url": "https://cantonnews.org/utila-highlights-canton-in-new-blockchain-privacy-guide-for-banks",
+      "published_at": "2026-09-15T06:23:46.812+00:00"
+    },
+    {
+      "title": "Digital Asset named in UK tokenisation feedback ahead of 2026 roadmap",
+      "category": "INSTITUTIONS",
+      "description": "Digital Asset Holdings (Canton) is listed among respondents to the UK’s consultation on tokenisation in wholesale markets. The FCA and Bank of England will use the feedback to develop a joint roadmap later this year, with collateral movement a leading priority.",
+      "url": "https://cantonnews.org/digital-asset-named-in-uk-tokenisation-feedback-ahead-of-2026-roadmap",
+      "published_at": "2026-09-15T06:19:03.711+00:00"
+    },
+    {
+      "title": "S&P Global Leads $110 Million Series B for Kaiko as Canton Foundation Joins Strategic Working Group",
+      "category": "INSTITUTIONS",
+      "description": "S&P Global has led a $110 million Series B expansion for Kaiko, with the Canton Foundation joining a new Strategic Industry Working Group on tokenised market data infrastructure, as Kaiko deepens its existing work with Canton Network on the iBoxx Treasury index and CC pricing benchmarks.",
+      "url": "https://cantonnews.org/s-p-global-leads-110-million-series-b-for-kaiko-as-canton-foundation-joins-strategic-working-group",
+      "published_at": "2026-09-14T20:23:40.86+00:00"
+    },
+    {
+      "title": "Tokenovate Settles Intraday Repo on Canton Network Using USDC and Common Domain Model",
+      "category": "INSTITUTIONS",
+      "description": "Tokenovate has completed an intraday repo on Canton Network using USDC and the FINOS Common Domain Model, demonstrating programmable, privacy-preserving post-trade settlement on institutional blockchain infrastructure.",
+      "url": "https://cantonnews.org/tokenovate-settles-intraday-repo-on-canton-network-using-usdc-and-common-domain-model",
+      "published_at": "2026-09-14T14:45:03.695+00:00"
+    },
     {
       "title": "Hong Kong Sets Out Roadmap to 3.5-Second Bond Settlement, With Canton Network in the Architecture",
       "category": "INSTITUTIONS",
