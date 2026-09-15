@@ -1450,6 +1450,29 @@
     "logo_local": "logos\\depinx.jpg"
   },
   {
+    "name": "DerivNex",
+    "slug": "derivnex",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6aa85e0492617bd52892207d_Screenshot%202026-09-14%20at%204.49.36%E2%80%AFPM.png",
+    "short_desc": "OTC Derivatives on the Canton Network",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "FINANCIAL INSTITUTIONS",
+      "COMPLIANCE",
+      "CUSTODY",
+      "INTEROPERABILITY",
+      "Network Utilities\nCOMPLIANCECUSTODYINTEROPERABILITYTOKENIZED ASSETSWALLETS",
+      "TOKENIZED ASSETS",
+      "WALLETS",
+      "Roles\nAPPS (ALL)APPS (FEATURED)FINANCIAL INSTITUTIONSMARKET INFRASTRUCTURESERVICE PROVIDERVALIDATOR\nAPPS (ALL)APPS (FEATURED)FINANCIAL INSTITUTIONSMARKET INFRASTRUCTURESERVICE PROVIDERVALIDATOR",
+      "MARKET INFRASTRUCTURE",
+      "SERVICE PROVIDER",
+      "VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nDerivNex\nhttps://derivnex.com/\nDerivNex is a full-scale post-trade engine for OTC derivatives — enabling counterparties to affirm trades, manage valuations, calculate cashflows, and coordinate payments through shared contract state on the permissioned Canton Network.\nNetwork Utilities\nCOMPLIANCECUSTODYINTEROPERABILITYTOKENIZED ASSETSWALLETS\nRoles\nAPPS (ALL)APPS (FEATURED)FINANCIAL INSTITUTIONSMARKET INFRASTRUCTURESERVICE PROVIDERVALIDATOR\nAPPS (ALL)APPS (FEATURED)FINANCIAL INSTITUTIONSMARKET INFRASTRUCTURESERVICE PROVIDERVALIDATOR",
+    "logo_local": "logos\\derivnex.png"
+  },
+  {
     "name": "DeSyn",
     "slug": "desyn",
     "logo_cdn": "https://cdn.prod.website-files.com/696805252243366e13a64c82/697a4b2e91c884840963f200_yellow-arrow-right.svg",
@@ -3910,6 +3933,20 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nQuantstamp\nhttps://quantstamp.com/\n\nQuantstamp is a leading blockchain security firm offering automated protocol-backed and manual smart contract audits.\n\nRoles\nSUPER VALIDATORVALIDATOR\nSUPER VALIDATORVALIDATOR",
     "logo_local": "logos\\quantstamp.jpeg"
+  },
+  {
+    "name": "QuillAudits",
+    "slug": "quillaudits",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a97c7f0d8c2688b49bc0da8_67ed6775-c396-4a82-9d97-635e2cfde010.png",
+    "short_desc": "Smart contract audits, KYC & on-chain monitoring. Securing Web3 since 2018, 1500+ projects",
+    "tags": [
+      "SERVICE PROVIDER",
+      "FORENSICS & SECURITY",
+      "Network Utilities\nFORENSICS & SECURITY",
+      "Roles\nSERVICE PROVIDER\nSERVICE PROVIDER"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nQuillAudits\nhttps://www.quillaudits.com/\nQuillAudits is a Web3 security firm that has been auditing blockchain protocols since 2018. We have reviewed over 1 million lines of code and secured more than 1,500 projects, including StarkWare, Taiko, ZetaChain and Metis. Our work spans smart contract and protocol audits, RWA and tokenization security, DeFi reviews, KYC, incident response and continuous on-chain monitoring. We also build free security tooling, including Multisig Inspector, a pre-signing verification layer for Safe multisigs. QuillAudits is ISO/IEC 27001:2022 certified and a certified member of the Circle Alliance Program. As real-world assets and institutional finance move on-chain, we help teams ship and operate with security built in from design through deployment and beyond.\nNetwork Utilities\nFORENSICS & SECURITY\nRoles\nSERVICE PROVIDER\nSERVICE PROVIDER",
+    "logo_local": "logos\\quillaudits.png"
   },
   {
     "name": "Realworld Solutions",
