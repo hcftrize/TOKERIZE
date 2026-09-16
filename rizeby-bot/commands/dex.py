@@ -40,6 +40,7 @@ utils/dexpaprika.py's docstring for the full cross-check that established this.
   Bare numbers with no unit default to RIZE.
 """
 import asyncio
+import time
 
 from utils.geckoterminal import get_pools_multi, pool_attrs, POOL_1, POOL_2
 from utils.dexpaprika import (
@@ -51,17 +52,59 @@ from utils.formatters import fmt_usd, fmt_rize, fmt_price, parse_dex_amount
 VALID_TYPES = ("buy", "sell", "all")
 PER_PAGE = 5
 
-# How hard /dex scans DexPaprika when a filter is narrow (e.g. a high RIZE
-# minimum) and matches are sparse. Each round fetches PAGES_PER_ROUND pages
-# per pool IN PARALLEL (limit=100 each); scanning stops as soon as enough
-# matches are found. Worst case (no matches ever found): MAX_ROUNDS *
-# PAGES_PER_ROUND * 100 raw trades scanned per pool per command call.
-# DexPaprika's rate limit is 15 req/min keyless, 50 req/min with a free
-# DEXPAPRIKA_KEY (utils/dexpaprika.py picks it up automatically from the
-# env) — scan deeper when a key is configured, stay conservative without one.
+# How hard /dex scans DexPaprika per CALL when a filter is narrow and
+# matches are sparse. Each round fetches PAGES_PER_ROUND pages per pool IN
+# PARALLEL (limit=100 each); scanning stops as soon as enough matches are
+# found. This budget is deliberately small and FIXED (not growing with
+# page) — reaching deep history is achieved by genuine incremental
+# progress across several `next` taps (see _dex_scan_cache below), each
+# one cheap, rather than one call trying to scan everything itself. A
+# growing per-call budget was tried and reverted: it fired enough
+# concurrent requests to blow through DexPaprika's rate limit within a
+# single call, which made /dex both slow (retry/backoff storms) AND
+# lossy (429s misread as "no more data"). DexPaprika's rate limit is 15
+# req/min keyless, 50 req/min with a free DEXPAPRIKA_KEY (utils/dexpaprika.py
+# picks it up automatically from the env).
 DP_PAGE_LIMIT = 100
 PAGES_PER_ROUND = 3 if HAS_KEY else 2
-MAX_ROUNDS = 6 if HAS_KEY else 4
+MAX_ROUNDS = 4 if HAS_KEY else 3
+
+# ── Per-(chat, filter) incremental scan state ───────────────────────────────
+# Keyed by chat_id. Remembers, per pool: how far we've already scanned
+# (next_page), the matches accumulated so far, and whether that pool's
+# history is confirmed exhausted. A fresh /dex (or a different filter)
+# resets it; "next"/"page N" reuse and extend it. This is what lets /dex
+# genuinely push further into history on each `next` WITHOUT rescanning
+# pages it already covered — the actual fix for both the "hits a wall
+# forever" bug and the rate-limit storm that a naive growing-budget
+# rescan-from-scratch approach caused.
+_dex_scan_cache: dict = {}
+DEX_SCAN_TTL = 900  # 15 min
+
+
+def _dex_scan_state(chat_id, filter_key):
+    now = time.time()
+    if chat_id is not None:
+        expired = [k for k, v in _dex_scan_cache.items()
+                   if now - v.get("ts", 0) > DEX_SCAN_TTL]
+        for k in expired:
+            del _dex_scan_cache[k]
+        entry = _dex_scan_cache.get(chat_id)
+        if entry and entry.get("filter_key") == filter_key:
+            entry["ts"] = now
+            return entry
+
+    fresh = {
+        "filter_key": filter_key,
+        "ts": now,
+        "pools": {
+            POOL_1: {"next_page": 1, "matches": [], "exhausted": False, "total_pages": None},
+            POOL_2: {"next_page": 1, "matches": [], "exhausted": False, "total_pages": None},
+        },
+    }
+    if chat_id is not None:
+        _dex_scan_cache[chat_id] = fresh
+    return fresh
 
 
 # ── /dexkey — debug: is DEXPAPRIKA_KEY actually live? ──────────────────────
@@ -79,21 +122,24 @@ async def cmd_dexkey(args: list) -> str:
         return (
             "🔑 *DEXPAPRIKA_KEY: ACTIVE*\n"
             f"Key ends in `...{tail}` ({len(key)} chars)\n\n"
-            f"Scan depth: {PAGES_PER_ROUND} pages/round · {MAX_ROUNDS} rounds max "
-            f"= up to {PAGES_PER_ROUND * MAX_ROUNDS * DP_PAGE_LIMIT} trades/pool "
-            "scanned per `/dex` call before needing *next*.\n"
-            "Rate limit: 50 req/min."
+            f"Scan budget: {PAGES_PER_ROUND} pages/round · {MAX_ROUNDS} rounds max/call "
+            f"= up to {PAGES_PER_ROUND * MAX_ROUNDS * DP_PAGE_LIMIT} new trades/pool "
+            "scanned per `/dex` or `next`.\n"
+            "Rate limit: 50 req/min.\n\n"
+            "_Each call only scans pages it hasn't seen yet for that chat's "
+            "current filter (incremental, not a rescan-from-scratch) — so "
+            "`next` stays fast and depth genuinely accumulates across taps "
+            "instead of being capped by one call's budget._"
         )
     return (
         "⚠️ *DEXPAPRIKA_KEY: NOT SET* — running keyless (free tier)\n\n"
-        f"Scan depth: {PAGES_PER_ROUND} pages/round · {MAX_ROUNDS} rounds max "
-        f"= up to {PAGES_PER_ROUND * MAX_ROUNDS * DP_PAGE_LIMIT} trades/pool "
-        "scanned per `/dex` call before needing *next*.\n"
+        f"Scan budget: {PAGES_PER_ROUND} pages/round · {MAX_ROUNDS} rounds max/call "
+        f"= up to {PAGES_PER_ROUND * MAX_ROUNDS * DP_PAGE_LIMIT} new trades/pool "
+        "scanned per `/dex` or `next`.\n"
         "Rate limit: 15 req/min.\n\n"
         "_Note: the key doesn't change how far back /dex can ultimately go — "
-        "keyless can reach the same full history via more `next` replies. "
-        "It only changes how much depth one single call can cover before "
-        "hitting the rate limit._"
+        "keyless reaches the same full history via more `next` replies, just "
+        "slightly smaller steps each time._"
     )
 
 
@@ -331,101 +377,83 @@ def _usage_text() -> str:
     )
 
 
-async def _scan_pool(pool_address: str, label: str, target_count: int,
-                      type_: str, min_b, max_b, max_rounds: int):
+async def _scan_pool_incremental(pool_address: str, label: str, pstate: dict,
+                                  need_count: int, type_: str, min_b, max_b):
     """
-    Scan one pool's transactions (newest-first) via DexPaprika, collecting
-    organic buy/sell matches until target_count is reached, the pool's
-    history is exhausted, or the caller's scan budget (max_rounds) is hit.
-    Returns (matches: list[dict], exhausted: bool) — exhausted=True means
-    we've genuinely reached the end of this pool's available history (not
-    just the scan budget), so there's nothing more `next` could ever find
-    here. exhausted=False with `next` still offered means: not confirmed
-    exhausted — deeper trades may exist, just outside this call's budget.
+    Extends pstate's accumulated matches by scanning forward from
+    pstate['next_page'] — NEVER rescans pages a previous call on this same
+    (chat, filter) session already covered. Mutates pstate in place.
+
+    Bounded to a small, fixed per-call budget (PAGES_PER_ROUND * MAX_ROUNDS)
+    so a single command stays fast and well under DexPaprika's rate limit.
+    Reaching deep history happens through genuine incremental progress
+    across several `next` taps, each one cheap — not one call trying to
+    scan everything at once (that's what used to trigger 429 storms and
+    multi-second `next` replies).
+
+    On a failure (rate-limited/errored even after retry), pstate['next_page']
+    is rewound to the first failed page rather than advanced past it — so
+    the *next* call retries it naturally, instead of silently skipping it
+    or burning this call's whole budget hammering it.
     """
-    matches = []
-    page = 1
-    total_pages = None
-    # Accumulated across the WHOLE scan, not just the current round — a page
-    # that failed three rounds ago is just as disqualifying for an
-    # "exhausted" verdict as one that failed just now. Getting this scoped
-    # wrong (per-round instead of scan-wide) was the actual regression: a
-    # clean final round could mask real matches lost on an earlier
-    # rate-limited page, silently declaring "full history" reached.
-    failed_pages: set[int] = set()
+    if pstate["exhausted"] or len(pstate["matches"]) >= need_count:
+        return
 
-    def _ingest(raw_txn):
-        trade = derive_trade(raw_txn)
-        if not trade:
-            return
-        if type_ != "all" and trade["kind"] != type_:
-            return
-        if not _passes_filter(trade["rize_amount"], trade["usd_value"], min_b, max_b):
-            return
-        trade["pool"] = label
-        matches.append(trade)
+    page = pstate["next_page"]
+    total_pages = pstate["total_pages"]
+    stalled_on = None
 
-    async def _fetch(page_nums):
-        nonlocal total_pages
-        results = await asyncio.gather(*[
-            get_pool_transactions_page(pool_address, p, DP_PAGE_LIMIT) for p in page_nums
-        ])
-        got_any = False
-        for p, (txns, tp, ok) in zip(page_nums, results):
-            if not ok:
-                failed_pages.add(p)
-                continue
-            failed_pages.discard(p)
-            if tp:
-                total_pages = tp
-            if not txns:
-                continue
-            got_any = True
-            for raw in txns:
-                _ingest(raw)
-        return got_any
-
-    for _ in range(max_rounds):
+    for _ in range(MAX_ROUNDS):
         page_nums = list(range(page, page + PAGES_PER_ROUND))
         if total_pages:
             page_nums = [p for p in page_nums if p <= total_pages]
         if not page_nums:
             break
 
-        got_any = await _fetch(page_nums)
+        results = await asyncio.gather(*[
+            get_pool_transactions_page(pool_address, p, DP_PAGE_LIMIT) for p in page_nums
+        ])
+        got_any = False
+        round_failed = False
+        for p, (txns, tp, ok) in zip(page_nums, results):
+            if not ok:
+                round_failed = True
+                stalled_on = p
+                break
+            if tp:
+                total_pages = tp
+            if not txns:
+                continue
+            got_any = True
+            for raw in txns:
+                trade = derive_trade(raw)
+                if not trade:
+                    continue
+                if type_ != "all" and trade["kind"] != type_:
+                    continue
+                if not _passes_filter(trade["rize_amount"], trade["usd_value"], min_b, max_b):
+                    continue
+                trade["pool"] = label
+                pstate["matches"].append(trade)
+
+        if round_failed:
+            break  # don't advance past a page we couldn't confirm
+
         page = page_nums[-1] + 1
-
-        if len(matches) >= target_count and not failed_pages:
-            exhausted = total_pages is not None and page > total_pages
-            return matches, exhausted
-        if total_pages and page > total_pages and not failed_pages:
+        if len(pstate["matches"]) >= need_count:
             break
-        if not got_any and not failed_pages:
-            return matches, True
-        # any_failed pages just get left for the retry pass below — the
-        # round loop keeps moving forward rather than getting stuck on them.
+        if total_pages and page > total_pages:
+            break
+        if not got_any:
+            break
 
-    # One retry pass over whatever pages failed during the scan — by now
-    # some real time has passed (other rounds ran), so a transient rate
-    # limit has likely cleared. This is what actually lets a single /dex
-    # call recover cleanly instead of just permanently giving up on those
-    # pages (which used to silently drop real trades).
-    if failed_pages:
-        await _fetch(sorted(failed_pages))
-
-    if failed_pages:
-        # Still couldn't get some pages even after the retry pass — cannot
-        # honestly claim exhaustion; `next` will try again from scratch.
-        return matches, False
-
-    # Every page we ever touched this call ultimately succeeded — exhausted
-    # is simply "did scanning actually run past the pool's last page",
-    # regardless of whether target_count was also reached along the way.
-    exhausted = total_pages is not None and page > total_pages
-    return matches, exhausted
+    pstate["next_page"] = stalled_on if stalled_on is not None else page
+    pstate["total_pages"] = total_pages
+    if stalled_on is None and total_pages is not None and page > total_pages:
+        pstate["exhausted"] = True
 
 
-async def cmd_dex(args: list, page: int = 0) -> str:
+async def cmd_dex(args: list, page: int = 0, chat_id=None) -> str:
     if not args:
         type_, rest = "all", []
     else:
@@ -443,27 +471,25 @@ async def cmd_dex(args: list, page: int = 0) -> str:
     # +1 beyond what this page needs, so we can tell whether there's a next page.
     target_count = (page + 1) * PER_PAGE + 1
 
-    # _scan_pool always rescans from page 1 (stateless — no cross-request scan
-    # cache), so the scan budget must GROW with how deep this request goes,
-    # or every call past a certain depth hits the exact same ceiling and
-    # returns the exact same matches forever, even though far more history
-    # is genuinely available. Each successive `next` therefore gets a bigger
-    # budget (DexPaprika's 30s local cache makes rescanning already-seen
-    # pages cheap). ABS_MAX_ROUNDS just guards against a runaway loop on a
-    # pathologically narrow filter — real exhaustion (total_pages reached)
-    # is what normally stops the scan long before this.
-    ABS_MAX_ROUNDS = 100
-    rounds_budget = min(MAX_ROUNDS * (page + 1), ABS_MAX_ROUNDS)
+    state = _dex_scan_state(chat_id, (type_, min_b, max_b))
+    pools_meta = [(POOL_1, "P1"), (POOL_2, "P2")]
 
-    scan_results = await asyncio.gather(
-        _scan_pool(POOL_1, "P1", target_count, type_, min_b, max_b, rounds_budget),
-        _scan_pool(POOL_2, "P2", target_count, type_, min_b, max_b, rounds_budget),
-    )
+    tasks = [
+        _scan_pool_incremental(pool_addr, label, state["pools"][pool_addr],
+                                target_count, type_, min_b, max_b)
+        for pool_addr, label in pools_meta
+        if len(state["pools"][pool_addr]["matches"]) < target_count
+        and not state["pools"][pool_addr]["exhausted"]
+    ]
+    if tasks:
+        await asyncio.gather(*tasks)
+
     all_matches = []
     fully_exhausted = True
-    for matches, exhausted in scan_results:
-        all_matches.extend(matches)
-        fully_exhausted = fully_exhausted and exhausted
+    for pool_addr, _label in pools_meta:
+        pstate = state["pools"][pool_addr]
+        all_matches.extend(pstate["matches"])
+        fully_exhausted = fully_exhausted and pstate["exhausted"]
 
     all_matches.sort(key=lambda t: t["epoch"], reverse=True)
 
