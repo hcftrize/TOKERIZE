@@ -274,7 +274,12 @@ def _fmt_trade(trade: dict, wallet: str | None) -> list[str]:
         "",
     ]
     tx_hash = trade.get("tx_hash")
-    tx_link = f"_[TX](https://basescan.org/tx/{tx_hash})_" if tx_hash else ""
+    # Plain [text](url) link — NOT wrapped in italics. Telegram's legacy
+    # Markdown parser doesn't reliably render a link nested inside `_..._`;
+    # it silently fails and shows the raw "[TX](https://...)" text instead
+    # (confirmed live). A bare link is the same syntax the old GeckoTerminal
+    # credit link used, which rendered fine — so this stays unnested.
+    tx_link = f"[TX](https://basescan.org/tx/{tx_hash})" if tx_hash else ""
     addr_part = _short_addr(wallet) if wallet else "wallet unavailable"
     out.append(f"{addr_part} - {tx_link}" if tx_link else addr_part)
     out.append("")
