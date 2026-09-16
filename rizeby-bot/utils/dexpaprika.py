@@ -2,8 +2,18 @@
 DexPaprika API wrapper — deep historical DEX trade data for RIZE's two
 Aerodrome pools (Base). Works keyless (free, no signup) on
 https://api.dexpaprika.com, and picks up a free-tier API key automatically
-from the DEXPAPRIKA_KEY env var if set (raises the rate limit from 15 to
-50 req/min — matters here since /dex can scan several pages per command).
+from the DEXPAPRIKA_KEY env var if set.
+
+RATE LIMIT / CREDITS (confirmed against the account's own billing page,
+2026-09-16 — not just DexPaprika's marketing docs, which quoted a generic
+50 req/min elsewhere and turned out to not match this actual Free-tier
+key): **30 req/min, 100K credits/month** (rolling 30-day window). 1 API
+request = 1 credit flat, no per-endpoint multiplier — confirmed via
+DexPaprika's own pricing page. RATE_LIMIT_PER_MIN below is set with a
+safety margin under the real 30/min ceiling. 100K credits/month is
+generous for this bot's actual traffic (≈3300/day) as long as /dex's
+per-call scan budget stays modest — see PAGES_PER_ROUND/MAX_ROUNDS in
+commands/dex.py, deliberately kept small precisely for this reason.
 
 AUTH (confirmed against DexPaprika's docs): the key goes in the
 `Authorization` header as its ENTIRE raw value — no "Bearer " prefix, e.g.
@@ -75,6 +85,37 @@ def _dp_headers() -> dict:
 # Free public Base mainnet RPC — no key, standard well-known endpoint.
 BASE_RPC = "https://mainnet.base.org"
 
+# ── Client-side rate limiter — makes "never send DexPaprika a 429" an actual
+# guarantee instead of a hope. Shared across EVERY request this process
+# makes (both pools, both endpoints): a sliding 60s window tracks recent
+# request timestamps, and any new request blocks until there's real room
+# under the limit. This is what commands/dex.py's small per-call scan
+# budget was implicitly relying on without enforcing — fine for one call in
+# isolation, but nothing stopped several rapid `next` taps from cumulatively
+# blowing the per-minute ceiling. Now the limit is enforced here, once, for
+# real, regardless of how fast the user taps.
+RATE_LIMIT_PER_MIN = 24 if HAS_KEY else 10  # safety margin under confirmed 30 / assumed 15
+_request_times: list = []
+_throttle_lock = asyncio.Lock()
+
+
+async def _throttle():
+    """Blocks (if needed) until firing one more request is safely under
+    RATE_LIMIT_PER_MIN in the trailing 60s. Reserves the slot atomically
+    (lock held only for the bookkeeping, not the actual HTTP call after)."""
+    while True:
+        async with _throttle_lock:
+            now = time.time()
+            # prune anything older than 60s
+            while _request_times and now - _request_times[0] > 60:
+                _request_times.pop(0)
+            if len(_request_times) < RATE_LIMIT_PER_MIN:
+                _request_times.append(now)
+                return
+            wait_for = 60 - (now - _request_times[0]) + 0.05
+        await asyncio.sleep(max(wait_for, 0.05))
+
+
 # ── Short TTL cache for pool/page fetches — protects DexPaprika's free-tier
 # rate limit (15 req/min keyless, 50 req/min with a free account) given /dex
 # can scan multiple pages per command. ──────────────────────────────────────
@@ -104,6 +145,7 @@ async def get_pool_detail(pool_address: str) -> dict | None:
     if cached is not None:
         return cached
     url = f"{DP_BASE}/networks/{NETWORK}/pools/{pool_address}"
+    await _throttle()
     try:
         async with httpx.AsyncClient(timeout=10) as client:
             r = await client.get(url, headers=_dp_headers())
@@ -147,6 +189,7 @@ async def get_pool_transactions_page(pool_address: str, page: int, limit: int = 
     url = f"{DP_BASE}/networks/{NETWORK}/pools/{pool_address}/transactions"
     data = None
     for attempt in range(2):
+        await _throttle()
         try:
             async with httpx.AsyncClient(timeout=10) as client:
                 r = await client.get(

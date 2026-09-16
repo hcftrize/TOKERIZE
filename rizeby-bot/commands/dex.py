@@ -58,16 +58,19 @@ PER_PAGE = 5
 # found. This budget is deliberately small and FIXED (not growing with
 # page) — reaching deep history is achieved by genuine incremental
 # progress across several `next` taps (see _dex_scan_cache below), each
-# one cheap, rather than one call trying to scan everything itself. A
-# growing per-call budget was tried and reverted: it fired enough
-# concurrent requests to blow through DexPaprika's rate limit within a
-# single call, which made /dex both slow (retry/backoff storms) AND
-# lossy (429s misread as "no more data"). DexPaprika's rate limit is 15
-# req/min keyless, 50 req/min with a free DEXPAPRIKA_KEY (utils/dexpaprika.py
-# picks it up automatically from the env).
+# one cheap, rather than one call trying to scan everything itself.
+#
+# Kept modest on purpose, tuned against the account's REAL confirmed
+# limits (billing page, 2026-09-16): 30 req/min, 100K credits/month,
+# 1 request = 1 credit flat. Worst case here is
+# PAGES_PER_ROUND*MAX_ROUNDS*2 pools = 12 requests/call (key) or 8
+# (keyless) — light on the monthly credit budget (100K/mo ≈ 3300/day)
+# even under heavy use, while still covering 400-600 trades/pool of new
+# ground on every single `next` tap. utils/dexpaprika.py's rate limiter
+# is the hard backstop regardless of this budget.
 DP_PAGE_LIMIT = 100
-PAGES_PER_ROUND = 3 if HAS_KEY else 2
-MAX_ROUNDS = 4 if HAS_KEY else 3
+PAGES_PER_ROUND = 2
+MAX_ROUNDS = 3 if HAS_KEY else 2
 
 # ── Per-(chat, filter) incremental scan state ───────────────────────────────
 # Keyed by chat_id. Remembers, per pool: how far we've already scanned
@@ -124,8 +127,9 @@ async def cmd_dexkey(args: list) -> str:
             f"Key ends in `...{tail}` ({len(key)} chars)\n\n"
             f"Scan budget: {PAGES_PER_ROUND} pages/round · {MAX_ROUNDS} rounds max/call "
             f"= up to {PAGES_PER_ROUND * MAX_ROUNDS * DP_PAGE_LIMIT} new trades/pool "
-            "scanned per `/dex` or `next`.\n"
-            "Rate limit: 50 req/min.\n\n"
+            "scanned per `/dex` or `next` (≤12 requests/call worst case).\n"
+            "Confirmed account limits (billing page): *30 req/min · 100K credits/mo*. "
+            "Bot throttles itself to 24 req/min max, so it can't ever trip the real limit.\n\n"
             "_Each call only scans pages it hasn't seen yet for that chat's "
             "current filter (incremental, not a rescan-from-scratch) — so "
             "`next` stays fast and depth genuinely accumulates across taps "
@@ -136,7 +140,9 @@ async def cmd_dexkey(args: list) -> str:
         f"Scan budget: {PAGES_PER_ROUND} pages/round · {MAX_ROUNDS} rounds max/call "
         f"= up to {PAGES_PER_ROUND * MAX_ROUNDS * DP_PAGE_LIMIT} new trades/pool "
         "scanned per `/dex` or `next`.\n"
-        "Rate limit: 15 req/min.\n\n"
+        "Rate limit: assumed 15 req/min keyless (unconfirmed — get a free key "
+        "to see its real numbers on DexPaprika's billing page). Bot throttles "
+        "itself to 10 req/min max as a conservative default.\n\n"
         "_Note: the key doesn't change how far back /dex can ultimately go — "
         "keyless reaches the same full history via more `next` replies, just "
         "slightly smaller steps each time._"
