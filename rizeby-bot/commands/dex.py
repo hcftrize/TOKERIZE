@@ -2,10 +2,19 @@
 Commands: /dexstat, /dex
 DEX-side stats and live trade feed for RIZE, aggregated across its two
 Aerodrome pools on Base. Powered by the free GeckoTerminal public API
-(utils/geckoterminal.py) — see that module's docstring for the caveat on
-unverified trade-endpoint field names.
+(utils/geckoterminal.py).
 
-/dexstat            — aggregated pool stats (price, liquidity, volume,
+Price is deliberately NOT shown here — /price already covers that.
+
+IMPORTANT SCOPE LIMIT (confirmed against GeckoTerminal's docs): the free
+/trades endpoint only returns the latest ~300 trades within a ROLLING 24H
+WINDOW per pool — there is no pagination/cursor to reach older history.
+/dex's "reply next" therefore paginates through everything available
+(up to ~600 raw trades across both pools, filtered down), but can never
+reach yesterday or further back. This is a hard ceiling of the free API,
+not a bug — see the closing note it prints once you hit the end.
+
+/dexstat            — aggregated pool stats (liquidity, volume,
                        buy/sell counts, FDV/MCap), P1/P2 breakdown, Refresh button
 /dex                — last organic buy/sell trades (both pools combined),
                        liquidity add/remove events are NOT shown here (kept
@@ -20,9 +29,9 @@ unverified trade-endpoint field names.
 from utils.geckoterminal import (
     get_pools_multi, get_pool_trades, pool_attrs, trade_attrs,
     get_trade_wallet, get_trade_kind, get_trade_rize_amount, get_trade_usd,
-    get_trade_timestamp, POOL_1, POOL_2, NETWORK,
+    get_trade_timestamp, POOL_1, POOL_2,
 )
-from utils.formatters import fmt_usd, fmt_rize, fmt_price, pct_arrow, parse_dex_amount
+from utils.formatters import fmt_usd, fmt_rize, parse_dex_amount
 
 VALID_TYPES = ("buy", "sell", "all")
 PER_PAGE = 5
@@ -46,18 +55,6 @@ def _label_for(a: dict) -> str:
     return "P?"
 
 
-def _f(v) -> float | None:
-    """GeckoTerminal returns most numeric attributes as strings — safely
-    coerce to float for formatters like pct_arrow/fmt_price that need a
-    real number (or None, which they render as '—')."""
-    if v is None:
-        return None
-    try:
-        return float(v)
-    except (TypeError, ValueError):
-        return None
-
-
 async def cmd_dexstat(args: list) -> tuple:
     pools = await get_pools_multi()
     if not pools:
@@ -68,14 +65,13 @@ async def cmd_dexstat(args: list) -> tuple:
     if not infos:
         return "❌ Could not fetch DEX pool data right now.", {}
 
-    # Reference pool = most liquid → used for price, price-change, FDV/MCap
-    # (those are token-level, not pool-level — summing them across pools
-    # would double-count, unlike liquidity/volume/buy-sell counts below).
+    # Reference pool = most liquid → used for FDV/MCap (token-level, not
+    # pool-level — summing across pools would double-count, unlike
+    # liquidity/volume/buy-sell counts below). Price itself is intentionally
+    # not read here at all — /price already covers that.
     ref = max(infos, key=_reserve)
-    price = float(ref.get("base_token_price_usd") or 0)
     fdv   = float(ref.get("fdv_usd") or 0)
     mcap  = float(ref.get("market_cap_usd") or 0) or fdv
-    price_change = ref.get("price_change_percentage") or {}
 
     total_liq = sum(_reserve(a) for a in infos)
 
@@ -108,28 +104,19 @@ async def cmd_dexstat(args: list) -> tuple:
     ages = [a.get("pool_created_at") for a in infos if a.get("pool_created_at")]
     age_str = min(ages)[:10] if ages else "—"
 
-    ref_addr = ref.get("address", "")
-    gt_link = f"https://www.geckoterminal.com/{NETWORK}/pools/{ref_addr}"
-
     lines = [
-        "🔷 *RIZE — DEX Stats* _(Aerodrome · Base)_",
+        "*RIZE — DEX Stats* _(Aerodrome · Base)_",
         "_Aggregated across 2 pools_",
-        "",
-        f"💰 Price: {fmt_price(price)}",
-        f"5m: {pct_arrow(_f(price_change.get('m5')))}  ·  1h: {pct_arrow(_f(price_change.get('h1')))}",
-        f"6h: {pct_arrow(_f(price_change.get('h6')))}  ·  24h: {pct_arrow(_f(price_change.get('h24')))}",
         "",
         f"💧 Liquidity: *{fmt_usd(total_liq)}*",
     ] + pool_lines + [
         "",
         f"📊 Volume 24h: {fmt_usd(vol_totals['h24'])}  ·  6h: {fmt_usd(vol_totals['h6'])}  ·  1h: {fmt_usd(vol_totals['h1'])}",
-        f"🟢 Buys 24h: {buy_totals['h24']}  ·  🔴 Sells 24h: {sell_totals['h24']}",
-        f"🟢 Buys 1h: {buy_totals['h1']}  ·  🔴 Sells 1h: {sell_totals['h1']}",
+        f"Buys 24h: {buy_totals['h24']}  ·  Sells 24h: {sell_totals['h24']}",
+        f"Buys 1h: {buy_totals['h1']}  ·  Sells 1h: {sell_totals['h1']}",
         "",
         f"FDV: {fmt_usd(fdv)}  ·  MCap: {fmt_usd(mcap)}",
         f"Oldest pool since: {age_str}",
-        "",
-        f"_Live data · {gt_link}_",
     ]
 
     markup = {"inline_keyboard": [[
@@ -271,9 +258,11 @@ async def cmd_dex(args: list, page: int = 0) -> str:
 
     filtered.sort(key=lambda x: x[0], reverse=True)
 
+    SCOPE_NOTE = "_GeckoTerminal's free API only covers the last ~24h (300 trades/pool max) — older trades aren't reachable here without on-chain indexing._"
+
     if not filtered:
         hint = " Try a wider range or `/dex` with no filter." if (min_b or max_b) else ""
-        return "No matching trades found." + hint
+        return "No matching trades found in the last ~24h." + hint + "\n" + SCOPE_NOTE
 
     total = len(filtered)
     start = page * PER_PAGE
@@ -281,19 +270,21 @@ async def cmd_dex(args: list, page: int = 0) -> str:
     total_pages = (total - 1) // PER_PAGE + 1
 
     if not page_items:
-        return "No more trades to display."
+        return "No more trades to display.\n" + SCOPE_NOTE
 
     header = "🔄 *RIZE — Live Trades*" + (f" · {type_.upper()}" if type_ != "all" else "")
     lines = [header]
     range_sub = _fmt_range_sub(min_b, max_b)
     if range_sub:
         lines.append(range_sub)
-    lines += [f"_Page {page + 1}/{total_pages} · Aerodrome (Base) · organic swaps only_", ""]
+    lines += [f"_Page {page + 1}/{total_pages} · Aerodrome (Base) · organic · last ~24h_", ""]
 
     for _, label, kind, t in page_items:
         lines += _fmt_trade(t, label, kind)
 
     if start + PER_PAGE < total:
         lines.append("_Reply *next* for more._")
+    else:
+        lines.append(SCOPE_NOTE)
 
     return "\n".join(lines)
