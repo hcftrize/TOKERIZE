@@ -631,9 +631,10 @@ Put any coin first to change the base asset.
 
 ━━ DEX (AERODROME) ━━
 
-/dexstat — Aggregated pool stats (liquidity, volume, buy/sell) · Refresh button
-/dex — Last organic buy/sell trades, both pools (last ~24h) · reply next for more
+/dexstat — Aggregated pool stats (liquidity, volume, buy/sell $) · Refresh button
+/dex — Last organic buy/sell trades, both pools · reply next for more (deep history)
 /dex buy · /dex sell · /dex all — Filter by trade type
+/dex 1M rize — Shortcut for /dex all 1M rize (minimum only)
 /dex buy 500k rize 1M rize — Range filter
 /dex sell 800usd — Minimum-only filter
 /dex all nc 2M rize — Maximum-only filter (nc skips a bound)
@@ -784,8 +785,8 @@ async def register_commands() -> None:
     {"command": "govbond",      "description": "Bond profile · reply see wallet for owner — /govbond 1234"},
     {"command": "traderize",    "description": "RIZE pairs & volumes"},
     {"command": "tradecc",      "description": "CC pairs & volumes — /tradebtc /tradeeth /tradelink any ticker"},
-    {"command": "dexstat",      "description": "Aggregated DEX pool stats — liquidity, volume, buy/sell"},
-    {"command": "dex",          "description": "Live organic trades, both pools — /dex buy 500k rize 1M rize"},
+    {"command": "dexstat",      "description": "Aggregated DEX pool stats — liquidity, volume, buy/sell $"},
+    {"command": "dex",          "description": "Deep organic trade history, both pools — /dex 1M rize"},
     {"command": "ccprice",      "description": "Canton Coin price & stats"},
     {"command": "ccburnmint",   "description": "Burn/mint ratio — /ccburnmint · /ccburnmint 1w"},
     {"command": "ccallocation", "description": "Mint allocation by role"},
