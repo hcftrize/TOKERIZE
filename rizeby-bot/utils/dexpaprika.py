@@ -130,8 +130,15 @@ async def get_pool_transactions_page(pool_address: str, page: int, limit: int = 
     that were simply rate-limited, not actually absent. Callers must only
     treat an empty result as real exhaustion when ok=True.
 
-    429s get up to 2 retries with backoff before giving up (ok=False);
-    other request failures get 1 retry (could be a transient network blip).
+    Gets ONE quick retry on failure (short fixed backoff) — deliberately
+    light. The incremental scan design in commands/dex.py means a page that
+    still fails just gets picked up cheaply on the *next* `/dex`/`next`
+    call, so this doesn't need to fight hard to succeed within one call;
+    an earlier version retried up to 3x with growing backoff specifically
+    to make deep, bursty scans "succeed no matter what" — that combination
+    (large bursts + aggressive retries) is what made /dex both slow and
+    still occasionally lossy. Small bursts + a light retry is the right
+    balance now that scanning itself is bounded and incremental.
     """
     cache_key = f"txns:{pool_address}:{page}:{limit}"
     cached = _cache_get(cache_key)
@@ -139,8 +146,7 @@ async def get_pool_transactions_page(pool_address: str, page: int, limit: int = 
         return cached
     url = f"{DP_BASE}/networks/{NETWORK}/pools/{pool_address}/transactions"
     data = None
-    attempts = 3
-    for attempt in range(attempts):
+    for attempt in range(2):
         try:
             async with httpx.AsyncClient(timeout=10) as client:
                 r = await client.get(
@@ -148,16 +154,16 @@ async def get_pool_transactions_page(pool_address: str, page: int, limit: int = 
                     params={"page": page, "limit": limit},
                 )
                 if r.status_code == 429:
-                    if attempt < attempts - 1:
-                        await asyncio.sleep(1.5 * (attempt + 1))
+                    if attempt == 0:
+                        await asyncio.sleep(0.8)
                         continue
                     return [], 0, False
                 r.raise_for_status()
                 data = r.json()
                 break
         except Exception:
-            if attempt < attempts - 1:
-                await asyncio.sleep(0.8 * (attempt + 1))
+            if attempt == 0:
+                await asyncio.sleep(0.4)
                 continue
             return [], 0, False
     if data is None:
