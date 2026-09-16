@@ -52,6 +52,7 @@ provider checked, not something unique to this bot.
 """
 import os
 import time
+import asyncio
 import datetime
 import httpx
 
@@ -117,31 +118,57 @@ async def get_pool_detail(pool_address: str) -> dict | None:
 async def get_pool_transactions_page(pool_address: str, page: int, limit: int = 100):
     """
     GET /networks/base/pools/{address}/transactions?page=N&limit=M
-    Returns (transactions: list[dict], total_pages: int). Newest-first.
-    Returns ([], 0) on any failure — callers treat that as 'stop scanning'.
+    Returns (transactions: list[dict], total_pages: int, ok: bool). Newest-first.
+
+    ok=False means the request genuinely FAILED (rate-limited or errored,
+    even after retries) — NOT the same thing as a confirmed-empty page.
+    This distinction matters: /dex's deep-scan can fire enough concurrent
+    page requests (POOL_1 + POOL_2, several pages/round) to occasionally
+    trip DexPaprika's rate limit mid-scan. A 429 used to be silently treated
+    as "no more transactions here", which made /dex falsely declare a
+    pool's history "fully exhausted" partway through — losing real trades
+    that were simply rate-limited, not actually absent. Callers must only
+    treat an empty result as real exhaustion when ok=True.
+
+    429s get up to 2 retries with backoff before giving up (ok=False);
+    other request failures get 1 retry (could be a transient network blip).
     """
     cache_key = f"txns:{pool_address}:{page}:{limit}"
     cached = _cache_get(cache_key)
     if cached is not None:
         return cached
     url = f"{DP_BASE}/networks/{NETWORK}/pools/{pool_address}/transactions"
-    try:
-        async with httpx.AsyncClient(timeout=10) as client:
-            r = await client.get(
-                url, headers=_dp_headers(),
-                params={"page": page, "limit": limit},
-            )
-            r.raise_for_status()
-            data = r.json()
-    except Exception:
-        return [], 0
+    data = None
+    attempts = 3
+    for attempt in range(attempts):
+        try:
+            async with httpx.AsyncClient(timeout=10) as client:
+                r = await client.get(
+                    url, headers=_dp_headers(),
+                    params={"page": page, "limit": limit},
+                )
+                if r.status_code == 429:
+                    if attempt < attempts - 1:
+                        await asyncio.sleep(1.5 * (attempt + 1))
+                        continue
+                    return [], 0, False
+                r.raise_for_status()
+                data = r.json()
+                break
+        except Exception:
+            if attempt < attempts - 1:
+                await asyncio.sleep(0.8 * (attempt + 1))
+                continue
+            return [], 0, False
+    if data is None:
+        return [], 0, False
     txns = data.get("transactions") or []
     page_info = data.get("page_info") or {}
     try:
         total_pages = int(page_info.get("total_pages") or 0)
     except (TypeError, ValueError):
         total_pages = 0
-    result = (txns, total_pages)
+    result = (txns, total_pages, True)
     _cache_set(cache_key, result)
     return result
 
