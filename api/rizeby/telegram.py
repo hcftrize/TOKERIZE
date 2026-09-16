@@ -325,8 +325,11 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
     elif cmd_lower == "dex":
         try:
             from commands.dex import cmd_dex
-            page = _get_page(reply_chat_id)
-            p = page["page"] if page and page["cmd"] == "dex" else 0
+            # A freshly-typed /dex is always a new run — page 0, regardless of
+            # whatever page a previous /dex browsing session was left on.
+            # (Only the "next"/"page N" reply paths above are allowed to carry
+            # a page number forward.)
+            p = 0
             _set_page(reply_chat_id, "dex", p, args)
             bot_mid = await send_message(reply_chat_id, await cmd_dex(args, page=p), thread_id=reply_thread_id)
             if bot_mid: _cache_bot_msg(bot_mid, "dex", p, args, reply_chat_id, reply_thread_id)

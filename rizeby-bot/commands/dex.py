@@ -250,13 +250,17 @@ def _fmt_trade_price(v: float) -> str:
 
 
 def _fmt_trade(trade: dict, wallet: str | None) -> list[str]:
+    """One trade block, spaced out for mobile readability: description line,
+    blank, timestamp, blank, wallet — rather than three cramped lines."""
     kind = trade["kind"]
     emoji = "🟢" if kind == "buy" else "🔴"
     verb = "Buy" if kind == "buy" else "Sell"
     price_str = _fmt_trade_price(trade["price_usd"])
     out = [
         f"{emoji} {verb} @ {price_str} — {fmt_rize(trade['rize_amount'])} ({fmt_usd(trade['usd_value'])}) · {trade['pool']}",
+        "",
         f"  {_fmt_ts(trade['epoch'])}",
+        "",
     ]
     if wallet:
         out.append(f"  `{wallet}`")
@@ -392,7 +396,7 @@ async def cmd_dex(args: list, page: int = 0) -> str:
         lines += _fmt_trade(trade, wallet)
 
     if have_more_buffered or can_scan_deeper:
-        lines.append("_Reply *next* for more._")
+        lines.append("_Reply *next* for more · Reply *page N* to jump to page N_")
     else:
         lines.append("_End of available history for these pools._")
 
