@@ -312,6 +312,19 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         from commands.rize import cmd_totalbonded
         await send_message(reply_chat_id, await cmd_totalbonded(args), thread_id=reply_thread_id)
 
+    elif cmd_lower == "dexstat":
+        from commands.dex import cmd_dexstat
+        text, markup = await cmd_dexstat(args)
+        await send_message(reply_chat_id, text, markup, thread_id=reply_thread_id)
+
+    elif cmd_lower == "dex":
+        from commands.dex import cmd_dex
+        page = _get_page(reply_chat_id)
+        p = page["page"] if page and page["cmd"] == "dex" else 0
+        _set_page(reply_chat_id, "dex", p, args)
+        bot_mid = await send_message(reply_chat_id, await cmd_dex(args, page=p), thread_id=reply_thread_id)
+        if bot_mid: _cache_bot_msg(bot_mid, "dex", p, args, reply_chat_id, reply_thread_id)
+
     elif cmd_lower in ("traderize",):
         from commands.price import cmd_traderize
         await send_message(reply_chat_id, await cmd_traderize(args), thread_id=reply_thread_id)
@@ -564,6 +577,10 @@ async def handle_callback(callback: dict) -> None:
         # coin_id is the CoinGecko id — pass directly, cmd_price resolves it
         text, markup = await cmd_price([coin_id])
         await edit_message(chat_id, msg_id, text, markup)
+    elif data == "dexstat_refresh":
+        from commands.dex import cmd_dexstat
+        text, markup = await cmd_dexstat([])
+        await edit_message(chat_id, msg_id, text, markup)
     try:
         async with httpx.AsyncClient(timeout=5) as client:
             await client.post(f"{TG_API}/answerCallbackQuery",
@@ -611,6 +628,15 @@ Put any coin first to change the base asset.
 /traderize — RIZE pairs & volumes
 /tradecc — CC pairs & volumes
 /tradebtc · /tradeeth · /tradelink — any coin
+
+━━ DEX (AERODROME) ━━
+
+/dexstat — Aggregated pool stats (price, liquidity, volume, buy/sell) · Refresh button
+/dex — Last organic buy/sell trades, both pools · reply next for more
+/dex buy · /dex sell · /dex all — Filter by trade type
+/dex buy 500k rize 1M rize — Range filter
+/dex sell 800usd — Minimum-only filter
+/dex all nc 2M rize — Maximum-only filter (nc skips a bound)
 
 ━━ CANTON COIN ━━
 
@@ -758,6 +784,8 @@ async def register_commands() -> None:
     {"command": "govbond",      "description": "Bond profile · reply see wallet for owner — /govbond 1234"},
     {"command": "traderize",    "description": "RIZE pairs & volumes"},
     {"command": "tradecc",      "description": "CC pairs & volumes — /tradebtc /tradeeth /tradelink any ticker"},
+    {"command": "dexstat",      "description": "Aggregated DEX pool stats — price, liquidity, volume, buy/sell"},
+    {"command": "dex",          "description": "Live organic trades, both pools — /dex buy 500k rize 1M rize"},
     {"command": "ccprice",      "description": "Canton Coin price & stats"},
     {"command": "ccburnmint",   "description": "Burn/mint ratio — /ccburnmint · /ccburnmint 1w"},
     {"command": "ccallocation", "description": "Mint allocation by role"},
