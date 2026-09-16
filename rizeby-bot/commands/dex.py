@@ -1,40 +1,65 @@
 """
 Commands: /dexstat, /dex
 DEX-side stats and live trade feed for RIZE, aggregated across its two
-Aerodrome pools on Base. Powered by the free GeckoTerminal public API
-(utils/geckoterminal.py).
+Aerodrome pools on Base.
 
-Price is deliberately NOT shown here — /price already covers that.
+/dexstat is powered by GeckoTerminal (liquidity, FDV/MCap, volume, buy/sell
+counts — all confirmed live) plus DexPaprika (cumulative buy/sell $ per
+window — GeckoTerminal's pool aggregate doesn't expose that split).
 
-IMPORTANT SCOPE LIMIT (confirmed against GeckoTerminal's docs): the free
-/trades endpoint only returns the latest ~300 trades within a ROLLING 24H
-WINDOW per pool — there is no pagination/cursor to reach older history.
-/dex's "reply next" therefore paginates through everything available
-(up to ~600 raw trades across both pools, filtered down), but can never
-reach yesterday or further back. This is a hard ceiling of the free API,
-not a bug — see the closing note it prints once you hit the end.
+/dex is powered entirely by DexPaprika (utils/dexpaprika.py): unlike
+GeckoTerminal's /trades endpoint (hard-capped at ~300 trades / rolling 24h,
+no pagination beyond that), DexPaprika's /transactions endpoint paginates
+for real — confirmed reachable all the way back to these pools' actual
+on-chain creation. "Reply next" therefore keeps scanning genuinely further
+back in history each time, not just through one fixed 24h batch.
 
-/dexstat            — aggregated pool stats (liquidity, volume,
-                       buy/sell counts, FDV/MCap), P1/P2 breakdown, Refresh button
+Price is deliberately NOT shown in /dexstat — /price already covers that.
+Each trade in /dex DOES show its own execution price (see _fmt_trade).
+
+WALLET CAVEAT: shown wallets are best-effort (tx.from, resolved via a free
+Base RPC call) — correct for the large majority of plain EOA-initiated
+trades, but can show a bundler/router instead of the true trader for swaps
+routed through a smart wallet + aggregator. This is a limitation confirmed
+to affect every provider checked (GeckoTerminal, DexPaprika, DEXTools' paid
+API, and professional infra like Allium) — not something unique to this bot,
+and not solvable without a much bigger on-chain log-parsing project. See
+utils/dexpaprika.py's docstring for the full cross-check that established this.
+
+/dexstat            — aggregated pool stats (liquidity, volume, buy/sell
+                       counts + $, FDV/MCap), P1/P2 breakdown, Refresh button
 /dex                — last organic buy/sell trades (both pools combined),
                        liquidity add/remove events are NOT shown here (kept
                        for a future /dexliq)
 /dex <type>         — type = buy | sell | all
+/dex <min>          — shortcut: same as `/dex all <min>` (no type = all)
 /dex <type> <min>   — single amount = MINIMUM threshold only
 /dex <type> <min> <max>
 /dex <type> nc <max>  — 'nc' skips that bound
   Amounts: '500k rize' / '500krize' / '800usd' / '800 usd' all accepted.
   Bare numbers with no unit default to RIZE.
 """
-from utils.geckoterminal import (
-    get_pools_multi, get_pool_trades, pool_attrs, trade_attrs,
-    get_trade_wallet, get_trade_kind, get_trade_rize_amount, get_trade_usd,
-    get_trade_timestamp, POOL_1, POOL_2,
+import asyncio
+
+from utils.geckoterminal import get_pools_multi, pool_attrs, POOL_1, POOL_2
+from utils.dexpaprika import (
+    get_pool_detail, get_pool_transactions_page, derive_trade, resolve_tx_wallet,
 )
-from utils.formatters import fmt_usd, fmt_rize, parse_dex_amount
+from utils.formatters import fmt_usd, fmt_rize, fmt_price, parse_dex_amount
 
 VALID_TYPES = ("buy", "sell", "all")
 PER_PAGE = 5
+
+# How hard /dex scans DexPaprika when a filter is narrow (e.g. a high RIZE
+# minimum) and matches are sparse. Each round fetches PAGES_PER_ROUND pages
+# per pool IN PARALLEL (limit=100 each); scanning stops as soon as enough
+# matches are found. Worst case (no matches ever found): MAX_ROUNDS *
+# PAGES_PER_ROUND * 100 raw trades scanned per pool per command call — kept
+# conservative to stay well within DexPaprika's free keyless rate limit
+# (15 req/min) even if a user rapid-fires several narrow /dex queries.
+DP_PAGE_LIMIT = 100
+PAGES_PER_ROUND = 2
+MAX_ROUNDS = 4
 
 
 # ── /dexstat ─────────────────────────────────────────────────────────────
@@ -101,8 +126,33 @@ async def cmd_dexstat(args: list) -> tuple:
         name = a.get("name", "?")
         pool_lines.append(f"  {label} ({name}): {fmt_usd(_reserve(a))}")
 
-    ages = [a.get("pool_created_at") for a in infos if a.get("pool_created_at")]
-    age_str = min(ages)[:10] if ages else "—"
+    # Cumulative buy/sell $ — GeckoTerminal's pool aggregate doesn't split
+    # volume by direction, so this piece comes from DexPaprika instead.
+    dp_details = await asyncio.gather(
+        get_pool_detail(POOL_1), get_pool_detail(POOL_2), return_exceptions=True
+    )
+    buy_usd_24h = sell_usd_24h = buy_usd_1h = sell_usd_1h = 0.0
+    dp_ok = False
+    for d in dp_details:
+        if not isinstance(d, dict):
+            continue
+        w24 = d.get("24h") or {}
+        w1 = d.get("1h") or {}
+        try:
+            buy_usd_24h += float(w24.get("buy_usd") or 0)
+            sell_usd_24h += float(w24.get("sell_usd") or 0)
+            buy_usd_1h += float(w1.get("buy_usd") or 0)
+            sell_usd_1h += float(w1.get("sell_usd") or 0)
+            dp_ok = True
+        except (TypeError, ValueError):
+            pass
+
+    if dp_ok:
+        buys24_line = f"Buys 24h: {buy_totals['h24']} ({fmt_usd(buy_usd_24h)})  ·  Sells 24h: {sell_totals['h24']} ({fmt_usd(sell_usd_24h)})"
+        buys1h_line = f"Buys 1h: {buy_totals['h1']} ({fmt_usd(buy_usd_1h)})  ·  Sells 1h: {sell_totals['h1']} ({fmt_usd(sell_usd_1h)})"
+    else:
+        buys24_line = f"Buys 24h: {buy_totals['h24']}  ·  Sells 24h: {sell_totals['h24']}"
+        buys1h_line = f"Buys 1h: {buy_totals['h1']}  ·  Sells 1h: {sell_totals['h1']}"
 
     lines = [
         "*RIZE — DEX Stats* _(Aerodrome · Base)_",
@@ -112,11 +162,10 @@ async def cmd_dexstat(args: list) -> tuple:
     ] + pool_lines + [
         "",
         f"📊 Volume 24h: {fmt_usd(vol_totals['h24'])}  ·  6h: {fmt_usd(vol_totals['h6'])}  ·  1h: {fmt_usd(vol_totals['h1'])}",
-        f"Buys 24h: {buy_totals['h24']}  ·  Sells 24h: {sell_totals['h24']}",
-        f"Buys 1h: {buy_totals['h1']}  ·  Sells 1h: {sell_totals['h1']}",
+        buys24_line,
+        buys1h_line,
         "",
         f"FDV: {fmt_usd(fdv)}  ·  MCap: {fmt_usd(mcap)}",
-        f"Oldest pool since: {age_str}",
     ]
 
     markup = {"inline_keyboard": [[
@@ -191,17 +240,21 @@ def _fmt_ts(epoch: float) -> str:
     return dt.strftime("%Y-%m-%d %H:%M UTC")
 
 
-def _fmt_trade(t: dict, pool_label: str, kind: str) -> list[str]:
-    attrs = trade_attrs(t)
-    rize_amt = get_trade_rize_amount(attrs, kind)
-    usd_amt = get_trade_usd(attrs)
-    wallet = get_trade_wallet(attrs)
-    ts = get_trade_timestamp(attrs)
+def _fmt_trade_price(v: float) -> str:
+    """'0.002475 $' — smart-precision number (reuses fmt_price's logic)
+    with the $ suffix the user asked for, placed right after Buy/Sell."""
+    s = fmt_price(v)  # e.g. "$0.002475"
+    return (s[1:] if s.startswith("$") else s) + " $"
+
+
+def _fmt_trade(trade: dict, wallet: str | None) -> list[str]:
+    kind = trade["kind"]
     emoji = "🟢" if kind == "buy" else "🔴"
     verb = "Buy" if kind == "buy" else "Sell"
+    price_str = _fmt_trade_price(trade["price_usd"])
     out = [
-        f"{emoji} {verb} — {fmt_rize(rize_amt)} ({fmt_usd(usd_amt)}) · {pool_label}",
-        f"  {_fmt_ts(ts)}",
+        f"{emoji} {verb} @ {price_str} — {fmt_rize(trade['rize_amount'])} ({fmt_usd(trade['usd_value'])}) · {trade['pool']}",
+        f"  {_fmt_ts(trade['epoch'])}",
     ]
     if wallet:
         out.append(f"  `{wallet}`")
@@ -216,10 +269,64 @@ def _usage_text() -> str:
         "Usage:\n"
         "`/dex` — last organic buy/sell trades\n"
         "`/dex buy` · `/dex sell` · `/dex all`\n"
+        "`/dex 1M rize` — shortcut for `/dex all 1M rize` (minimum only)\n"
         "`/dex buy 500k rize 1M rize` — range\n"
         "`/dex sell 800usd` — minimum only\n"
         "`/dex all nc 2M rize` — maximum only (`nc` skips a bound)"
     )
+
+
+async def _scan_pool(pool_address: str, label: str, target_count: int,
+                      type_: str, min_b, max_b):
+    """
+    Scan one pool's transactions (newest-first) via DexPaprika, collecting
+    organic buy/sell matches until target_count is reached, the pool's
+    history is exhausted, or the safety cap (MAX_ROUNDS) is hit.
+    Returns (matches: list[dict], exhausted: bool) — exhausted=True means
+    we've genuinely reached the end of this pool's available history (not
+    just the scan cap), so there's nothing more `next` could ever find here.
+    """
+    matches = []
+    page = 1
+    total_pages = None
+    for _ in range(MAX_ROUNDS):
+        page_nums = list(range(page, page + PAGES_PER_ROUND))
+        if total_pages:
+            page_nums = [p for p in page_nums if p <= total_pages]
+        if not page_nums:
+            return matches, True
+
+        results = await asyncio.gather(*[
+            get_pool_transactions_page(pool_address, p, DP_PAGE_LIMIT) for p in page_nums
+        ])
+        got_any = False
+        for txns, tp in results:
+            if tp:
+                total_pages = tp
+            if not txns:
+                continue
+            got_any = True
+            for raw in txns:
+                trade = derive_trade(raw)
+                if not trade:
+                    continue
+                if type_ != "all" and trade["kind"] != type_:
+                    continue
+                if not _passes_filter(trade["rize_amount"], trade["usd_value"], min_b, max_b):
+                    continue
+                trade["pool"] = label
+                matches.append(trade)
+
+        page = page_nums[-1] + 1
+        if len(matches) >= target_count:
+            exhausted = total_pages is not None and page > total_pages
+            return matches, exhausted
+        if total_pages and page > total_pages:
+            return matches, True
+        if not got_any:
+            return matches, True
+
+    return matches, False  # hit the safety cap — more may exist, unconfirmed
 
 
 async def cmd_dex(args: list, page: int = 0) -> str:
@@ -230,61 +337,61 @@ async def cmd_dex(args: list, page: int = 0) -> str:
         if maybe_type in VALID_TYPES:
             type_, rest = maybe_type, args[1:]
         else:
-            return _usage_text()
+            # Shortcut: "/dex 1M RIZE" behaves like "/dex all 1M RIZE".
+            type_, rest = "all", args
 
     min_b, max_b = _parse_range(rest)
+    if rest and min_b is None and max_b is None:
+        return _usage_text()
 
-    pools_trades = []
-    for label, addr in (("P1", POOL_1), ("P2", POOL_2)):
-        for t in await get_pool_trades(addr):
-            pools_trades.append((label, addr, t))
+    # +1 beyond what this page needs, so we can tell whether there's a next page.
+    target_count = (page + 1) * PER_PAGE + 1
 
-    if not pools_trades:
-        return "❌ Could not fetch recent trades right now."
+    scan_results = await asyncio.gather(
+        _scan_pool(POOL_1, "P1", target_count, type_, min_b, max_b),
+        _scan_pool(POOL_2, "P2", target_count, type_, min_b, max_b),
+    )
+    all_matches = []
+    fully_exhausted = True
+    for matches, exhausted in scan_results:
+        all_matches.extend(matches)
+        fully_exhausted = fully_exhausted and exhausted
 
-    filtered = []
-    for label, addr, t in pools_trades:
-        attrs = trade_attrs(t)
-        kind = get_trade_kind(attrs, addr)
-        if kind not in ("buy", "sell"):
-            continue  # organic swaps only — drops anything add/remove-shaped
-        if type_ != "all" and kind != type_:
-            continue
-        rize_amt = get_trade_rize_amount(attrs, kind)
-        usd_amt = get_trade_usd(attrs)
-        if not _passes_filter(rize_amt, usd_amt, min_b, max_b):
-            continue
-        filtered.append((get_trade_timestamp(attrs), label, kind, t))
+    all_matches.sort(key=lambda t: t["epoch"], reverse=True)
 
-    filtered.sort(key=lambda x: x[0], reverse=True)
+    hint = " Try a wider range or `/dex` with no filter." if (min_b or max_b) else ""
 
-    SCOPE_NOTE = "_GeckoTerminal's free API only covers the last ~24h (300 trades/pool max) — older trades aren't reachable here without on-chain indexing._"
+    if not all_matches:
+        if fully_exhausted:
+            return "No matching trades found in the full available history." + hint
+        return ("No matches in the depth scanned so far." + hint +
+                " Reply *next* to keep scanning further back.")
 
-    if not filtered:
-        hint = " Try a wider range or `/dex` with no filter." if (min_b or max_b) else ""
-        return "No matching trades found in the last ~24h." + hint + "\n" + SCOPE_NOTE
-
-    total = len(filtered)
     start = page * PER_PAGE
-    page_items = filtered[start:start + PER_PAGE]
-    total_pages = (total - 1) // PER_PAGE + 1
+    page_items = all_matches[start:start + PER_PAGE]
+    have_more_buffered = len(all_matches) > start + PER_PAGE
+    can_scan_deeper = not fully_exhausted
 
     if not page_items:
-        return "No more trades to display.\n" + SCOPE_NOTE
+        if fully_exhausted:
+            return "No more trades — you've reached the full available history for these pools."
+        return "No more matches buffered yet. Reply *next* to keep scanning further back."
+
+    wallets = await asyncio.gather(*[resolve_tx_wallet(t["tx_hash"]) for t in page_items])
 
     header = "🔄 *RIZE — Live Trades*" + (f" · {type_.upper()}" if type_ != "all" else "")
     lines = [header]
     range_sub = _fmt_range_sub(min_b, max_b)
     if range_sub:
         lines.append(range_sub)
-    lines += [f"_Page {page + 1}/{total_pages} · Aerodrome (Base) · organic · last ~24h_", ""]
+    lines += [f"_Page {page + 1} · Aerodrome (Base) · organic swaps_", ""]
 
-    for _, label, kind, t in page_items:
-        lines += _fmt_trade(t, label, kind)
+    for trade, wallet in zip(page_items, wallets):
+        lines += _fmt_trade(trade, wallet)
 
-    if start + PER_PAGE < total:
+    if have_more_buffered or can_scan_deeper:
         lines.append("_Reply *next* for more._")
     else:
-        lines.append(SCOPE_NOTE)
+        lines.append("_End of available history for these pools._")
 
     return "\n".join(lines)
