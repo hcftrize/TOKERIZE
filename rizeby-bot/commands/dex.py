@@ -259,13 +259,13 @@ def _fmt_trade(trade: dict, wallet: str | None) -> list[str]:
     out = [
         f"{emoji} {verb} @ {price_str} — {fmt_rize(trade['rize_amount'])} ({fmt_usd(trade['usd_value'])}) · {trade['pool']}",
         "",
-        f"  {_fmt_ts(trade['epoch'])}",
+        _fmt_ts(trade["epoch"]),
         "",
     ]
     if wallet:
-        out.append(f"  `{wallet}`")
+        out.append(f"`{wallet}`")
     else:
-        out.append("  _wallet unavailable_")
+        out.append("_wallet unavailable_")
     out.append("")
     return out
 
