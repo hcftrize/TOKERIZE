@@ -116,11 +116,19 @@ async def _throttle():
         await asyncio.sleep(max(wait_for, 0.05))
 
 
-# ── Short TTL cache for pool/page fetches — protects DexPaprika's free-tier
-# rate limit (15 req/min keyless, 50 req/min with a free account) given /dex
-# can scan multiple pages per command. ──────────────────────────────────────
+# ── TTL cache for pool/page fetches ─────────────────────────────────────────
+# Set to 65s — deliberately just OVER the throttle's 60s sliding window, not
+# under it. commands/dex.py's /dex always re-requests the exact same fixed
+# page numbers every call, so a repeat call either (a) lands within
+# CACHE_TTL and costs 0 new requests (pure cache hit), or (b) lands after
+# CACHE_TTL, by which point the previous call's requests have ALSO fully
+# aged out of the throttle's 60s window. There's no gap between those two
+# cases where a repeat call both misses the cache AND still collides with
+# the still-warm throttle window — which is exactly what used to cause a
+# real, measured ~25s wait on a "next" tapped 30-60s after the previous
+# one (verified by simulation). A shorter TTL (e.g. 30s) reopens that gap.
 _cache: dict = {}
-CACHE_TTL = 30  # seconds
+CACHE_TTL = 65  # seconds — see rationale above; keep >= the throttle's 60s window
 
 # Resolved tx wallets are cached permanently (per-process) — a mined tx's
 # `from` never changes, so there's no reason to ever re-fetch it.
