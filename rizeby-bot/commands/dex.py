@@ -72,25 +72,38 @@ PER_PAGE = 5
 # never more, never accumulated across calls. Deliberately simple: no
 # per-chat state, no "how far did we get last time", nothing to get out of
 # sync. worst case = SCAN_PAGES_PER_POOL * 2 pools requests per call
-# (8 with a key -> 16 requests/call, 3 keyless -> 6 requests/call), and
+# (11 with a key -> 22 requests/call, 3 keyless -> 6 requests/call), and
 # CONSTANT — it doesn't grow the longer a chat keeps using /dex, unlike the
 # stateful version this replaced.
 #
 # The real ceiling here is NOT the 429 risk — utils/dexpaprika.py's
 # _throttle() makes exceeding 30 req/min mathematically impossible
 # regardless of this number (it waits rather than ever firing over the
-# limit). The two things that actually limit how high this can reasonably
-# go: (1) fluidity — 16 req/call still leaves real headroom under the 24
-# req/min throttle ceiling for several `next` taps in a row before any
-# wait is even possible, especially since repeat taps within the same 30s
-# usually hit utils/dexpaprika.py's page cache and cost 0 new requests;
-# (2) the monthly credit budget (100K/mo, confirmed on the account's
-# billing page, 1 request = 1 credit) — at 16 req/call, even a generous
-# ~200 /dex-or-next calls/day lands around 96K/mo, near that ceiling. Going
-# meaningfully higher than 8 risks the credit budget before it risks
-# anything else.
+# limit). Two things actually limit how high this can reasonably go:
+#
+# (1) Fluidity. Verified by simulation (controlled fake clock + fake
+# sleep, not just reasoned about): with CACHE_TTL=65s in
+# utils/dexpaprika.py (>= the throttle's 60s window), a burst of up to 12
+# pages/pool (24 req/call = the throttle's full 24 req/min ceiling) causes
+# ZERO wait even across 6 instant `next`/filter-change taps in a row —
+# because a repeat call either hits the page cache (filter doesn't change
+# which raw pages get fetched) or lands after the previous burst has
+# fully aged out of the throttle window; there's no gap where both fail at
+# once. 13+ pages/pool broke this immediately in testing (a single burst
+# alone exceeds 24 and has to wait on itself). 11 is chosen instead of the
+# bare 12-page maximum to leave 2 requests of slack for incidental
+# concurrent DexPaprika use (e.g. a /dexstat call landing in the same few
+# seconds), which also shares this same rate budget.
+#
+# (2) The monthly credit budget (100K/mo, confirmed on the account's
+# billing page, 1 request = 1 credit). At 22 req/call, a light-to-moderate
+# ~100 /dex-or-next calls/day is ~66K/mo (fine), but a generous ~200
+# calls/day would be ~132K/mo — OVER budget. This wasn't a concern at the
+# previous, smaller value (8 pages ~= 96K/mo at that same heavy-use
+# estimate); it's worth re-checking if this bot's actual daily usage ever
+# looks that high.
 DP_PAGE_LIMIT = 100
-SCAN_PAGES_PER_POOL = 8 if HAS_KEY else 3
+SCAN_PAGES_PER_POOL = 11 if HAS_KEY else 3
 
 
 # ── /dexkey — debug: is DEXPAPRIKA_KEY actually live? ──────────────────────
@@ -115,9 +128,11 @@ async def cmd_dexkey(args: list) -> str:
             "that one batch — no deep history crawl, no risk of drifting out of "
             "sync with itself.\n"
             "Confirmed account limits (billing page): *30 req/min · 100K credits/mo*. "
-            "Bot throttles itself to 24 req/min max as a hard backstop, though at "
-            f"a constant {SCAN_PAGES_PER_POOL * 2} requests/call it's nowhere near "
-            "that ceiling in normal use.\n\n"
+            "Bot throttles itself to 24 req/min max as a hard backstop — a single call "
+            f"uses {SCAN_PAGES_PER_POOL * 2} of that budget (verified by simulation to "
+            "cause zero wait even across several instant `next`/filter-change taps in a "
+            "row), leaving a small margin for anything else touching DexPaprika in the "
+            "same few seconds.\n\n"
             "_This trades away deep-history digging for being always correct and "
             "predictable — a previous stateful version could dig further back via "
             "repeated `next`, but a plain freshly-typed `/dex` could silently "
