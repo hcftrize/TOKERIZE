@@ -15,6 +15,34 @@ TG_API = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 # never named to users — copyMessage() sends with no "Forwarded from" tag.
 CHAINLINK_MEME_CHANNEL_ID = -1001539496298
 
+# ── Webhook update dedup ───────────────────────────────────────────────────────
+# Telegram retries a webhook delivery if it doesn't get a prompt 200 back —
+# and a deep DexPaprika scan (now up to 1800 trades/pool per /dex call with
+# the API key) can genuinely take long enough to trigger that. Without this,
+# a single "next" tap can get processed twice, silently double-advancing the
+# page (e.g. a page 1→2 next lands you on 3, "No more matches buffered yet"
+# out of nowhere). Every Telegram update carries a unique, ever-increasing
+# update_id — track recently-seen ones and skip reprocessing.
+_seen_updates: dict = {}
+SEEN_UPDATE_TTL = 600  # 10 min — plenty longer than any realistic retry gap
+
+
+def _already_processed(update_id) -> bool:
+    """True if this update_id was handled recently (and marks it as seen if
+    not). update_id may be missing on malformed input — treat as never-seen
+    so we never block genuine traffic just because Telegram omitted it."""
+    if update_id is None:
+        return False
+    now = time.time()
+    expired = [k for k, v in _seen_updates.items() if now - v > SEEN_UPDATE_TTL]
+    for k in expired:
+        del _seen_updates[k]
+    if update_id in _seen_updates:
+        return True
+    _seen_updates[update_id] = now
+    return False
+
+
 # ── Pagination state ──────────────────────────────────────────────────────────
 _pagination: dict = {}
 PAGE_TTL = 600  # 10 min
@@ -952,6 +980,13 @@ class handler(BaseHTTPRequestHandler):
         try:
             length = int(self.headers.get("Content-Length", 0))
             body   = json.loads(self.rfile.read(length))
+            if _already_processed(body.get("update_id")):
+                # Telegram re-delivering an update we already handled (slow
+                # response last time) — ack again, don't reprocess it.
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b"OK")
+                return
             kind, payload = parse_update(body)
             if kind == "callback":
                 asyncio.run(handle_callback(payload))
