@@ -320,6 +320,15 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         from commands.rize import cmd_totalbonded
         await send_message(reply_chat_id, await cmd_totalbonded(args), thread_id=reply_thread_id)
 
+    elif cmd_lower == "dexkey":
+        try:
+            from commands.dex import cmd_dexkey
+            await send_message(reply_chat_id, await cmd_dexkey(args), thread_id=reply_thread_id)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            await send_message(reply_chat_id, f"⚠️ /dexkey error: `{type(e).__name__}: {e}`", thread_id=reply_thread_id)
+
     elif cmd_lower == "dexstat":
         try:
             from commands.dex import cmd_dexstat
