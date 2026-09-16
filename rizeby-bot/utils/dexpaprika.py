@@ -12,7 +12,7 @@ request = 1 credit flat, no per-endpoint multiplier — confirmed via
 DexPaprika's own pricing page. RATE_LIMIT_PER_MIN below is set with a
 safety margin under the real 30/min ceiling. 100K credits/month is
 generous for this bot's actual traffic (≈3300/day) as long as /dex's
-per-call scan budget stays modest — see PAGES_PER_ROUND/MAX_ROUNDS in
+per-call scan budget stays modest — see TOTAL_BUDGET_PER_CALL in
 commands/dex.py, deliberately kept small precisely for this reason.
 
 AUTH (confirmed against DexPaprika's docs): the key goes in the
