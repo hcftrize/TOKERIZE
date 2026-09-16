@@ -71,11 +71,19 @@ def _next_page(chat_id: int):
 
 
 async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
-                        thread_id: int = None, cached_ctx: dict = None) -> None:
+                        thread_id: int = None, cached_ctx: dict = None,
+                        _continuation: bool = False) -> None:
     """
     cached_ctx: if the user replied to a bot message, this holds the bot message's
     stored context {cmd, page, args, chat_id, thread_id}.  We use it to send the
     response to the correct chat/thread regardless of who typed the reply.
+
+    _continuation: True only when this call is the internal recursive dispatch
+    made by the "next"/"page N" reply handlers below (they've already computed
+    and stored the target page in _pagination before calling back in). False
+    means this is a command the user typed directly — some handlers (e.g. dex)
+    use this to always start a freshly-typed command at page 0, instead of
+    inheriting whatever page a previous browsing session was left on.
     """
     cmd_lower = cmd.lower().strip()
 
@@ -118,7 +126,7 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         }
         effective_cmd = cmd_map.get(state["cmd"], state["cmd"])
         await route_command(effective_cmd, state["args"], reply_chat_id,
-                            message_id, reply_thread_id)
+                            message_id, reply_thread_id, _continuation=True)
         return
 
     # ── "see wallet" reply after /govbond ────────────────────────────────
@@ -182,7 +190,7 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
             }
             effective_cmd = cmd_map.get(state["cmd"], state["cmd"])
             await route_command(effective_cmd, state["args"], reply_chat_id,
-                                message_id, reply_thread_id)
+                                message_id, reply_thread_id, _continuation=True)
         else:
             await send_message(reply_chat_id, "No active list to navigate.",
                                thread_id=reply_thread_id)
@@ -325,11 +333,16 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
     elif cmd_lower == "dex":
         try:
             from commands.dex import cmd_dex
-            # A freshly-typed /dex is always a new run — page 0, regardless of
-            # whatever page a previous /dex browsing session was left on.
-            # (Only the "next"/"page N" reply paths above are allowed to carry
-            # a page number forward.)
-            p = 0
+            if _continuation:
+                # Recursive dispatch from "next"/"page N" — they already
+                # computed and stored the target page; read it back.
+                page = _get_page(reply_chat_id)
+                p = page["page"] if page and page["cmd"] == "dex" else 0
+            else:
+                # A freshly-typed /dex is always a new run — page 0,
+                # regardless of whatever page a previous /dex browsing
+                # session was left on.
+                p = 0
             _set_page(reply_chat_id, "dex", p, args)
             bot_mid = await send_message(reply_chat_id, await cmd_dex(args, page=p), thread_id=reply_thread_id)
             if bot_mid: _cache_bot_msg(bot_mid, "dex", p, args, reply_chat_id, reply_thread_id)
