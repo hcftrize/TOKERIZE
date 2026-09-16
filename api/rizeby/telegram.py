@@ -313,17 +313,27 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         await send_message(reply_chat_id, await cmd_totalbonded(args), thread_id=reply_thread_id)
 
     elif cmd_lower == "dexstat":
-        from commands.dex import cmd_dexstat
-        text, markup = await cmd_dexstat(args)
-        await send_message(reply_chat_id, text, markup, thread_id=reply_thread_id)
+        try:
+            from commands.dex import cmd_dexstat
+            text, markup = await cmd_dexstat(args)
+            await send_message(reply_chat_id, text, markup, thread_id=reply_thread_id)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            await send_message(reply_chat_id, f"⚠️ /dexstat error: `{type(e).__name__}: {e}`", thread_id=reply_thread_id)
 
     elif cmd_lower == "dex":
-        from commands.dex import cmd_dex
-        page = _get_page(reply_chat_id)
-        p = page["page"] if page and page["cmd"] == "dex" else 0
-        _set_page(reply_chat_id, "dex", p, args)
-        bot_mid = await send_message(reply_chat_id, await cmd_dex(args, page=p), thread_id=reply_thread_id)
-        if bot_mid: _cache_bot_msg(bot_mid, "dex", p, args, reply_chat_id, reply_thread_id)
+        try:
+            from commands.dex import cmd_dex
+            page = _get_page(reply_chat_id)
+            p = page["page"] if page and page["cmd"] == "dex" else 0
+            _set_page(reply_chat_id, "dex", p, args)
+            bot_mid = await send_message(reply_chat_id, await cmd_dex(args, page=p), thread_id=reply_thread_id)
+            if bot_mid: _cache_bot_msg(bot_mid, "dex", p, args, reply_chat_id, reply_thread_id)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            await send_message(reply_chat_id, f"⚠️ /dex error: `{type(e).__name__}: {e}`", thread_id=reply_thread_id)
 
     elif cmd_lower in ("traderize",):
         from commands.price import cmd_traderize
@@ -578,9 +588,14 @@ async def handle_callback(callback: dict) -> None:
         text, markup = await cmd_price([coin_id])
         await edit_message(chat_id, msg_id, text, markup)
     elif data == "dexstat_refresh":
-        from commands.dex import cmd_dexstat
-        text, markup = await cmd_dexstat([])
-        await edit_message(chat_id, msg_id, text, markup)
+        try:
+            from commands.dex import cmd_dexstat
+            text, markup = await cmd_dexstat([])
+            await edit_message(chat_id, msg_id, text, markup)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            await send_message(chat_id, f"⚠️ /dexstat error: `{type(e).__name__}: {e}`")
     try:
         async with httpx.AsyncClient(timeout=5) as client:
             await client.post(f"{TG_API}/answerCallbackQuery",
@@ -924,7 +939,8 @@ class handler(BaseHTTPRequestHandler):
                 asyncio.run(route_command(cmd, args, chat_id, msg_id, thread_id, cached_ctx))
             # else: plain text in group — silently ignore
         except Exception:
-            pass
+            import traceback
+            traceback.print_exc()
         self.send_response(200)
         self.end_headers()
         self.wfile.write(b"OK")
