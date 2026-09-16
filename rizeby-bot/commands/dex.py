@@ -44,6 +44,7 @@ import asyncio
 from utils.geckoterminal import get_pools_multi, pool_attrs, POOL_1, POOL_2
 from utils.dexpaprika import (
     get_pool_detail, get_pool_transactions_page, derive_trade, resolve_tx_wallet,
+    HAS_KEY,
 )
 from utils.formatters import fmt_usd, fmt_rize, fmt_price, parse_dex_amount
 
@@ -54,12 +55,13 @@ PER_PAGE = 5
 # minimum) and matches are sparse. Each round fetches PAGES_PER_ROUND pages
 # per pool IN PARALLEL (limit=100 each); scanning stops as soon as enough
 # matches are found. Worst case (no matches ever found): MAX_ROUNDS *
-# PAGES_PER_ROUND * 100 raw trades scanned per pool per command call — kept
-# conservative to stay well within DexPaprika's free keyless rate limit
-# (15 req/min) even if a user rapid-fires several narrow /dex queries.
+# PAGES_PER_ROUND * 100 raw trades scanned per pool per command call.
+# DexPaprika's rate limit is 15 req/min keyless, 50 req/min with a free
+# DEXPAPRIKA_KEY (utils/dexpaprika.py picks it up automatically from the
+# env) — scan deeper when a key is configured, stay conservative without one.
 DP_PAGE_LIMIT = 100
-PAGES_PER_ROUND = 2
-MAX_ROUNDS = 4
+PAGES_PER_ROUND = 3 if HAS_KEY else 2
+MAX_ROUNDS = 6 if HAS_KEY else 4
 
 
 # ── /dexstat ─────────────────────────────────────────────────────────────
