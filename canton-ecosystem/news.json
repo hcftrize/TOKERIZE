@@ -1,7 +1,14 @@
 {
-  "updated_at": "2026-09-15T06:32:14+00:00",
-  "count": 321,
+  "updated_at": "2026-09-16T06:32:11+00:00",
+  "count": 322,
   "articles": [
+    {
+      "title": "Cashen Joins Canton Foundation Collateral Subcommittee Alongside DTCC, BNY, and Euroclear",
+      "category": "INSTITUTIONS",
+      "description": "Cashen, Canton Network's CC locking marketplace, has joined the Canton Foundation's Collateral Subcommittee chaired by DTCC, contributing to the Cross-Application Collateral Mobility workstream alongside BNY, Euroclear, and Broadridge.",
+      "url": "https://cantonnews.org/cashen-joins-canton-foundation-collateral-subcommittee-alongside-dtcc-bny-and-euroclear",
+      "published_at": "2026-09-15T17:21:56.746+00:00"
+    },
     {
       "title": "Edel joins DTC’s digital assets working group",
       "category": "INSTITUTIONS",
