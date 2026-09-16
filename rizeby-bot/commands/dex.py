@@ -64,6 +64,39 @@ PAGES_PER_ROUND = 3 if HAS_KEY else 2
 MAX_ROUNDS = 6 if HAS_KEY else 4
 
 
+# ── /dexkey — debug: is DEXPAPRIKA_KEY actually live? ──────────────────────
+
+async def cmd_dexkey(args: list) -> str:
+    """
+    Reads utils.dexpaprika.HAS_KEY/DEXPAPRIKA_KEY *at request time, in this
+    exact running process* — the only way to be certain the env var is
+    actually picked up in production, rather than guessing from behavior.
+    """
+    from utils.dexpaprika import HAS_KEY as has_key, DEXPAPRIKA_KEY as key
+
+    if has_key:
+        tail = key[-4:] if len(key) >= 4 else key
+        return (
+            "🔑 *DEXPAPRIKA_KEY: ACTIVE*\n"
+            f"Key ends in `...{tail}` ({len(key)} chars)\n\n"
+            f"Scan depth: {PAGES_PER_ROUND} pages/round · {MAX_ROUNDS} rounds max "
+            f"= up to {PAGES_PER_ROUND * MAX_ROUNDS * DP_PAGE_LIMIT} trades/pool "
+            "scanned per `/dex` call before needing *next*.\n"
+            "Rate limit: 50 req/min."
+        )
+    return (
+        "⚠️ *DEXPAPRIKA_KEY: NOT SET* — running keyless (free tier)\n\n"
+        f"Scan depth: {PAGES_PER_ROUND} pages/round · {MAX_ROUNDS} rounds max "
+        f"= up to {PAGES_PER_ROUND * MAX_ROUNDS * DP_PAGE_LIMIT} trades/pool "
+        "scanned per `/dex` call before needing *next*.\n"
+        "Rate limit: 15 req/min.\n\n"
+        "_Note: the key doesn't change how far back /dex can ultimately go — "
+        "keyless can reach the same full history via more `next` replies. "
+        "It only changes how much depth one single call can cover before "
+        "hitting the rate limit._"
+    )
+
+
 # ── /dexstat ─────────────────────────────────────────────────────────────
 
 def _reserve(a: dict) -> float:
