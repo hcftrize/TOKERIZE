@@ -346,44 +346,83 @@ async def _scan_pool(pool_address: str, label: str, target_count: int,
     matches = []
     page = 1
     total_pages = None
-    for _ in range(max_rounds):
-        page_nums = list(range(page, page + PAGES_PER_ROUND))
-        if total_pages:
-            page_nums = [p for p in page_nums if p <= total_pages]
-        if not page_nums:
-            return matches, True
+    # Accumulated across the WHOLE scan, not just the current round — a page
+    # that failed three rounds ago is just as disqualifying for an
+    # "exhausted" verdict as one that failed just now. Getting this scoped
+    # wrong (per-round instead of scan-wide) was the actual regression: a
+    # clean final round could mask real matches lost on an earlier
+    # rate-limited page, silently declaring "full history" reached.
+    failed_pages: set[int] = set()
 
+    def _ingest(raw_txn):
+        trade = derive_trade(raw_txn)
+        if not trade:
+            return
+        if type_ != "all" and trade["kind"] != type_:
+            return
+        if not _passes_filter(trade["rize_amount"], trade["usd_value"], min_b, max_b):
+            return
+        trade["pool"] = label
+        matches.append(trade)
+
+    async def _fetch(page_nums):
+        nonlocal total_pages
         results = await asyncio.gather(*[
             get_pool_transactions_page(pool_address, p, DP_PAGE_LIMIT) for p in page_nums
         ])
         got_any = False
-        for txns, tp in results:
+        for p, (txns, tp, ok) in zip(page_nums, results):
+            if not ok:
+                failed_pages.add(p)
+                continue
+            failed_pages.discard(p)
             if tp:
                 total_pages = tp
             if not txns:
                 continue
             got_any = True
             for raw in txns:
-                trade = derive_trade(raw)
-                if not trade:
-                    continue
-                if type_ != "all" and trade["kind"] != type_:
-                    continue
-                if not _passes_filter(trade["rize_amount"], trade["usd_value"], min_b, max_b):
-                    continue
-                trade["pool"] = label
-                matches.append(trade)
+                _ingest(raw)
+        return got_any
 
+    for _ in range(max_rounds):
+        page_nums = list(range(page, page + PAGES_PER_ROUND))
+        if total_pages:
+            page_nums = [p for p in page_nums if p <= total_pages]
+        if not page_nums:
+            break
+
+        got_any = await _fetch(page_nums)
         page = page_nums[-1] + 1
-        if len(matches) >= target_count:
+
+        if len(matches) >= target_count and not failed_pages:
             exhausted = total_pages is not None and page > total_pages
             return matches, exhausted
-        if total_pages and page > total_pages:
+        if total_pages and page > total_pages and not failed_pages:
+            break
+        if not got_any and not failed_pages:
             return matches, True
-        if not got_any:
-            return matches, True
+        # any_failed pages just get left for the retry pass below — the
+        # round loop keeps moving forward rather than getting stuck on them.
 
-    return matches, False  # hit the safety cap — more may exist, unconfirmed
+    # One retry pass over whatever pages failed during the scan — by now
+    # some real time has passed (other rounds ran), so a transient rate
+    # limit has likely cleared. This is what actually lets a single /dex
+    # call recover cleanly instead of just permanently giving up on those
+    # pages (which used to silently drop real trades).
+    if failed_pages:
+        await _fetch(sorted(failed_pages))
+
+    if failed_pages:
+        # Still couldn't get some pages even after the retry pass — cannot
+        # honestly claim exhaustion; `next` will try again from scratch.
+        return matches, False
+
+    # Every page we ever touched this call ultimately succeeded — exhausted
+    # is simply "did scanning actually run past the pool's last page",
+    # regardless of whether target_count was also reached along the way.
+    exhausted = total_pages is not None and page > total_pages
+    return matches, exhausted
 
 
 async def cmd_dex(args: list, page: int = 0) -> str:
