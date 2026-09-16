@@ -123,6 +123,48 @@ def parse_amount(s: str) -> float | None:
         return None
 
 
+def parse_dex_amount(token: str) -> tuple[float, str] | None:
+    """
+    Parse a /dex or /dexliq filter amount into (value, unit).
+    unit is 'rize' or 'usd'. Returns None for an unparseable token or the
+    'nc' wildcard (caller checks for 'nc' itself — this just won't match it).
+
+    Accepts, case-insensitively and with or without a space:
+      '500k rize' / '500krize' / '500K RIZE'  → (500000.0, 'rize')
+      '800usd'    / '800 usd'                 → (800.0,    'usd')
+      '1.2m'      (no unit)                   → (1200000.0, 'rize')  — bare
+                                                  numbers default to RIZE,
+                                                  same convention as parse_amount()
+    Note: this takes a single already-merged token (e.g. after the caller has
+    joined a ['500k','rize'] arg pair into '500krize') — see _merge_amount_arg
+    in commands/dex.py for that step.
+    """
+    if not token:
+        return None
+    t = token.lower().replace(" ", "").strip()
+    if t == "nc":
+        return None
+    unit = "rize"
+    if t.endswith("usd"):
+        unit = "usd"
+        t = t[:-3]
+    elif t.endswith("rize"):
+        unit = "rize"
+        t = t[:-4]
+    if not t:
+        return None
+    multipliers = {"k": 1_000, "m": 1_000_000, "b": 1_000_000_000}
+    mult = 1
+    if t[-1] in multipliers:
+        mult = multipliers[t[-1]]
+        t = t[:-1]
+    t = t.replace(",", "")
+    try:
+        return float(t) * mult, unit
+    except ValueError:
+        return None
+
+
 def escape_md(text: str) -> str:
     """Escape MarkdownV2 special chars."""
     special = r"\_*[]()~`>#+-=|{}.!"
