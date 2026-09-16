@@ -332,19 +332,21 @@ def _usage_text() -> str:
 
 
 async def _scan_pool(pool_address: str, label: str, target_count: int,
-                      type_: str, min_b, max_b):
+                      type_: str, min_b, max_b, max_rounds: int):
     """
     Scan one pool's transactions (newest-first) via DexPaprika, collecting
     organic buy/sell matches until target_count is reached, the pool's
-    history is exhausted, or the safety cap (MAX_ROUNDS) is hit.
+    history is exhausted, or the caller's scan budget (max_rounds) is hit.
     Returns (matches: list[dict], exhausted: bool) — exhausted=True means
     we've genuinely reached the end of this pool's available history (not
-    just the scan cap), so there's nothing more `next` could ever find here.
+    just the scan budget), so there's nothing more `next` could ever find
+    here. exhausted=False with `next` still offered means: not confirmed
+    exhausted — deeper trades may exist, just outside this call's budget.
     """
     matches = []
     page = 1
     total_pages = None
-    for _ in range(MAX_ROUNDS):
+    for _ in range(max_rounds):
         page_nums = list(range(page, page + PAGES_PER_ROUND))
         if total_pages:
             page_nums = [p for p in page_nums if p <= total_pages]
@@ -402,9 +404,21 @@ async def cmd_dex(args: list, page: int = 0) -> str:
     # +1 beyond what this page needs, so we can tell whether there's a next page.
     target_count = (page + 1) * PER_PAGE + 1
 
+    # _scan_pool always rescans from page 1 (stateless — no cross-request scan
+    # cache), so the scan budget must GROW with how deep this request goes,
+    # or every call past a certain depth hits the exact same ceiling and
+    # returns the exact same matches forever, even though far more history
+    # is genuinely available. Each successive `next` therefore gets a bigger
+    # budget (DexPaprika's 30s local cache makes rescanning already-seen
+    # pages cheap). ABS_MAX_ROUNDS just guards against a runaway loop on a
+    # pathologically narrow filter — real exhaustion (total_pages reached)
+    # is what normally stops the scan long before this.
+    ABS_MAX_ROUNDS = 100
+    rounds_budget = min(MAX_ROUNDS * (page + 1), ABS_MAX_ROUNDS)
+
     scan_results = await asyncio.gather(
-        _scan_pool(POOL_1, "P1", target_count, type_, min_b, max_b),
-        _scan_pool(POOL_2, "P2", target_count, type_, min_b, max_b),
+        _scan_pool(POOL_1, "P1", target_count, type_, min_b, max_b, rounds_budget),
+        _scan_pool(POOL_2, "P2", target_count, type_, min_b, max_b, rounds_budget),
     )
     all_matches = []
     fully_exhausted = True
