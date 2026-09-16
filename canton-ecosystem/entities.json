@@ -3534,6 +3534,23 @@
     "logo_local": "logos\\noders.jpg"
   },
   {
+    "name": "Noderun VIP",
+    "slug": "noderun-vip",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6aa874a8863bd9633800927f_a1171c26-9b0a-4db5-a203-487a1c9eb033.png",
+    "short_desc": "Private RFQ trading for institutional size on Canton. Sealed quotes, atomic DvP, self-custody.",
+    "tags": [
+      "APPS (ALL)",
+      "VALIDATOR",
+      "EXCHANGES",
+      "LIQUIDITY",
+      "TOKENIZED ASSETS",
+      "Network Utilities\nEXCHANGESLIQUIDITYTOKENIZED ASSETS",
+      "Roles\nAPPS (ALL)VALIDATOR\nAPPS (ALL)VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nNoderun VIP\nhttps://swap.monster/\nSwap Monster is a private request-for-quote venue on the Canton Network, built for participants moving institutional size without exposing intent. A participant posts a trade request, selects exactly which counterparties can see it, and receives sealed quotes that competing counterparties cannot see. Assets stay in the trader's own wallet until a quote is accepted. On acceptance, asset and cash settle together in one Daml transaction, or neither moves. No public order book, no pool, no custodian between the legs. Swap Monster is DvP by design: we orchestrate the trade and never hold assets. Built by Node.Monster, validator operators across 30+ networks with $1B in AUM.\nNetwork Utilities\nEXCHANGESLIQUIDITYTOKENIZED ASSETS\nRoles\nAPPS (ALL)VALIDATOR\nAPPS (ALL)VALIDATOR",
+    "logo_local": "logos\\noderun-vip.png"
+  },
+  {
     "name": "Novaprime",
     "slug": "novaprime",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515c9254b21d94913361a_logo_novaprime.png",
