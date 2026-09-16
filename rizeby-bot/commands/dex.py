@@ -249,6 +249,17 @@ def _fmt_trade_price(v: float) -> str:
     return (s[1:] if s.startswith("$") else s) + " $"
 
 
+def _short_addr(addr: str) -> str:
+    """'0x2b..aC3e' — shortened and deliberately plain text, NOT wrapped in
+    backticks (no monospace, no tap-to-copy). The shown wallet is often a
+    router/aggregator rather than the real trader (see module docstring), so
+    copying it isn't actually useful — the TX link next to it is the real
+    action: tap through to Basescan and let the user judge for themselves."""
+    if not addr or len(addr) < 10:
+        return addr or "—"
+    return f"{addr[:4]}..{addr[-4:]}"
+
+
 def _fmt_trade(trade: dict, wallet: str | None) -> list[str]:
     """One trade block, spaced out for mobile readability: description line,
     blank, timestamp, blank, wallet — rather than three cramped lines."""
@@ -262,10 +273,10 @@ def _fmt_trade(trade: dict, wallet: str | None) -> list[str]:
         _fmt_ts(trade["epoch"]),
         "",
     ]
-    if wallet:
-        out.append(f"`{wallet}`")
-    else:
-        out.append("_wallet unavailable_")
+    tx_hash = trade.get("tx_hash")
+    tx_link = f"_[TX](https://basescan.org/tx/{tx_hash})_" if tx_hash else ""
+    addr_part = _short_addr(wallet) if wallet else "wallet unavailable"
+    out.append(f"{addr_part} - {tx_link}" if tx_link else addr_part)
     out.append("")
     return out
 
