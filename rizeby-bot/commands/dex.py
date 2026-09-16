@@ -72,12 +72,25 @@ PER_PAGE = 5
 # never more, never accumulated across calls. Deliberately simple: no
 # per-chat state, no "how far did we get last time", nothing to get out of
 # sync. worst case = SCAN_PAGES_PER_POOL * 2 pools requests per call
-# (5 with a key -> 10 requests/call, 3 keyless -> 6 requests/call), safely
-# under utils/dexpaprika.py's 24-or-10-req/min throttle even for several
-# taps in a row, and CONSTANT — it doesn't grow the longer a chat keeps
-# using /dex, unlike the stateful version this replaced.
+# (8 with a key -> 16 requests/call, 3 keyless -> 6 requests/call), and
+# CONSTANT — it doesn't grow the longer a chat keeps using /dex, unlike the
+# stateful version this replaced.
+#
+# The real ceiling here is NOT the 429 risk — utils/dexpaprika.py's
+# _throttle() makes exceeding 30 req/min mathematically impossible
+# regardless of this number (it waits rather than ever firing over the
+# limit). The two things that actually limit how high this can reasonably
+# go: (1) fluidity — 16 req/call still leaves real headroom under the 24
+# req/min throttle ceiling for several `next` taps in a row before any
+# wait is even possible, especially since repeat taps within the same 30s
+# usually hit utils/dexpaprika.py's page cache and cost 0 new requests;
+# (2) the monthly credit budget (100K/mo, confirmed on the account's
+# billing page, 1 request = 1 credit) — at 16 req/call, even a generous
+# ~200 /dex-or-next calls/day lands around 96K/mo, near that ceiling. Going
+# meaningfully higher than 8 risks the credit budget before it risks
+# anything else.
 DP_PAGE_LIMIT = 100
-SCAN_PAGES_PER_POOL = 5 if HAS_KEY else 3
+SCAN_PAGES_PER_POOL = 8 if HAS_KEY else 3
 
 
 # ── /dexkey — debug: is DEXPAPRIKA_KEY actually live? ──────────────────────
