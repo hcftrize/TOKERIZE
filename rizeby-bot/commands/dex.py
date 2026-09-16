@@ -53,24 +53,33 @@ VALID_TYPES = ("buy", "sell", "all")
 PER_PAGE = 5
 
 # How hard /dex scans DexPaprika per CALL when a filter is narrow and
-# matches are sparse. Each round fetches PAGES_PER_ROUND pages per pool IN
-# PARALLEL (limit=100 each); scanning stops as soon as enough matches are
-# found. This budget is deliberately small and FIXED (not growing with
-# page) — reaching deep history is achieved by genuine incremental
-# progress across several `next` taps (see _dex_scan_cache below), each
-# one cheap, rather than one call trying to scan everything itself.
+# matches are sparse.
 #
-# Kept modest on purpose, tuned against the account's REAL confirmed
-# limits (billing page, 2026-09-16): 30 req/min, 100K credits/month,
-# 1 request = 1 credit flat. Worst case here is
-# PAGES_PER_ROUND*MAX_ROUNDS*2 pools = 12 requests/call (key) or 8
-# (keyless) — light on the monthly credit budget (100K/mo ≈ 3300/day)
-# even under heavy use, while still covering 400-600 trades/pool of new
-# ground on every single `next` tap. utils/dexpaprika.py's rate limiter
-# is the hard backstop regardless of this budget.
+# TOTAL_BUDGET_PER_CALL is a request budget SHARED across both pools (not
+# per pool) — a call fetches at most this many DexPaprika pages, total,
+# split between whichever pools still need scanning. This replaced an
+# earlier design where EACH pool got its own separate full budget
+# (PAGES_PER_ROUND*MAX_ROUNDS*2 pools = up to 12 requests/call even when
+# only one pool still had anything useful to find): P1 is small (~27
+# pages) and exhausts fast, but P2 is ~10K transactions (~100+ pages) and
+# almost never has a qualifying trade for a narrow filter — so once P1
+# was done, every call was still quietly burning its FULL separate budget
+# re-scanning P2 for nothing, which is what pushed cumulative requests
+# over the rate limit within 2-3 `next` taps and caused the ~60s stall.
+#
+# Sharing one small pool means a call where only one pool is still active
+# (the common case once the other exhausts) still makes fast progress,
+# while the total per call stays low enough that several `next` taps in a
+# row never approach the 24 req/min throttle ceiling — tuned against the
+# account's REAL confirmed limits (billing page, 2026-09-16): 30 req/min,
+# 100K credits/month, 1 request = 1 credit flat. 24/min ÷ 5 req/call ≈ 4-5
+# calls back-to-back before any wait is even possible, and in practice
+# taps are rarely instant, so the sliding 60s window keeps freeing up
+# before that. utils/dexpaprika.py's rate limiter remains the hard
+# backstop regardless of this budget.
 DP_PAGE_LIMIT = 100
-PAGES_PER_ROUND = 2
-MAX_ROUNDS = 3 if HAS_KEY else 2
+PAGE_BATCH = 2  # concurrent page fetches per micro-round, within the shared budget
+TOTAL_BUDGET_PER_CALL = 5 if HAS_KEY else 3
 
 # ── Per-(chat, filter) incremental scan state ───────────────────────────────
 # Keyed by chat_id. Remembers, per pool: how far we've already scanned
@@ -125,11 +134,16 @@ async def cmd_dexkey(args: list) -> str:
         return (
             "🔑 *DEXPAPRIKA_KEY: ACTIVE*\n"
             f"Key ends in `...{tail}` ({len(key)} chars)\n\n"
-            f"Scan budget: {PAGES_PER_ROUND} pages/round · {MAX_ROUNDS} rounds max/call "
-            f"= up to {PAGES_PER_ROUND * MAX_ROUNDS * DP_PAGE_LIMIT} new trades/pool "
-            "scanned per `/dex` or `next` (≤12 requests/call worst case).\n"
+            f"Scan budget: *{TOTAL_BUDGET_PER_CALL} requests/call*, SHARED across "
+            "both pools (not per pool) — up to "
+            f"{TOTAL_BUDGET_PER_CALL * DP_PAGE_LIMIT} new transactions scanned per "
+            "`/dex` or `next`. Whichever pool still needs scanning gets the "
+            "full budget to itself once the other is exhausted, instead of "
+            "each pool always burning its own separate allowance.\n"
             "Confirmed account limits (billing page): *30 req/min · 100K credits/mo*. "
-            "Bot throttles itself to 24 req/min max, so it can't ever trip the real limit.\n\n"
+            "Bot throttles itself to 24 req/min max, so it can't ever trip the real "
+            f"limit — and at {TOTAL_BUDGET_PER_CALL} req/call that's 4-5 *next* taps "
+            "back-to-back before there's ever a reason to wait.\n\n"
             "_Each call only scans pages it hasn't seen yet for that chat's "
             "current filter (incremental, not a rescan-from-scratch) — so "
             "`next` stays fast and depth genuinely accumulates across taps "
@@ -137,9 +151,9 @@ async def cmd_dexkey(args: list) -> str:
         )
     return (
         "⚠️ *DEXPAPRIKA_KEY: NOT SET* — running keyless (free tier)\n\n"
-        f"Scan budget: {PAGES_PER_ROUND} pages/round · {MAX_ROUNDS} rounds max/call "
-        f"= up to {PAGES_PER_ROUND * MAX_ROUNDS * DP_PAGE_LIMIT} new trades/pool "
-        "scanned per `/dex` or `next`.\n"
+        f"Scan budget: *{TOTAL_BUDGET_PER_CALL} requests/call*, SHARED across "
+        f"both pools — up to {TOTAL_BUDGET_PER_CALL * DP_PAGE_LIMIT} new "
+        "transactions scanned per `/dex` or `next`.\n"
         "Rate limit: assumed 15 req/min keyless (unconfirmed — get a free key "
         "to see its real numbers on DexPaprika's billing page). Bot throttles "
         "itself to 10 req/min max as a conservative default.\n\n"
@@ -383,24 +397,48 @@ def _usage_text() -> str:
     )
 
 
+class _ScanBudget:
+    """A request budget SHARED across both pools' scans for one /dex or
+    `next` call. Each page fetch must reserve a slot first; once the
+    budget is spent, further scanning simply stops for this call (not a
+    failure — the pool just resumes from the same next_page on the next
+    call). This is what keeps a single call's total DexPaprika requests
+    bounded to TOTAL_BUDGET_PER_CALL regardless of how many pools are
+    still active, instead of each pool getting its own separate budget."""
+
+    def __init__(self, total: int):
+        self.remaining = total
+        self.lock = asyncio.Lock()
+
+    async def take(self, want: int) -> int:
+        async with self.lock:
+            grant = min(want, self.remaining)
+            self.remaining -= grant
+            return grant
+
+
 async def _scan_pool_incremental(pool_address: str, label: str, pstate: dict,
-                                  need_count: int, type_: str, min_b, max_b):
+                                  need_count: int, type_: str, min_b, max_b,
+                                  budget: "_ScanBudget"):
     """
     Extends pstate's accumulated matches by scanning forward from
     pstate['next_page'] — NEVER rescans pages a previous call on this same
     (chat, filter) session already covered. Mutates pstate in place.
 
-    Bounded to a small, fixed per-call budget (PAGES_PER_ROUND * MAX_ROUNDS)
-    so a single command stays fast and well under DexPaprika's rate limit.
-    Reaching deep history happens through genuine incremental progress
-    across several `next` taps, each one cheap — not one call trying to
-    scan everything at once (that's what used to trigger 429 storms and
-    multi-second `next` replies).
+    Draws pages from `budget`, a SHARED counter across both pools for this
+    one call — so if one pool is already exhausted (the common case once a
+    narrow filter's real matches run out in the smaller pool), the other
+    pool gets the call's full budget to itself instead of each pool always
+    burning its own separate allowance. Reaching deep history happens
+    through genuine incremental progress across several `next` taps, each
+    one cheap — not one call trying to scan everything at once (that's
+    what used to trigger 429 storms and multi-second `next` replies).
 
     On a failure (rate-limited/errored even after retry), pstate['next_page']
     is rewound to the first failed page rather than advanced past it — so
-    the *next* call retries it naturally, instead of silently skipping it
-    or burning this call's whole budget hammering it.
+    the *next* call retries it naturally. Running out of shared budget
+    (not a failure) simply stops the loop where it stands — next_page is
+    left exactly where scanning should resume, no rewind needed.
     """
     if pstate["exhausted"] or len(pstate["matches"]) >= need_count:
         return
@@ -409,13 +447,23 @@ async def _scan_pool_incremental(pool_address: str, label: str, pstate: dict,
     total_pages = pstate["total_pages"]
     stalled_on = None
 
-    for _ in range(MAX_ROUNDS):
-        page_nums = list(range(page, page + PAGES_PER_ROUND))
-        if total_pages:
-            page_nums = [p for p in page_nums if p <= total_pages]
-        if not page_nums:
+    while True:
+        if len(pstate["matches"]) >= need_count:
+            break
+        if total_pages and page > total_pages:
             break
 
+        want = PAGE_BATCH
+        if total_pages:
+            want = min(want, total_pages - page + 1)
+        if want <= 0:
+            break
+
+        granted = await budget.take(want)
+        if granted <= 0:
+            break  # this call's shared budget is spent — resume here next time
+
+        page_nums = list(range(page, page + granted))
         results = await asyncio.gather(*[
             get_pool_transactions_page(pool_address, p, DP_PAGE_LIMIT) for p in page_nums
         ])
@@ -446,10 +494,6 @@ async def _scan_pool_incremental(pool_address: str, label: str, pstate: dict,
             break  # don't advance past a page we couldn't confirm
 
         page = page_nums[-1] + 1
-        if len(pstate["matches"]) >= need_count:
-            break
-        if total_pages and page > total_pages:
-            break
         if not got_any:
             break
 
@@ -457,6 +501,22 @@ async def _scan_pool_incremental(pool_address: str, label: str, pstate: dict,
     pstate["total_pages"] = total_pages
     if stalled_on is None and total_pages is not None and page > total_pages:
         pstate["exhausted"] = True
+
+
+def _scan_progress_pct(state: dict) -> int | None:
+    """Rough % of both pools' full transaction history scanned so far for
+    this session — lets the "no new matches yet" message show real
+    progress instead of feeling stuck/infinite when a filter is sparse."""
+    scanned = total = 0
+    for pool_addr in (POOL_1, POOL_2):
+        pstate = state["pools"][pool_addr]
+        tp = pstate.get("total_pages")
+        if tp:
+            scanned += min(max(pstate["next_page"] - 1, 0), tp)
+            total += tp
+    if not total:
+        return None
+    return min(100, int(scanned / total * 100))
 
 
 async def cmd_dex(args: list, page: int = 0, chat_id=None) -> str:
@@ -480,9 +540,10 @@ async def cmd_dex(args: list, page: int = 0, chat_id=None) -> str:
     state = _dex_scan_state(chat_id, (type_, min_b, max_b))
     pools_meta = [(POOL_1, "P1"), (POOL_2, "P2")]
 
+    budget = _ScanBudget(TOTAL_BUDGET_PER_CALL)
     tasks = [
         _scan_pool_incremental(pool_addr, label, state["pools"][pool_addr],
-                                target_count, type_, min_b, max_b)
+                                target_count, type_, min_b, max_b, budget)
         for pool_addr, label in pools_meta
         if len(state["pools"][pool_addr]["matches"]) < target_count
         and not state["pools"][pool_addr]["exhausted"]
@@ -501,10 +562,13 @@ async def cmd_dex(args: list, page: int = 0, chat_id=None) -> str:
 
     hint = " Try a wider range or `/dex` with no filter." if (min_b or max_b) else ""
 
+    pct = _scan_progress_pct(state)
+    progress_note = f" (~{pct}% of full history scanned)" if pct is not None else ""
+
     if not all_matches:
         if fully_exhausted:
             return "No matching trades found in the full available history." + hint
-        return ("No matches in the depth scanned so far." + hint +
+        return ("No matches in the depth scanned so far" + progress_note + "." + hint +
                 " Reply *next* to keep scanning further back.")
 
     start = page * PER_PAGE
@@ -515,7 +579,9 @@ async def cmd_dex(args: list, page: int = 0, chat_id=None) -> str:
     if not page_items:
         if fully_exhausted:
             return "No more trades — you've reached the full available history for these pools."
-        return "No more matches buffered yet. Reply *next* to keep scanning further back."
+        return ("Not the end yet, but no new matches in this batch" + progress_note +
+                " — matches get sparse this deep. Reply *next* to keep digging, "
+                "or try a wider range.")
 
     wallets = await asyncio.gather(*[resolve_tx_wallet(t["tx_hash"]) for t in page_items])
 
@@ -529,8 +595,13 @@ async def cmd_dex(args: list, page: int = 0, chat_id=None) -> str:
     for trade, wallet in zip(page_items, wallets):
         lines += _fmt_trade(trade, wallet)
 
-    if have_more_buffered or can_scan_deeper:
+    if have_more_buffered:
         lines.append("_Reply *next* for more · Reply *page N* to jump to page N_")
+    elif can_scan_deeper:
+        # Next buffered page isn't ready yet — the next "next" tap will need
+        # to scan further before it has something to show, so flag that
+        # up front rather than let it look like a stall.
+        lines.append(f"_Reply *next* to keep scanning further back{progress_note}_")
     else:
         lines.append("_End of available history for these pools._")
 
