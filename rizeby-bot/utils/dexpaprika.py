@@ -1,7 +1,16 @@
 """
 DexPaprika API wrapper — deep historical DEX trade data for RIZE's two
-Aerodrome pools (Base). Free, keyless, no signup required for the endpoints
-used here (https://api.dexpaprika.com).
+Aerodrome pools (Base). Works keyless (free, no signup) on
+https://api.dexpaprika.com, and picks up a free-tier API key automatically
+from the DEXPAPRIKA_KEY env var if set (raises the rate limit from 15 to
+50 req/min — matters here since /dex can scan several pages per command).
+
+AUTH (confirmed against DexPaprika's docs): the key goes in the
+`Authorization` header as its ENTIRE raw value — no "Bearer " prefix, e.g.
+`Authorization: api_xxxxx`. This is a FREE-tier key on the standard
+api.dexpaprika.com host; a PRO key would need api-pro.dexpaprika.com instead
+(sending a free key to the pro host, or vice versa, returns a 403) — if
+DEXPAPRIKA_KEY turns out to be a Pro key, DP_BASE below needs updating.
 
 Confirmed LIVE 2026-09-16 against real responses for POOL_1:
   - GET /networks/base/pools/{address}
@@ -41,6 +50,7 @@ routed through an ERC-4337 smart wallet + aggregator — a limitation
 confirmed (via Basescan + Allium's own public docs) to affect every
 provider checked, not something unique to this bot.
 """
+import os
 import time
 import datetime
 import httpx
@@ -50,6 +60,16 @@ from utils.geckoterminal import POOL_1, POOL_2, RIZE_TOKEN  # reuse same constan
 DP_BASE = "https://api.dexpaprika.com"
 NETWORK = "base"
 POOLS = [POOL_1, POOL_2]
+
+DEXPAPRIKA_KEY = (os.environ.get("DEXPAPRIKA_KEY") or "").strip()
+HAS_KEY = bool(DEXPAPRIKA_KEY)
+
+
+def _dp_headers() -> dict:
+    headers = {"Accept": "application/json"}
+    if DEXPAPRIKA_KEY:
+        headers["Authorization"] = DEXPAPRIKA_KEY
+    return headers
 
 # Free public Base mainnet RPC — no key, standard well-known endpoint.
 BASE_RPC = "https://mainnet.base.org"
@@ -85,7 +105,7 @@ async def get_pool_detail(pool_address: str) -> dict | None:
     url = f"{DP_BASE}/networks/{NETWORK}/pools/{pool_address}"
     try:
         async with httpx.AsyncClient(timeout=10) as client:
-            r = await client.get(url, headers={"Accept": "application/json"})
+            r = await client.get(url, headers=_dp_headers())
             r.raise_for_status()
             data = r.json()
     except Exception:
@@ -108,7 +128,7 @@ async def get_pool_transactions_page(pool_address: str, page: int, limit: int = 
     try:
         async with httpx.AsyncClient(timeout=10) as client:
             r = await client.get(
-                url, headers={"Accept": "application/json"},
+                url, headers=_dp_headers(),
                 params={"page": page, "limit": limit},
             )
             r.raise_for_status()
