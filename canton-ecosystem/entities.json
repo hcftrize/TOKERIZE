@@ -941,20 +941,6 @@
     "logo_local": "logos\\cbtc.png"
   },
   {
-    "name": "CC Explorer",
-    "slug": "cc-explorer",
-    "logo_cdn": "https://cdn.prod.website-files.com/696805252243366e13a64c82/697a4b2e91c884840963f200_yellow-arrow-right.svg",
-    "short_desc": "Monitors transactions, validators, and governance activity on Canton.",
-    "tags": [
-      "APPS (FEATURED)",
-      "APPS (ALL)",
-      "Network UtilitiesNo items found.",
-      "Roles\nAPPS (FEATURED)APPS (ALL)\nAPPS (FEATURED)APPS (ALL)"
-    ],
-    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nCC Explorer\nhttps://ccexplorer.io/\n\nCC Explorer by Node Fortress is a dedicated tool that enables users to monitor transactions, validators, and governance activity on the Canton Network in real time. The richly indexed data is accessible both through the CC Explorer website and programmatically via API, providing flexible access for users, analysts, and developers.\n\nRoles\nAPPS (FEATURED)APPS (ALL)\nAPPS (FEATURED)APPS (ALL)",
-    "logo_local": "logos\\cc-explorer.svg"
-  },
-  {
     "name": "CC View",
     "slug": "cc-view",
     "logo_cdn": "https://cdn.prod.website-files.com/696805252243366e13a64c82/697a4b2e91c884840963f200_yellow-arrow-right.svg",
@@ -3532,23 +3518,6 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nNoders\nhttps://noders.team/\nNetwork Utilities\nDEVELOPER TOOLS\nRoles\nVALIDATORAPPS (ALL)\nVALIDATORAPPS (ALL)",
     "logo_local": "logos\\noders.jpg"
-  },
-  {
-    "name": "Noderun VIP",
-    "slug": "noderun-vip",
-    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6aa874a8863bd9633800927f_a1171c26-9b0a-4db5-a203-487a1c9eb033.png",
-    "short_desc": "Private RFQ trading for institutional size on Canton. Sealed quotes, atomic DvP, self-custody.",
-    "tags": [
-      "APPS (ALL)",
-      "VALIDATOR",
-      "EXCHANGES",
-      "LIQUIDITY",
-      "TOKENIZED ASSETS",
-      "Network Utilities\nEXCHANGESLIQUIDITYTOKENIZED ASSETS",
-      "Roles\nAPPS (ALL)VALIDATOR\nAPPS (ALL)VALIDATOR"
-    ],
-    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nNoderun VIP\nhttps://swap.monster/\nSwap Monster is a private request-for-quote venue on the Canton Network, built for participants moving institutional size without exposing intent. A participant posts a trade request, selects exactly which counterparties can see it, and receives sealed quotes that competing counterparties cannot see. Assets stay in the trader's own wallet until a quote is accepted. On acceptance, asset and cash settle together in one Daml transaction, or neither moves. No public order book, no pool, no custodian between the legs. Swap Monster is DvP by design: we orchestrate the trade and never hold assets. Built by Node.Monster, validator operators across 30+ networks with $1B in AUM.\nNetwork Utilities\nEXCHANGESLIQUIDITYTOKENIZED ASSETS\nRoles\nAPPS (ALL)VALIDATOR\nAPPS (ALL)VALIDATOR",
-    "logo_local": "logos\\noderun-vip.png"
   },
   {
     "name": "Novaprime",
