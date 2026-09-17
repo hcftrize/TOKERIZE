@@ -24,6 +24,8 @@ jobs:
           python-version: "3.12"
 
       - name: Run scraper
+        env:
+          LIGHTHOUSE_KEY: ${{ secrets.LIGHTHOUSE_KEY }}
         run: |
           if [ "${{ github.event.inputs.bootstrap }}" = "true" ]; then
             python scripts/scrape_lighthouse.py --bootstrap
