@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-16T06:32:11+00:00",
-  "count": 322,
+  "updated_at": "2026-09-17T06:32:11+00:00",
+  "count": 326,
   "articles": [
+    {
+      "title": "Temple Digital Group Launches Virtual Orderbooks for Custom Trading Venues on Canton Network",
+      "category": "ECOSYSTEM",
+      "description": "Temple Digital Group has opened up its Lightspeed trading engine to select institutions through Virtual Orderbooks, a primitive that lets operators deploy private, compliant spot, prediction, and perpetual markets on Canton Network.",
+      "url": "https://cantonnews.org/temple-digital-group-launches-virtual-orderbooks-for-custom-trading-venues-on-canton-network",
+      "published_at": "2026-09-16T16:32:35.991+00:00"
+    },
+    {
+      "title": "$EDEL is Finally Taking Its Rightful Seat at the Table",
+      "category": "INSTITUTIONS",
+      "description": "Edel Finance is deepening its role in institutional tokenization through its involvement in the DTC Digital Assets Solutions Industry Working Group and its growing presence in the Canton ecosystem. As traditional assets move onchain, $EDEL is positioning itself around the infrastructure, liquidity, collateral, and settlement systems that could shape the next phase of tokenized finance.",
+      "url": "https://cantonnews.org/edel-is-finally-taking-its-rightful-seat-at-the-table",
+      "published_at": "2026-09-16T15:59:27.992246+00:00"
+    },
+    {
+      "title": "Japan's FSA Names On-Chain Finance a 2026 Policy Priority as MUFG Tests JGB Repos on Canton Network",
+      "category": "INSTITUTIONS",
+      "description": "Japan's FSA has named on-chain finance its top 2026 policy priority, with MUFG's JGB repo testing on Canton Network already selected for the FSA's Payment Innovation Project as the regulator builds out the legal, institutional, and collaborative infrastructure for blockchain-based financial markets.",
+      "url": "https://cantonnews.org/japan-s-fsa-names-on-chain-finance-a-2026-policy-priority-as-mufg-tests-jgb-repos-on-canton-network",
+      "published_at": "2026-09-16T12:41:45.296+00:00"
+    },
+    {
+      "title": "Zenith Joins DTC Digital Assets Solutions Industry Working Group Focused on Institutional Tokenization",
+      "category": "INSTITUTIONS",
+      "description": "Zenith has joined the DTC Digital Assets Solutions Industry Working Group as a participating member, alongside 100+ firms including BlackRock, JPMorgan, Goldman Sachs, Citi, Nasdaq, and NYSE. DTCC's subsidiary, the Depository Trust Company (DTC), is the custodian behind $114 trillion in U.S. securities. Zenith joins as a Canton Network Tier-1 Super Validator and developer of an Ethereum-compatible execution environment for Canton, contributing its perspective on blockchain infrastructure and application development alongside other market participants.",
+      "url": "https://cantonnews.org/zenith-joins-dtc-digital-assets-solutions-industry-working-group-focused-on-institutional-tokenization",
+      "published_at": "2026-09-16T10:21:56.564781+00:00"
+    },
     {
       "title": "Cashen Joins Canton Foundation Collateral Subcommittee Alongside DTCC, BNY, and Euroclear",
       "category": "INSTITUTIONS",
