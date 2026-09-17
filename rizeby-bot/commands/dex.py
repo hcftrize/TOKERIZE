@@ -323,12 +323,33 @@ def _fmt_range_sub(min_b, max_b) -> str:
     return ""
 
 
+def _fmt_relative(delta_s: float) -> str:
+    """'5min ago' / '1h34 ago' / '1d 4h ago' — relative age, so a user
+    doesn't have to convert UTC to their own timezone just to tell if a
+    trade happened 5 minutes ago or yesterday. Clamped at 0 in case of
+    tiny clock skew between the trade timestamp and the bot's own clock."""
+    secs = max(0, int(delta_s))
+    minutes = secs // 60
+    if minutes < 60:
+        return f"{minutes}min ago"
+    hours = minutes // 60
+    rem_min = minutes % 60
+    if hours < 24:
+        return f"{hours}h{rem_min:02d} ago"
+    days = hours // 24
+    rem_h = hours % 24
+    return f"{days}d {rem_h}h ago"
+
+
 def _fmt_ts(epoch: float) -> str:
     if not epoch:
         return "—"
     import datetime
     dt = datetime.datetime.fromtimestamp(epoch, tz=datetime.timezone.utc)
-    return dt.strftime("%Y-%m-%d %H:%M UTC")
+    now = datetime.datetime.now(datetime.timezone.utc)
+    relative = _fmt_relative((now - dt).total_seconds())
+    absolute = dt.strftime("%d/%m - %H:%M UTC")
+    return f"{relative} - {absolute}"
 
 
 def _fmt_trade_price(v: float) -> str:
