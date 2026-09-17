@@ -4,11 +4,20 @@ CIPs from GitHub JSON.
 Lighthouse: GET /governance → {vote_requests:[]} or array
 Fields: id, reason_body (=title), status, accept_votes, reject_votes
 """
+import os
 import httpx
 from utils.github_data import get_cips
 
 LIGHTHOUSE_BASE = "https://lighthouse.cantonloop.com/api"
 CIP_GITHUB_URL  = "https://github.com/canton-foundation/cips"
+
+# Lighthouse now requires "Authorization: Bearer <key>" on every request
+# (enforcement went live 2026-09-16 — unkeyed calls fail outright).
+LIGHTHOUSE_KEY = os.environ.get("LIGHTHOUSE_KEY", "")
+
+
+def lighthouse_headers() -> dict:
+    return {"Authorization": f"Bearer {LIGHTHOUSE_KEY}"} if LIGHTHOUSE_KEY else {}
 
 
 def _md_safe(text) -> str:
@@ -107,7 +116,7 @@ async def cmd_cantongov(args: list, page: int = 0) -> str:
     """
     try:
         async with httpx.AsyncClient(timeout=12) as client:
-            r = await client.get(f"{LIGHTHOUSE_BASE}/governance")
+            r = await client.get(f"{LIGHTHOUSE_BASE}/governance", headers=lighthouse_headers())
             r.raise_for_status()
             data = r.json()
     except Exception as e:
