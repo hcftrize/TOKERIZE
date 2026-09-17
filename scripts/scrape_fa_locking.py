@@ -7,6 +7,7 @@ Fetches Featured App locking data from Lighthouse API and updates two JSON files
 
 import json
 import os
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
@@ -18,8 +19,21 @@ DATA_DIR = "rize-data-hub"
 FA_SNAPSHOT_PATH = os.path.join(DATA_DIR, "fa-locking.json")
 HISTORY_PATH = os.path.join(DATA_DIR, "locking-history.json")
 
+# Optional: attributes requests to a Lighthouse API key (Swagger docs, 2026-09-17:
+# "Authorization: Bearer <API key>"). As of that same doc, key-based auth
+# enforcement on public reads is DISABLED account-wide — a missing/invalid key
+# just falls back to anonymous traffic, it does not itself cause a 401/403. If
+# a 403 still happens with this header set, it's very likely a WAF/anti-bot
+# layer reacting to the request shape (e.g. User-Agent), not this key. Only
+# applied to the Lighthouse call below — never sent to CoinGecko.
+LIGHTHOUSE_KEY = os.environ.get("LIGHTHOUSE_KEY", "")
+
 # Statuses considered "active" for total lock computation
 ACTIVE_STATUSES = {"3-Approved"}
+
+
+def lighthouse_headers() -> dict:
+    return {"Authorization": f"Bearer {LIGHTHOUSE_KEY}"} if LIGHTHOUSE_KEY else {}
 
 
 def fetch_json(url: str, headers: dict = None) -> dict:
@@ -31,8 +45,13 @@ def fetch_json(url: str, headers: dict = None) -> dict:
             **(headers or {}),
         }
     )
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode())
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read().decode())
+    except urllib.error.HTTPError as e:
+        body = e.read().decode(errors="replace")[:500]
+        print(f"HTTP {e.code} fetching {url}\nResponse body: {body}")
+        raise
 
 
 def fetch_cc_market() -> tuple[float | None, float | None]:
@@ -177,7 +196,8 @@ def save_json(path: str, obj) -> None:
 
 def main():
     print(f"Fetching FA locking from {FA_API_URL}...")
-    data = fetch_json(FA_API_URL)
+    print("Lighthouse API key: SET" if LIGHTHOUSE_KEY else "Lighthouse API key: NOT SET (anonymous request)")
+    data = fetch_json(FA_API_URL, lighthouse_headers())
 
     # ── Build snapshot ────────────────────────────────────────────────────────
     rows = build_fa_rows(data)
