@@ -19,6 +19,8 @@ jobs:
           python-version: "3.12"
 
       - name: Run SV locking scraper
+        env:
+          LIGHTHOUSE_KEY: ${{ secrets.LIGHTHOUSE_KEY }}
         run: python scripts/scrape_sv_locking.py
 
       - name: Commit and push to dev
