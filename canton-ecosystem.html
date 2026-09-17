@@ -1123,7 +1123,12 @@ document.addEventListener("DOMContentLoaded", function() {
     cipRender();
 
   /* ── CANTON GOVERNANCE ── */
-  const GOV_API = 'https://lighthouse.cantonloop.com/api';
+  // Routed through /api/lighthouse-gov (Vercel serverless proxy) instead of
+  // hitting Lighthouse directly: Lighthouse now requires an API key on every
+  // request, and that key can't live in this client-side JS without being
+  // exposed to anyone viewing the page source. The proxy attaches it
+  // server-side. See api/lighthouse-gov.js.
+  const GOV_API = '/api/lighthouse-gov?path=';
   const GOV_PER_PAGE = 20;
   let govAll = [];
   let govFiltered = [];
