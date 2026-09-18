@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-09-17T06:32:11+00:00",
-  "count": 326,
+  "updated_at": "2026-09-18T06:32:20+00:00",
+  "count": 329,
   "articles": [
+    {
+      "title": "Canton Network Receives 21 New Validator Applications Spanning Finance, Infrastructure, and Emerging Market Use Cases",
+      "category": "ECOSYSTEM",
+      "description": "Twenty-one organisations have submitted Canton Network validator applications ahead of a September 23 deadline, including interest rate swap infrastructure, undercollateralised credit markets, trade finance, yield routing, tokenised gold, and a broad range of Southeast Asian and emerging market builders.",
+      "url": "https://cantonnews.org/canton-network-receives-21-new-validator-applications-spanning-finance-infrastructure-and-emerging-market-use-cases",
+      "published_at": "2026-09-17T20:22:18.336+00:00"
+    },
+    {
+      "title": "Kyobo Life and SBI Complete Cross-Border Yen-Won Stablecoin Test on Canton Network",
+      "category": "INSTITUTIONS",
+      "description": "Kyobo Life and SBI have completed a Canton Network pilot testing direct yen-won stablecoin exchange without a dollar intermediate leg, modelling cross-border institutional settlement in what Kyobo Life describes as South Korea's first such test by an insurer.",
+      "url": "https://cantonnews.org/kyobo-life-and-sbi-complete-cross-border-yen-won-stablecoin-test-on-canton-network",
+      "published_at": "2026-09-17T12:01:18.214+00:00"
+    },
+    {
+      "title": "South Korean Asset Managers Build Digital Asset Infrastructure as Domestic Regulations Lag Overseas Markets",
+      "category": "INSTITUTIONS",
+      "description": "South Korean asset managers are launching digital asset ETFs abroad and building blockchain partnerships at home, including Shinhan Asset Management's agreement with the Canton Foundation, as they prepare for an expected opening of the domestic digital asset product market.",
+      "url": "https://cantonnews.org/south-korean-asset-managers-build-digital-asset-infrastructure-as-domestic-regulations-lag-overseas-markets",
+      "published_at": "2026-09-17T11:55:25.863+00:00"
+    },
     {
       "title": "Temple Digital Group Launches Virtual Orderbooks for Custom Trading Venues on Canton Network",
       "category": "ECOSYSTEM",
