@@ -1,8 +1,43 @@
 Arc Ecosystem — Entities not found on arc.io/ecosystem
-Checked: 2026-09-17
-Count: 1
+Checked: 2026-09-18
+Count: 36
 
 These entities exist in arcentities.json but were NOT found during scrape.
 Please check manually — remove from arcentities.json if confirmed gone.
 
+- Bank Frick (slug: bank-frick)
+- RedStone (slug: redstone)
+- Robinhood (slug: robinhood)
+- SafePal (slug: safepal)
+- Sasai Fintech (slug: sasai-fintech)
+- SBI Holdings (slug: sbi-holdings)
+- Securitize (slug: securitize)
+- Sequence (slug: sequence)
+- Societe Generale (slug: societe-generale)
+- Stablecorp (slug: stablecorp)
+- Standard Chartered (slug: scb)
+- Stargate (slug: stargate)
+- State Street (slug: state-street)
+- Sumitomo Corporation (slug: sumitomo-corporation-2)
+- Superface (slug: superface)
+- Superform (slug: superform)
 - T-RIZE (slug: t-rize)
+- Taurus (slug: taurus)
+- Tenderly (slug: tenderly)
+- thirdweb (slug: thirdweb)
+- Transak (slug: transak)
+- TRM (slug: trm)
+- Turnkey (slug: turnkey)
+- Utila (slug: utila)
+- Visa (slug: visa)
+- Vultisig (slug: vultisig)
+- WheelX (slug: wheelx)
+- WisdomTree (slug: wisdomtree)
+- WorldPay (slug: worldpay-2)
+- Wormhole (slug: wormhole)
+- Yellow Card (slug: yellow-card)
+- Zerion (slug: zerion)
+- ZeroDev (slug: zerodev)
+- zkp2p (slug: zkp2p)
+- Zodia Custody (slug: zodia-custody)
+- Zodia Markets (slug: zodia-markets)
