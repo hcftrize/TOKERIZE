@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-09-19T06:32:05+00:00",
-  "count": 329,
+  "updated_at": "2026-09-20T06:32:13+00:00",
+  "count": 332,
   "articles": [
+    {
+      "title": "LYNC brings one-command deployment to Canton developers",
+      "category": "TECHNOLOGY",
+      "description": "LYNC has introduced canton-deploy, a tool that combines several steps needed to deploy an application’s Daml packages and set up users. Developers can also check deployments, inspect contracts and manage network configurations from the same tool.",
+      "url": "https://cantonnews.org/lync-brings-one-command-deployment-to-canton-developers",
+      "published_at": "2026-09-20T02:03:39.24+00:00"
+    },
+    {
+      "title": "CC/USDCx Pair Goes Live on Kora's Permissionless Orderbook",
+      "category": "MARKETS",
+      "description": "CC/USDCx is now live for trading on Kora's permissionless orderbook, bringing together Canton Coin and Circle's USDCx stablecoin on Canton Network, with the pair available via xReserve.",
+      "url": "https://cantonnews.org/cc-usdcx-pair-goes-live-on-kora-s-permissionless-orderbook",
+      "published_at": "2026-09-19T13:42:24.862+00:00"
+    },
+    {
+      "title": "Intercepta Integrates Compliance Engine With Canton Network for Real-Time Sanctions Screening and AML Checks",
+      "category": "TECHNOLOGY",
+      "description": "Intercepta has integrated its Compliance Engine with Canton Network, enabling real-time sanctions screening, AML checks, and fund flow traceability through designated observer roles within Canton's privacy-preserving architecture, without altering the network's underlying privacy model.",
+      "url": "https://cantonnews.org/intercepta-integrates-compliance-engine-with-canton-network-for-real-time-sanctions-screening-and-aml-checks",
+      "published_at": "2026-09-19T09:54:38.092+00:00"
+    },
     {
       "title": "Canton Network Receives 21 New Validator Applications Spanning Finance, Infrastructure, and Emerging Market Use Cases",
       "category": "ECOSYSTEM",
