@@ -1,7 +1,70 @@
 {
-  "updated_at": "2026-09-20T06:32:13+00:00",
-  "count": 332,
+  "updated_at": "2026-09-20T22:32:32+00:00",
+  "count": 341,
   "articles": [
+    {
+      "title": "Console adds individual balances for Canton network fees",
+      "category": "TECHNOLOGY",
+      "description": "Console users can now fund their own Canton traffic fees with CC or top up another participant's balance. The feature gives each account a separate way to cover its network usage.",
+      "url": "https://cantonnews.org/console-adds-individual-balances-for-canton-network-fees",
+      "published_at": "2026-09-20T15:09:08.356+00:00"
+    },
+    {
+      "title": "Kora adds USDCx trading pairs for gold and silver on Canton",
+      "category": "TOKENIZATION",
+      "description": "Kora users can now trade eXAU and eXAG against USDCx. The new gold and silver pairs follow a funding option that lets users move USDC from Ethereum directly into a Kora account.",
+      "url": "https://cantonnews.org/kora-adds-usdcx-trading-pairs-for-gold-and-silver-on-canton",
+      "published_at": "2026-09-20T15:08:55.738+00:00"
+    },
+    {
+      "title": "Cancore brings AI-assisted trading to Canton",
+      "category": "TECHNOLOGY",
+      "description": "Cancore MCP lets users turn a plain-language request into a proposed trade. The wallet supplies the live quote, and the user reviews and signs before any funds move.",
+      "url": "https://cantonnews.org/cancore-brings-ai-assisted-trading-to-canton",
+      "published_at": "2026-09-20T15:08:46.168+00:00"
+    },
+    {
+      "title": "Ekiden passes $1 million in trading as early users get lower fees",
+      "category": "ECOSYSTEM",
+      "description": "Ekiden's invite-only MainNet has passed $1 million in trading volume across 15,978 trades. A temporary fee offer and new leverage limits accompany the milestone.",
+      "url": "https://cantonnews.org/ekiden-passes-1-million-in-trading-as-early-users-get-lower-fees",
+      "published_at": "2026-09-20T15:08:38.712+00:00"
+    },
+    {
+      "title": "Loop brings prepaid network fees to Canton MainNet",
+      "category": "TECHNOLOGY",
+      "description": "Loop's Fee Balance is live on Canton MainNet, giving users a separate prepaid balance for transaction costs. The rollout also brings an update for applications that submit transactions from their own servers.",
+      "url": "https://cantonnews.org/loop-brings-prepaid-network-fees-to-canton-mainnet",
+      "published_at": "2026-09-20T15:08:25.497+00:00"
+    },
+    {
+      "title": "Alpend and BitSafe add CC rewards for CBTC lenders",
+      "category": "ECOSYSTEM",
+      "description": "Alpend has partnered with BitSafe to reward CBTC deposits with Canton Coin on top of the interest earned from lending. Deposits remain subject to the pool's available capacity.",
+      "url": "https://cantonnews.org/alpend-and-bitsafe-add-cc-rewards-for-cbtc-lenders",
+      "published_at": "2026-09-20T15:08:11.473+00:00"
+    },
+    {
+      "title": "Canton 3.5.18 adds reliability fixes and a security update",
+      "category": "TECHNOLOGY",
+      "description": "The September 17 release improves catch-up, corrects misleading warnings and includes a security fix for node operators.",
+      "url": "https://cantonnews.org/canton-3-5-18-adds-reliability-fixes-and-a-security-update",
+      "published_at": "2026-09-20T15:08:02.667+00:00"
+    },
+    {
+      "title": "Canton approves reward change for batched asset settlements",
+      "category": "TECHNOLOGY",
+      "description": "An approved change removes a cap that disadvantaged applications settling several trades together. The broader reward framework remains under review.",
+      "url": "https://cantonnews.org/canton-approves-reward-change-for-batched-asset-settlements",
+      "published_at": "2026-09-20T15:07:45.09+00:00"
+    },
+    {
+      "title": "TreasurySpring Approved as Canton Network Super Validator to Record Fixed-Term Fund Share Ownership On-Chain",
+      "category": "INSTITUTIONS",
+      "description": "TreasurySpring has been approved as a Canton Network Super Validator, with the first milestone focused on recording Fixed-Term Fund Share ownership on Canton's ledger as the authoritative ownership register, with no change to the existing client experience.",
+      "url": "https://cantonnews.org/treasuryspring-approved-as-canton-network-super-validator-to-record-fixed-term-fund-share-ownership-on-chain",
+      "published_at": "2026-09-20T10:13:46.667+00:00"
+    },
     {
       "title": "LYNC brings one-command deployment to Canton developers",
       "category": "TECHNOLOGY",
