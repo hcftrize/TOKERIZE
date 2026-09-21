@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-20T03:15:55.776891472Z",
-  "last_closed_round": 113935,
+  "updated_at": "2026-09-21T03:15:56.872719449Z",
+  "last_closed_round": 114075,
   "policy": {
     "id": "cip-0116-featured-app-locking",
     "title": "CIP-0116 Featured App Locking",
@@ -10,21 +10,21 @@
   },
   "summary": {
     "total_apps": 127,
-    "meets_requirement_count": 82,
-    "shortfall_count": 45,
+    "meets_requirement_count": 83,
+    "shortfall_count": 44,
     "data_issue_count": 19,
     "app_provider_count": 102,
-    "app_provider_locked": 495028929.2572386,
+    "app_provider_locked": 496888566.2798461,
     "app_provider_required": 510000000.0,
-    "app_provider_shortfall": 177530458.94465476,
+    "app_provider_shortfall": 177230723.1049577,
     "asset_issuer_count": 25,
     "asset_issuer_locked": 511465985.49833685,
     "asset_issuer_required": 625000000.0,
     "asset_issuer_shortfall": 113534014.50166315,
-    "total_locked_app_level": 1006494914.7555753,
-    "unique_wallet_total": 904798104.7774117,
+    "total_locked_app_level": 1008354551.7781829,
+    "unique_wallet_total": 906657741.8000191,
     "required_total": 1135000000.0,
-    "shortfall_total": 291064473.4463179
+    "shortfall_total": 290764737.60662085
   },
   "apps": [
     {
@@ -739,9 +739,9 @@
       "source_status": "3-Approved",
       "status_label": "Below Requirement",
       "meets_requirement": false,
-      "locked_balance": 56615.4226614935,
+      "locked_balance": 62369.0252689761,
       "required_lock": 5000000.0,
-      "shortfall": 4943384.5773385065,
+      "shortfall": 4937630.974731024,
       "data_quality": [],
       "is_active": true
     },
@@ -905,11 +905,11 @@
       "role": "App Provider",
       "asset_issuer": false,
       "source_status": "3-Approved",
-      "status_label": "Below Requirement",
-      "meets_requirement": false,
-      "locked_balance": 4706017.76291041,
+      "status_label": "Meets Requirement",
+      "meets_requirement": true,
+      "locked_balance": 6559901.18291041,
       "required_lock": 5000000.0,
-      "shortfall": 293982.2370895902,
+      "shortfall": 0.0,
       "data_quality": [],
       "is_active": true
     },
