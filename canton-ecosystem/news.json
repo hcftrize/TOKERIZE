@@ -1,7 +1,112 @@
 {
-  "updated_at": "2026-09-21T06:32:14+00:00",
-  "count": 341,
+  "updated_at": "2026-09-22T06:32:46+00:00",
+  "count": 356,
   "articles": [
+    {
+      "title": "Selay introduces Watcher for Canton project checks",
+      "category": "TECHNOLOGY",
+      "description": "Watcher lets users look up a domain, project name or Canton Party ID to inspect its classification, operator and on-chain evidence. Selay has released it as an early version without login or wallet-connection requirements.",
+      "url": "https://cantonnews.org/selay-introduces-watcher-for-canton-project-checks",
+      "published_at": "2026-09-22T02:14:57.283+00:00"
+    },
+    {
+      "title": "Canborsa adds partial closing for perpetual positions",
+      "category": "TECHNOLOGY",
+      "description": "Traders can now close a chosen percentage or amount of a Canborsa position while keeping the rest open, with existing take-profit and stop-loss settings retained on the remainder.",
+      "url": "https://cantonnews.org/canborsa-adds-partial-closing-for-perpetual-positions",
+      "published_at": "2026-09-22T01:57:04.066+00:00"
+    },
+    {
+      "title": "Cantex announces $3 million in total value locked",
+      "category": "ECOSYSTEM",
+      "description": "Cantex's latest milestone puts its announced total value locked at $3 million. The Canton trading platform is also inviting institutions and eligible accredited individuals to apply as liquidity partners.",
+      "url": "https://cantonnews.org/cantex-announces-3-million-in-total-value-locked",
+      "published_at": "2026-09-22T01:56:53.606+00:00"
+    },
+    {
+      "title": "Canton Foundation sponsors Marex’s Super Validator proposal",
+      "category": "INSTITUTIONS",
+      "description": "The Foundation has sponsored a proposal for Marex to earn Super Validator weight of up to 10 through institutional settlement, collateral and other agreed projects.",
+      "url": "https://cantonnews.org/canton-foundation-sponsors-marex-s-super-validator-proposal",
+      "published_at": "2026-09-22T01:56:45.15+00:00"
+    },
+    {
+      "title": "Five Canton apps clear Tokenomics review for Featured App status",
+      "category": "TECHNOLOGY",
+      "description": "The Hub, Upflam, Ubyx, WolfEdge Labs and FTP have cleared committee review. Super Validator on-chain approval is the next step in establishing their Featured App status.",
+      "url": "https://cantonnews.org/five-canton-apps-clear-tokenomics-review-for-featured-app-status",
+      "published_at": "2026-09-22T01:56:31.436+00:00"
+    },
+    {
+      "title": "Paxos Super Validator proposal reaches a formal Canton vote",
+      "category": "INSTITUTIONS",
+      "description": "The proposal ties a maximum Super Validator reward weight of 8 to native stablecoin issuance, reserve management and automated minting and redemption on Canton.",
+      "url": "https://cantonnews.org/paxos-super-validator-proposal-reaches-a-formal-canton-vote",
+      "published_at": "2026-09-22T01:56:21.493+00:00"
+    },
+    {
+      "title": "Splice 0.8.0 is ready for MainNet deployment",
+      "category": "TECHNOLOGY",
+      "description": "Splice 0.8.0 is ready for deployment on Canton's production network, with two-thirds of Super Validator nodes upgraded by the September 21 notice. The rollout combines software updates with later votes to activate certain features.",
+      "url": "https://cantonnews.org/splice-0-8-0-is-ready-for-mainnet-deployment",
+      "published_at": "2026-09-22T01:56:11.621+00:00"
+    },
+    {
+      "title": "LSEG Super Validator proposal moves to a formal Canton vote",
+      "category": "INSTITUTIONS",
+      "description": "Canton’s Super Validators have begun voting on LSEG’s proposed participation. The plan would let the group earn reward weight of up to 10 against confidential milestones.",
+      "url": "https://cantonnews.org/lseg-super-validator-proposal-moves-to-a-formal-canton-vote",
+      "published_at": "2026-09-22T01:56:01.601+00:00"
+    },
+    {
+      "title": "Rocky announces multichain wallet support beyond Canton",
+      "category": "TECHNOLOGY",
+      "description": "Rocky Wallet supports Canton, Solana and Ethereum-compatible networks in one interface. The update adds a combined view of balances, token transfers and app discovery, with multisig wallets still planned.",
+      "url": "https://cantonnews.org/rocky-announces-multichain-wallet-support-beyond-canton",
+      "published_at": "2026-09-22T00:37:53.541+00:00"
+    },
+    {
+      "title": "Slay Money announces 6,000 CC for early users and weekly rewards",
+      "category": "ECOSYSTEM",
+      "description": "Slay Money plans to share 6,000 CC among 20 early users before its first weekly rewards distribution. Activity in the app begins counting this week, with the first weekly payout planned for next week.",
+      "url": "https://cantonnews.org/slay-money-announces-6-000-cc-for-early-users-and-weekly-rewards",
+      "published_at": "2026-09-22T00:37:48.172+00:00"
+    },
+    {
+      "title": "a16z crypto approved for Canton Super Validator role",
+      "category": "INSTITUTIONS",
+      "description": "Canton's Super Validator operators have approved a16z crypto's participation. The arrangement links rewards and a maximum earnable weight of 10 to verified milestones.",
+      "url": "https://cantonnews.org/a16z-crypto-approved-for-canton-super-validator-role",
+      "published_at": "2026-09-22T00:37:41.992+00:00"
+    },
+    {
+      "title": "Silvana adds cSOL, QQQe and SPYe trading on Canton",
+      "category": "ECOSYSTEM",
+      "description": "cSOL, QQQe and SPYe are now available to trade on Silvana, adding three more assets to the platform's private trading markets on Canton.",
+      "url": "https://cantonnews.org/silvana-adds-csol-qqqe-and-spye-trading-on-canton",
+      "published_at": "2026-09-22T00:37:33.182+00:00"
+    },
+    {
+      "title": "Float seeks Featured App status for its Canton swap service",
+      "category": "TECHNOLOGY",
+      "description": "The Slay Money team's Float service has applied for Featured App status. It compares quotes from exchange partners to swap more than 2,000 supported crypto assets into Canton Coin and back out again.",
+      "url": "https://cantonnews.org/float-seeks-featured-app-status-for-its-canton-swap-service",
+      "published_at": "2026-09-21T13:56:27.504+00:00"
+    },
+    {
+      "title": "Swap Monster announces Edel partnership for EDELx on Canton",
+      "category": "ECOSYSTEM",
+      "description": "Swap Monster has announced a partnership with Edel focused on EDELx, its Canton-side token. The update builds on earlier availability of a CBTC/EDELx market on the trading platform.",
+      "url": "https://cantonnews.org/swap-monster-announces-edel-partnership-for-edelx-on-canton",
+      "published_at": "2026-09-21T13:56:18.46+00:00"
+    },
+    {
+      "title": "Fairmint seeks 3.5 million CC for a Privy toolkit on Canton",
+      "category": "TECHNOLOGY",
+      "description": "Fairmint has applied for funding to connect Privy-based apps to Canton. The proposed developer toolkit would help those apps authorize transactions, with most of the requested funding tied to independent MainNet adoption and maintenance.",
+      "url": "https://cantonnews.org/fairmint-seeks-3-5-million-cc-for-a-privy-toolkit-on-canton",
+      "published_at": "2026-09-21T13:56:09.814+00:00"
+    },
     {
       "title": "Console adds individual balances for Canton network fees",
       "category": "TECHNOLOGY",
