@@ -4,7 +4,7 @@
   "bootstrap": true,
   "counts": {
     "bondCreatedEvents": 10192,
-    "increaseBondEvents": 355,
+    "increaseBondEvents": 358,
     "bonds": 10192
   },
   "data": {
@@ -115317,6 +115317,33 @@
         "blockNumber": "51472632",
         "timestamp": "1789734611",
         "txHash": "0x1d671af33f6e61fd19f43515a8ecb1584f8019ff64c2d0980dcb7bdc14b604bb"
+      },
+      {
+        "id": "0x5ec579a0b5a3ee413d5724989001ed5b62ff371b99df97b5641d59d16103f7c1-51601888",
+        "nftId": "10171",
+        "amount": "60000",
+        "date": "2026-09-21",
+        "blockNumber": "51601888",
+        "timestamp": "1789993123",
+        "txHash": "0x5ec579a0b5a3ee413d5724989001ed5b62ff371b99df97b5641d59d16103f7c1"
+      },
+      {
+        "id": "0x9a785284868a4bd7ebf72fde4ca378bcc2487f45d80af7cf18b9ce1a3e1baabc-51602410",
+        "nftId": "10177",
+        "amount": "15000",
+        "date": "2026-09-21",
+        "blockNumber": "51602410",
+        "timestamp": "1789994167",
+        "txHash": "0x9a785284868a4bd7ebf72fde4ca378bcc2487f45d80af7cf18b9ce1a3e1baabc"
+      },
+      {
+        "id": "0x6a5bf64cd25cc038df158448e662148197e7d3dd39df552f151c0734f07f1bcc-51603048",
+        "nftId": "330",
+        "amount": "10000",
+        "date": "2026-09-21",
+        "blockNumber": "51603048",
+        "timestamp": "1789995443",
+        "txHash": "0x6a5bf64cd25cc038df158448e662148197e7d3dd39df552f151c0734f07f1bcc"
       }
     ],
     "bonds": [
@@ -247538,10 +247565,10 @@
         "createdAtDate": "2026-08-10",
         "createdAtTimestamp": "1786366555",
         "createdAtBlock": "49788604",
-        "totalDeposited": "44796.88",
-        "increaseCount": 2,
-        "lastDepositDate": "2026-09-13",
-        "lastDepositTimestamp": "1789336367"
+        "totalDeposited": "104796.88",
+        "increaseCount": 3,
+        "lastDepositDate": "2026-09-21",
+        "lastDepositTimestamp": "1789993123"
       },
       {
         "id": "10172",
@@ -247616,10 +247643,10 @@
         "createdAtDate": "2026-09-01",
         "createdAtTimestamp": "1788288463",
         "createdAtBlock": "50749558",
-        "totalDeposited": "5090",
-        "increaseCount": 0,
-        "lastDepositDate": "2026-09-01",
-        "lastDepositTimestamp": "1788288463"
+        "totalDeposited": "20090",
+        "increaseCount": 1,
+        "lastDepositDate": "2026-09-21",
+        "lastDepositTimestamp": "1789994167"
       },
       {
         "id": "10178",
@@ -247818,5 +247845,5 @@
       }
     ]
   },
-  "updated_at": "2026-09-21T05:31:57.466648+00:00"
+  "updated_at": "2026-09-22T05:31:55.938789+00:00"
 }
