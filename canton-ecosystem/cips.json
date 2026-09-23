@@ -1134,9 +1134,9 @@
     "number": 124,
     "title": "London Stock Exchange Group (LSEG) Super Validator Participation",
     "type": "Governance",
-    "status": "Proposed",
+    "status": "Approved",
     "created": "2026-09-02",
-    "approved": "TBD",
+    "approved": "2026-09-22",
     "description": "This CIP proposes granting London Stock Exchange Group (LSEG) participation as a Super Validator (SV) with a maximum Weight of 10. Given LSEG's strategic importance to the Canton ecosystem, its inclusion will bring significant financial market infrastructure expertise, alignment with global payments and post-trade markets, and meaningful contributions to network governance and institutional adoption.\n\nUnlike other CIPs, this program contains confidential commitments to the ecosystem. Those commitments and milestones have been agreed with the Tokenomics and SVAC and will be made available to the public when appropriate and as needed.\n\n - **Total Earnable Weight:** 10 (max)\n\n- **Accrual Destination:** Escrow, consistent with existing SV escrow mechanics.\n\n- **Confidentiality:** The Super Validator Accountability Committee (SVAC) will review the milestones and inform SVs if they have been met."
   },
   {
@@ -1144,9 +1144,9 @@
     "number": 125,
     "title": "Add Paxos as a Super Validator (Weight 8.0)",
     "type": "Governance",
-    "status": "Proposed",
+    "status": "Approved",
     "created": "2026-09-14",
-    "approved": "TBD",
+    "approved": "2026-09-22",
     "description": "This proposal adds Paxos as a Super Validator (SV) on the Canton Network with a maximum potential weight of 8.0, tied to the integration and operation of stablecoin treasury management workflows on Canton.\n\nPaxos is the issuer of major regulated stablecoins and operates regulated infrastructure for custody and settlement. This proposal aligns SV rewards with Paxos bringing treasury management, issuance, and settlement flows on-chain, enabling 24×7 programmable cash infrastructure on Canton."
   }
 ]
