@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-22T06:32:46+00:00",
-  "count": 356,
+  "updated_at": "2026-09-23T06:32:17+00:00",
+  "count": 360,
   "articles": [
+    {
+      "title": "Canton Foundation sets 10-day update window for grant applicants",
+      "category": "TECHNOLOGY",
+      "description": "Applicants with open Development Fund proposals must identify the funding priority their work addresses and explain its benefit to Canton. Unchanged proposals face closure and exclusion from the next funding cycle.",
+      "url": "https://cantonnews.org/canton-foundation-sets-10-day-update-window-for-grant-applicants",
+      "published_at": "2026-09-22T23:57:42.755+00:00"
+    },
+    {
+      "title": "Hacken and NODERS schedule live AI audit workshop for Canton builders",
+      "category": "TECHNOLOGY",
+      "description": "A free online workshop on September 29 will review a real Canton smart contract with Hacken's AI Auditor. Builders will see how to examine possible security issues and plan fixes.",
+      "url": "https://cantonnews.org/hacken-and-noders-schedule-live-ai-audit-workshop-for-canton-builders",
+      "published_at": "2026-09-22T23:57:32.447+00:00"
+    },
+    {
+      "title": "Next Finance Tech receives one additional Canton MainNet validator allocation",
+      "category": "TECHNOLOGY",
+      "description": "Japan-based Next Finance Tech has received one additional MainNet validator node allocation. The September 21 award builds on the company's participation in Canton, which began in August 2025.",
+      "url": "https://cantonnews.org/next-finance-tech-receives-one-additional-canton-mainnet-validator-allocation",
+      "published_at": "2026-09-22T23:57:18.664+00:00"
+    },
+    {
+      "title": "Canton Foundation and KB Securities to discuss tokenized settlement at Bridge Seoul",
+      "category": "INSTITUTIONS",
+      "description": "Wavebridge's October 1 conference in Seoul will feature Canton Foundation and KB Securities in a session on cross-border payments and tokenized-asset settlement.",
+      "url": "https://cantonnews.org/canton-foundation-and-kb-securities-to-discuss-tokenized-settlement-at-bridge-seoul",
+      "published_at": "2026-09-22T23:57:11.557+00:00"
+    },
     {
       "title": "Selay introduces Watcher for Canton project checks",
       "category": "TECHNOLOGY",
