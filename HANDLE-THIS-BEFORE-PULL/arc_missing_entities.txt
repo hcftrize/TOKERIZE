@@ -1,8 +1,28 @@
 Arc Ecosystem — Entities not found on arc.io/ecosystem
-Checked: 2026-09-22
-Count: 1
+Checked: 2026-09-23
+Count: 21
 
 These entities exist in arcentities.json but were NOT found during scrape.
 Please check manually — remove from arcentities.json if confirmed gone.
 
+- AWS (slug: aws)
+- Axelar (slug: axelar)
+- Brex (slug: brex)
+- Cloudflare (slug: cloudflare)
+- Deutsche Bank (slug: deutsche-bank)
+- dLocal (slug: dlocal)
+- EBANX (slug: ebanx)
+- Emirates NBD (slug: emirates-nbd)
+- First Abu Dhabi Bank (slug: first-abu-dhabi-bank)
+- FIS (slug: fis)
+- GetLiquid (slug: getliquid)
+- Goldman Sachs (slug: goldman-sachs)
+- Hecto Innovation (slug: hecto-innovation-2)
+- Hurupay (slug: hurupay)
+- LianLian (slug: lianlian-2)
+- Mercoin (slug: mercoin-2)
+- Nuvei (slug: nuvei)
+- Ormi Labs (slug: ormi-labs)
+- State Street (slug: state-street)
 - T-RIZE (slug: t-rize)
+- WheelX (slug: wheelx)

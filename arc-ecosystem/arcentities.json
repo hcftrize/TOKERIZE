@@ -1,5 +1,29 @@
 [
   {
+    "name": "0x",
+    "slug": "0x",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35158b4f9d76adae1a554_6ab351570c887e14ae8b1b60_0x-logo.png",
+    "description": "",
+    "external_url": "https://0x.org/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\0x.png"
+  },
+  {
+    "name": "1inch",
+    "slug": "1inch",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3516244c2156302ff891a_6ab3516207e3351cc8f9a53a_1inch-logo.png",
+    "description": "",
+    "external_url": "https://1inch.com/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\1inch.png"
+  },
+  {
     "name": "Aave",
     "slug": "aave",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900dc93490611b54729de1b_Logomark-dark.svg",
@@ -58,6 +82,30 @@
       "Stablecoin Issuers"
     ],
     "logo_local": "logos\\allunity.jpg"
+  },
+  {
+    "name": "Aster",
+    "slug": "aster",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab354f9143d71eb72135755_6ab354f860107e360c945f2c_aster-logo.png",
+    "description": "",
+    "external_url": "https://www.asterdex.com/en",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\aster.png"
+  },
+  {
+    "name": "Augustus",
+    "slug": "augustus",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab33e60dac7bcd2b96d7a26_6ab33e5f7485c30a040eb47e_augustus-logo.jpeg",
+    "description": "",
+    "external_url": "augustus.io",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\augustus.jpeg"
   },
   {
     "name": "Auros",
@@ -123,6 +171,18 @@
     "logo_local": "logos\\b2c2.png"
   },
   {
+    "name": "Backpack",
+    "slug": "backpack",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c4fe7bfa7286364dcb9_6ab35c4ee6c64edb45bbb7fb_backpack-logo.jpeg",
+    "description": "",
+    "external_url": "https://backpack.exchange/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\backpack.jpeg"
+  },
+  {
     "name": "Bank Frick",
     "slug": "bank-frick",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbd7d81a420d2fcf8ee29e_bankfrick-icon.svg",
@@ -133,6 +193,18 @@
       "Banks"
     ],
     "logo_local": "logos\\bank-frick.svg"
+  },
+  {
+    "name": "Bankr",
+    "slug": "bankr",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab353e9532a9dc7af44ae51_6ab353e880f979573dfb1fd7_bankr-logo.svg",
+    "description": "",
+    "external_url": "https://bankr.bot/terminal",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\bankr.svg"
   },
   {
     "name": "BDACS (KRW1)",
@@ -147,6 +219,18 @@
     "logo_local": "logos\\bdacs-krw1-2.png"
   },
   {
+    "name": "Binance",
+    "slug": "binance",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35a5b776b2468728c143f_6ab35a5aea3e95a7e57127e4_binance-logo.webp",
+    "description": "",
+    "external_url": "http://binance.com",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\binance.webp"
+  },
+  {
     "name": "Binance Wallet",
     "slug": "binance-wallet",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6aa35649e889367018fa9870_6aa35648d2d2a1e8d32598d6_binance-wallet-logo.png",
@@ -159,6 +243,18 @@
     "logo_local": "logos\\binance-wallet.png"
   },
   {
+    "name": "Bitget Wallet",
+    "slug": "bitget-wallet",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c5a2b1b164fb7f4c1bd_6ab35c5a4a52accb54fe1a26_bitget-wallet-logo.jpeg",
+    "description": "",
+    "external_url": "https://web3.bitget.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\bitget-wallet.jpeg"
+  },
+  {
     "name": "BitGo",
     "slug": "bitgo",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fff9093fe36d2f5f6dfa1d_BitGo_Logo.png",
@@ -169,6 +265,18 @@
       "Custodians"
     ],
     "logo_local": "logos\\bitgo.png"
+  },
+  {
+    "name": "Bitrue",
+    "slug": "bitrue",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35a9c7f42bd6d90dcf153_6ab35a9be6c64edb45bad7af_bitrue-logo.png",
+    "description": "",
+    "external_url": "https://www.bitrue.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\bitrue.png"
   },
   {
     "name": "Bitso / Juno",
@@ -303,6 +411,18 @@
       "Banks"
     ],
     "logo_local": "logos\\btg-pactual.svg"
+  },
+  {
+    "name": "BVNK",
+    "slug": "bvnk",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab349928301f8fa023f7464_6ab349914f73db8addd22193_bvnk-logo.jpeg",
+    "description": "",
+    "external_url": "https://www.bvnk.com/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\bvnk.jpeg"
   },
   {
     "name": "Bybit",
@@ -464,6 +584,18 @@
     "logo_local": "logos\\coingecko.png"
   },
   {
+    "name": "Coins.ph",
+    "slug": "coins-ph",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35aa8e7bfa72863645709_6ab35aa763d3e92efee6b8f1_coins-ph-logo.jpeg",
+    "description": "",
+    "external_url": "https://www.coins.ph/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\coins-ph.jpeg"
+  },
+  {
     "name": "Commerzbank",
     "slug": "commerzbank-2",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6931882e2b90a9f4d3623462_CB-2022-Logo_centered_RGB_positive.png",
@@ -548,6 +680,42 @@
     "logo_local": "logos\\curve.png"
   },
   {
+    "name": "Cycles",
+    "slug": "cycles",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab354ae8399c15649ebd0c7_6ab354ae532a9dc7af450585_cycles-logo.png",
+    "description": "",
+    "external_url": "https://pay.cycles.money/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\cycles.png"
+  },
+  {
+    "name": "DCent",
+    "slug": "dcent",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c6791dbef2f3eae46f5_6ab35c67b817438c026fbadd_dcent-logo.webp",
+    "description": "",
+    "external_url": "https://dcentwallet.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\dcent.webp"
+  },
+  {
+    "name": "Definitive",
+    "slug": "definitive",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3550880f979573dfb7fde_6ab3550660107e360c9462f7_definitive-logo.jpeg",
+    "description": "",
+    "external_url": "https://www.definitive.fi/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\definitive.jpeg"
+  },
+  {
     "name": "Deutsche Bank",
     "slug": "deutsche-bank",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fffabb25afb016ba2323ff_DB.png",
@@ -571,6 +739,30 @@
       "Tools"
     ],
     "logo_local": "logos\\dfns.svg"
+  },
+  {
+    "name": "Dialectic",
+    "slug": "dialectic",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3512636a80cd3fcb5d349_6ab35125143d71eb721215f4_dialectic-logo.jpeg",
+    "description": "",
+    "external_url": "https://dialectic.com/",
+    "tags": [
+      "Financial Services",
+      "Borrow/Lend"
+    ],
+    "logo_local": "logos\\dialectic.jpeg"
+  },
+  {
+    "name": "Digital Garage",
+    "slug": "digital-garage",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab354cd36a80cd3fcb72581_6ab354cd8c9c964099a4aeb3_digital-garage-logo.jpeg",
+    "description": "",
+    "external_url": "https://www.garage.co.jp/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\digital-garage.jpeg"
   },
   {
     "name": "Dinari",
@@ -597,6 +789,18 @@
     "logo_local": "logos\\dlocal.svg"
   },
   {
+    "name": "Doppler",
+    "slug": "doppler",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3541ca8a493c3b9b631aa_6ab3541cfe46302ea5f2ccca_doppler-logo.jpeg",
+    "description": "",
+    "external_url": "https://doppler.xyz/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\doppler.jpeg"
+  },
+  {
     "name": "Dromos Labs",
     "slug": "dromos-labs",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd14e924a1c7acfeb176e1_Dromos%20Logo%20Symbol.svg",
@@ -621,6 +825,18 @@
     "logo_local": "logos\\drpc.webp"
   },
   {
+    "name": "DTCC",
+    "slug": "dtcc",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab33c857485c30a040daa27_6ab33c85c3d7f9b77bf0a84c_dtcc-logo.png",
+    "description": "",
+    "external_url": "dtcc.com",
+    "tags": [
+      "Financial Services",
+      "Custodians"
+    ],
+    "logo_local": "logos\\dtcc.png"
+  },
+  {
     "name": "Dynamic",
     "slug": "dynamic",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd14b4a6585fdb17dae834_dynamic-icon.svg",
@@ -640,6 +856,19 @@
       "PSPs"
     ],
     "logo_local": "logos\\ebanx.svg"
+  },
+  {
+    "name": "edgeX",
+    "slug": "edgex",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3542580f979573dfb306e_6ab354252f68f49ceb68d5e3_edgex-logo.png",
+    "description": "",
+    "external_url": "https://pro.edgex.exchange/en-US/home",
+    "tags": [
+      "Trading",
+      "DEXs",
+      "CEXs"
+    ],
+    "logo_local": "logos\\edgex.png"
   },
   {
     "name": "Elliptic",
@@ -666,6 +895,18 @@
     "logo_local": "logos\\emirates-nbd.svg"
   },
   {
+    "name": "ether.fi",
+    "slug": "ether-fi",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c7669ef76b1daeb7c62_6ab35c75776b2468728d1fee_ether-fi-logo.png",
+    "description": "",
+    "external_url": "https://www.ether.fi/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\ether-fi.png"
+  },
+  {
     "name": "Exodus",
     "slug": "exodus",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe0b98635f0b30354af30_Exodus_symbol.svg",
@@ -676,6 +917,19 @@
       "Wallet Services"
     ],
     "logo_local": "logos\\exodus.svg"
+  },
+  {
+    "name": "Extended",
+    "slug": "extended",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35614b817438c026ce891_6ab356131c257ca22f945da9_extended-logo.png",
+    "description": "",
+    "external_url": "https://extended.exchange/",
+    "tags": [
+      "Trading",
+      "DEXs",
+      "CEXs"
+    ],
+    "logo_local": "logos\\extended.png"
   },
   {
     "name": "Fireblocks",
@@ -726,6 +980,18 @@
     "logo_local": "logos\\fluid.svg"
   },
   {
+    "name": "fomo",
+    "slug": "fomo",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3561e0e71e3f8be3050d7_6ab3561d2f76c8e575a2d37f_fomo-logo.png",
+    "description": "",
+    "external_url": "https://fomo.family/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\fomo.png"
+  },
+  {
     "name": "Forte AUD",
     "slug": "forte",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe23ec7329ee0ab66b5ba_Forte.svg",
@@ -769,6 +1035,30 @@
       "Market Makers"
     ],
     "logo_local": "logos\\galaxy.png"
+  },
+  {
+    "name": "Gate",
+    "slug": "gate",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35ab569ef76b1daeb2b61_6ab35ab4e6c64edb45bae7b9_gate-logo.png",
+    "description": "",
+    "external_url": "https://www.gate.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\gate.png"
+  },
+  {
+    "name": "Gauntlet",
+    "slug": "gauntlet",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3513505e89eabf5ce49cb_6ab351348399c15649ea8331_gauntlet-logo.png",
+    "description": "",
+    "external_url": "https://gauntlet.network",
+    "tags": [
+      "Financial Services",
+      "Borrow/Lend"
+    ],
+    "logo_local": "logos\\gauntlet.png"
   },
   {
     "name": "GetLiquid",
@@ -885,6 +1175,18 @@
     "logo_local": "logos\\hsbc.png"
   },
   {
+    "name": "Huma Finance",
+    "slug": "huma-finance",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab34658d9c324c2914a3dc8_6ab346577be54d3b82607bcf_huma-finance-logo.png",
+    "description": "",
+    "external_url": "https://huma.finance/",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\huma-finance.png"
+  },
+  {
     "name": "Hurupay",
     "slug": "hurupay",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6931927b18d709a190f2f493_hurupay-final-logo.jpg",
@@ -895,6 +1197,42 @@
       "Fintechs"
     ],
     "logo_local": "logos\\hurupay.jpg"
+  },
+  {
+    "name": "imToken",
+    "slug": "imtoken",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c81776b2468728d25f8_6ab35c80436bc54d08754129_imtoken-logo.png",
+    "description": "",
+    "external_url": "https://token.im/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\imtoken.png"
+  },
+  {
+    "name": "Janus Henderson",
+    "slug": "janus-henderson",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab347ca1b4732d7b4d0a62d_6ab347ca382f5a7b7179a85c_janus-henderson-logo.png",
+    "description": "",
+    "external_url": "https://www.janushenderson.com/",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\janus-henderson.png"
+  },
+  {
+    "name": "JCB",
+    "slug": "jcb",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab349b9da0e618d39402b8b_6ab349b7e3d92e475ad0cb62_jcb-logo.png",
+    "description": "",
+    "external_url": "https://www.global.jcb/en/index.html",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\jcb.png"
   },
   {
     "name": "JPYC",
@@ -933,6 +1271,30 @@
     "logo_local": "logos\\kraken.svg"
   },
   {
+    "name": "KuCoin",
+    "slug": "kucoin",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35b9b2f76c8e575a5380c_6ab35b9acb4d6682f18e4496_kucoin-logo.png",
+    "description": "",
+    "external_url": "https://www.kucoin.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\kucoin.png"
+  },
+  {
+    "name": "KyberSwap",
+    "slug": "kyberswap",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3543f8c5ce8b30e1ac2c8_6ab3543e2f68f49ceb68d9be_kyberswap-logo.png",
+    "description": "",
+    "external_url": "https://kyberswap.com/swap/ethereum",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\kyberswap.png"
+  },
+  {
     "name": "Kyobo Life",
     "slug": "kyobo-life-2",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69318c12a26808313c0bb4e0_KyoboLife_ci_horizontal_en.png",
@@ -957,6 +1319,30 @@
     "logo_local": "logos\\layerzero.svg"
   },
   {
+    "name": "LBank",
+    "slug": "lbank",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35baa4cdb5145ee6f9be4_6ab35ba9d2286786db934d20_lbank-logo.png",
+    "description": "",
+    "external_url": "https://www.lbank.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\lbank.png"
+  },
+  {
+    "name": "Lead Bank",
+    "slug": "lead-bank",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab340c39be506c7f74839c2_6ab340c19be506c7f74838da_lead-bank-logo.png",
+    "description": "",
+    "external_url": "https://www.lead.bank/",
+    "tags": [
+      "Financial Services",
+      "Banks"
+    ],
+    "logo_local": "logos\\lead-bank.png"
+  },
+  {
     "name": "Ledger",
     "slug": "ledger",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe5e84ec2263793433914_ledger-icon.svg",
@@ -964,6 +1350,18 @@
     "external_url": "https://www.ledger.com/",
     "tags": [],
     "logo_local": "logos\\ledger.svg"
+  },
+  {
+    "name": "LI.FI",
+    "slug": "li-fi",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35487d26f83b699aa745f_6ab3548678494f2cf0cc1d5b_li-fi-logo.png",
+    "description": "",
+    "external_url": "https://li.fi/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\li-fi.png"
   },
   {
     "name": "LianLian",
@@ -1011,6 +1409,18 @@
     "logo_local": "logos\\mastercard.svg"
   },
   {
+    "name": "Matrixdock",
+    "slug": "matrixdock",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3485fce277f8b205019dc_6ab3485e72dd23a2705603cc_matrixdock-logo.jpeg",
+    "description": "",
+    "external_url": "https://www.matrixdock.com",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\matrixdock.jpeg"
+  },
+  {
     "name": "Mercoin",
     "slug": "mercoin-2",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69318cf6581198300ec9d7b0_mercoin_logo_bk.png",
@@ -1021,6 +1431,18 @@
       "PSPs"
     ],
     "logo_local": "logos\\mercoin-2.png"
+  },
+  {
+    "name": "Merkl",
+    "slug": "merkl",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35513cbbf7f117cf763c3_6ab35512f254e06986191a94_merkl-logo.png",
+    "description": "",
+    "external_url": "https://merkl.xyz/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\merkl.png"
   },
   {
     "name": "MetaMask",
@@ -1035,6 +1457,42 @@
     "logo_local": "logos\\metamask.svg"
   },
   {
+    "name": "MEXC",
+    "slug": "mexc",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35bbc91dbef2f3eae33a4_6ab35bbc578096661939abb7_mexc-logo.png",
+    "description": "",
+    "external_url": "https://www.mexc.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\mexc.png"
+  },
+  {
+    "name": "Mobee",
+    "slug": "mobee",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35bcc615ecaabe3d74591_6ab35bcb4a52accb54fe1136_mobee-logo.jpeg",
+    "description": "",
+    "external_url": "https://mobee.com/en",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\mobee.jpeg"
+  },
+  {
+    "name": "MoonPay",
+    "slug": "moonpay",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab349c7568175a876c57f77_6ab349c6c3d7f9b77bf2df01_moonpay-logo.png",
+    "description": "",
+    "external_url": "https://www.moonpay.com/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\moonpay.png"
+  },
+  {
     "name": "Morpho",
     "slug": "morpho",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900dd4d5ab8afd5b17ea7e3_Morpho-with-background-logo.svg",
@@ -1045,6 +1503,18 @@
       "Borrow/Lend"
     ],
     "logo_local": "logos\\morpho.svg"
+  },
+  {
+    "name": "New York Life Investment Management",
+    "slug": "new-york-life-investment-management",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab34854d8841c52c37a6299_6ab34853f96741fd0097bc48_new-york-life-investment-management-logo.jpeg",
+    "description": "",
+    "external_url": "newyorklifeinvestments.com",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\new-york-life-investment-management.jpeg"
   },
   {
     "name": "Noah",
@@ -1071,6 +1541,18 @@
     "logo_local": "logos\\nuvei.svg"
   },
   {
+    "name": "OKX",
+    "slug": "okx",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35bd9beb9c0ddd82567c1_6ab35bd82b1b164fb7f4800b_okx-logo.png",
+    "description": "",
+    "external_url": "https://www.okx.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\okx.png"
+  },
+  {
     "name": "OKX Wallet",
     "slug": "okx-wallet",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6aa359cce7e90f36e38417be_6aa359caef6ebdd92aa0aac7_okx-wallet-logo.svg",
@@ -1081,6 +1563,18 @@
       "Wallet Services"
     ],
     "logo_local": "logos\\okx-wallet.svg"
+  },
+  {
+    "name": "OpenSea",
+    "slug": "opensea",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3551eb18275630a644f29_6ab3551c33e695b2def5cee5_opensea-logo.png",
+    "description": "",
+    "external_url": "opensea.io",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\opensea.png"
   },
   {
     "name": "Ormi Labs",
@@ -1095,6 +1589,30 @@
     "logo_local": "logos\\ormi-labs.svg"
   },
   {
+    "name": "OSL",
+    "slug": "osl",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35be42b1b164fb7f486d5_6ab35be42b1b164fb7f48651_osl-logo.jpeg",
+    "description": "",
+    "external_url": "https://www.osl.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\osl.jpeg"
+  },
+  {
+    "name": "OwlPay",
+    "slug": "owlpay",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab34b52d8841c52c37a9fe7_6ab34b51fbcf32e2d28ce896_owlpay-logo.jpeg",
+    "description": "",
+    "external_url": "http://owlpay.com",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\owlpay.jpeg"
+  },
+  {
     "name": "Pairpoint",
     "slug": "pairpoint-by-vodafone",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe816c0d1d51101c02ba1_pairpoint-icon.svg",
@@ -1107,6 +1625,18 @@
     "logo_local": "logos\\pairpoint-by-vodafone.svg"
   },
   {
+    "name": "Paribu",
+    "slug": "paribu",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35bef5f8583c64af1506a_6ab35bee0e71e3f8be336642_paribu-logo.png",
+    "description": "",
+    "external_url": "https://www.paribu.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\paribu.png"
+  },
+  {
     "name": "Paysafe",
     "slug": "paysafe",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbe8b3689d1834834e5021_paysafe-icon-180x180.png",
@@ -1114,6 +1644,30 @@
     "external_url": "https://www.paysafe.com",
     "tags": [],
     "logo_local": "logos\\paysafe.png"
+  },
+  {
+    "name": "PDAX",
+    "slug": "pdax",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c13b817438c026f92e9_6ab35c124abf618dff82d979_pdax-logo.png",
+    "description": "",
+    "external_url": "https://pdax.ph/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\pdax.png"
+  },
+  {
+    "name": "Phantom",
+    "slug": "phantom",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c9169ef76b1daeb82a6_6ab35c91cb4d6682f18e99a4_phantom-logo.png",
+    "description": "",
+    "external_url": "https://phantom.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\phantom.png"
   },
   {
     "name": "PhotonPay",
@@ -1137,6 +1691,18 @@
     "logo_local": "logos\\pimilico.svg"
   },
   {
+    "name": "pools.trade",
+    "slug": "pools-trade",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab359dc4abf618dff826df5_6ab359db436bc54d08740b69_pools-trade-logo.jpeg",
+    "description": "",
+    "external_url": "https://pools.xyz/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\pools-trade.jpeg"
+  },
+  {
     "name": "Privy",
     "slug": "privy",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd1312a4091121d979e970_privy-icon.png",
@@ -1149,6 +1715,42 @@
     "logo_local": "logos\\privy.png"
   },
   {
+    "name": "ProShares",
+    "slug": "proshares",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3486d40ee4a840ff1069f_6ab3486cd8841c52c37a6a6d_proshares-logo.png",
+    "description": "",
+    "external_url": "https://www.proshares.com",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\proshares.png"
+  },
+  {
+    "name": "Pulsar",
+    "slug": "pulsar",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab34ed5cbbf7f117cf51bbe_6ab34ed58c9c964099a3f438_pulsar-logo.jpeg",
+    "description": "",
+    "external_url": "https://app.pulsar.finance/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\pulsar.jpeg"
+  },
+  {
+    "name": "Pump.fun",
+    "slug": "pump-fun",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab359ea776b2468728bc8b4_6ab359e9578096661938fcf6_pump-fun-logo.png",
+    "description": "",
+    "external_url": "https://pump.fun/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\pump-fun.png"
+  },
+  {
     "name": "QuickNode",
     "slug": "quicknode",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd12d85ce3de4f3d2cdcb6_quicknode-icon.svg",
@@ -1159,6 +1761,30 @@
       "RPC Providers"
     ],
     "logo_local": "logos\\quicknode.svg"
+  },
+  {
+    "name": "Rabby",
+    "slug": "rabby",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c9c63d3e92efee732e7_6ab35c9c578096661939ebc5_rabby-logo.png",
+    "description": "",
+    "external_url": "https://rabby.io/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\rabby.png"
+  },
+  {
+    "name": "Rain",
+    "slug": "rain",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3509244c2156302ff4061_6ab35091cbbf7f117cf6128e_rain-logo.png",
+    "description": "",
+    "external_url": "https://www.rain.com/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\rain.png"
   },
   {
     "name": "Rainbow",
@@ -1204,6 +1830,18 @@
       "Oracles"
     ],
     "logo_local": "logos\\redstone.svg"
+  },
+  {
+    "name": "RhinoFi",
+    "slug": "rhinofi",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab359f7c77433c53da07d75_6ab359f7ea3e95a7e57101cf_rhinofi-logo.png",
+    "description": "",
+    "external_url": "https://rhino.fi/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\rhinofi.png"
   },
   {
     "name": "Robinhood",
@@ -1338,6 +1976,18 @@
     "logo_local": "logos\\state-street.png"
   },
   {
+    "name": "Steakhouse Financial",
+    "slug": "steakhouse-financial",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3514df2b6e93e17eca4c8_6ab3514c9ebb224ac579dedd_steakhouse-financial-logo.png",
+    "description": "",
+    "external_url": "http://steakhouse.financial/",
+    "tags": [
+      "Financial Services",
+      "Borrow/Lend"
+    ],
+    "logo_local": "logos\\steakhouse-financial.png"
+  },
+  {
     "name": "Sumitomo Corporation",
     "slug": "sumitomo-corporation-2",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/69318d69ba3424e4bd070680_SumitomoCorporation-logo.svg",
@@ -1362,6 +2012,15 @@
     "logo_local": "logos\\superface.png"
   },
   {
+    "name": "Superfluid",
+    "slug": "superfluid",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35caf2b1b164fb7f4ed43_6ab35caf237eee0ac31315ce_superfluid-logo.png",
+    "description": "",
+    "external_url": "https://www.superfluid.finance/",
+    "tags": [],
+    "logo_local": "logos\\superfluid.png"
+  },
+  {
     "name": "Superform",
     "slug": "superform",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900e049efbf01e880c4e2ab_Superform_Brandmark.svg",
@@ -1372,6 +2031,27 @@
       "Yield"
     ],
     "logo_local": "logos\\superform.svg"
+  },
+  {
+    "name": "Swapper",
+    "slug": "swapper",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35a42ea3e95a7e5711da7_6ab35a42f214a43a65c3f920_swapper-logo.png",
+    "description": "",
+    "external_url": "https://swapper.finance/",
+    "tags": [],
+    "logo_local": "logos\\swapper.png"
+  },
+  {
+    "name": "SwissBorg",
+    "slug": "swissborg",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c20346433267d0d2733_6ab35c204cdb5145ee6fa5ca_swissborg-logo.png",
+    "description": "",
+    "external_url": "https://swissborg.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\swissborg.png"
   },
   {
     "name": "T-RIZE",
@@ -1386,6 +2066,18 @@
     "logo_local": "logos\\trize.png"
   },
   {
+    "name": "Tangem",
+    "slug": "tangem",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35cbb2b1b164fb7f4f302_6ab35cbbe6c64edb45bbe188_tangem-logo.png",
+    "description": "",
+    "external_url": "https://tangem.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\tangem.png"
+  },
+  {
     "name": "Taurus",
     "slug": "taurus",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbf68e9cbf70c2e3e77e6b_Taurus_Wordmark_FullColourDark_RGB.svg",
@@ -1396,6 +2088,15 @@
       "Custodians"
     ],
     "logo_local": "logos\\taurus.svg"
+  },
+  {
+    "name": "Tazapay",
+    "slug": "tazapay",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab350f693f2e1b6c015bfc1_6ab350f444c2156302ff61a9_tazapay-logo.png",
+    "description": "",
+    "external_url": "https://tazapay.com/",
+    "tags": [],
+    "logo_local": "logos\\tazapay.png"
   },
   {
     "name": "Tenderly",
@@ -1422,6 +2123,24 @@
     "logo_local": "logos\\thirdweb.svg"
   },
   {
+    "name": "Thunes",
+    "slug": "thunes",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35103a174b58c3a67f99e_6ab35102604bc410dcbcbb90_thunes-logo.png",
+    "description": "",
+    "external_url": "http://thunes.com/",
+    "tags": [],
+    "logo_local": "logos\\thunes.png"
+  },
+  {
+    "name": "Tokocrypto",
+    "slug": "tokocrypto",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c2b2b1b164fb7f4ab1a_6ab35c2a5f8583c64af1592f_tokocrypto-logo.png",
+    "description": "",
+    "external_url": "https://tokocrypto.com/",
+    "tags": [],
+    "logo_local": "logos\\tokocrypto.png"
+  },
+  {
     "name": "Transak",
     "slug": "transak",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd0108ee31fc7f0e42d662_transak-icon.svg",
@@ -1446,6 +2165,18 @@
     "logo_local": "logos\\trm.svg"
   },
   {
+    "name": "Trust Wallet",
+    "slug": "trust-wallet",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35cd3cb4d6682f18ea7f6_6ab35cd14a52accb54fe2e87_trust-wallet-logo.png",
+    "description": "",
+    "external_url": "https://trustwallet.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\trust-wallet.png"
+  },
+  {
     "name": "Turnkey",
     "slug": "turnkey",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd0f62e32065ffea007630_turnkey-icon.png",
@@ -1458,6 +2189,51 @@
     "logo_local": "logos\\turnkey.png"
   },
   {
+    "name": "Uniswap",
+    "slug": "uniswap",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35a4f57809666193921a6_6ab35a4e5780966619392188_uniswap-logo.svg",
+    "description": "",
+    "external_url": "https://app.uniswap.org/",
+    "tags": [],
+    "logo_local": "logos\\uniswap.svg"
+  },
+  {
+    "name": "Upbit",
+    "slug": "upbit",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c377f42bd6d90dd2b74_6ab35c36161843dbf3897566_upbit-logo.png",
+    "description": "",
+    "external_url": "https://www.upbit.com/",
+    "tags": [
+      "Trading",
+      "CEXs"
+    ],
+    "logo_local": "logos\\upbit.png"
+  },
+  {
+    "name": "UQPay",
+    "slug": "uqpay",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3510e93f2e1b6c015cb3f_6ab3510ed26f83b699a9caaf_uqpay-logo.png",
+    "description": "",
+    "external_url": "http://uqpay.com/",
+    "tags": [
+      "Payments",
+      "Fintechs"
+    ],
+    "logo_local": "logos\\uqpay.png"
+  },
+  {
+    "name": "USD.ai",
+    "slug": "usd-ai",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3487740ee4a840ff10c12_6ab34876d9c324c2914b3be1_usd-ai-logo.svg",
+    "description": "",
+    "external_url": "https://usd.ai/",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\usd-ai.svg"
+  },
+  {
     "name": "Utila",
     "slug": "utila",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a3b1a3820b7ce6076ce4753_Utila%20Logo%20icon%20-%20Dark.svg",
@@ -1468,6 +2244,15 @@
       "Wallet Services"
     ],
     "logo_local": "logos\\utila.svg"
+  },
+  {
+    "name": "VelaFi",
+    "slug": "velafi",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35cc7b817438c026feb6c_6ab35cc718388e8f6382e86a_velafi-logo.png",
+    "description": "",
+    "external_url": "https://www.velafi.com/",
+    "tags": [],
+    "logo_local": "logos\\velafi.png"
   },
   {
     "name": "Visa",
@@ -1494,6 +2279,24 @@
     "logo_local": "logos\\vultisig.svg"
   },
   {
+    "name": "WalletConnect",
+    "slug": "walletconnect",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35ce3dd3fb3f66d930127_6ab35ce34cdb5145ee6fbc50_walletconnect-logo.png",
+    "description": "",
+    "external_url": "https://walletconnect.com/",
+    "tags": [],
+    "logo_local": "logos\\walletconnect.png"
+  },
+  {
+    "name": "Wenia",
+    "slug": "wenia",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c42436bc54d08752627_6ab35c41dc3e450e10bf4bb2_wenia-logo.png",
+    "description": "",
+    "external_url": "https://www.wenia.com/es",
+    "tags": [],
+    "logo_local": "logos\\wenia.png"
+  },
+  {
     "name": "WheelX",
     "slug": "wheelx",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6a1f1f8b46f984a4e57a1251_wheelX.png",
@@ -1504,6 +2307,15 @@
       "Crosschain"
     ],
     "logo_local": "logos\\wheelx.png"
+  },
+  {
+    "name": "Wirex",
+    "slug": "wirex",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab3511936a80cd3fcb5cbaf_6ab35118143d71eb72120f9a_wirex-logo.png",
+    "description": "",
+    "external_url": "https://www.wirexapp.com/",
+    "tags": [],
+    "logo_local": "logos\\wirex.png"
   },
   {
     "name": "WisdomTree",
@@ -1540,6 +2352,18 @@
       "Crosschain"
     ],
     "logo_local": "logos\\wormhole.svg"
+  },
+  {
+    "name": "xStocks by Payward",
+    "slug": "xstocks-by-payward",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab348821e42a8b48dfb0d1b_6ab348811d8d0010ba75fbbd_xstocks-by-payward-logo.png",
+    "description": "",
+    "external_url": "https://xstocks.com/us",
+    "tags": [
+      "Issuers",
+      "Tokenized Assets"
+    ],
+    "logo_local": "logos\\xstocks-by-payward.png"
   },
   {
     "name": "Yellow Card",
