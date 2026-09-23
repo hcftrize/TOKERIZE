@@ -1975,6 +1975,10 @@
     {
       "date": "2026-09-21",
       "value": 917563316.89
+    },
+    {
+      "date": "2026-09-22",
+      "value": 926110324.04
     }
   ],
   "cex": [
@@ -3933,10 +3937,50 @@
     {
       "date": "2026-09-21",
       "value": 177200342.95
+    },
+    {
+      "date": "2026-09-22",
+      "value": 177213117.71
     }
   ],
   "unbonding": [],
   "whales": [
+    {
+      "date": "2026-09-22",
+      "amount": 13011464.74,
+      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
+      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
+      "from_label": "0x71f6…91c9",
+      "to_label": "0x5be4…d08d",
+      "tx": "0xfe46959276dd5e62d0a91deb355d98b82ed488d2d8b11156b5ad0c91fec6eb45"
+    },
+    {
+      "date": "2026-09-22",
+      "amount": 8500000.0,
+      "from": "0xf2f327e6c6df13950e40256ef8d0c83c87ee2e80",
+      "to": "0x5a134098bdbeb05da9eac35439c5624547ed26ee",
+      "from_label": "0xf2f3…2e80",
+      "to_label": "Governance",
+      "tx": "0x6425c4d92475079ce343fcfaced34ec7a7f98201c195025467b09232e8259a0f"
+    },
+    {
+      "date": "2026-09-22",
+      "amount": 13979552.95,
+      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
+      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
+      "from_label": "0x71f6…91c9",
+      "to_label": "0x5be4…d08d",
+      "tx": "0xc7130a6b71b075cebcbbad6b32b4b8777a3bbbc01a673ab14226715feda84d8d"
+    },
+    {
+      "date": "2026-09-22",
+      "amount": 13217724.52,
+      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
+      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
+      "from_label": "0x71f6…91c9",
+      "to_label": "0x5be4…d08d",
+      "tx": "0x5ebd38959b937e44955b80494c25482159eee83b6655c02c4095aec530d85cca"
+    },
     {
       "date": "2026-09-18",
       "amount": 12212070.24,
@@ -4278,7 +4322,7 @@
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe",
       "0x15Da7556D5ED888306839bed06f868AeaeDCb0d7"
     ],
-    "updated": "2026-09-21T23:59:25.166898+00:00"
+    "updated": "2026-09-22T23:59:19.672223+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
