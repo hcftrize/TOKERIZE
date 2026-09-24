@@ -135,9 +135,14 @@ async def get_tv_symbol(coin_id: str, coin_symbol: str) -> str:
     if cache_key in _tv_symbol_cache:
         return _tv_symbol_cache[cache_key]
 
-    # Special case: RIZE only on Kraken
+    # Special case: RIZE — prioritize the Aerodrome SlipStream RIZE/USDC pool
+    # (Base network, pool 0xEa5cb64754Ad7aA24F7A6BBe3b724F29B4f822B8) over the
+    # thin Kraken RIZE/USD listing. Confirmed 2026-09-24 via TradingView's own
+    # symbol page (tradingview.com/symbols/RIZE2USD/markets/): this pool is
+    # indexed there as exchange "AERODROMESLIPSTREAM", ticker
+    # "RIZEUSDC_EA5CB6" — i.e. AERODROMESLIPSTREAM:RIZEUSDC_EA5CB6.
     if coin_id == RIZE_ID:
-        result = "KRAKEN:RIZEUSD"
+        result = "AERODROMESLIPSTREAM:RIZEUSDC_EA5CB6"
         _tv_symbol_cache[cache_key] = result
         return result
 
