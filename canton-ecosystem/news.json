@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-23T06:32:17+00:00",
-  "count": 360,
+  "updated_at": "2026-09-24T06:32:19+00:00",
+  "count": 364,
   "articles": [
+    {
+      "title": "Canton Network Receives 60 New Validator Applications in Largest Batch to Date",
+      "category": "ECOSYSTEM",
+      "description": "Canton Network has received 60 new validator applications in its largest batch to date, including Mirae Asset Securities, Kore AI, Rome Protocol, and a broad range of professional validator operators and application builders spanning Southeast Asia, Singapore, Europe, and the Americas.",
+      "url": "https://cantonnews.org/canton-network-receives-60-new-validator-applications-in-largest-batch-to-date",
+      "published_at": "2026-09-23T21:21:36.462+00:00"
+    },
+    {
+      "title": "$CC: The Unstoppable Force of Ingenuity",
+      "category": "INSTITUTIONS",
+      "description": "Canton Network is gaining momentum as Visa, a16z, and DTCC deepen their presence in its ecosystem. With growing institutional participation, real tokenized asset activity, and expanding Canton Coin incentives, Canton is positioning itself as a key bridge between traditional finance and onchain markets.",
+      "url": "https://cantonnews.org/cc-the-unstoppable-force-of-ingenuity",
+      "published_at": "2026-09-23T14:56:17.513534+00:00"
+    },
+    {
+      "title": "Temple Launches Lightspeed 2.0 Matching Engine for Higher Trading Capacity",
+      "category": "ECOSYSTEM",
+      "description": "Temple has released Lightspeed 2.0, a major matching engine upgrade capable of processing over 85 million orders per day, settling 29x more trades per second, and matching orders in 3.6ms.",
+      "url": "https://cantonnews.org/temple-launches-lightspeed-2-0-matching-engine-for-higher-trading-capacity",
+      "published_at": "2026-09-23T14:13:13.157+00:00"
+    },
+    {
+      "title": "OneSwap's OnePump Is Coming Soon to Canton Network",
+      "category": "ECOSYSTEM",
+      "description": "OnePump, OneSwap's memecoin launchpad on Canton Network, is coming soon with two-minute token launches, no mempool sniping, and automatic liquidity locking.",
+      "url": "https://cantonnews.org/oneswap-s-onepump-is-coming-soon-to-canton-network",
+      "published_at": "2026-09-23T13:53:23.661+00:00"
+    },
     {
       "title": "Canton Foundation sets 10-day update window for grant applicants",
       "category": "TECHNOLOGY",
