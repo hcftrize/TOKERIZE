@@ -2864,6 +2864,22 @@
     "logo_local": "logos\\kiln.png"
   },
   {
+    "name": "Kintsu",
+    "slug": "kintsu",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ab2ac2158aff7b29b8b8db7_dabf14c5-5a9f-47d3-9bca-0d6dd46dbbcd.png",
+    "short_desc": "Lending markets, vaults and staking infrastructure for productive digital assets on Canton.",
+    "tags": [
+      "APPS (ALL)",
+      "MARKET INFRASTRUCTURE",
+      "VALIDATOR",
+      "FINANCING",
+      "LIQUIDITY",
+      "TOKENIZED ASSETS"
+    ],
+    "detail_text": "Lending markets, vaults and staking infrastructure for productive digital assets on Canton.",
+    "logo_local": "logos\\kintsu.png"
+  },
+  {
     "name": "KlarSign",
     "slug": "klarsign",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69bdd803a5586db535f651d4_klar.jpg",
