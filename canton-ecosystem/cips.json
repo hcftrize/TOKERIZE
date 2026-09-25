@@ -1148,5 +1148,15 @@
     "created": "2026-09-14",
     "approved": "2026-09-22",
     "description": "This proposal adds Paxos as a Super Validator (SV) on the Canton Network with a maximum potential weight of 8.0, tied to the integration and operation of stablecoin treasury management workflows on Canton.\n\nPaxos is the issuer of major regulated stablecoins and operates regulated infrastructure for custody and settlement. This proposal aligns SV rewards with Paxos bringing treasury management, issuance, and settlement flows on-chain, enabling 24×7 programmable cash infrastructure on Canton."
+  },
+  {
+    "id": "CIP-0126",
+    "number": 126,
+    "title": "Marex Super Validator Weight 10",
+    "type": "Governance",
+    "status": "Proposed",
+    "created": "2026-09-14",
+    "approved": "TBD",
+    "description": "This CIP proposes granting Marex participation as a Super Validator (SV) with a maximum Weight of 10.\n\nGiven Marex's position as a global financial services platform and its capabilities across execution, clearing, financing, collateral management, and prime services, Marex's participation is expected to advance institutional adoption of the Canton Network, support the development of regulated capital-markets use cases, and contribute meaningfully to network governance and growth.\n\nThis CIP establishes an umbrella, milestone-based program through which Marex can earn SV Weight of up to 10 by delivering initiatives that materially advance the Canton ecosystem.\n\nThis program contains confidential commitments to the ecosystem. Those commitments and milestones have been agreed with the Tokenomics Committee and SVAC and will be made available to the public when appropriate.\n\n- **Total Earnable Weight:** 10 (maximum)\n- **Accrual Destination:** Escrow, consistent with existing SV escrow mechanics\n- **Confidentiality:** The applicable governance bodies will review the milestones and inform the Super Validators when they have been met"
   }
 ]
