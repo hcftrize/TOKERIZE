@@ -1987,6 +1987,10 @@
     {
       "date": "2026-09-24",
       "value": 926103739.47
+    },
+    {
+      "date": "2026-09-25",
+      "value": 926103739.47
     }
   ],
   "cex": [
@@ -3957,10 +3961,32 @@
     {
       "date": "2026-09-24",
       "value": 166600439.81
+    },
+    {
+      "date": "2026-09-25",
+      "value": 164039645.41
     }
   ],
   "unbonding": [],
   "whales": [
+    {
+      "date": "2026-09-25",
+      "amount": 10438210.71,
+      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
+      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
+      "from_label": "0x71f6…91c9",
+      "to_label": "0x5be4…d08d",
+      "tx": "0xc5a202efe608dacacebf50a8c987ecfa81826015698b8cb8787888308f097f51"
+    },
+    {
+      "date": "2026-09-25",
+      "amount": 9321035.58,
+      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
+      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
+      "from_label": "0x71f6…91c9",
+      "to_label": "0x5be4…d08d",
+      "tx": "0x5be575dbafdc1bff063624759802cfc6c1e840e8cfa73a0ef4cf2128adfc8787"
+    },
     {
       "date": "2026-09-24",
       "amount": 5665798.53,
@@ -4383,7 +4409,7 @@
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe",
       "0x15Da7556D5ED888306839bed06f868AeaeDCb0d7"
     ],
-    "updated": "2026-09-24T23:59:19.301534+00:00"
+    "updated": "2026-09-25T23:59:25.256656+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
