@@ -1,7 +1,182 @@
 {
-  "updated_at": "2026-09-25T06:32:24+00:00",
-  "count": 364,
+  "updated_at": "2026-09-26T06:32:29+00:00",
+  "count": 384,
   "articles": [
+    {
+      "title": "Grisoco AI opens its Canton security-review beta to builders",
+      "category": "TECHNOLOGY",
+      "description": "Grisoco AI is inviting Canton developers to test its automated Daml security review. The beta examines permissions, privacy, shared-contract design and the effect of software upgrades.",
+      "url": "https://cantonnews.org/grisoco-ai-opens-its-canton-security-review-beta-to-builders",
+      "published_at": "2026-09-26T05:05:30.717+00:00"
+    },
+    {
+      "title": "Marex wins approval for Canton Super Validator role",
+      "category": "INSTITUTIONS",
+      "description": "Marex’s Super Validator proposal has passed with nine votes in favor. Its approved program links rewards to milestones covering institutional settlement, collateral and regulated financial activity on Canton.",
+      "url": "https://cantonnews.org/marex-wins-approval-for-canton-super-validator-role",
+      "published_at": "2026-09-26T05:04:57.117+00:00"
+    },
+    {
+      "title": "Canton adds account-level tracking for network traffic costs",
+      "category": "TECHNOLOGY",
+      "description": "Local Traffic Management is live on Canton MainNet. Wallet providers and validator operators can track the traffic costs of individual accounts and choose whether to check balances before transactions are submitted.",
+      "url": "https://cantonnews.org/canton-adds-account-level-tracking-for-network-traffic-costs",
+      "published_at": "2026-09-26T05:04:47.218+00:00"
+    },
+    {
+      "title": "LSEG wins approval for Canton Super Validator role",
+      "category": "INSTITUTIONS",
+      "description": "London Stock Exchange Group’s Super Validator proposal has passed with 12 votes in favor. The approved plan ties a maximum reward weight of 10 to confidential milestones and verified delivery.",
+      "url": "https://cantonnews.org/lseg-wins-approval-for-canton-super-validator-role",
+      "published_at": "2026-09-26T05:04:41.357+00:00"
+    },
+    {
+      "title": "Grofty previews Canton swaps across OneSwap and Cantex",
+      "category": "TECHNOLOGY",
+      "description": "Grofty's upcoming DEX will compare OneSwap and Cantex quotes, show fees before approval and let users choose their route. The preview also includes portfolio tools and bridging into USDCx.",
+      "url": "https://cantonnews.org/grofty-previews-canton-swaps-across-oneswap-and-cantex",
+      "published_at": "2026-09-26T05:04:23.166+00:00"
+    },
+    {
+      "title": "Cantex adds Edel's S&P 500 and Nasdaq-100 tokens",
+      "category": "TOKENIZATION",
+      "description": "SPYe and QQQe are now trading on Cantex, bringing Edel-issued, index-linked assets to another Canton venue. The tokens are debt instruments, with direct redemption available to verified institutional participants.",
+      "url": "https://cantonnews.org/cantex-adds-edel-s-s-p-500-and-nasdaq-100-tokens",
+      "published_at": "2026-09-26T05:04:11.712+00:00"
+    },
+    {
+      "title": "Zenith and IntellectEU work with TACEO on private Canton integrations",
+      "category": "TECHNOLOGY",
+      "description": "Zenith and IntellectEU are working with TACEO's Merces privacy technology for Canton applications and bank payment systems. The integrations form part of a wider rollout that began on Monad and World Chain.",
+      "url": "https://cantonnews.org/zenith-and-intellecteu-work-with-taceo-on-private-canton-integrations",
+      "published_at": "2026-09-26T05:04:06.722+00:00"
+    },
+    {
+      "title": "SwissBorg adds EDEL to its trading platform",
+      "category": "ECOSYSTEM",
+      "description": "SwissBorg users can now swap into EDEL from supported fiat currencies and crypto assets. The listing covers Edel's Base token and comes as the project expands its Canton-native stock offering.",
+      "url": "https://cantonnews.org/swissborg-adds-edel-to-its-trading-platform",
+      "published_at": "2026-09-26T05:03:57.356+00:00"
+    },
+    {
+      "title": "Bayzen’s Featured App application enters Canton MainNet vote",
+      "category": "TECHNOLOGY",
+      "description": "Bayzen’s Featured App application has moved to a MainNet vote after clearing Tokenomics review. The project is developing prediction markets for financial assets, protocol milestones and ecosystem events.",
+      "url": "https://cantonnews.org/bayzen-s-featured-app-application-enters-canton-mainnet-vote",
+      "published_at": "2026-09-26T05:03:52.406+00:00"
+    },
+    {
+      "title": "Rubic seeks 2.7 million CC for Canton swap-routing tools",
+      "category": "TECHNOLOGY",
+      "description": "Rubic has requested Canton Development Fund support for open-source tools that would compare token-swap routes across Canton exchanges. The 2.7 million CC proposal includes development, maintenance and an independent security review.",
+      "url": "https://cantonnews.org/rubic-seeks-2-7-million-cc-for-canton-swap-routing-tools",
+      "published_at": "2026-09-26T05:03:45.166+00:00"
+    },
+    {
+      "title": "Paxos wins Canton approval for stablecoin and treasury plan",
+      "category": "INSTITUTIONS",
+      "description": "Paxos’s Super Validator proposal has passed with 12 votes in favor. Its milestones include a $20 million stablecoin issuance target, reserve management and round-the-clock minting and redemption on Canton.",
+      "url": "https://cantonnews.org/paxos-wins-canton-approval-for-stablecoin-and-treasury-plan",
+      "published_at": "2026-09-26T05:03:38.862+00:00"
+    },
+    {
+      "title": "Ankr proposes a Super Validator role on Canton",
+      "category": "TECHNOLOGY",
+      "description": "Ankr has submitted a draft proposal for Canton Super Validator participation. Its plan ties a maximum reward weight of six to node operations, network activity and infrastructure for applications.",
+      "url": "https://cantonnews.org/ankr-proposes-a-super-validator-role-on-canton",
+      "published_at": "2026-09-26T04:49:08.606+00:00"
+    },
+    {
+      "title": "Canton 3.5.19 brings reliability fixes and a security update",
+      "category": "TECHNOLOGY",
+      "description": "The latest Canton maintenance release fixes memory and connection-handling issues, improves diagnostics and updates a software dependency to address a security vulnerability.",
+      "url": "https://cantonnews.org/canton-3-5-19-brings-reliability-fixes-and-a-security-update",
+      "published_at": "2026-09-26T04:48:42.917+00:00"
+    },
+    {
+      "title": "Rocky and Ember plan wider access to tokenized assets on Canton",
+      "category": "TOKENIZATION",
+      "description": "Rocky and Ember will work together to expand access to real-world asset markets on Canton. The cooperation brings Ember's financial-product focus to Rocky's planned trading platform, with specific markets and timing still to be announced.",
+      "url": "https://cantonnews.org/rocky-and-ember-plan-wider-access-to-tokenized-assets-on-canton",
+      "published_at": "2026-09-26T04:48:28.973+00:00"
+    },
+    {
+      "title": "Cancore passes $50 million in cross-chain volume",
+      "category": "TECHNOLOGY",
+      "description": "Cancore has passed $50 million in cumulative MainNet volume between Canton and other blockchains. The milestone follows its public opening in May and the recent introduction of AI-assisted trading.",
+      "url": "https://cantonnews.org/cancore-passes-50-million-in-cross-chain-volume",
+      "published_at": "2026-09-26T04:48:14.321+00:00"
+    },
+    {
+      "title": "Rocky adds independent checks for Canton trade settlements",
+      "category": "TECHNOLOGY",
+      "description": "Rocky Verification lets users check delivery-versus-payment trade settlements on Canton. The tool is available ahead of Rocky's wider MainNet launch and is the first application of its planned Canton Assurance Layer.",
+      "url": "https://cantonnews.org/rocky-adds-independent-checks-for-canton-trade-settlements",
+      "published_at": "2026-09-26T04:47:25.254+00:00"
+    },
+    {
+      "title": "CCTools opens its data API as Temple TVL tracking goes live on DeFiLlama",
+      "category": "TECHNOLOGY",
+      "description": "Developers can now use CCTools data in their own Canton apps and dashboards. Its data feed is also powering Temple's total value locked figures on DeFiLlama.",
+      "url": "https://cantonnews.org/cctools-opens-its-data-api-as-temple-tvl-tracking-goes-live-on-defillama",
+      "published_at": "2026-09-26T04:47:10.4+00:00"
+    },
+    {
+      "title": "Titan opens waitlist for its planned Canton exchange",
+      "category": "ECOSYSTEM",
+      "description": "Titan has opened registration ahead of its planned MainNet launch. The exchange is building toward around-the-clock markets for crypto, equities and private assets, with privacy central to its Canton-based offering.",
+      "url": "https://cantonnews.org/titan-opens-waitlist-for-its-planned-canton-exchange",
+      "published_at": "2026-09-26T04:46:31.592+00:00"
+    },
+    {
+      "title": "Canton approves 21 new validator operators",
+      "category": "INSTITUTIONS",
+      "description": "A new batch of 21 validator operators has cleared Canton’s approval process. The group includes teams working on tokenized gold, institutional credit, invoice funding and applications for businesses across several regions.",
+      "url": "https://cantonnews.org/canton-approves-21-new-validator-operators",
+      "published_at": "2026-09-26T04:46:20.238+00:00"
+    },
+    {
+      "title": "Tradecraft seeks DvP status after updating trade settlement",
+      "category": "TECHNOLOGY",
+      "description": "Tradecraft has applied for DvP venue status on Canton after updating how its trade orders settle. Both sides complete together, while a separate change to liquidity operations remains planned.",
+      "url": "https://cantonnews.org/tradecraft-seeks-dvp-status-after-updating-trade-settlement",
+      "published_at": "2026-09-26T04:46:07.261+00:00"
+    },
+    {
+      "title": "CANAL adds PartyLayer wallet connectivity on Canton",
+      "category": "TECHNOLOGY",
+      "description": "CANAL and PartyLayer are working together to connect CANAL's asset platform with Canton wallets. The integration supports wallet connection, signing and transactions as CANAL develops its SOL-backed iSOL asset.",
+      "url": "https://cantonnews.org/canal-adds-partylayer-wallet-connectivity-on-canton",
+      "published_at": "2026-09-26T04:45:53.779+00:00"
+    },
+    {
+      "title": "T-RIZE Joins Canton Foundation Collateral Subcommittee Alongside DTCC, ISDA, BNY, and Euroclear",
+      "category": "INSTITUTIONS",
+      "description": "T-RIZE has joined the Canton Foundation's Collateral Subcommittee, contributing to Cross-Application Collateral Mobility and Tokenised Repo and Financing workstreams alongside DTCC, ISDA, BNY, Euroclear, and Broadridge.",
+      "url": "https://cantonnews.org/t-rize-joins-canton-foundation-collateral-subcommittee-alongside-dtcc-isda-bny-and-euroclear",
+      "published_at": "2026-09-25T14:31:41.99+00:00"
+    },
+    {
+      "title": "Digital Asset CEO Hints at Major Canton Network Milestone Next Week",
+      "category": "INSTITUTIONS",
+      "description": "Digital Asset CEO Yuval Rooz has suggested a significant Canton Network transaction could occur next week, hinting at a \"first print\" in a market he described as worth more than $100 trillion, separate from the DTCC Tokenization Service launch planned for October.",
+      "url": "https://cantonnews.org/digital-asset-ceo-hints-at-major-canton-network-milestone-next-week",
+      "published_at": "2026-09-25T10:30:45.345+00:00"
+    },
+    {
+      "title": "Nasdaq Connects Calypso Collateral Management to Canton Network as It Builds Toward Always-On Markets",
+      "category": "INSTITUTIONS",
+      "description": "Nasdaq is integrating its Calypso collateral management platform with Canton Network as part of its always-on market strategy, alongside planned 23/5 trading, a tokenized equity product, and a Kraken partnership, targeting a $3 to $6 billion market opportunity by 2030.",
+      "url": "https://cantonnews.org/nasdaq-connects-calypso-collateral-management-to-canton-network-as-it-builds-toward-always-on-markets",
+      "published_at": "2026-09-25T10:16:40.706+00:00"
+    },
+    {
+      "title": "Fireblocks Details How Citadel Securities Used Canton Network in DTCC's July 15 Tokenization Event",
+      "category": "INSTITUTIONS",
+      "description": "Fireblocks has detailed how it provided the infrastructure for Citadel Securities to tokenise US Treasuries on Canton Network and post them as collateral to CME during DTCC's July 15 production event, as the DTCC Tokenization Service prepares for its October 2026 commercial launch.",
+      "url": "https://cantonnews.org/fireblocks-details-how-citadel-securities-used-canton-network-in-dtcc-s-july-15-tokenization-event",
+      "published_at": "2026-09-25T10:09:56.316+00:00"
+    },
     {
       "title": "Canton Network Receives 60 New Validator Applications in Largest Batch to Date",
       "category": "ECOSYSTEM",
@@ -288,13 +463,6 @@
       "description": "Japan's FSA has named on-chain finance its top 2026 policy priority, with MUFG's JGB repo testing on Canton Network already selected for the FSA's Payment Innovation Project as the regulator builds out the legal, institutional, and collaborative infrastructure for blockchain-based financial markets.",
       "url": "https://cantonnews.org/japan-s-fsa-names-on-chain-finance-a-2026-policy-priority-as-mufg-tests-jgb-repos-on-canton-network",
       "published_at": "2026-09-16T12:41:45.296+00:00"
-    },
-    {
-      "title": "Zenith Joins DTC Digital Assets Solutions Industry Working Group Focused on Institutional Tokenization",
-      "category": "INSTITUTIONS",
-      "description": "Zenith has joined the DTC Digital Assets Solutions Industry Working Group as a participating member, alongside 100+ firms including BlackRock, JPMorgan, Goldman Sachs, Citi, Nasdaq, and NYSE. DTCC's subsidiary, the Depository Trust Company (DTC), is the custodian behind $114 trillion in U.S. securities. Zenith joins as a Canton Network Tier-1 Super Validator and developer of an Ethereum-compatible execution environment for Canton, contributing its perspective on blockchain infrastructure and application development alongside other market participants.",
-      "url": "https://cantonnews.org/zenith-joins-dtc-digital-assets-solutions-industry-working-group-focused-on-institutional-tokenization",
-      "published_at": "2026-09-16T10:21:56.564781+00:00"
     },
     {
       "title": "Cashen Joins Canton Foundation Collateral Subcommittee Alongside DTCC, BNY, and Euroclear",
@@ -1214,13 +1382,6 @@
       "published_at": "2026-08-06T12:33:31.528+00:00"
     },
     {
-      "title": "Digital Asset Addresses 10 Common Canton Network Myths",
-      "category": "INSTITUTIONS",
-      "description": "As the Canton Network continues to scale it has become a central point of conversation for institutions exploring digital assets. Because of its unique design - tailored for institutional finance - some misunderstandings regarding its architecture, governance, and openness have emerged. This article aims to address some common misconceptions, and clarify how the Canton Network functions, is governed, and delivers value to its global ecosystem.",
-      "url": "https://cantonnews.org/digital-asset-addresses-10-common-canton-network-myths",
-      "published_at": "2026-08-06T05:35:14.636+00:00"
-    },
-    {
       "title": "Nano Labs Approved as Canton Network Validator",
       "category": "INSTITUTIONS",
       "description": "Nano Labs has been approved to operate a validator node on Canton, joining the network’s global validator ecosystem.",
@@ -2096,13 +2257,6 @@
       "published_at": "2026-05-19T00:07:04.566+00:00"
     },
     {
-      "title": "Introducing the new Canton Network developer docs",
-      "category": "TECHNOLOGY",
-      "description": "Canton Network consolidated developer documentation into one hub with role-based learning, open-source contributions, and AI-assisted tooling.",
-      "url": "https://cantonnews.org/introducing-the-new-canton-network-developer-docs",
-      "published_at": "2026-05-18T14:16:00.548+00:00"
-    },
-    {
       "title": "Temple Crosses $100 Million in Trading Volume on Canton Network",
       "category": "ECOSYSTEM",
       "description": "Temple, the first native trading platform built on Canton Network, has surpassed $100 million in cumulative trading volume, marking a significant milestone for institutional on-chain trading within the Canton ecosystem.",
@@ -2348,25 +2502,11 @@
       "published_at": "2026-04-28T13:52:58.174+00:00"
     },
     {
-      "title": "How TRM Labs and Canton Network Make Privacy and Compliance Complementary",
-      "category": "REGULATION",
-      "description": "Privacy-first blockchains can support AML compliance. See how Canton Network and TRM Lab enable selective disclosure and risk-based monitoring.",
-      "url": "https://cantonnews.org/how-trm-labs-and-canton-network-make-privacy-and-compliance-complementary",
-      "published_at": "2026-04-28T12:54:18.105+00:00"
-    },
-    {
       "title": "Canton Tops Chain Revenue Rankings, Ahead of Tron and Ethereum",
       "category": "MARKETS",
       "description": "DefiLlama data showed Canton in first place on chain revenue, with Tron second and Ethereum third in the latest 24-hour rankings.",
       "url": "https://cantonnews.org/canton-tops-chain-revenue-rankings-ahead-of-tron-and-ethereum",
       "published_at": "2026-04-28T12:00:00+00:00"
-    },
-    {
-      "title": "WalletConnect is now live on Canton Network",
-      "category": "TECHNOLOGY",
-      "description": "WalletConnect is now live on Canton Network, giving supported wallets, custodians, and apps a standard way to connect. The integration brings seamless access across institutional finance and DeFi.",
-      "url": "https://cantonnews.org/walletconnect-is-now-live-on-canton-network",
-      "published_at": "2026-04-27T14:13:46.192+00:00"
     },
     {
       "title": "Cancore Genesis Phase 2 Goes Live on Canton",
