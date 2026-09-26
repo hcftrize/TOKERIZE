@@ -4511,6 +4511,21 @@
     "logo_local": "logos\\tradeweb-24x7-repo-app-for-canton.png"
   },
   {
+    "name": "Trail of Bits",
+    "slug": "trail-of-bits",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ab589ce60f85684cc348e5e_56109c45-8e2c-4010-850a-8f6f3a35e316.svg",
+    "short_desc": "We run original research, build the tools it produces, and publish what we find. Since 2012.",
+    "tags": [
+      "SERVICE PROVIDER",
+      "DEVELOPER TOOLS",
+      "FORENSICS & SECURITY",
+      "Network Utilities\nDEVELOPER TOOLSFORENSICS & SECURITY",
+      "Roles\nSERVICE PROVIDER\nSERVICE PROVIDER"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nTrail of Bits\nhttps://trailofbits.com/\nSince 2012, Trail of Bits has secured the software, blockchains, and cryptography that high-value targets run on. Our Software Assurance teams review systems across the whole SDLC: application code, cloud, and architecture; AI/ML systems from training data to deployed agents; every layer of a blockchain, from smart contracts to bridges; and cryptographic protocols, from zero-knowledge proofs to post-quantum migrations. Our Security Engineering team embeds with yours to build custom tooling and fix vulnerabilities from development through deployment. Our Research & Development group turns multi-year research into open-source tools, papers, and standards. Every engagement leaves something behind: human-validated findings, plus CI rules and fuzzers that catch the same bug class next time. We maintain Slither, Echidna, and Medusa, and 620 of our audits are public.\nNetwork Utilities\nDEVELOPER TOOLSFORENSICS & SECURITY\nRoles\nSERVICE PROVIDER\nSERVICE PROVIDER",
+    "logo_local": "logos\\trail-of-bits.svg"
+  },
+  {
     "name": "Trakx",
     "slug": "trakx",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515d3dca2e1ea4e95f31c_Trakx%2520-%2520Lionel%2520Rebibo.png",
