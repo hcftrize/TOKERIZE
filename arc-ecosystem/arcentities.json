@@ -72,6 +72,18 @@
     "logo_local": "logos\\alchemy.svg"
   },
   {
+    "name": "Alcove",
+    "slug": "alcove",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab581604a1402fd276038d6_6ab5815c440626c238d5a9dd_alcove-logo.png",
+    "description": "",
+    "external_url": "https://www.alcove.io/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\alcove.png"
+  },
+  {
     "name": "AllUnity",
     "slug": "allunity",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/695fe1b471d894335b2b9fa5_AU-logo.jpg",
