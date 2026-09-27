@@ -1,7 +1,21 @@
 {
-  "updated_at": "2026-09-26T06:32:29+00:00",
-  "count": 384,
+  "updated_at": "2026-09-27T06:32:19+00:00",
+  "count": 386,
   "articles": [
+    {
+      "title": "Alpend Crosses $3 Million TVL as Credit Protocol Gains Momentum on Canton Network",
+      "category": "ECOSYSTEM",
+      "description": "Alpend has crossed $3 million in total value locked on Canton Network, reaching the milestone three days after crossing $2 million, as the credit protocol's lending and borrowing markets continue to attract inflows.",
+      "url": "https://cantonnews.org/alpend-crosses-3-million-tvl-as-credit-protocol-gains-momentum-on-canton-network",
+      "published_at": "2026-09-26T19:12:20.578+00:00"
+    },
+    {
+      "title": "Global Blockchain Projects Compete for Korea's Financial Market as Canton Network Deepens Institutional Ties",
+      "category": "INSTITUTIONS",
+      "description": "Six global blockchain projects including Canton Network, Solana, Chainlink, Avalanche, Optimism, and Plume are competing for South Korea's financial market ahead of the country's 2027 tokenised securities framework, with Canton drawing investment and validator participation from multiple Korean financial institutions.",
+      "url": "https://cantonnews.org/global-blockchain-projects-compete-for-korea-s-financial-market-as-canton-network-deepens-institutional-ties",
+      "published_at": "2026-09-26T14:06:18.58+00:00"
+    },
     {
       "title": "Grisoco AI opens its Canton security-review beta to builders",
       "category": "TECHNOLOGY",
