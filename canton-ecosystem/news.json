@@ -1,7 +1,91 @@
 {
-  "updated_at": "2026-09-28T06:32:12+00:00",
-  "count": 386,
+  "updated_at": "2026-09-29T06:32:40+00:00",
+  "count": 398,
   "articles": [
+    {
+      "title": "Grofty launches Lens to track Canton prices and trading activity",
+      "category": "TECHNOLOGY",
+      "description": "Grofty Lens brings Canton asset prices, liquidity and exchange comparisons into one dashboard, with data refreshed every minute and an API for developers.",
+      "url": "https://cantonnews.org/grofty-launches-lens-to-track-canton-prices-and-trading-activity",
+      "published_at": "2026-09-29T00:55:40.671+00:00"
+    },
+    {
+      "title": "Canton advances Splice upgrades across MainNet, TestNet and DevNet",
+      "category": "TECHNOLOGY",
+      "description": "Fresh operator notices confirm Splice 0.8.1 for MainNet, 0.8.3 for TestNet and 0.8.4 for DevNet, with two-thirds of Super Validator nodes upgraded in each environment.",
+      "url": "https://cantonnews.org/canton-advances-splice-upgrades-across-mainnet-testnet-and-devnet",
+      "published_at": "2026-09-29T00:55:33.254+00:00"
+    },
+    {
+      "title": "Nuxaris opens cBTC and CC swaps on Canton",
+      "category": "ECOSYSTEM",
+      "description": "Nuxaris has introduced cBTC/CC swaps as the first part of its DEX rollout. More token listings are planned, with CBNB also announced as coming to Canton.",
+      "url": "https://cantonnews.org/nuxaris-opens-cbtc-and-cc-swaps-on-canton",
+      "published_at": "2026-09-29T00:55:26.631+00:00"
+    },
+    {
+      "title": "Temple reaches $30 million in daily trading volume on Canton",
+      "category": "ECOSYSTEM",
+      "description": "Temple's latest daily-volume update shows around $30 million in trading activity, following the release of its Lightspeed 2.0 matching engine.",
+      "url": "https://cantonnews.org/temple-reaches-30-million-in-daily-trading-volume-on-canton",
+      "published_at": "2026-09-29T00:55:17.901+00:00"
+    },
+    {
+      "title": "Alpend joins DeFiLlama with public tracking for its Canton lending markets",
+      "category": "ECOSYSTEM",
+      "description": "DeFiLlama now tracks Alpend's total value locked and active loans, with a published method explaining how the Canton lending platform's figures are calculated.",
+      "url": "https://cantonnews.org/alpend-joins-defillama-with-public-tracking-for-its-canton-lending-markets",
+      "published_at": "2026-09-29T00:54:50.186+00:00"
+    },
+    {
+      "title": "Canton's developer update brings easier troubleshooting and AI-assisted search",
+      "category": "TECHNOLOGY",
+      "description": "Canton's Q3 developer update covers new troubleshooting tools, an AI documentation assistant and a developer hub, alongside ongoing work to simplify application setup.",
+      "url": "https://cantonnews.org/canton-s-developer-update-brings-easier-troubleshooting-and-ai-assisted-search",
+      "published_at": "2026-09-29T00:54:38.269+00:00"
+    },
+    {
+      "title": "Yuval Rooz calls for connected financial networks at Seoul's EastPoint conference",
+      "category": "INSTITUTIONS",
+      "description": "At EastPoint in Seoul, Canton co-founder Yuval Rooz argued for connecting networks that meet local rules, rather than waiting for countries to adopt one regulatory system.",
+      "url": "https://cantonnews.org/yuval-rooz-calls-for-connected-financial-networks-at-seoul-s-eastpoint-conference",
+      "published_at": "2026-09-29T00:54:22.695+00:00"
+    },
+    {
+      "title": "Palladium Labs Joins DTCC Digital Assets Industry Working Group",
+      "category": "INSTITUTIONS",
+      "description": "Palladium Labs has joined DTCC's 100-plus member Digital Assets Industry Working Group, bringing a Canton Network builder's perspective on how tokenised assets function across lending, collateral, and settlement workflows.",
+      "url": "https://cantonnews.org/palladium-labs-joins-dtcc-digital-assets-industry-working-group",
+      "published_at": "2026-09-28T19:27:43.778+00:00"
+    },
+    {
+      "title": "Canton Foundation and Noves to Host Canton's First Institutional Forum in Korea Ahead of 2027 Token Securities Rules",
+      "category": "INSTITUTIONS",
+      "description": "Canton Foundation and Noves will host The Capital Forum in Seoul on September 30, Canton's first hosted institutional forum in Korea, as financial executives prepare for South Korea's token-securities framework taking effect on February 4, 2027.",
+      "url": "https://cantonnews.org/canton-foundation-and-noves-to-host-canton-s-first-institutional-forum-in-korea-ahead-of-2027-token-securities-rules",
+      "published_at": "2026-09-28T15:48:05.783+00:00"
+    },
+    {
+      "title": "Payvol resubmits 1.9 million CC funding request for simpler Canton payments",
+      "category": "TECHNOLOGY",
+      "description": "Cayvox Labs has resubmitted its Payvol proposal to the Canton Development Fund. The 23-week plan would create shared payment tools for Canton apps and wallets, with part of the requested funding tied to independent teams using them.",
+      "url": "https://cantonnews.org/payvol-resubmits-1-9-million-cc-funding-request-for-simpler-canton-payments",
+      "published_at": "2026-09-28T13:52:59.665+00:00"
+    },
+    {
+      "title": "HackCanton Season 3 draws around 450 builders from 48 countries",
+      "category": "TECHNOLOGY",
+      "description": "HackCanton Season 3 has recorded 353 registrations representing around 450 builders across 48 countries. The competition also includes a 10,000 CC Grofty bounty for projects that build a working wallet and onboarding experience on Canton MainNet.",
+      "url": "https://cantonnews.org/hackcanton-season-3-draws-around-450-builders-from-48-countries",
+      "published_at": "2026-09-28T13:52:40.592+00:00"
+    },
+    {
+      "title": "Zenith Opens EVM Testnet to the Public, Bringing Ethereum Development to Canton",
+      "category": "ECOSYSTEM",
+      "description": "The Zenith EVM Testnet is live and open to the public. For the first time, 31800+ Solidity developers can deploy applications that compose atomically with Canton's $9T institutional infrastructure, using MetaMask, Foundry, Hardhat, and Remix, with no code rewrites and no bridges.",
+      "url": "https://cantonnews.org/zenith-opens-evm-testnet-to-the-public-bringing-ethereum-development-to-canton",
+      "published_at": "2026-09-28T10:56:14.574862+00:00"
+    },
     {
       "title": "Alpend Crosses $3 Million TVL as Credit Protocol Gains Momentum on Canton Network",
       "category": "ECOSYSTEM",
