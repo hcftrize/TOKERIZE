@@ -3342,6 +3342,23 @@
     "logo_local": "logos\\moatcapital.png"
   },
   {
+    "name": "Modulo Finance",
+    "slug": "modulo-finance",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6abb8164d4a1b00520cba6cf_faa8a0e4-82ec-4908-be6a-2e8865f1b75b.png",
+    "short_desc": "Consumer wallet for holding, sending and managing assets on Canton Network.",
+    "tags": [
+      "APPS (FEATURED)",
+      "SERVICE PROVIDER",
+      "VALIDATOR",
+      "EXCHANGES",
+      "WALLETS",
+      "Network Utilities\nEXCHANGESWALLETS",
+      "Roles\nAPPS (FEATURED)SERVICE PROVIDERVALIDATOR\nAPPS (FEATURED)SERVICE PROVIDERVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nModulo Finance\nhttps://www.modulo.finance\nModulo is a consumer-facing financial platform built on Canton Network. At its core, Modulo is a multi-chain wallet for optimized for accessing, holding, transferring and swapping Canton-native assets through a single interface. Modulo gives users a straightforward way to interact with the network’s growing asset ecosystem. Beyond the wallet, Modulo operates validator infrastructure on Canton and has introduced MOD, a minimum-variance token that represents locked collateral in the Modulo ecosystem. The product is continuing to expand with Modulo Vault: an upcoming extension of the platform designed to broaden how users can deploy and interact with assets on Canton. Modulo’s goal is to build the consumer layer for Canton: one place to access assets, move capital and use the financial applications emerging across the network.\nNetwork Utilities\nEXCHANGESWALLETS\nRoles\nAPPS (FEATURED)SERVICE PROVIDERVALIDATOR\nAPPS (FEATURED)SERVICE PROVIDERVALIDATOR",
+    "logo_local": "logos\\modulo-finance.png"
+  },
+  {
     "name": "Monerium",
     "slug": "monerium",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515cd79af0e495c513807_monerium_logo.jpeg",
@@ -4044,6 +4061,18 @@
     "logo_local": "logos\\robinhood.svg"
   },
   {
+    "name": "Rome Protocol",
+    "slug": "rome-protocol",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6abc03a14e5500eb991b7b67_154256b2-377a-492d-9c74-5b3d732bea05.png",
+    "short_desc": "Canton assets in Solana and EVM wallets, with Canton ordering every transaction.",
+    "tags": [
+      "VALIDATOR",
+      "INTEROPERABILITY"
+    ],
+    "detail_text": "Canton assets in Solana and EVM wallets, with Canton ordering every transaction.",
+    "logo_local": "logos\\rome-protocol.png"
+  },
+  {
     "name": "RWA.xyz",
     "slug": "rwaxyz",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515e18766ded4ad45a8ac_Untitled%2520design%2520(32).png",
@@ -4727,6 +4756,24 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nVala Wallet\nhttps://vala-wallet.cc/\nVala is a non-custodial web wallet and your primary gateway to Canton apps & CIP-56 Tokens. Keys are generated locally and remain on your device. Sign in using passkeys (Face ID, Touch ID or password), with no app download required. Built natively for Canton, Vala is your access point to AllFi.\nNetwork Utilities\nWALLETS\nRoles\nAPPS (FEATURED)\nAPPS (FEATURED)",
     "logo_local": "logos\\vala-wallet.png"
+  },
+  {
+    "name": "Validation Cloud",
+    "slug": "validation-cloud",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6abada7216955a4406907d6a_c9c5d68f-31b7-494f-abe9-c4691655ba10.png",
+    "short_desc": "The leading provider of institutional-grade infrastructure for the new money",
+    "tags": [
+      "MARKET INFRASTRUCTURE",
+      "SERVICE PROVIDER",
+      "VALIDATOR",
+      "DATA & ANALYTICS",
+      "DEVELOPER TOOLS",
+      "NAAS PROVIDER",
+      "Network Utilities\nDATA & ANALYTICSDEVELOPER TOOLSNAAS PROVIDER",
+      "Roles\nMARKET INFRASTRUCTURESERVICE PROVIDERVALIDATOR\nMARKET INFRASTRUCTURESERVICE PROVIDERVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nValidation Cloud\nhttps://www.validationcloud.io\nValidation Cloud is the institutional platform to Understand, Move, Earn digital assets. Built for stablecoins, tokenized assets, and cryptocurrencies, our platform delivers mission-critical infrastructure (validators, RPC) for the modern financial stack through Mavrik AI, Node API, and Staking. We help institutions analyze digital asset activity, access leading blockchain networks, and earn rewards through secure, high-performance infrastructure.\nNetwork Utilities\nDATA & ANALYTICSDEVELOPER TOOLSNAAS PROVIDER\nRoles\nMARKET INFRASTRUCTURESERVICE PROVIDERVALIDATOR\nMARKET INFRASTRUCTURESERVICE PROVIDERVALIDATOR",
+    "logo_local": "logos\\validation-cloud.png"
   },
   {
     "name": "Vigil Markets",
