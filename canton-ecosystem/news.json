@@ -1,7 +1,98 @@
 {
-  "updated_at": "2026-09-29T06:32:40+00:00",
-  "count": 398,
+  "updated_at": "2026-09-30T06:32:34+00:00",
+  "count": 411,
   "articles": [
+    {
+      "title": "SyncVotes renews Featured App request after its v2 upgrade",
+      "category": "TECHNOLOGY",
+      "description": "SyncVotes has updated its Canton Featured App application following a rebuild of its community-voting platform. The proposal would use application rewards to reduce members’ governance costs.",
+      "url": "https://cantonnews.org/syncvotes-renews-featured-app-request-after-its-v2-upgrade",
+      "published_at": "2026-09-29T18:53:16.991+00:00"
+    },
+    {
+      "title": "Edel’s SPYe and QQQe reach $1 million in combined trading volume",
+      "category": "TOKENIZATION",
+      "description": "Edel’s two index-linked tokens have reached $1 million in combined trading volume in less than a week. More assets, more venues and EDEL staking are next on the roadmap.",
+      "url": "https://cantonnews.org/edel-s-spye-and-qqqe-reach-1-million-in-combined-trading-volume",
+      "published_at": "2026-09-29T18:49:50.014+00:00"
+    },
+    {
+      "title": "Canborsa reaches $35 million in total trading volume",
+      "category": "ECOSYSTEM",
+      "description": "Canborsa has reached $35 million in cumulative trading volume as its Canton-based platform continues to offer markets across crypto, stocks and commodities.",
+      "url": "https://cantonnews.org/canborsa-reaches-35-million-in-total-trading-volume",
+      "published_at": "2026-09-29T18:47:25.382+00:00"
+    },
+    {
+      "title": "Alpend launches portfolio dashboard for its Canton lending markets",
+      "category": "TECHNOLOGY",
+      "description": "Alpend’s new portfolio view brings balances, interest, rewards and borrowing risk into one dashboard, alongside a record of past transactions.",
+      "url": "https://cantonnews.org/alpend-launches-portfolio-dashboard-for-its-canton-lending-markets",
+      "published_at": "2026-09-29T18:44:16.316+00:00"
+    },
+    {
+      "title": "Ibex adds cETH perpetual trading to its Canton beta",
+      "category": "ECOSYSTEM",
+      "description": "cETH-PERP is now listed on Ibex’s beta MainNet, adding a market linked to onRails’ ETH-backed token on Canton.",
+      "url": "https://cantonnews.org/ibex-adds-ceth-perpetual-trading-to-its-canton-beta",
+      "published_at": "2026-09-29T18:41:31.851+00:00"
+    },
+    {
+      "title": "OneSwap launches bridge between Canton and eight networks",
+      "category": "TECHNOLOGY",
+      "description": "OneSwap’s Squid-powered bridge is live, giving users a route from supported assets on eight networks into Canton Coin and back again.",
+      "url": "https://cantonnews.org/oneswap-launches-bridge-between-canton-and-eight-networks",
+      "published_at": "2026-09-29T18:38:50.152+00:00"
+    },
+    {
+      "title": "Unhedged details referral rewards for its Canton prediction markets",
+      "category": "ECOSYSTEM",
+      "description": "Unhedged’s referral program gives inviters a share of eligible trading fees for 90 days, while referred users can receive up to $10 in fee rebates during their first 30 days of eligible trading.",
+      "url": "https://cantonnews.org/unhedged-details-referral-rewards-for-its-canton-prediction-markets",
+      "published_at": "2026-09-29T18:36:40.555+00:00"
+    },
+    {
+      "title": "CC Space brings its AI network explorer to Canton TestNet",
+      "category": "TECHNOLOGY",
+      "description": "CC Space is live on Canton TestNet with AI-assisted searches, network analytics, alerts and developer access. Users can browse without an account, with 500 free credits available after signup.",
+      "url": "https://cantonnews.org/cc-space-brings-its-ai-network-explorer-to-canton-testnet",
+      "published_at": "2026-09-29T18:34:38.52+00:00"
+    },
+    {
+      "title": "Temple adds Send Connect support for desktop trading on Canton",
+      "category": "TECHNOLOGY",
+      "description": "Send Wallet users can now connect to Temple on desktop through Send Connect. The integration adds another wallet option for trading on Canton.",
+      "url": "https://cantonnews.org/temple-adds-send-connect-support-for-desktop-trading-on-canton",
+      "published_at": "2026-09-29T18:31:33.156+00:00"
+    },
+    {
+      "title": "Mystic Finance proposes a shared vault standard for Canton",
+      "category": "TECHNOLOGY",
+      "description": "Mystic Finance has submitted a Development Fund proposal for shared vault tools on Canton. The plan covers deposits, withdrawals and ownership shares, with funding tied to development and adoption milestones.",
+      "url": "https://cantonnews.org/mystic-finance-proposes-a-shared-vault-standard-for-canton",
+      "published_at": "2026-09-29T18:27:50.055+00:00"
+    },
+    {
+      "title": "Slay Money adds Exolix cross-chain swaps to its Canton app",
+      "category": "TECHNOLOGY",
+      "description": "Slay Money users can now exchange supported assets through Exolix without leaving the app. The integration adds cross-chain swaps to its Canton wallet, trading and prediction-market features.",
+      "url": "https://cantonnews.org/slay-money-adds-exolix-cross-chain-swaps-to-its-canton-app",
+      "published_at": "2026-09-29T18:25:31.539+00:00"
+    },
+    {
+      "title": "Tradecraft passes $2.5 million in trading volume over 14 days",
+      "category": "ECOSYSTEM",
+      "description": "Tradecraft's September 28 update puts trading volume above $2.5 million over the preceding 14 days. The figure measures trading activity on its Canton exchange.",
+      "url": "https://cantonnews.org/tradecraft-passes-2-5-million-in-trading-volume-over-14-days",
+      "published_at": "2026-09-29T18:20:14.725+00:00"
+    },
+    {
+      "title": "Shinhan Financial Group CEO Meets Digital Asset Leadership in Seoul to Deepen Canton Network Partnership",
+      "category": "INSTITUTIONS",
+      "description": "Shinhan Financial Group's CEO has met Digital Asset and Canton Foundation leadership in Seoul to deepen collaboration across tokenised finance, digital asset infrastructure, and cross-border market connectivity, as Shinhan's group-wide Canton strategy takes shape ahead of Korea's 2027 token securities framework.",
+      "url": "https://cantonnews.org/shinhan-financial-group-ceo-meets-digital-asset-leadership-in-seoul-to-deepen-canton-network-partnership",
+      "published_at": "2026-09-29T11:28:52.473+00:00"
+    },
     {
       "title": "Grofty launches Lens to track Canton prices and trading activity",
       "category": "TECHNOLOGY",
