@@ -1,6 +1,6 @@
 Arc Ecosystem — Entities not found on arc.io/ecosystem
-Checked: 2026-09-30
-Count: 21
+Checked: 2026-10-01
+Count: 23
 
 These entities exist in arcentities.json but were NOT found during scrape.
 Please check manually — remove from arcentities.json if confirmed gone.
@@ -8,6 +8,7 @@ Please check manually — remove from arcentities.json if confirmed gone.
 - AWS (slug: aws)
 - Axelar (slug: axelar)
 - Brex (slug: brex)
+- CFi (slug: cfi)
 - Cloudflare (slug: cloudflare)
 - Deutsche Bank (slug: deutsche-bank)
 - dLocal (slug: dlocal)
@@ -19,6 +20,7 @@ Please check manually — remove from arcentities.json if confirmed gone.
 - Goldman Sachs (slug: goldman-sachs)
 - Hecto Innovation (slug: hecto-innovation-2)
 - Hurupay (slug: hurupay)
+- Kyobo Life (slug: kyobo-life-2)
 - LianLian (slug: lianlian-2)
 - Mercoin (slug: mercoin-2)
 - Nuvei (slug: nuvei)
