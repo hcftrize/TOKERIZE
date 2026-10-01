@@ -1,7 +1,40 @@
 {
-  "updated_at": "2026-10-01T13:29:55+00:00",
-  "count": 48,
+  "updated_at": "2026-10-01T14:07:31+00:00",
+  "count": 53,
   "articles": [
+    {
+      "title": "TOKEN2049",
+      "category": "EVENTS",
+      "description": "Singapore",
+      "url": "event:token2049:2026-10-07",
+      "published_at": "2026-10-07",
+      "start_date": "2026-10-07",
+      "end_date": "2026-10-08",
+      "image": null,
+      "external_url": "https://www.token2049.com/singapore"
+    },
+    {
+      "title": "SIBOS Miami",
+      "category": "EVENTS",
+      "description": "Miami, FL",
+      "url": "event:sibos-miami:2026-09-28",
+      "published_at": "2026-09-28",
+      "start_date": "2026-09-28",
+      "end_date": "2026-10-01",
+      "image": null,
+      "external_url": "https://www.sibos.com/"
+    },
+    {
+      "title": "Exploit Summit",
+      "category": "EVENTS",
+      "description": "Montreal, Canada",
+      "url": "event:exploit-summit:2026-09-28",
+      "published_at": "2026-09-28",
+      "start_date": "2026-09-28",
+      "end_date": "2026-09-29",
+      "image": null,
+      "external_url": "https://exploitsummit.com/"
+    },
     {
       "title": "T-RIZE Joins the Canton Foundation’s Collateral Subcommittee, Chaired by DTCC",
       "category": "NEWS",
@@ -17,6 +50,28 @@
       "url": "https://www.t-rize.io/news/T-RIZE-Deploys-RIZEMIND-on-Arc-Mainnet",
       "published_at": "2026-09-22T10:00+01:00",
       "image": "https://images.ctfassets.net/n5wr4ufmavp8/39tIyT5WlQ6bYFM5n05j4w/cec92fe18cf937778d9369882da49d22/unnamed.jpg?w=800"
+    },
+    {
+      "title": "Canada FinTech Forum",
+      "category": "EVENTS",
+      "description": "Montréal, QC",
+      "url": "event:canada-fintech-forum:2026-09-14",
+      "published_at": "2026-09-14",
+      "start_date": "2026-09-14",
+      "end_date": "2026-09-15",
+      "image": null,
+      "external_url": "https://www.forumfintechcanada.com/en/home"
+    },
+    {
+      "title": "Real-World Asset Summit Brooklyn",
+      "category": "EVENTS",
+      "description": "Brooklyn, NY",
+      "url": "event:real-world-asset-summit-brooklyn:2026-09-01",
+      "published_at": "2026-09-01",
+      "start_date": "2026-09-01",
+      "end_date": "2026-09-02",
+      "image": null,
+      "external_url": "https://www.rwasummit.io/brooklyn-2026"
     },
     {
       "title": "T-RIZE Talks: Eduardo Furtado",
