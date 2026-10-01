@@ -1,13 +1,14 @@
-name: Clean Canton News Cover Filenames
+name: Clean T-RIZE News Cover Filenames
 
-# One-off / as-needed cleanup: Photoshop's Batch "Save As" sometimes has
-# "As a Copy" ticked, which appends " copy" to every output filename
-# (e.g. "27w1 copy.jpg" instead of "27w1.jpg"). news/cantonarticles.json
-# always points at the clean name ("/assets/news/canton/27w1.jpg"), so any
+# Same fix as clean-cover-filenames.yml, scoped to assets/news/t-rize/
+# instead of assets/news/canton/: Photoshop's Batch "Save As" sometimes
+# has "As a Copy" ticked, which appends " copy" to every output filename
+# (e.g. "26m9 copy.jpg" instead of "26m9.jpg"). news/trizearticles.json
+# always points at the clean name ("/assets/news/t-rize/26m9.jpg"), so any
 # stray " copy" file is invisible on the site until it's renamed back.
 #
 # Run this manually (Actions tab > this workflow > Run workflow) any time
-# after uploading a fresh batch of covers into assets/news/canton/ — it
+# after uploading a fresh batch of covers into assets/news/t-rize/ — it
 # strips " copy" from every matching filename in that folder and commits
 # the rename. Safe to re-run: files already named correctly are skipped,
 # and it never overwrites an existing clean file.
@@ -27,7 +28,7 @@ jobs:
 
       - name: Strip " copy" from cover filenames
         run: |
-          cd assets/news/canton
+          cd assets/news/t-rize
           shopt -s nullglob
           renamed=0
           skipped=0
@@ -51,5 +52,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git diff --staged --quiet && echo "No changes to commit." || git commit -m "chore: strip stray 'copy' suffix from Canton News cover filenames"
+          git diff --staged --quiet && echo "No changes to commit." || git commit -m "chore: strip stray 'copy' suffix from T-RIZE News cover filenames"
           git push origin HEAD:${{ github.ref_name }}
