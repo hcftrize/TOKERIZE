@@ -3276,6 +3276,20 @@
     "logo_local": "logos\\mesh.svg"
   },
   {
+    "name": "Metatarz",
+    "slug": "metatarz",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6abcf8db0eea5faa5632c092_da8c8ca1-7a65-40ac-b437-f32e570ba465.png",
+    "short_desc": "Non-custodial wallet and node provider on Canton Network",
+    "tags": [
+      "APPS (FEATURED)",
+      "NAAS PROVIDER",
+      "Network Utilities\nNAAS PROVIDER",
+      "Roles\nAPPS (FEATURED)\nAPPS (FEATURED)"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nMetatarz\nhttps://metatarz.xyz\nMetatarz Wallet is the first EVM native Canton wallet built for privacy and security. Connect, send, and manage Canton assets in one wallet. Supports Canton network and 18+ EVM networks. Fully EVM-compatible with automatic Canton preapproval deployment, CC and CIP-56 transfers and user-friendly assets overview tab. Secure and non-custodial wallet where keys never leave your device. Built by the team behind Metatarz enterprise-grade staking infrastructure.\nNetwork Utilities\nNAAS PROVIDER\nRoles\nAPPS (FEATURED)\nAPPS (FEATURED)",
+    "logo_local": "logos\\metatarz.png"
+  },
+  {
     "name": "MEXC",
     "slug": "mexc",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515df55dc91c5993fa1a3_mexc-logo-png_seeklogo-423327.png",
