@@ -52,5 +52,10 @@
       "src": "/admin",
       "dest": "/admin.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/rizeby/telegram.py": {
+      "excludeFiles": "{assets/**,rize-governance-hub/**,rize-governance-hub.html,canton-ecosystem/**,canton-ecosystem.html,arc-ecosystem/**,news/**,news.html,rize-data-hub/**,rize-data-hub.html,rize-ecosystem.html,goldsky/**,goldsky-governance/**,templates/**,scripts/**,HANDLE-THIS-BEFORE-PULL/**,*.html}"
+    }
+  }
 }
