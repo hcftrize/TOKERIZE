@@ -1,0 +1,40 @@
+name: Scrape T-RIZE Data (Learning Center + Talks)
+
+# Triggered externally (cron-job.org) every day via workflow_dispatch, same
+# pattern as the Canton News scraper. One script, one run, covers both
+# t-rize.io sources (Learning Center "All Resources" + T-RIZE Talks) and
+# writes a single trizedata/news.json — see scripts/scrape_trizedata.py for
+# why these two pages are merged into one output instead of two.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Playwright + Chromium
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+
+      - name: Scrape Learning Center + T-RIZE Talks -> trizedata/news.json
+        run: python scripts/scrape_trizedata.py
+
+      - name: Commit trizedata/news.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add trizedata/news.json
+          git diff --staged --quiet && echo "No changes to commit." || git commit -m "chore: scrape T-RIZE Learning Center + Talks [skip ci]"
+          git push origin HEAD:${{ github.ref_name }}
