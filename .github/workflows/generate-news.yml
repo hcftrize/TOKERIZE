@@ -4,7 +4,9 @@ on:
   push:
     branches: [main, dev]
     paths:
-      - 'articles.json'
+      - 'news/tokerizearticles.json'
+      - 'news/cantonarticles.json'
+      - 'news/trizearticles.json'
       - 'templates/article-template.html'
       - 'scripts/generate_news.py'
   workflow_dispatch: {}
@@ -24,7 +26,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Generate static news pages
+      - name: Generate static news pages (all collections)
         run: python scripts/generate_news.py
 
       - name: Commit generated pages
@@ -32,5 +34,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add news/
-          git diff --staged --quiet && echo "No changes to commit." || git commit -m "chore: regenerate news pages from articles.json [skip ci]"
+          git diff --staged --quiet && echo "No changes to commit." || git commit -m "chore: regenerate news pages from catalog JSON [skip ci]"
           git push origin HEAD:${{ github.ref_name }}
