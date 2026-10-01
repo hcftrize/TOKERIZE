@@ -125,17 +125,34 @@ def main():
     OUTPUT_DIR.mkdir(exist_ok=True)
 
     written = []
+    current_slugs = set()
     for article in articles:
         result = render_article(article, template)
         if result is None:
             continue
         slug, html_out = result
+        current_slugs.add(slug)
         out_path = OUTPUT_DIR / f"{slug}.html"
         out_path.write_text(html_out, encoding="utf-8")
         written.append(slug)
         print(f"  ✓ news/{slug}.html")
 
+    # news/ is a build output fully derived from articles.json — any
+    # previously-generated *.html page whose slug is no longer present
+    # (article removed, or its slug was renamed) is orphaned and must be
+    # deleted here, otherwise it silently stays live on the site forever.
+    # Non-.html files (placeholders, an images/ subfolder, etc.) are left
+    # untouched.
+    removed = []
+    for existing in sorted(OUTPUT_DIR.glob("*.html")):
+        if existing.stem not in current_slugs:
+            existing.unlink()
+            removed.append(existing.name)
+            print(f"  🗑️  removed stale news/{existing.name}")
+
     print(f"\nGenerated {len(written)} article page(s) from {len(articles)} entr{'y' if len(articles)==1 else 'ies'} in articles.json.")
+    if removed:
+        print(f"Removed {len(removed)} stale page(s) no longer referenced in articles.json: {', '.join(removed)}")
 
 
 if __name__ == "__main__":
