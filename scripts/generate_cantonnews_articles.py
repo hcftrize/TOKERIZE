@@ -104,7 +104,10 @@ def build_article_line(a: dict) -> str:
     desc = html.escape(a.get("description") or "", quote=False)
     url = html.escape(a.get("url") or "", quote=True)
     desc_part = f" {desc}" if desc else ""
-    return f'<p><strong>{title}:</strong>{desc_part} <a href="{url}">Read more</a>.</p>'
+    # Opens in a new tab so a reader can click through every item of interest
+    # without losing their place in the weekly recap.
+    return (f'<p><strong>{title}:</strong>{desc_part} '
+            f'<a href="{url}" target="_blank" rel="noopener noreferrer">Read more</a>.</p>')
 
 
 def build_content(week_articles: list[dict], monday: datetime, sunday: datetime) -> tuple[str, list[str]]:
@@ -120,10 +123,9 @@ def build_content(week_articles: list[dict], monday: datetime, sunday: datetime)
 
     date_range = f"{monday.strftime('%B %d')}&ndash;{sunday.strftime('%d, %Y')}" if monday.month == sunday.month \
         else f"{monday.strftime('%B %d')} &ndash; {sunday.strftime('%B %d, %Y')}"
-    cats_human = ", ".join(order)
 
     parts = [
-        f"<p>Canton Network news for the week of {date_range}, covering {cats_human}.</p>"
+        f"<p>Canton Network news for the week of {date_range}.</p>"
     ]
     for cat in order:
         parts.append(f"<h2>{html.escape(cat)}</h2>")
@@ -163,8 +165,7 @@ def main():
             publish_date = week_monday + timedelta(days=7)  # the following Monday
             content, cats = build_content(week_articles, week_monday, week_sunday)
             excerpt = (f"Canton Network news for the week of "
-                       f"{week_monday.strftime('%B %d')}–{week_sunday.strftime('%d, %Y')}: "
-                       f"{', '.join(cats)}.")
+                       f"{week_monday.strftime('%B %d')}–{week_sunday.strftime('%d, %Y')}.")
             year_suffix = str(iso_year)[2:]
             image = f"/assets/news/canton/{year_suffix}w{iso_week}.jpg"
 
