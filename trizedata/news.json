@@ -1,0 +1,390 @@
+{
+  "updated_at": "2026-10-01T13:29:55+00:00",
+  "count": 48,
+  "articles": [
+    {
+      "title": "T-RIZE Joins the Canton Foundation’s Collateral Subcommittee, Chaired by DTCC",
+      "category": "NEWS",
+      "description": "T-RIZE will contribute to industry work on collateral mobility and tokenized repo and financing\nacross Canton Network, alongside ISDA, BNY, Euroclear, Broadridge and other leading financial\ninstitutions and market infrastructures.\nMONTREAL, September 24, 2026 — T-RIZE Group Corporation (“T-RIZE”)…",
+      "url": "https://www.t-rize.io/news/T-RIZE-Joins-the-Canton-Foundations-Collateral-Subcommittee-Chaired-by-DTCC",
+      "published_at": "2026-09-25T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/7kxuANHphsxvdYKv5WmEs1/ea89ab0e1aa4929f0c58b345c702c5f3/unnamed.png?w=800"
+    },
+    {
+      "title": "T-RIZE Deploys RIZEMIND on Arc Mainnet",
+      "category": "NEWS",
+      "description": "Learning across institutional boundaries, with data kept local and a record participants can verify.RIZEMIND lets institutions train and improve models together while keeping their underlying training data local. With its onchain components now deployed on Arc Mainnet, our open-source infrastruct…",
+      "url": "https://www.t-rize.io/news/T-RIZE-Deploys-RIZEMIND-on-Arc-Mainnet",
+      "published_at": "2026-09-22T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/39tIyT5WlQ6bYFM5n05j4w/cec92fe18cf937778d9369882da49d22/unnamed.jpg?w=800"
+    },
+    {
+      "title": "T-RIZE Talks: Eduardo Furtado",
+      "category": "TALKS",
+      "description": "Co-Founder and CTO — This week, we sat down with Eduardo Furtado, Co-Founder and CTO, to learn more about his work, his path into digital assets, and what motivates him as part of T-RIZE.",
+      "url": "https://www.t-rize.io/t-rize-talks/eduardo-furtado",
+      "published_at": "2026-08-28",
+      "image": "https://www.t-rize.io/share/talks/eduardo-furtado.jpg"
+    },
+    {
+      "title": "Tokenized Deposits: Why Banks Are Bringing Commercial-Bank Money Onchain",
+      "category": "ARTICLE",
+      "description": "Tokenized deposits are moving beyond experimentation as major banks begin putting commercial bank money onto distributed-ledger infrastructure.J.P. Morgan operates production-grade blockchain-based payments infrastructure and has extended bank-issued deposit money onto public blockchain infrastru…",
+      "url": "https://www.t-rize.io/news/Tokenized-Deposits-Why-Banks-Are-Bringing-Commercial-Bank-Money-Onchain",
+      "published_at": "2026-08-19T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/1RXbK6t0d9SsBYU71osA51/2f507e0b39188bac51e59f8867e5ed0a/unnamed.png?w=800"
+    },
+    {
+      "title": "T-RIZE Appoints an HR Partner to Strengthen Its People and Culture Infrastructure",
+      "category": "NEWS",
+      "description": "Montréal, Canada, August 13, 2026 — T-RIZE Group today announced the appointment of Andrée-Anne Godin as HR Partner, marking an important step in the company’s continued organizational growth and the development of its internal people and culture function.With more than 10 years of experience in …",
+      "url": "https://www.t-rize.io/news/T-RIZE-Appoints-an-HR-Partner-to-Strengthen-Its-People-and-Culture-Infrastructure",
+      "published_at": "2026-08-14T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/5UdiNq7CzGwEMLvXIvgbt4/132842a9dbf970ebf28029a37455594a/unnamed__1_.png?w=800"
+    },
+    {
+      "title": "T-RIZE Talks: Isabelle Godin",
+      "category": "TALKS",
+      "description": "Head of Marketing and Branding — This week, we sat down with Isabelle Godin, Head of Marketing and Branding, to learn more about her work, her path into digital assets, and what motivates her as part of T-RIZE.",
+      "url": "https://www.t-rize.io/t-rize-talks/isabelle-godin",
+      "published_at": "2026-08-14",
+      "image": "https://www.t-rize.io/share/talks/isabelle-godin.jpg"
+    },
+    {
+      "title": "T-RIZE Talks: Mikaeil Mayeli",
+      "category": "TALKS",
+      "description": "Software Engineer — This week, we sat down with Mikaeil Mayeli, Software Engineer, to learn more about his work, his path into digital assets, and what motivates him as part of T-RIZE.",
+      "url": "https://www.t-rize.io/t-rize-talks/mikaeil-mayeli",
+      "published_at": "2026-08-07",
+      "image": "https://www.t-rize.io/share/talks/mikaeil-mayeli.jpg"
+    },
+    {
+      "title": "T-RIZE Talks: Michael Duchesne",
+      "category": "TALKS",
+      "description": "Co-Founder and Head of Engineering — This week, we sat down with Michael Duchesne, Co-Founder and Head of Engineering, to learn more about his work, his path into digital assets, and what motivates him as part of T-RIZE.",
+      "url": "https://www.t-rize.io/t-rize-talks/michael-duchesne",
+      "published_at": "2026-07-31",
+      "image": "https://www.t-rize.io/share/talks/michael-duchesne.jpg"
+    },
+    {
+      "title": "T-RIZE Talks: Thien Duy Tran",
+      "category": "TALKS",
+      "description": "Co-Founder and Head of Market Strategy — This week, we sat down with Thien Duy Tran, Co-Founder and Head of Market Strategy, to learn more about his work, his path into digital assets, and what motivates him as part of T-RIZE.",
+      "url": "https://www.t-rize.io/t-rize-talks/thien-duy-tran",
+      "published_at": "2026-07-24",
+      "image": "https://www.t-rize.io/share/talks/thien-duy-tran.jpg"
+    },
+    {
+      "title": "T-RIZE Appoints Former Visa Executive Paul Davidson as Director of Institutional Accounts & Business Development",
+      "category": "NEWS",
+      "description": "Toronto, Canada, July 21, 2026 — T-RIZE Group today announced the appointment of Paul Davidson as Director of Institutional Accounts & Business Development. He joins T-RIZE from Visa, where he served as Director of New Business Development, Global Money Movement.In his new role, Paul leads instit…",
+      "url": "https://www.t-rize.io/news/T-RIZE-Appoints-Former-Visa-Executive-Paul-Davidson-as-Director-of-Institutional-Accounts-&-Business-Development",
+      "published_at": "2026-07-21T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/5RRbtwvVvk29Ctos4nw22/f8e8f08789691668581045f84a1880b7/unnamed__2_.png?w=800"
+    },
+    {
+      "title": "T-RIZE Talks: Helmi Trabelsi",
+      "category": "TALKS",
+      "description": "Senior Blockchain Engineer and Team Lead — This week, we sat down with Helmi Trabelsi, Senior Blockchain Engineer and Team Lead, to learn more about his work, his path into digital assets, and what motivates him as part of T-RIZE.",
+      "url": "https://www.t-rize.io/t-rize-talks/helmi-trabelsi",
+      "published_at": "2026-07-17",
+      "image": "https://www.t-rize.io/share/talks/helmi-trabelsi.jpg"
+    },
+    {
+      "title": "Federated Learning in Cybersecurity: The Shift Toward Shared Learning",
+      "category": "ARTICLE",
+      "description": "A recent World Economic Forum virtual session examined how organizations are moving artificial intelligence in cybersecurity from experimentation to enterprise deployment.The discussion drew on Empowering Defenders: AI for Cybersecurity, a recent World Economic Forum white paper developed in coll…",
+      "url": "https://www.t-rize.io/news/Federated-Learning-in-Cybersecurity-The-Shift-Toward-Shared-Learning",
+      "published_at": "2026-07-15T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/1aiUmwIbrCfaaTvfdbtOeN/e8d8ba272e5f5842ee61c57a83d5aa13/unnamed__1_.png?w=800"
+    },
+    {
+      "title": "T-RIZE Talks: Alexis Nurdin",
+      "category": "TALKS",
+      "description": "Senior Front-End Developer — This week, we sat down with Alexis Nurdin, Senior Front-End Developer, to learn more about his work, his path into digital assets, and what motivates him as part of T-RIZE.",
+      "url": "https://www.t-rize.io/t-rize-talks/alexis-nurdin",
+      "published_at": "2026-07-10",
+      "image": "https://www.t-rize.io/share/talks/alexis-nurdin.jpg"
+    },
+    {
+      "title": "x402 and the Next Payment Layer for Agentic Finance",
+      "category": "ARTICLE",
+      "description": "Tokenization is making financial assets more machine-readable. At the same time, AI agents are becoming a new class of internet users.That overlap matters. If software can interact with tokenized financial markets, it will need a way to access data, tools, proofs, and intelligence without relying…",
+      "url": "https://www.t-rize.io/news/x402-and-the-Next-Payment-Layer-for-Agentic-Finance",
+      "published_at": "2026-07-08T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/2WXlXCer3ZxSV2D4VMYWaW/4d7ae840890254fb728f54e1d8fed4d7/unnamed.png?w=800"
+    },
+    {
+      "title": "The Institutional Orchestration Behind Tokenization",
+      "category": "ARTICLE",
+      "description": "Financial markets are moving into a more demanding stage of digital asset adoption.The first wave of tokenization centered on instruments with relatively standardized structures, including stablecoins, tokenized treasuries, and money market funds. These products demonstrated that onchain infrastr…",
+      "url": "https://www.t-rize.io/news/the-institutional-orchestration-behind-tokenization",
+      "published_at": "2026-06-30T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/6EBUS4Jbh8AawLgf1en4l/dcf86c4d5af31c20a33fe2eb6c20be10/unnamed__1_.png?w=800"
+    },
+    {
+      "title": "Institutional Tokenization Platform T-RIZE Adopts Chainlink to Power Onchain Proof of Insurance for $3 Trillion Private Credit Market",
+      "category": "NEWS",
+      "description": "This first-of-its-kind solution enables institutions to verify insurance coverage data for tokenized assets via Chainlink infrastructure, eliminating paper-based processes and counterparty risk.T-RIZE Group is pleased to announce the completion of its adoption of Chainlink, the industry-standard …",
+      "url": "https://www.t-rize.io/news/institutional-tokenization-platform-TRIZE-adopts-chainlink",
+      "published_at": "2026-06-24T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/3FIBKgna9dD3dmMYEpdMbP/b95634d81d1da15686cb306f0654951d/unnamed.png?w=800"
+    },
+    {
+      "title": "Private Credit Is Defining the Next Phase of Tokenization",
+      "category": "ARTICLE",
+      "description": "Tokenization began with the assets that were easiest to represent on-chain.Stablecoins, tokenized treasuries, and money market funds were the natural first wave. Their structures are standardized. Their redemption mechanics are familiar. Their operational requirements are relatively simple compar…",
+      "url": "https://www.t-rize.io/news/private-credit-is-defining-the-next-phase-of-tokenization",
+      "published_at": "2026-06-23T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/2vHcJ1FZkShltdqyRSQC99/c5f40a7a41bc80250e91aedede8212d4/unnamed.png?w=800"
+    },
+    {
+      "title": "T-RIZE Appoints Omar C. Bermudez as Product Director",
+      "category": "NEWS",
+      "description": "Strengthening product leadership as T-RIZE advances its institutional tokenization and decentralized risk modeling infrastructureT-RIZE Group Corporation is pleased to announce the appointment of Omar C. Bermudez as Product Director.Omar joins T-RIZE at a pivotal stage in the company’s growth as …",
+      "url": "https://www.t-rize.io/news/t-rize-appoints-omar-c-bermudez-as-product-director",
+      "published_at": "2026-06-18T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/43m8u4jzsyUH5GKQOexmyh/3651949251c8e78775be3075eb5b5afd/unnamed.png?w=800"
+    },
+    {
+      "title": "The New Trust Standard for Tokenized Assets",
+      "category": "ARTICLE",
+      "description": "For years, tokenization was presented through the language of access, liquidity and efficiency. Real-world assets could be represented digitally, administered more efficiently and transferred through programmable infrastructure. That narrative helped the market understand the promise. Institution…",
+      "url": "https://www.t-rize.io/news/the-new-trust-standard-for-tokenized-assets",
+      "published_at": "2026-06-16T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/4bPnqpX9VOWzawbBphFhxs/2c8f84836fee901cd45f730c947ef8be/unnamed.png?w=800"
+    },
+    {
+      "title": "Scaling Private Credit Requires Institutional-Grade Infrastructure",
+      "category": "ARTICLE",
+      "description": "Scaling Private Credit Requires Institutional-Grade InfrastructurePrivate credit has become one of the most important segments of global finance. Today, it manages more than $3.5 trillion in assets globally, according to the Alternative Credit Council (ACC) and the Alternative Investment Manageme…",
+      "url": "https://www.t-rize.io/news/scaling-private-credit-requires-institutional-grade-infrastructure",
+      "published_at": "2026-03-25T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/2FUdS8axHS4lmeqNCJeuIw/06893b9e97913eef1b57cdf1facdb20e/unnamed.png?w=800"
+    },
+    {
+      "title": "T-RIZE Appoints Rémi Richard as Chief Operating Officer to Scale Institutional Execution Across the Tokenization Stack",
+      "category": "NEWS",
+      "description": "Appointment strengthens operating capacity as T-RIZE expands products, strategic projects and institutional partnerships\n\nMONTREAL — T-RIZE today announced the appointment of Rémi Richard as Chief Operating Officer, strengthening the company’s leadership team as it scales its platform, broadens i…",
+      "url": "https://www.t-rize.io/news/t-rize-appoints-remi-richard-as-chief-operating-officer-to-scale-institutional",
+      "published_at": "2026-03-20T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/7fvXQHicsyEFD9IqrrnzJr/715ba820bd7f1e3daa4a49e7f0e22e5f/unnamed.jpg?w=800"
+    },
+    {
+      "title": "Tokenization: 8 Big Trends for 2026",
+      "category": "ARTICLE",
+      "description": "As blockchain infrastructure matures and regulation becomes clearer, tokenization is moving from experimentation to execution. Once confined to crypto-native circles, the tokenization of real-world assets (RWAs) is now firmly on the radar of banks, asset managers, real estate developers, governme…",
+      "url": "https://www.t-rize.io/news/tokenization-8-big-trends-for-2026",
+      "published_at": "2025-12-29T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/2aqVoR8NBwcEzofCbyJk46/2b87a70602006f51985f88de42e71346/istockphoto-871717412-612x612.jpg?w=800"
+    },
+    {
+      "title": "T-RIZE Strategically Collaborates with Republic and Canton to Launch the First New Construction Real Estate Equity Tokenization Deal on Canton Network, phase one of a $200M plan ​",
+      "category": "NEWS",
+      "description": "New York, United States — October 30, 2025​T-RIZE Group has structured for tokenization a new-construction equity offering from Canada, now live for subscription on Republic for U.S. accredited (Reg D) and other eligible international investors. The offering represents the first tranche of a US$2…",
+      "url": "https://www.t-rize.io/news/t-rize-strategically-collaborates-with-republic-and-canton-to-launch-the-first",
+      "published_at": "2025-10-30T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/17HofInxJERhfnj8qEYJ68/8e94188931e23ea196037c3359de906b/30ff04_2f4fc94bb575458f931345a410f439e6-mv2.jpg?w=800"
+    },
+    {
+      "title": "Canada Backs Advanced Tokenization and Distributed Federated Learning Research with Over $3 Million in Funding",
+      "category": "NEWS",
+      "description": "Montréal, Canada — [Oct 16, 2025] — T-RIZE Group and École de technologie supérieure (ÉTS) are proud to announce that the Industrial Research Chair in Tokenization, established in 2024 under the leadership of Professor Kaiwen Zhang, has secured over CAD $3 million over five years in contributions…",
+      "url": "https://www.t-rize.io/news/canada-backs-advanced-tokenization-and-distributed-federated-learning-research",
+      "published_at": "2025-10-16T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/27sbgLuBFPVgljfonuKOMh/405be8778dce36e4ce1c6fe5a1e5803d/canada.jpeg?w=800"
+    },
+    {
+      "title": "T-RIZE Group Strengthens Leadership with Institutional Tokenization of Structured Financial Products on Canton Network",
+      "category": "NEWS",
+      "description": "New York, USA – [July 23, 2025 ] – T-RIZE Group, a Canadian fintech firm specializing in institutional-grade tokenization, is deepening its integration with the Canton Network as a validator node operator, active builder of tokenization projects, and one of the first entities to issue and manage …",
+      "url": "https://www.t-rize.io/news/t-rize-group-strengthens-leadership-with-institutional-tokenization-of",
+      "published_at": "2025-07-23T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/3leRaE1VzSAoSi2g6hjVjy/816780d8129991be187edf94a2523d35/Partner_Wint_copy_2x.png?w=800"
+    },
+    {
+      "title": "T-RIZE Joins Flower Pilot Program to Deliver a Production-Grade Blueprint for Token-based Privacy-Preserving AI",
+      "category": "NEWS",
+      "description": "Montreal, Canada – June 25, 2025 – T-RIZE Group, a leader in Tokenization and privacy-preserving artificial intelligence, is proud to announce its participation in the Flower Pilot Program, a three-month initiative to advance federated learning innovation. Through this program, T-RIZE will develo…",
+      "url": "https://www.t-rize.io/news/t-rize-joins-flower-pilot-program-to-deliver-a-production-grade-blueprint-for",
+      "published_at": "2025-06-25T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/7Gvb3UPwfwo8efrJpX25Qo/9400e8dd91494ce1449b8faf9882f53c/30ff04_ca0edbe19cd84396b25a66f0f3c03968-mv2.jpg?w=800"
+    },
+    {
+      "title": "T-RIZE Joins the Global Synchronizer Foundation to Accelerate Tokenization and Institutional Blockchain Adoption",
+      "category": "NEWS",
+      "description": "The Global Synchronizer Foundation (GSF) is proud to welcome T-RIZE, a pioneer in real-world asset tokenization and on chain machine learning, as its newest member. This partnership marks a pivotal step in driving forward interoperable, institution-ready digital asset infrastructure across the Ca…",
+      "url": "https://www.t-rize.io/news/t-rize-joins-the-global-synchronizer-foundation-to-accelerate-tokenization-and",
+      "published_at": "2025-06-01T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/4zNRW0xMFNF8TevCn6guxT/9f353f1f2e85a81d98fb10a723e4ec2c/Partner_Wint_copy_9_2x.png?w=800"
+    },
+    {
+      "title": "Building the Next Layer of Global Finance",
+      "category": "ARTICLE",
+      "description": "For years, tokenization occupied a marginal corner of finance, an intriguing experiment rather than a core market mechanism. That is now changing. As digital infrastructure matures and regulators in major jurisdictions clarify legal frameworks, the tokenization of real-world assets is graduating …",
+      "url": "https://www.t-rize.io/news/building-the-next-layer-of-global-finance",
+      "published_at": "2025-01-20T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/1N3BH5xPotPXZcMYYCm3U1/52a695d91dc84608bddba8dd4e725039/modern-empty-office-room-large-glass-wall-city-skyline-view-concrete-interior-shiny-floor-ceiling-no-people-inside-urban-410.jpg?w=800"
+    },
+    {
+      "title": "Who Tokenization Is For",
+      "category": "INTRO",
+      "description": "Use cases, not hypeTokenization is not a universal solution. It is most effective when applied to specific needs and operating environments.This page explains who typically benefits from tokenization and why.Issuers and asset originatorsTokenization is relevant for organizations that issue or ori…",
+      "url": "https://www.t-rize.io/news/who-tokenization-is-for",
+      "published_at": "2025-01-01T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/uC1N6MLDNHRarqnnnCU8Z/597d4a194d1d98ee575e6447f47934ae/istockphoto-2163519478-612x612.jpg?w=800"
+    },
+    {
+      "title": "Where T-RIZE Fits",
+      "category": "INTRO",
+      "description": "Infrastructure for trusted digital issuanceTokenization requires more than technology. It requires reliable infrastructure that supports governance, compliance, and long-term operations.This is where T-RIZE fits.An infrastructure role, not a product roleT-RIZE does not issue assets, promote inves…",
+      "url": "https://www.t-rize.io/news/where-t-rize-fits",
+      "published_at": "2025-01-01T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/7IiMwLnSVI4jUsUQxVQstc/e923d2eda461de065029e61ab931ace4/silhouette-business-people-discussion-meeting-cityscape-team-concept_53876-146187.avif?w=800"
+    },
+    {
+      "title": "Tokenization vs Traditional Asset Issuance",
+      "category": "INTRO",
+      "description": "What changes…and what doesn’tTokenization is often presented as something radically new.\nIn reality, it is best understood as an evolution of existing issuance processes, not a replacement of financial fundamentals.This page explains what truly changes with tokenization, and what remains exactly …",
+      "url": "https://www.t-rize.io/news/tokenization-vs-traditional-asset-issuance",
+      "published_at": "2025-01-01T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/55DFYGmoREhSwToOPzhVNm/8dd7a9882f4184738ce9c439ff517b2b/istockphoto-1521709857-612x612.jpg?w=800"
+    },
+    {
+      "title": "Tokenization & Compliance",
+      "category": "INTRO",
+      "description": "Designed for regulated environmentsTokenization does not replace regulation. It must operate within existing legal and regulatory frameworks.This page explains how tokenization and compliance work together, and why governance and controls are essential to any credible digital issuance.Tokenizatio…",
+      "url": "https://www.t-rize.io/news/tokenization-and-compliance",
+      "published_at": "2025-01-01T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/1RyPh2fKKn3ZYBqVh13mAT/4651df794058e90d1a0de26135c9b0b0/images.jpeg?w=800"
+    },
+    {
+      "title": "The Role of Infrastructure",
+      "category": "INTRO",
+      "description": "Why infrastructure matters more than innovationTokenization is often discussed in terms of innovation. In practice, infrastructure is what determines whether tokenization succeeds or fails.This page explains why strong digital infrastructure is essential for reliable, compliant, and scalable asse…",
+      "url": "https://www.t-rize.io/news/the-role-of-infrastructure",
+      "published_at": "2025-01-01T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/2ycFLZ9TycMT7UY6JiHH5E/7806219337fa88d017c7518531327907/istockphoto-1140524542-612x612.jpg?w=800"
+    },
+    {
+      "title": "Common Misconceptions About Tokenization",
+      "category": "INTRO",
+      "description": "Separating facts from assumptionsTokenization is often discussed using language borrowed from emerging technologies and speculative markets. This has created confusion, particularly in institutional and regulated environments.This page addresses the most common misconceptions and clarifies what t…",
+      "url": "https://www.t-rize.io/news/common-misconceptions-about-tokenization",
+      "published_at": "2025-01-01T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/2X2x3Ky79ojXLyyzXzas3X/91a5b917e01cddfb9407997be23cc752/workspace-intensely-detailed-3d-rendering-of-bright-in-abstract-office-interior_9850685.jpg_bw700?w=800"
+    },
+    {
+      "title": "Digital Bonds Explained",
+      "category": "INTRO",
+      "description": "What makes a bond “digital”, and what doesn’tDigital bonds are often misunderstood. Despite the terminology, a digital bond is not a new type of financial instrument. It is a traditional bond that uses digital infrastructure to improve how it is issued and managed.This page explains what digital …",
+      "url": "https://www.t-rize.io/news/digital-bonds-explained",
+      "published_at": "2025-01-01T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/65Kd5ZQIAACJpsWbx1DfCd/ab5360ba8d731df70fc8f6ef6d4f4b6d/free-photo-of-the-space-needle-is-seen-in-the-background-of-a-city.jpeg?w=800"
+    },
+    {
+      "title": "Retrospective 2024 and Outlook for 2025: T-RIZE Group Leading the Tokenization Revolution",
+      "category": "NEWS",
+      "description": "2024: A Breakthrough Year for Tokenization​The year 2024 marked a turning point for tokenization, redefining global finance. Onchain tokenized assets, excluding stablecoins, surpassed $15 billion—a remarkable 80% growth from 2023—while stablecoins exceeded $200 billion in market capitalization. A…",
+      "url": "https://www.t-rize.io/news/retrospective-2024-and-outlook-for-2025-t-rize-group-leading-the-tokenization",
+      "published_at": "2024-12-31T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/1DIO1RCPqCHphy44HEreBD/8d5ffbe2661e946c1d89fec20766f8ec/30ff04_1fed5e2afcfc4bc289a18d1fee0b8d96-mv2.jpg?w=800"
+    },
+    {
+      "title": "T-RIZE Group : Une solution innovante pour répondre à la crise du logement au Québec en simplifiant l’accès aux capitaux internationaux pour les promoteurs immobiliers",
+      "category": "NEWS",
+      "description": "Montréal, Québec – 17 décembre 2024 – Face à la crise du logement qui touche actuellement le Québec, T-RIZE Group lance une plateforme de financement révolutionnaire destinée à aider les promoteurs immobiliers québécois à accéder plus facilement aux capitaux internationaux. Cette initiative perme…",
+      "url": "https://www.t-rize.io/news/t-rize-group-une-solution-innovante-pour-repondre-a-la-crise-du-logement-au",
+      "published_at": "2024-12-17T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/2lN2pFS3uN2qV0rFEUmJOd/b844524cbd225d6f0133aed4dc7875c1/11062b_cc5dd9de1e514191958ddc16167e17d1-mv2.jpg?w=800"
+    },
+    {
+      "title": "T-RIZE Group secure a $300M tokenization deal, supercharging a $2B Global pipeline and redefining decarbonized, institutional-grade Real World Asset (RWA) investments",
+      "category": "NEWS",
+      "description": "Redefining Construction and Real Estate Investment Through Tokenization​Montreal, Canada - Dec 17, 2024 – T-RIZE Group, a leader in Real World Asset (RWA) tokenization, has entered into a strategic agreement for a $300 million deal to tokenize Project Champfleury, a transformative 960-unit reside…",
+      "url": "https://www.t-rize.io/news/t-rize-group-secure-a-300m-tokenization-deal-supercharging-a-2b-global-pipeline",
+      "published_at": "2024-12-17T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/3QLjJRbuUi1Mz8HCv8g1SJ/ac81791e30c48c9e3b4475ccc91fecff/30ff04_7ffa4ff9e8164a0fab694531867b2d67-mv2.jpg?w=800"
+    },
+    {
+      "title": "T-RIZE Group Integrates with Chainlink to Enhance Cross-Chain Interoperability and Asset Verification for Tokenized Assets Enhanced with Onchain Intelligence",
+      "category": "NEWS",
+      "description": "New York, November 5, 2024T-RIZE Group Integrates with Chainlink to Enhance Cross-Chain Interoperability and Asset Verification for Tokenized Assets Enhanced with Onchain Intelligence​T-RIZE Group, a leading innovator in real-world asset (RWA) tokenization, is enhancing interoperability and asset…",
+      "url": "https://www.t-rize.io/news/t-rize-group-integrates-with-chainlink-to-enhance-cross-chain-interoperability",
+      "published_at": "2024-11-05T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/6xiP6zq1lFLfTFK4uqQmY2/225d65f7b6601880df38acfe0300fd25/Partner_Wint_copy_2_2x.png?w=800"
+    },
+    {
+      "title": "T-RIZE Group Strengthens Platform Security with Successful Hashlock Smart Contract Audit",
+      "category": "NEWS",
+      "description": "Montreal, September 25, 2024T-RIZE Group Strengthens Platform Security with Successful Hashlock Smart Contract Audit​​T-RIZE Group proudly announces that Hashlock, a leader in Web3 security, has successfully completed a comprehensive audit of decentralized smart contracts for Rizenet and the $RIZ…",
+      "url": "https://www.t-rize.io/news/t-rize-group-strengthens-platform-security-with-successful-hashlock-smart",
+      "published_at": "2024-09-25T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/1T6xzitkaX96ZJjmODoBo6/1c58f4751789e3eb34575343e036b660/Partner_Wint_copy_4_2x.png?w=800"
+    },
+    {
+      "title": "T-RIZE Group and Texture Capital Announce Strategic Partnership to Unlock U.S. Market Liquidity",
+      "category": "NEWS",
+      "description": "New York, July 23, 2024T-RIZE Group and Texture Capital Announce Strategic Partnership to Unlock U.S. Market LiquidityNew York, NY – T-RIZE Group, a blockchain powered tokenization and fundraising solution for sports clubs, real estate assets, private credit, carbon credit structures and other fi…",
+      "url": "https://www.t-rize.io/news/t-rize-group-and-texture-capital-announce-strategic-partnership-to-unlock-u-s",
+      "published_at": "2024-07-23T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/2ob1b8y7X64joMwT6HSpRK/87ff0aca359d93c66aff8afd91f2fe0d/Partner_Wint_copy_3_2x.png?w=800"
+    },
+    {
+      "title": "T-RIZE Group Integrates with Fireblocks for Enhanced Digital Asset Security",
+      "category": "NEWS",
+      "description": "​​T-RIZE Group Integrates Fireblocks to Revolutionize Digital Asset Security​Montreal, March 15, 2024T-RIZE Group, a pioneering force in blockchain technology and asset tokenization, is excited to announce our integration of Fireblocks, an industry leader in digital asset security and blockchain-…",
+      "url": "https://www.t-rize.io/news/t-rize-group-integrates-with-fireblocks-for-enhanced-digital-asset-security",
+      "published_at": "2024-03-15T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/1deNUDZUeKsB6B9Yv2WmkD/3c26952e00609845387853c5431678aa/Partner_Wint_copy_5_2x.png?w=800"
+    },
+    {
+      "title": "T-RIZE Group Integrates Groundbreaking AI-Driven Capabilities",
+      "category": "NEWS",
+      "description": "Montreal, December 18, 2023​T-RIZE Group Integrates Groundbreaking AI-Driven Capabilities​T-RIZE Group, a leader in real estate tokenization solutions, is proud to announce the integration of advanced AI-driven capabilities into our platform. This significant enhancement accelerates the asset lis…",
+      "url": "https://www.t-rize.io/news/t-rize-group-integrates-groundbreaking-ai-driven-capabilities",
+      "published_at": "2023-12-18T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/NgFVc6nhGVCKq52p7kny0/294d12012c8de3b4a35e11f92a0aa444/nsplsh_a0fd11a9ef0c4c5f8fe821b6573619d5mv2.jpg?w=800"
+    },
+    {
+      "title": "T-RIZE Group Announces Groundbreaking Integration with Base Blockchain Powered by Coinbase",
+      "category": "NEWS",
+      "description": "Montreal, November 14 2023T-RIZE Group, a leader in blockchain real estate solutions, today unveiled the world's first real estate tokenization platform integrated with Base Blockchain. This innovative move follows the successful creation of T-RIZE's own Institutional-Grade Hybrid Blockchain, mar…",
+      "url": "https://www.t-rize.io/news/t-rize-group-announces-groundbreaking-integration-with-base-blockchain-powered",
+      "published_at": "2023-11-14T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/1b0Hk72uKIc3XfZzQFvgb7/9d4a38c233ba1dece54da501f34b5830/Partner_Wint_copy_6_2x.png?w=800"
+    },
+    {
+      "title": "ETS and T-Rize Group Announce a New Industrial Research Chair in Blockchain Technology",
+      "category": "NEWS",
+      "description": "Montreal, November 2nd 2023​ETS and T-Rize Group Announce a New Industrial Research Chair in Blockchain Technology​École de technologie supérieure (ETS) has joined forces with the T-Rize Group to establish the T-Rize Industrial Research Chair in Blockchain Technologies. This partnership seeks to …",
+      "url": "https://www.t-rize.io/news/ets-and-t-rize-group-announce-a-new-industrial-research-chair-in-blockchain",
+      "published_at": "2023-11-02T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/5VO7iqgplXzuYpGGXfEOaR/f666931df14a6af1b8ba39258487d261/Partner_Wint_copy_7_2x.png?w=800"
+    },
+    {
+      "title": "T-RIZE Group Strengthens Its Position with New Strategic Appointment and Toronto Office Opening in the Financial District",
+      "category": "NEWS",
+      "description": "Toronto, ON, 24th October 2023\n T-RIZE Group Strengthens Its Position with New Strategic Appointment and Toronto Office Opening in the Financial DistrictT-RIZE Group is gaining traction in the asset tokenization sector and proudly announces the appointment of Mr. Etienne Phaneuf as Strategic Advi…",
+      "url": "https://www.t-rize.io/news/t-rize-group-strengthens-its-position-with-new-strategic-appointment-and-toronto",
+      "published_at": "2023-10-24T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/4BcY8IOj7ZP1YWuRZ23pVw/f07d8e3734389b9c815ccd199334ba07/fd245a_13d160507ec746f4b08e266d996f94e4mv2.jpg?w=800"
+    },
+    {
+      "title": "Dr. Yahya Shahsavari Joins T-RIZE Group as Director of AI and Blockchain Integration",
+      "category": "NEWS",
+      "description": "Montreal, 16th October 2023​Dr. Yahya Shahsavari Joins T-RIZE Group as Director of AI and Blockchain Integration​T-RIZE Group announces the strategic appointment of Dr. Yahya Shahsavari as Director of AI and Blockchain Integration. Dr. Shahsavari, with his substantial expertise in artificial inte…",
+      "url": "https://www.t-rize.io/news/dr-yahya-shahsavari-joins-t-rize-group-as-director-of-ai-and-blockchain",
+      "published_at": "2023-10-16T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/3Fglm2y7LoR6kvcxPrT930/fc847754f3a32a7cdf2a3122444ef6eb/29ef6f_18f5de42a659469791fb92dbe96aa904mv2.jpg?w=800"
+    },
+    {
+      "title": "Ekitas and T-RIZE Group Announce Strategic Partnership to Revolutionize Real Estate Markets",
+      "category": "NEWS",
+      "description": "Montreal, 3rd October 2023​Ekitas and T-RIZE Group Announce Strategic Partnership to Revolutionize Real Estate Markets​We are delighted to announce a strategic partnership between Ekitas and the T-RIZE Group | Digital Technologies Group!T-Rize Group Corporation is a leader in the tokenization of …",
+      "url": "https://www.t-rize.io/news/ekitas-and-t-rize-group-announce-strategic-partnership-to-revolutionize-real",
+      "published_at": "2023-10-03T00:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/ztPhtsPcDZhRs9c8XHB9Q/c24136f147dbe4c0eb1bd8ddd7bf1749/Ekitas_2x.png?w=800"
+    }
+  ]
+}
