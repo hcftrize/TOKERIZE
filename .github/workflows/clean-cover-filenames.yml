@@ -1,0 +1,55 @@
+name: Clean Canton News Cover Filenames
+
+# One-off / as-needed cleanup: Photoshop's Batch "Save As" sometimes has
+# "As a Copy" ticked, which appends " copy" to every output filename
+# (e.g. "27w1 copy.jpg" instead of "27w1.jpg"). news/cantonarticles.json
+# always points at the clean name ("/assets/news/canton/27w1.jpg"), so any
+# stray " copy" file is invisible on the site until it's renamed back.
+#
+# Run this manually (Actions tab > this workflow > Run workflow) any time
+# after uploading a fresh batch of covers into assets/news/canton/ — it
+# strips " copy" from every matching filename in that folder and commits
+# the rename. Safe to re-run: files already named correctly are skipped,
+# and it never overwrites an existing clean file.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Strip " copy" from cover filenames
+        run: |
+          cd assets/news/canton
+          shopt -s nullglob
+          renamed=0
+          skipped=0
+          for f in *" copy"*; do
+            new="${f// copy/}"
+            if [ "$f" = "$new" ]; then
+              continue
+            fi
+            if [ -e "$new" ]; then
+              echo "skip: $f -> $new (target already exists)"
+              skipped=$((skipped+1))
+              continue
+            fi
+            git mv "$f" "$new"
+            echo "renamed: $f -> $new"
+            renamed=$((renamed+1))
+          done
+          echo "Renamed $renamed file(s), skipped $skipped."
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --staged --quiet && echo "No changes to commit." || git commit -m "chore: strip stray 'copy' suffix from Canton News cover filenames"
+          git push origin HEAD:${{ github.ref_name }}
