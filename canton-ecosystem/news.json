@@ -1,7 +1,168 @@
 {
-  "updated_at": "2026-09-30T06:32:34+00:00",
-  "count": 411,
+  "updated_at": "2026-10-01T06:33:00+00:00",
+  "count": 434,
   "articles": [
+    {
+      "title": "Canton reaches 908,000 transacting parties in The Tie’s data",
+      "category": "ECOSYSTEM",
+      "description": "The cumulative number of distinct parties that have transacted on Canton has risen from 20,000 a year earlier to 908,000.",
+      "url": "https://cantonnews.org/canton-reaches-908-000-transacting-parties-in-the-tie-s-data",
+      "published_at": "2026-10-01T05:49:09.784+00:00"
+    },
+    {
+      "title": "Canborsa adds clearer market data and trade controls",
+      "category": "ECOSYSTEM",
+      "description": "Canborsa’s latest update brings prices, market changes and collateral choices closer to the point where users open a trade.",
+      "url": "https://cantonnews.org/canborsa-adds-clearer-market-data-and-trade-controls",
+      "published_at": "2026-10-01T05:48:57.334+00:00"
+    },
+    {
+      "title": "Console, Cantex and OneSwap receive Canton settlement recognition",
+      "category": "ECOSYSTEM",
+      "description": "Tokenomics has approved delivery-versus-payment treatment for qualifying trades on the three venues under Canton’s Featured App reward guidance.",
+      "url": "https://cantonnews.org/console-cantex-and-oneswap-receive-canton-settlement-recognition",
+      "published_at": "2026-10-01T05:48:50.15+00:00"
+    },
+    {
+      "title": "Seoul forum brings Korean institutions together around Canton plans",
+      "category": "INSTITUTIONS",
+      "description": "Shinhan Asset Management outlined its Canton strategy as financial institutions and infrastructure firms discussed preparations for production use.",
+      "url": "https://cantonnews.org/seoul-forum-brings-korean-institutions-together-around-canton-plans",
+      "published_at": "2026-10-01T05:48:41.014+00:00"
+    },
+    {
+      "title": "Kintsu previews lending and CC staking for its Canton private beta",
+      "category": "TECHNOLOGY",
+      "description": "The first beta wave will let participants supply USDC, borrow against Canton Coin and submit CC staking requests, then help refine the experience.",
+      "url": "https://cantonnews.org/kintsu-previews-lending-and-cc-staking-for-its-canton-private-beta",
+      "published_at": "2026-10-01T05:48:34.976+00:00"
+    },
+    {
+      "title": "SBI VC Trade offers Canton Coin rebates on recurring purchases",
+      "category": "ECOSYSTEM",
+      "description": "A VCTRADE campaign covers spread costs on eligible recurring purchases of Canton Coin, with rebates paid later in crypto.",
+      "url": "https://cantonnews.org/sbi-vc-trade-offers-canton-coin-rebates-on-recurring-purchases",
+      "published_at": "2026-10-01T05:48:27.2+00:00"
+    },
+    {
+      "title": "Temple passes $1 billion in trading volume on Canton",
+      "category": "ECOSYSTEM",
+      "description": "Temple’s trading engine has processed more than $1 billion in volume, following an upgrade that expanded its order and settlement capacity.",
+      "url": "https://cantonnews.org/temple-passes-1-billion-in-trading-volume-on-canton",
+      "published_at": "2026-10-01T05:48:19.699+00:00"
+    },
+    {
+      "title": "C7 launches a searchable directory of Canton organisations",
+      "category": "TECHNOLOGY",
+      "description": "The public 7TRUST directory lets readers search by organisation, domain or Party ID and filter entries by credentials and network roles.",
+      "url": "https://cantonnews.org/c7-launches-a-searchable-directory-of-canton-organisations",
+      "published_at": "2026-10-01T05:48:09.617+00:00"
+    },
+    {
+      "title": "Lloyds and Visa settle $750,000 in stablecoin pilot involving Canton",
+      "category": "INSTITUTIONS",
+      "description": "A seven-day trial moved USDC to Visa in under an hour, including over the weekend, with Lloyds using its own Canton node.",
+      "url": "https://cantonnews.org/lloyds-and-visa-settle-750-000-in-stablecoin-pilot-involving-canton",
+      "published_at": "2026-10-01T05:48:03.127+00:00"
+    },
+    {
+      "title": "Mirae Asset Securities among 60 approved Canton validator operators",
+      "category": "INSTITUTIONS",
+      "description": "Canton’s latest validator approvals include Mirae Asset Securities, Ankr Labs and Rome Protocol. MainNet access follows a separate allocation process.",
+      "url": "https://cantonnews.org/mirae-asset-securities-among-60-approved-canton-validator-operators",
+      "published_at": "2026-10-01T05:47:48.753+00:00"
+    },
+    {
+      "title": "Société Générale clears Canton tokenized-collateral milestone",
+      "category": "INSTITUTIONS",
+      "description": "Tokenomics has approved completion of Société Générale’s first CIP-0115 milestone, covering acceptance of tokenized assets as collateral on Canton.",
+      "url": "https://cantonnews.org/soci-t-g-n-rale-clears-canton-tokenized-collateral-milestone",
+      "published_at": "2026-10-01T05:47:30.602+00:00"
+    },
+    {
+      "title": "Canton proposal would make Super Validator reward weights easier to track",
+      "category": "TECHNOLOGY",
+      "description": "A draft proposes recording individual reward-right holders and their allocations on the ledger, replacing information held in operator configurations.",
+      "url": "https://cantonnews.org/canton-proposal-would-make-super-validator-reward-weights-easier-to-track",
+      "published_at": "2026-10-01T05:47:21.68+00:00"
+    },
+    {
+      "title": "Canton: The Orchestrator of This Institutional Masterpiece",
+      "category": "INSTITUTIONS",
+      "description": "Canton Network is rapidly connecting traditional finance with blockchain infrastructure. From major institutions and tokenized assets to expanding trading platforms and applications, Canton is building an ecosystem designed for real financial activity. The bigger story is how these pieces are beginning to work together on one global network.",
+      "url": "https://cantonnews.org/canton-the-orchestrator-of-this-institutional-masterpiece",
+      "published_at": "2026-09-30T14:26:35.273548+00:00"
+    },
+    {
+      "title": "Kaiko Deploys First Institutional-Grade Oracle on Zenith Testnet, Canton's Native EVM Extension",
+      "category": "ECOSYSTEM",
+      "description": "Ethereum applications deployed on Zenith gain regulated, multi-asset pricing data from Kaiko, the institutional data provider already trusted across Canton, Hyperliquid, and Wall Street's own Bloomberg Terminal.",
+      "url": "https://cantonnews.org/kaiko-deploys-first-institutional-grade-oracle-on-zenith-testnet-canton-s-native-evm-extension",
+      "published_at": "2026-09-30T11:34:57.124821+00:00"
+    },
+    {
+      "title": "ScopeX seeks Canton Featured App status for automated remittances",
+      "category": "TECHNOLOGY",
+      "description": "ScopeX is developing a Canton service that sends money to India when a chosen exchange rate is reached. Its Featured App application outlines a TestNet product and plans for a MainNet rollout.",
+      "url": "https://cantonnews.org/scopex-seeks-canton-featured-app-status-for-automated-remittances",
+      "published_at": "2026-09-30T11:01:18.495+00:00"
+    },
+    {
+      "title": "Kairo and Askardex launch a 10,000 CC trading campaign",
+      "category": "ECOSYSTEM",
+      "description": "The campaign runs from September 30 to October 9 UTC, with separate reward pools for qualifying swaps and trading activity across multiple days.",
+      "url": "https://cantonnews.org/kairo-and-askardex-launch-a-10-000-cc-trading-campaign",
+      "published_at": "2026-09-30T10:58:01.445+00:00"
+    },
+    {
+      "title": "Upflam prepares a privacy pool for Canton payments",
+      "category": "TECHNOLOGY",
+      "description": "Upflam is developing a deposit pool to make payment relationships harder to trace and has invited participants to help with its cryptographic setup ahead of launch.",
+      "url": "https://cantonnews.org/upflam-prepares-a-privacy-pool-for-canton-payments",
+      "published_at": "2026-09-30T10:54:38.246+00:00"
+    },
+    {
+      "title": "Canton puts connected markets at the heart of its KBW keynote",
+      "category": "INSTITUTIONS",
+      "description": "Canton Foundation president Viv Diwakar used Korea Blockchain Week to explain how tokenized assets could become more useful when institutions can trade and settle across connected systems.",
+      "url": "https://cantonnews.org/canton-puts-connected-markets-at-the-heart-of-its-kbw-keynote",
+      "published_at": "2026-09-30T10:50:28.629+00:00"
+    },
+    {
+      "title": "Digital Asset adds transfer verification on Canton, with Bybit integrated",
+      "category": "TECHNOLOGY",
+      "description": "DA Registry’s Proof of Transfer API lets users check a private asset transfer’s status through compatible explorers. Bybit and DA Registry have already integrated it.",
+      "url": "https://cantonnews.org/digital-asset-adds-transfer-verification-on-canton-with-bybit-integrated",
+      "published_at": "2026-09-30T10:48:06.964+00:00"
+    },
+    {
+      "title": "Five North and Loop separate their brands as Loop Suite launches",
+      "category": "TECHNOLOGY",
+      "description": "Cantonloop becomes Loop Wallet and Lighthouse becomes Loop Data under the new Loop Suite. Existing wallets and balances stay unchanged, and moving to the new wallet domain is optional.",
+      "url": "https://cantonnews.org/five-north-and-loop-separate-their-brands-as-loop-suite-launches",
+      "published_at": "2026-09-30T10:45:05.19+00:00"
+    },
+    {
+      "title": "Canton awards another batch of MainNet validator allocations",
+      "category": "TECHNOLOGY",
+      "description": "A new allocation notice names 43 distinct organisations, including Upflam, Bayzen Tech, STAKR.space and Lo:Tech. The awards are issued in line with network capacity and health assessments.",
+      "url": "https://cantonnews.org/canton-awards-another-batch-of-mainnet-validator-allocations",
+      "published_at": "2026-09-30T10:42:29.522+00:00"
+    },
+    {
+      "title": "Slay Money proposes stablecoin settlement for Canton prediction markets",
+      "category": "ECOSYSTEM",
+      "description": "Slay Money wants to pair prediction stakes with a dollar stablecoin when a bet is placed, reducing exposure to CC or cBTC price changes before the outcome is settled.",
+      "url": "https://cantonnews.org/slay-money-proposes-stablecoin-settlement-for-canton-prediction-markets",
+      "published_at": "2026-09-30T10:40:55.155+00:00"
+    },
+    {
+      "title": "Cardiv seeks Canton recognition for its trading settlement model",
+      "category": "ECOSYSTEM",
+      "description": "WolfEdge Labs has requested delivery-versus-payment recognition for Cardiv, an exchange designed to keep assets in users’ custody and settle both sides of a matched trade together.",
+      "url": "https://cantonnews.org/cardiv-seeks-canton-recognition-for-its-trading-settlement-model",
+      "published_at": "2026-09-30T10:38:28.22+00:00"
+    },
     {
       "title": "SyncVotes renews Featured App request after its v2 upgrade",
       "category": "TECHNOLOGY",
