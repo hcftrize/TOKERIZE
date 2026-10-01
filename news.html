@@ -55,6 +55,12 @@ body{font-family:'Rajdhani',sans-serif;background:var(--white);color:var(--text)
 .section-label{display:flex;align-items:center;gap:14px;margin:52px 0 28px;}
 .section-label span{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--navy);}
 .section-label::after{content:"";flex:1;height:1px;background:var(--border);}
+.news-tabs{display:flex;flex-wrap:wrap;margin:44px 0 36px;border:1px solid var(--border);}
+.news-tab{flex:1;min-width:140px;background:var(--white);border:none;border-right:1px solid var(--border);padding:16px 10px;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);cursor:pointer;transition:background 0.2s,color 0.2s;}
+.news-tab:last-child{border-right:none;}
+.news-tab:hover{background:var(--off);}
+.news-tab.active{background:var(--navy);color:#fff;}
+.news-tab .tab-count{font-family:'DM Mono',monospace;font-weight:400;opacity:0.7;margin-left:3px;}
 .featured{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);margin-bottom:48px;}
 .featured-img{background:#111;overflow:hidden;min-height:320px;}
 .featured-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.9;transition:opacity 0.3s;}
@@ -83,7 +89,7 @@ body{font-family:'Rajdhani',sans-serif;background:var(--white);color:var(--text)
 .article-card-meta{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border);}
 .news-empty{font-family:'DM Mono',monospace;font-size:14px;color:var(--muted);padding:40px 0;text-align:center;}
 @media(max-width:900px){.featured{grid-template-columns:1fr;}.featured-body{border-left:none;border-top:1px solid var(--border);padding:24px;}.article-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:600px){.hero{padding:48px 16px 40px;}.article-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){.hero{padding:48px 16px 40px;}.article-grid{grid-template-columns:1fr;}.news-tabs{flex-direction:column;}.news-tab{border-right:none;border-bottom:1px solid var(--border);}.news-tab:last-child{border-bottom:none;}}
 
 
 /* ═══════════════════════════════════════════════
@@ -181,6 +187,12 @@ html, body { overflow-x: hidden; max-width: 100%; }
   </div>
 </div>
 <div class="wrap">
+  <div class="news-tabs" id="news-tabs">
+    <button class="news-tab active" data-source="tokerize">Tokerize Editorial <span class="tab-count" id="count-tokerize"></span></button>
+    <button class="news-tab" data-source="t-rize">T-RIZE News <span class="tab-count" id="count-t-rize"></span></button>
+    <button class="news-tab" data-source="canton">Canton News <span class="tab-count" id="count-canton"></span></button>
+    <button class="news-tab" data-source="all">All <span class="tab-count" id="count-all"></span></button>
+  </div>
   <div id="news-featured"></div>
   <div id="news-grid" class="article-grid"></div>
   <div id="news-empty" class="news-empty" style="display:none">No articles yet — check back soon.</div>
@@ -202,17 +214,42 @@ function esc(s){
   d.textContent=s||'';
   return d.innerHTML;
 }
-fetch('/articles.json').then(r=>r.json()).then(articles=>{
-  if(!Array.isArray(articles)||articles.length===0){
-    document.getElementById('news-empty').style.display='block';
+
+// Each source is one catalog JSON under /news/, rendered by generate_news.py
+// into news/<folder>/<slug>.html. trizearticles.json doesn't exist yet (no
+// scraper built) — fetch() failing or 404ing on it just yields an empty
+// list for that source, no error shown.
+const SOURCES = [
+  {key:'tokerize', label:'Tokerize Editorial', file:'/news/tokerizearticles.json', folder:'tokerize'},
+  {key:'t-rize',   label:'T-RIZE News',        file:'/news/trizearticles.json',    folder:'t-rize'},
+  {key:'canton',   label:'Canton News',        file:'/news/cantonarticles.json',   folder:'canton'},
+];
+
+let allArticles = [];
+let activeTab = 'tokerize';
+
+function render(){
+  const list = activeTab === 'all'
+    ? allArticles
+    : allArticles.filter(a => a._source === activeTab);
+  const sorted = [...list].sort((a,b) => new Date(b.date) - new Date(a.date));
+
+  const featuredEl = document.getElementById('news-featured');
+  const gridEl = document.getElementById('news-grid');
+  const emptyEl = document.getElementById('news-empty');
+
+  if(sorted.length === 0){
+    featuredEl.innerHTML = '';
+    gridEl.innerHTML = '';
+    emptyEl.textContent = 'No articles yet in this section — check back soon.';
+    emptyEl.style.display = 'block';
     return;
   }
-  const sorted=[...articles].sort((a,b)=>new Date(b.date)-new Date(a.date));
-  const [latest,...rest]=sorted;
+  emptyEl.style.display = 'none';
 
-  const featuredEl=document.getElementById('news-featured');
-  featuredEl.innerHTML=`
-    <a class="featured" href="/news/${esc(latest.slug)}" style="text-decoration:none;color:inherit;display:grid;">
+  const [latest, ...rest] = sorted;
+  featuredEl.innerHTML = `
+    <a class="featured" href="/news/${esc(latest._folder)}/${esc(latest.slug)}" style="text-decoration:none;color:inherit;display:grid;">
       <div class="featured-img"><img src="${esc(latest.image||'')}" alt="${esc(latest.title)}"/></div>
       <div class="featured-body">
         <div>
@@ -227,9 +264,8 @@ fetch('/articles.json').then(r=>r.json()).then(articles=>{
       </div>
     </a>`;
 
-  const gridEl=document.getElementById('news-grid');
-  gridEl.innerHTML=rest.map(a=>`
-    <a class="article-card" href="/news/${esc(a.slug)}" style="text-decoration:none;color:inherit;display:block;">
+  gridEl.innerHTML = rest.map(a => `
+    <a class="article-card" href="/news/${esc(a._folder)}/${esc(a.slug)}" style="text-decoration:none;color:inherit;display:block;">
       <div class="article-card-img"><img src="${esc(a.image||'')}" alt="${esc(a.title)}"/></div>
       <div class="article-card-body">
         <h3>${esc(a.title)}</h3>
@@ -240,6 +276,44 @@ fetch('/articles.json').then(r=>r.json()).then(articles=>{
         </div>
       </div>
     </a>`).join('');
+}
+
+function updateCounts(){
+  const counts = {};
+  SOURCES.forEach(s => counts[s.key] = 0);
+  allArticles.forEach(a => { counts[a._source] = (counts[a._source]||0) + 1; });
+  SOURCES.forEach(s => {
+    const el = document.getElementById(`count-${s.key}`);
+    if(el) el.textContent = `(${counts[s.key]})`;
+  });
+  document.getElementById('count-all').textContent = `(${allArticles.length})`;
+}
+
+function setActiveTab(key){
+  activeTab = key;
+  document.querySelectorAll('.news-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.source === key);
+  });
+  render();
+}
+
+document.getElementById('news-tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.news-tab');
+  if(!btn) return;
+  setActiveTab(btn.dataset.source);
+});
+
+Promise.allSettled(SOURCES.map(s =>
+  fetch(s.file).then(r => r.ok ? r.json() : [])
+)).then(results => {
+  results.forEach((res, i) => {
+    const src = SOURCES[i];
+    const data = (res.status === 'fulfilled' && Array.isArray(res.value)) ? res.value : [];
+    data.forEach(a => { a._source = src.key; a._folder = src.folder; });
+    allArticles = allArticles.concat(data);
+  });
+  updateCounts();
+  setActiveTab('tokerize');
 }).catch(()=>{
   document.getElementById('news-empty').textContent='Could not load articles right now.';
   document.getElementById('news-empty').style.display='block';
