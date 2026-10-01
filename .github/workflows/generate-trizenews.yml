@@ -6,7 +6,7 @@ name: Generate T-RIZE News Article
 # reasoning as the rest of the repo's workflows.
 #
 # generate_trizenews_articles.py does a full rebuild of every COMPLETE
-# period (month in the current year, whole year for every earlier year)
+# period (month from MONTHLY_FROM_YEAR onward, whole year before that)
 # found in trizedata/news.json each time it runs, so the very first run
 # bootstraps every missing period in one go, and every following monthly
 # run just adds whatever period newly became complete since last time —
@@ -21,13 +21,16 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          ref: dev
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Build the T-RIZE News catalog (news/trizearticles.json) from trizedata/news.json
         run: python scripts/generate_trizenews_articles.py
@@ -35,10 +38,27 @@ jobs:
       - name: Generate static pages (all collections)
         run: python scripts/generate_news.py
 
-      - name: Commit catalog + generated pages
+      - name: Commit and push to dev
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "trizenews-bot"
+          git config user.email "bot@tokerize.com"
           git add news/trizearticles.json news/t-rize/
-          git diff --staged --quiet && echo "No changes to commit." || git commit -m "chore: generate T-RIZE News article [skip ci]"
-          git push origin HEAD:${{ github.ref_name }}
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore: generate T-RIZE News article [skip ci]"
+            git push origin dev
+          fi
+
+      # No manual review step here on purpose, same reasoning as
+      # reindex-cantonnews.yml / generate-cantonnews.yml: the catalog and
+      # pages are fully derived from trizedata/news.json by a deterministic
+      # script, so every successful run auto-promotes straight to main.
+      - name: Push catalog + pages to main
+        run: |
+          git fetch origin main
+          git checkout main
+          git checkout dev -- news/trizearticles.json news/t-rize/
+          git add news/trizearticles.json news/t-rize/
+          git diff --staged --quiet || git commit -m "chore: generate T-RIZE News article — sync to main $(date -u +%Y-%m-%d) [skip ci]"
+          git push origin main
