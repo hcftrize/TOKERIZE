@@ -17,8 +17,8 @@
       "dest": "/news.html"
     },
     {
-      "src": "/news/([^/]+)",
-      "dest": "/news/$1.html"
+      "src": "/news/([^/]+)/([^/]+)",
+      "dest": "/news/$1/$2.html"
     },
     {
       "src": "/rize-data-hub",
