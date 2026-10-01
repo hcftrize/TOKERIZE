@@ -1,0 +1,42 @@
+name: Generate Canton News Weekly Article
+
+# Triggered externally (cron-job.org, same pattern as the rest of the
+# scraping/digest workflows) every Monday morning via workflow_dispatch —
+# no native `schedule:` here on purpose, matching the repo's convention.
+#
+# generate_cantonnews_articles.py does a full rebuild of every COMPLETE
+# week found in canton-ecosystem/news.json each time it runs, so the very
+# first run bootstraps every missing week in one go, and every following
+# Monday run just adds the one week that became complete since last time —
+# nothing special to do for "catch up" if a run is ever missed.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build the Canton News catalog (news/cantonarticles.json) from canton-ecosystem/news.json
+        run: python scripts/generate_cantonnews_articles.py
+
+      - name: Generate static pages (all collections)
+        run: python scripts/generate_news.py
+
+      - name: Commit catalog + generated pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add news/cantonarticles.json news/canton/
+          git diff --staged --quiet && echo "No changes to commit." || git commit -m "chore: generate Canton News weekly article [skip ci]"
+          git push origin HEAD:${{ github.ref_name }}
