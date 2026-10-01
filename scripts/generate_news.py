@@ -2,9 +2,25 @@
 """
 generate_news.py — Static pre-renderer for the Tokerize /news section.
 
-Reads articles.json (the single source of truth — same schema as before:
-slug, title, excerpt, date, image, content) and, for every entry, bakes a
-full standalone HTML page at news/<slug>.html using templates/article-template.html.
+Shared rendering engine for ALL news sources. Each source is a "collection":
+a catalog JSON file (list of {slug, title, excerpt, date, image, content} —
+content is trusted, author-supplied HTML) and an output subfolder. For every
+entry in every collection, this bakes a full standalone HTML page at
+news/<folder>/<slug>.html using templates/article-template.html.
+
+Collections today:
+  - news/tokerizearticles.json  -> news/tokerize/   (hand-written editorial,
+                                                       e.g. the monthly recap)
+  - news/cantonarticles.json    -> news/canton/      (auto-built weekly from
+                                                       canton-ecosystem/news.json
+                                                       by generate_cantonnews_articles.py)
+  - news/trizearticles.json     -> news/t-rize/      (not built yet — skipped
+                                                       gracefully until it exists)
+
+Each entry's catalog JSON is itself a build output for canton/t-rize (built
+by their own dedicated script) or hand-edited for tokerize — this script
+doesn't care which; it just bakes whatever JSON a collection currently has
+into HTML, the same way for every source.
 
 Unlike the old article.html (which left title/meta/content empty in the raw
 HTML and filled them in with client-side JS after a fetch), this produces a
@@ -17,10 +33,9 @@ a correct link preview by Telegram/Twitter/Discord, which never execute JS.
 Run from the repo root:
     python scripts/generate_news.py
 
-Intended to run automatically via .github/workflows/generate-news.yml on
-every push that touches articles.json — but safe to run locally too; it's
-idempotent (regenerating from the same articles.json always produces the
-same output).
+Intended to run automatically via GitHub Actions on every push that touches
+a catalog JSON — but safe to run locally too; it's idempotent (regenerating
+from the same catalog JSON always produces the same output).
 """
 import json
 import html
@@ -30,10 +45,17 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ARTICLES_JSON = ROOT / "articles.json"
+NEWS_DIR = ROOT / "news"
 TEMPLATE_PATH = ROOT / "templates" / "article-template.html"
-OUTPUT_DIR = ROOT / "news"
 SITE_BASE_URL = "https://tokerize.top"
+
+# (catalog JSON path, output subfolder under news/) — add a line here the
+# day trizearticles.json exists; nothing else about this script changes.
+COLLECTIONS = [
+    (NEWS_DIR / "tokerizearticles.json", "tokerize"),
+    (NEWS_DIR / "cantonarticles.json", "canton"),
+    (NEWS_DIR / "trizearticles.json", "t-rize"),
+]
 
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
@@ -71,7 +93,7 @@ def build_schema_json(article: dict, canonical_url: str, iso_date: str) -> str:
     return raw.replace("</script", "<\\/script")
 
 
-def render_article(article: dict, template: str) -> tuple[str, str] | None:
+def render_article(article: dict, template: str, folder: str) -> tuple[str, str] | None:
     slug = (article.get("slug") or "").strip()
     if not slug or not SLUG_RE.match(slug):
         print(f"  ⚠️  skipping entry with invalid/missing slug: {slug!r}")
@@ -83,7 +105,7 @@ def render_article(article: dict, template: str) -> tuple[str, str] | None:
     image   = article.get("image", "")
     content = article.get("content", "")
 
-    canonical_url = f"{SITE_BASE_URL}/news/{slug}"
+    canonical_url = f"{SITE_BASE_URL}/news/{folder}/{slug}"
     parsed_date = parse_date(date)
     iso_date = parsed_date.strftime("%Y-%m-%dT00:00:00+00:00") if parsed_date else ""
 
@@ -111,48 +133,68 @@ def render_article(article: dict, template: str) -> tuple[str, str] | None:
     return slug, out
 
 
-def main():
-    if not ARTICLES_JSON.exists():
-        print(f"❌ {ARTICLES_JSON} not found.")
-        sys.exit(1)
-    if not TEMPLATE_PATH.exists():
-        print(f"❌ {TEMPLATE_PATH} not found.")
-        sys.exit(1)
+def process_collection(catalog_path: Path, folder: str, template: str) -> tuple[int, int]:
+    """Renders one collection's catalog into news/<folder>/*.html, cleaning
+    up stale pages within that same subfolder only. Returns (written, removed).
+    A missing catalog file is not an error — it just means that source
+    hasn't been built yet (e.g. trizearticles.json before the scraper
+    exists) — skipped quietly."""
+    if not catalog_path.exists():
+        print(f"  (skip) {catalog_path.relative_to(ROOT)} not found — nothing to generate for news/{folder}/.")
+        return 0, 0
 
-    articles = json.loads(ARTICLES_JSON.read_text(encoding="utf-8"))
-    template = TEMPLATE_PATH.read_text(encoding="utf-8")
-
-    OUTPUT_DIR.mkdir(exist_ok=True)
+    articles = json.loads(catalog_path.read_text(encoding="utf-8"))
+    out_dir = NEWS_DIR / folder
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     written = []
     current_slugs = set()
     for article in articles:
-        result = render_article(article, template)
+        result = render_article(article, template, folder)
         if result is None:
             continue
         slug, html_out = result
         current_slugs.add(slug)
-        out_path = OUTPUT_DIR / f"{slug}.html"
+        out_path = out_dir / f"{slug}.html"
         out_path.write_text(html_out, encoding="utf-8")
         written.append(slug)
-        print(f"  ✓ news/{slug}.html")
+        print(f"  ✓ news/{folder}/{slug}.html")
 
-    # news/ is a build output fully derived from articles.json — any
-    # previously-generated *.html page whose slug is no longer present
-    # (article removed, or its slug was renamed) is orphaned and must be
-    # deleted here, otherwise it silently stays live on the site forever.
-    # Non-.html files (placeholders, an images/ subfolder, etc.) are left
-    # untouched.
+    # news/<folder>/ is a build output fully derived from this one catalog —
+    # any previously-generated *.html page in it whose slug is no longer
+    # present (entry removed, or its slug was renamed) is orphaned and must
+    # be deleted here, otherwise it silently stays live on the site forever.
+    # Scoped to this folder only, so processing one collection never touches
+    # another's pages. Non-.html files are left untouched.
     removed = []
-    for existing in sorted(OUTPUT_DIR.glob("*.html")):
+    for existing in sorted(out_dir.glob("*.html")):
         if existing.stem not in current_slugs:
             existing.unlink()
-            removed.append(existing.name)
-            print(f"  🗑️  removed stale news/{existing.name}")
+            removed.append(f"{folder}/{existing.name}")
+            print(f"  🗑️  removed stale news/{folder}/{existing.name}")
 
-    print(f"\nGenerated {len(written)} article page(s) from {len(articles)} entr{'y' if len(articles)==1 else 'ies'} in articles.json.")
-    if removed:
-        print(f"Removed {len(removed)} stale page(s) no longer referenced in articles.json: {', '.join(removed)}")
+    print(f"  -> {len(written)} page(s) from {len(articles)} entr{'y' if len(articles) == 1 else 'ies'} in {catalog_path.name}.")
+    return len(written), len(removed)
+
+
+def main():
+    if not TEMPLATE_PATH.exists():
+        print(f"❌ {TEMPLATE_PATH} not found.")
+        sys.exit(1)
+
+    template = TEMPLATE_PATH.read_text(encoding="utf-8")
+    NEWS_DIR.mkdir(exist_ok=True)
+
+    total_written = 0
+    total_removed = 0
+    for catalog_path, folder in COLLECTIONS:
+        w, r = process_collection(catalog_path, folder, template)
+        total_written += w
+        total_removed += r
+
+    print(f"\nGenerated {total_written} article page(s) total across {len(COLLECTIONS)} collection(s).")
+    if total_removed:
+        print(f"Removed {total_removed} stale page(s) total.")
 
 
 if __name__ == "__main__":
