@@ -13,10 +13,6 @@
       "dest": "/about.html"
     },
     {
-      "src": "/article",
-      "dest": "/article.html"
-    },
-    {
       "src": "/news",
       "dest": "/news.html"
     },
