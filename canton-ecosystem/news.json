@@ -1,7 +1,77 @@
 {
-  "updated_at": "2026-10-01T06:33:00+00:00",
-  "count": 434,
+  "updated_at": "2026-10-02T06:32:44+00:00",
+  "count": 444,
   "articles": [
+    {
+      "title": "Titan launches its Canton testnet after opening its waitlist",
+      "category": "TECHNOLOGY",
+      "description": "Titan’s testnet is live on Canton, a week after the exchange opened its waitlist. The release gives users a first testing environment for its privacy-focused trading platform.",
+      "url": "https://cantonnews.org/titan-launches-its-canton-testnet-after-opening-its-waitlist",
+      "published_at": "2026-10-01T15:39:11.122+00:00"
+    },
+    {
+      "title": "Canton opens MainNet vote for CantonBFT migration",
+      "category": "TECHNOLOGY",
+      "description": "A governance vote would schedule the MainNet move to CantonBFT for October 10. The proposed timetable separates the configuration change from the migration itself.",
+      "url": "https://cantonnews.org/canton-opens-mainnet-vote-for-cantonbft-migration",
+      "published_at": "2026-10-01T15:39:06.054+00:00"
+    },
+    {
+      "title": "Yuval Rooz puts institutional use at the centre of Korea’s digital asset opportunity",
+      "category": "INSTITUTIONS",
+      "description": "At RealFi X Asia in Seoul, Digital Asset’s CEO focused on institutions putting blockchain into everyday use, rather than treating regulation or tokenization totals as proof of adoption.",
+      "url": "https://cantonnews.org/yuval-rooz-puts-institutional-use-at-the-centre-of-korea-s-digital-asset-opportunity",
+      "published_at": "2026-10-01T15:38:58.169+00:00"
+    },
+    {
+      "title": "Greywick plans Litecoin on Canton with cLTC",
+      "category": "TOKENIZATION",
+      "description": "Greywick Digital and the Litecoin Foundation have signed a memorandum of understanding supporting cLTC on Canton. A launch is targeted for the end of 2026, subject to publishing reserve and rollout details.",
+      "url": "https://cantonnews.org/greywick-plans-litecoin-on-canton-with-cltc",
+      "published_at": "2026-10-01T15:38:52.973+00:00"
+    },
+    {
+      "title": "Ekiden adds gold and silver markets on Canton",
+      "category": "ECOSYSTEM",
+      "description": "Gold and silver are now available on Ekiden during its closed MainNet phase. The new markets trade against USDCx and carry a 2× XP multiplier.",
+      "url": "https://cantonnews.org/ekiden-adds-gold-and-silver-markets-on-canton",
+      "published_at": "2026-10-01T15:38:47.31+00:00"
+    },
+    {
+      "title": "Edel passes $2 million in stock-token trading as staking plans take shape",
+      "category": "TOKENIZATION",
+      "description": "Combined trading volume in SPYe and QQQe has passed $2 million, two days after reaching $1 million. Edel plans to reveal its staking tiers and participation details next week.",
+      "url": "https://cantonnews.org/edel-passes-2-million-in-stock-token-trading-as-staking-plans-take-shape",
+      "published_at": "2026-10-01T15:38:38.557+00:00"
+    },
+    {
+      "title": "LetsExchange closes its swap service after earlier Console Wallet integration",
+      "category": "ECOSYSTEM",
+      "description": "LetsExchange stopped accepting exchanges on October 1. Earlier transactions will still be processed, and support is due to remain available through November 30.",
+      "url": "https://cantonnews.org/letsexchange-closes-its-swap-service-after-earlier-console-wallet-integration",
+      "published_at": "2026-10-01T15:38:21.142+00:00"
+    },
+    {
+      "title": "Marex’s Canton Super Validator program moves to an implementation vote",
+      "category": "INSTITUTIONS",
+      "description": "A MainNet vote would put the hosted reward-weight arrangement for Marex’s approved Super Validator program into effect. Milestone rewards would still require verification and further governance approval.",
+      "url": "https://cantonnews.org/marex-s-canton-super-validator-program-moves-to-an-implementation-vote",
+      "published_at": "2026-10-01T15:38:13.768+00:00"
+    },
+    {
+      "title": "Grofty brings its Canton app to Google Play",
+      "category": "TECHNOLOGY",
+      "description": "Grofty has confirmed Android availability through Google Play. The app combines account management, asset transfers, an address book and transaction history in a mobile interface.",
+      "url": "https://cantonnews.org/grofty-brings-its-canton-app-to-google-play",
+      "published_at": "2026-10-01T15:38:02.138+00:00"
+    },
+    {
+      "title": "Canborsa Expands Canton Coin Utility, Enabling $CC as Collateral Across All Markets",
+      "category": "ECOSYSTEM",
+      "description": "The RWA perpetual DEX Canborsa lets traders use Canton Coin as collateral for any market, and launches a 14-day trading competition to mark the update",
+      "url": "https://cantonnews.org/canborsa-expands-canton-coin-utility-enabling-cc-as-collateral-across-all-markets",
+      "published_at": "2026-10-01T13:29:18.325178+00:00"
+    },
     {
       "title": "Canton reaches 908,000 transacting parties in The Tie’s data",
       "category": "ECOSYSTEM",
