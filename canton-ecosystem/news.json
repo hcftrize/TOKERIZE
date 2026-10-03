@@ -1,7 +1,70 @@
 {
-  "updated_at": "2026-10-02T06:32:44+00:00",
-  "count": 444,
+  "updated_at": "2026-10-03T06:32:33+00:00",
+  "count": 453,
   "articles": [
+    {
+      "title": "CanTra seeks Canton Featured App status for art-linked securities",
+      "category": "TOKENIZATION",
+      "description": "CanTra has applied for Featured App status on Canton ahead of an offering linked to a Francis Bacon triptych. The planned investment starts at €100, subject to investor eligibility and the offering terms.",
+      "url": "https://cantonnews.org/cantra-seeks-canton-featured-app-status-for-art-linked-securities",
+      "published_at": "2026-10-02T16:59:06.048+00:00"
+    },
+    {
+      "title": "Canal seeks Canton Featured App status after controlled iSOL pilot",
+      "category": "TECHNOLOGY",
+      "description": "Canal’s Featured App application sets out a controlled MainNet pilot for iSOL, its SOL-backed asset on Canton. Broader commercial use is targeted for mid-to-late October, subject to approval and integration readiness.",
+      "url": "https://cantonnews.org/canal-seeks-canton-featured-app-status-after-controlled-isol-pilot",
+      "published_at": "2026-10-02T16:57:02.365+00:00"
+    },
+    {
+      "title": "HackCanton Season 3 reaches 85 teams as submissions begin",
+      "category": "TECHNOLOGY",
+      "description": "HackCanton Season 3 now has 85 teams and 44 projects, with six projects submitted for judging. AppsFactory’s latest update also records 67 build diaries as teams approach the October 9 submission deadline.",
+      "url": "https://cantonnews.org/hackcanton-season-3-reaches-85-teams-as-submissions-begin",
+      "published_at": "2026-10-02T16:55:12.448+00:00"
+    },
+    {
+      "title": "Canton brings its connected-market case to Korea’s STO Summit",
+      "category": "INSTITUTIONS",
+      "description": "Canton Foundation president Viv Diwakar spoke at Korea’s STO Summit on October 2, explaining how connected financial systems could let institutions move collateral and settle transactions outside normal market hours.",
+      "url": "https://cantonnews.org/canton-brings-its-connected-market-case-to-korea-s-sto-summit",
+      "published_at": "2026-10-02T16:53:00.449+00:00"
+    },
+    {
+      "title": "Zenith brings Korean institutions together at Seoul Table",
+      "category": "INSTITUTIONS",
+      "description": "Zenith co-hosted an institutional lunch during Korea Blockchain Week with Kaiko, Utila and Happyblock. Participants included Woori Bank, Mirae Asset Securities and Kyobo firms, with discussions covering tokenization and blockchain infrastructure for regulated markets.",
+      "url": "https://cantonnews.org/zenith-brings-korean-institutions-together-at-seoul-table",
+      "published_at": "2026-10-02T16:51:18.615+00:00"
+    },
+    {
+      "title": "Ekiden passes $5 million in trading volume on Canton",
+      "category": "ECOSYSTEM",
+      "description": "Ekiden has reached $5,865,560 in cumulative MainNet trading volume while access remains invite-only. The milestone follows the addition of gold and silver markets to its Canton derivatives exchange.",
+      "url": "https://cantonnews.org/ekiden-passes-5-million-in-trading-volume-on-canton",
+      "published_at": "2026-10-02T16:47:56.433+00:00"
+    },
+    {
+      "title": "Swap.monster Joins the DTC Digital Assets Solutions Industry Working Group",
+      "category": "INSTITUTIONS",
+      "description": "Swap.monster has joined the DTC Digital Assets Solutions Industry Working Group (IWG), an industry forum convened by The Depository Trust & Clearing Corporation (DTCC) to support dialogue, feedback and alignment around the DTCC Tokenization Service and the continued evolution of digital market infrastructure.",
+      "url": "https://cantonnews.org/swap-monster-joins-the-dtc-digital-assets-solutions-industry-working-group",
+      "published_at": "2026-10-02T13:03:09.929211+00:00"
+    },
+    {
+      "title": "Cantex passes $300 million in trading volume on Canton",
+      "category": "ECOSYSTEM",
+      "description": "Cantex has reached $300 million in total trading volume, up from its $200 million milestone in August. The exchange lets users trade Canton assets while retaining control of their funds.",
+      "url": "https://cantonnews.org/cantex-passes-300-million-in-trading-volume-on-canton",
+      "published_at": "2026-10-02T09:45:08.33+00:00"
+    },
+    {
+      "title": "Primus Labs and HashCloak seek funding for private-data verification on Canton",
+      "category": "TECHNOLOGY",
+      "description": "The two teams have requested 1,303,500 CC for tools that would let Canton applications check facts from private web data without exposing the underlying information. The proposal remains open.",
+      "url": "https://cantonnews.org/primus-labs-and-hashcloak-seek-funding-for-private-data-verification-on-canton",
+      "published_at": "2026-10-02T09:45:02.357+00:00"
+    },
     {
       "title": "Titan launches its Canton testnet after opening its waitlist",
       "category": "TECHNOLOGY",
