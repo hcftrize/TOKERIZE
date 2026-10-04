@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-10-04T06:32:26+00:00",
-  "count": 453,
+  "updated_at": "2026-10-04T22:32:40+00:00",
+  "count": 461,
   "articles": [
+    {
+      "title": "What a Slice of $114 Trillion Looks Like On-Chain",
+      "category": "INSTITUTIONS",
+      "description": "DTC holds more than $114 trillion in securities, and its tokenization service reaches commercial launch this month. Illustrative scenarios show what even a small share on-chain would represent, and why Canton's fee economics depend on activity rather than notional value",
+      "url": "https://cantonnews.org/what-a-slice-of-114-trillion-looks-like-on-chain",
+      "published_at": "2026-10-04T19:11:35.832+00:00"
+    },
+    {
+      "title": "Edel targets next week for EDEL staking with CC rewards",
+      "category": "ECOSYSTEM",
+      "description": "Edel’s October 3 update targets the following week for holders to stake EDEL and earn Canton Coin. It advances the timetable beyond the earlier promise to reveal participation details, without an exact opening date or yield rate.",
+      "url": "https://cantonnews.org/edel-targets-next-week-for-edel-staking-with-cc-rewards",
+      "published_at": "2026-10-04T08:29:02.268+00:00"
+    },
+    {
+      "title": "Eight Canton apps clear Tokenomics review for Featured App status",
+      "category": "TECHNOLOGY",
+      "description": "Meridiant, Rocky Wallet, Jubilee, Selay Wallet, Wintip, SyncVotes, Nocturnal Wallet and BETH have cleared Tokenomics review. The October 2 notice makes them ready for Super Validator on-chain approval and does not itself activate their status.",
+      "url": "https://cantonnews.org/eight-canton-apps-clear-tokenomics-review-for-featured-app-status",
+      "published_at": "2026-10-04T08:28:54.528+00:00"
+    },
+    {
+      "title": "LSEG’s Canton Super Validator plan moves to an implementation vote",
+      "category": "INSTITUTIONS",
+      "description": "An open MainNet vote would add LSEG’s hosted reward weight through MPCH following September’s program approval. The request targets October 10, while milestone rewards remain subject to verified delivery and further approval.",
+      "url": "https://cantonnews.org/lseg-s-canton-super-validator-plan-moves-to-an-implementation-vote",
+      "published_at": "2026-10-04T08:28:40.175+00:00"
+    },
+    {
+      "title": "Noves plans Canton deployment talks in Tokyo",
+      "category": "INSTITUTIONS",
+      "description": "Noves plans meetings with Japanese financial institutions and infrastructure partners focused on Canton research, deployment design and partnerships. Its team will also join Pacific Meta’s Blockchain Summit on October 5.",
+      "url": "https://cantonnews.org/noves-plans-canton-deployment-talks-in-tokyo",
+      "published_at": "2026-10-04T08:28:31.232+00:00"
+    },
+    {
+      "title": "Obsidian joins Canton’s collateral subcommittee",
+      "category": "INSTITUTIONS",
+      "description": "Obsidian has joined the DTCC-chaired Canton Foundation Collateral Subcommittee. Its planned contributions cover tokenized repo and financing, plus the acceptance of tokenized collateral by clearing houses and market infrastructure.",
+      "url": "https://cantonnews.org/obsidian-joins-canton-s-collateral-subcommittee",
+      "published_at": "2026-10-04T08:28:21.202+00:00"
+    },
+    {
+      "title": "Grofty expands Lens with portfolio tracking and developer tools",
+      "category": "TECHNOLOGY",
+      "description": "Grofty’s latest Lens update brings historical exports, shareable dashboards, portfolio tracking and price alerts together with developer SDKs. The October 3 announcement builds on its existing Canton market-data service.",
+      "url": "https://cantonnews.org/grofty-expands-lens-with-portfolio-tracking-and-developer-tools",
+      "published_at": "2026-10-04T08:28:12.448+00:00"
+    },
+    {
+      "title": "Tradecraft and C8 receive Canton settlement recognition",
+      "category": "TECHNOLOGY",
+      "description": "Tradecraft and C8 Wallet + RFQ DEX have received delivery-versus-payment recognition for Canton reward treatment. C8’s approval covers only its wallet and RFQ exchange, excluding Concordia.",
+      "url": "https://cantonnews.org/tradecraft-and-c8-receive-canton-settlement-recognition",
+      "published_at": "2026-10-04T08:28:06.155+00:00"
+    },
     {
       "title": "CanTra seeks Canton Featured App status for art-linked securities",
       "category": "TOKENIZATION",
