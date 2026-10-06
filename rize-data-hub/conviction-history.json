@@ -2027,6 +2027,10 @@
     {
       "date": "2026-10-04",
       "value": 878542804.58
+    },
+    {
+      "date": "2026-10-05",
+      "value": 878559143.26
     }
   ],
   "cex": [
@@ -4037,10 +4041,32 @@
     {
       "date": "2026-10-04",
       "value": 153505216.53
+    },
+    {
+      "date": "2026-10-05",
+      "value": 163168878.67
     }
   ],
   "unbonding": [],
   "whales": [
+    {
+      "date": "2026-10-05",
+      "amount": 7094582.82,
+      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
+      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
+      "from_label": "0x71f6…91c9",
+      "to_label": "0x5be4…d08d",
+      "tx": "0xd0786ed743ab99a3a2193bb76d126e8f27a723de4c061e7a01340a3b2358afcb"
+    },
+    {
+      "date": "2026-10-05",
+      "amount": 10765299.23,
+      "from": "0x504ce9e51e508c85a161058c12e970a903d482fc",
+      "to": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
+      "from_label": "0x504c…82fc",
+      "to_label": "Kraken Hot 1",
+      "tx": "0x49924933241b86be8958d9d7d39f820c9d28152ef2a96db8989e887c91b7820a"
+    },
     {
       "date": "2026-10-04",
       "amount": 10990297.28,
@@ -4463,15 +4489,6 @@
       "from_label": "Kraken Hot 1",
       "to_label": "Kraken Cold 2",
       "tx": "0xc5b5dab8ab4ff21965ec42efeb6cf4f4b8bdf3966efb66f0127e6356e507c443"
-    },
-    {
-      "date": "2026-09-04",
-      "amount": 10032808.91,
-      "from": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
-      "to": "0x504ce9e51e508c85a161058c12e970a903d482fc",
-      "from_label": "Kraken Hot 1",
-      "to_label": "0x504c…82fc",
-      "tx": "0x8e47b153879109a73e2c4804ca53c78d1d2905e17b51b7d3d23993fa01bd4323"
     }
   ],
   "metadata": {
@@ -4490,7 +4507,7 @@
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe",
       "0x15Da7556D5ED888306839bed06f868AeaeDCb0d7"
     ],
-    "updated": "2026-10-04T23:59:28.008487+00:00"
+    "updated": "2026-10-05T23:59:30.233384+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
