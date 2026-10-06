@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-10-05T06:32:41+00:00",
-  "count": 461,
+  "updated_at": "2026-10-06T06:32:33+00:00",
+  "count": 467,
   "articles": [
+    {
+      "title": "Canton weekly recap: Lloyds, Visa, LSEG and Korea's biggest banks",
+      "category": "INSTITUTIONS",
+      "description": "Lloyds and Visa settled stablecoin payments over a weekend, Temple crossed $1 billion in volume, 908,000 parties have now transacted, and MainNet’s move to CantonBFT has a proposed date. Here is everything that moved on Canton from September 28 to October 4, one update at a time.",
+      "url": "https://cantonnews.org/canton-weekly-recap-lloyds-visa-lseg-and-korea-s-biggest-banks",
+      "published_at": "2026-10-05T17:34:55.506+00:00"
+    },
+    {
+      "title": "Rocky previews a dark pool for large trades on Canton",
+      "category": "INSTITUTIONS",
+      "description": "Rocky's planned dark pool would keep large orders out of the public order book and combine public-market midpoint pricing with Canton settlement. The feature is not open for trading, and no launch date has been announced.",
+      "url": "https://cantonnews.org/rocky-previews-a-dark-pool-for-large-trades-on-canton",
+      "published_at": "2026-10-05T09:46:23.939+00:00"
+    },
+    {
+      "title": "Norvault opens Francis Bacon-linked offering on Canton",
+      "category": "TOKENIZATION",
+      "description": "Norvault has opened its Bacon Series 001 offering through CanTra, accepting euros or Canton Coin from eligible investors. Each note will be represented by a Canton token, with issuance and delivery scheduled for November 5 subject to completion conditions.",
+      "url": "https://cantonnews.org/norvault-opens-francis-bacon-linked-offering-on-canton",
+      "published_at": "2026-10-05T09:43:57.988+00:00"
+    },
+    {
+      "title": "Meriq seeks Featured App status for its Canton swap venue",
+      "category": "ECOSYSTEM",
+      "description": "Meriq has applied for Featured App status for its Canton asset-swap venue. The platform is operating in a controlled MainNet launch, with an independent audit still planned before larger production limits.",
+      "url": "https://cantonnews.org/meriq-seeks-featured-app-status-for-its-canton-swap-venue",
+      "published_at": "2026-10-05T09:42:12.138+00:00"
+    },
+    {
+      "title": "DIA seeks funding for multi-source price checks on Canton",
+      "category": "TECHNOLOGY",
+      "description": "DIA is seeking up to 8.4 million CC to build an open-source tool that checks data from several providers before Canton applications use it. Funding remains under review.",
+      "url": "https://cantonnews.org/dia-seeks-funding-for-multi-source-price-checks-on-canton",
+      "published_at": "2026-10-05T09:40:17.254+00:00"
+    },
+    {
+      "title": "Canton Venues brings seven trading venues into one dashboard",
+      "category": "TECHNOLOGY",
+      "description": "Canton Venues is a free dashboard for comparing token prices, liquidity and estimated trade costs across seven Canton venues. Its public data feed also supports developers and compatible AI tools.",
+      "url": "https://cantonnews.org/canton-venues-brings-seven-trading-venues-into-one-dashboard",
+      "published_at": "2026-10-05T09:36:49.906+00:00"
+    },
     {
       "title": "What a Slice of $114 Trillion Looks Like On-Chain",
       "category": "INSTITUTIONS",
