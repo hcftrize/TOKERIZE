@@ -265,6 +265,20 @@
     "logo_local": "logos\\appsfactory.png"
   },
   {
+    "name": "arCCadeio",
+    "slug": "arccadeio",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6abfe43c4c3e44fb3cf41f36_9842d1d5-5335-44cb-ad8c-5379555b594d.png",
+    "short_desc": "arCCade is a Canton native wallet and trading platform for swaps, markets and atomic settlement.",
+    "tags": [
+      "APPS (FEATURED)",
+      "EXCHANGES",
+      "Network Utilities\nEXCHANGES",
+      "Roles\nAPPS (FEATURED)\nAPPS (FEATURED)"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\narCCadeio\nhttps://www.arccade.io/\narCCade brings wallet, swap and trading functionality together in one Canton native platform. Users can hold, send and receive assets, execute swaps and trade supported Canton assets through the arCCade terminal. The platform supports Canton Token Standard assets and atomic DvP settlement, combining self custody, private execution and onchain settlement in a single trading experience.\nNetwork Utilities\nEXCHANGES\nRoles\nAPPS (FEATURED)\nAPPS (FEATURED)",
+    "logo_local": "logos\\arccadeio.png"
+  },
+  {
     "name": "Archax",
     "slug": "archax",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69b1d9eccbbab00307c5d82e_archax.png",
@@ -3127,6 +3141,19 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nLondon Stock Exchange\nhttps://www.londonstockexchange.com/\n\nDevelopers of the Digital Settlement House (DiSH Cash), enabling instantaneous settlement between independent payment networks, on blockchain or using traditional technology.\n\nNetwork Utilities\nLIQUIDITYTOKENIZED ASSETSEXCHANGESPAYMENTSINTEROPERABILITY\nRoles\nFINANCIAL INSTITUTIONSAPPS (ALL)MARKET INFRASTRUCTURE\nFINANCIAL INSTITUTIONSAPPS (ALL)MARKET INFRASTRUCTURE",
     "logo_local": "logos\\london-stock-exchange.jpg"
+  },
+  {
+    "name": "Loop Wallet",
+    "slug": "loop-wallet",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ac3e30c4e4611b8eba3bd9a_ef407514-461f-484c-aabb-b7700ed03624.png",
+    "short_desc": "A self-custody web-based wallet that emphasizes on security and UX,",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "WALLETS"
+    ],
+    "detail_text": "A self-custody web-based wallet that emphasizes on security and UX,",
+    "logo_local": "logos\\loop-wallet.png"
   },
   {
     "name": "Luganodes",
