@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-06T03:16:01.480587447Z",
-  "last_closed_round": 116175,
+  "updated_at": "2026-10-07T03:16:06.772120549Z",
+  "last_closed_round": 116315,
   "policy": {
     "id": "cip-0116-featured-app-locking",
     "title": "CIP-0116 Featured App Locking",
@@ -14,17 +14,17 @@
     "shortfall_count": 46,
     "data_issue_count": 19,
     "app_provider_count": 104,
-    "app_provider_locked": 510373391.99473166,
+    "app_provider_locked": 509690033.53573465,
     "app_provider_required": 520000000.0,
-    "app_provider_shortfall": 188026977.8086967,
+    "app_provider_shortfall": 188023791.8871839,
     "asset_issuer_count": 24,
-    "asset_issuer_locked": 501306257.70413125,
+    "asset_issuer_locked": 501306894.9113762,
     "asset_issuer_required": 600000000.0,
-    "asset_issuer_shortfall": 98693742.29586875,
-    "total_locked_app_level": 1011679649.6988628,
-    "unique_wallet_total": 888983819.7206992,
+    "asset_issuer_shortfall": 98693105.08862379,
+    "total_locked_app_level": 1010996928.4471109,
+    "unique_wallet_total": 888301098.4689472,
     "required_total": 1120000000.0,
-    "shortfall_total": 286720720.10456544
+    "shortfall_total": 286716896.9758077
   },
   "apps": [
     {
@@ -320,9 +320,9 @@
       "source_status": "3-Approved",
       "status_label": "Below Requirement",
       "meets_requirement": false,
-      "locked_balance": 9306257.754131248,
+      "locked_balance": 9306894.961376207,
       "required_lock": 25000000.0,
-      "shortfall": 15693742.245868752,
+      "shortfall": 15693105.038623793,
       "data_quality": [],
       "is_active": true
     },
@@ -739,9 +739,9 @@
       "source_status": "3-Approved",
       "status_label": "Below Requirement",
       "meets_requirement": false,
-      "locked_balance": 7355.4713033122,
+      "locked_balance": 10541.3928160863,
       "required_lock": 5000000.0,
-      "shortfall": 4992644.528696688,
+      "shortfall": 4989458.607183914,
       "data_quality": [],
       "is_active": true
     },
@@ -907,7 +907,7 @@
       "source_status": "3-Approved",
       "status_label": "Meets Requirement",
       "meets_requirement": true,
-      "locked_balance": 8952950.601534963,
+      "locked_balance": 8266406.221025209,
       "required_lock": 5000000.0,
       "shortfall": 0.0,
       "data_quality": [],
