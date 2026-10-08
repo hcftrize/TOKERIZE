@@ -96,6 +96,18 @@
     "logo_local": "logos\\allunity.jpg"
   },
   {
+    "name": "Argus",
+    "slug": "argus",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ac6a7c30373161deb259d0a_argus-3d.png",
+    "description": "",
+    "external_url": "https://argus.world/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\argus.png"
+  },
+  {
     "name": "Aster",
     "slug": "aster",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab354f9143d71eb72135755_6ab354f860107e360c945f2c_aster-logo.png",
