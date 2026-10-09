@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-08T03:15:55.662988994Z",
-  "last_closed_round": 116455,
+  "updated_at": "2026-10-09T03:15:53.699530291Z",
+  "last_closed_round": 116595,
   "policy": {
     "id": "cip-0116-featured-app-locking",
     "title": "CIP-0116 Featured App Locking",
@@ -14,17 +14,17 @@
     "shortfall_count": 46,
     "data_issue_count": 19,
     "app_provider_count": 104,
-    "app_provider_locked": 510249930.3188523,
+    "app_provider_locked": 509347499.1948738,
     "app_provider_required": 520000000.0,
-    "app_provider_shortfall": 188020291.3928666,
+    "app_provider_shortfall": 188016839.07309982,
     "asset_issuer_count": 24,
     "asset_issuer_locked": 501306894.9113762,
     "asset_issuer_required": 600000000.0,
     "asset_issuer_shortfall": 98693105.08862379,
-    "total_locked_app_level": 1011556825.2302284,
-    "unique_wallet_total": 888860995.2520648,
+    "total_locked_app_level": 1010654394.10625,
+    "unique_wallet_total": 887958564.1280863,
     "required_total": 1120000000.0,
-    "shortfall_total": 286713396.48149043
+    "shortfall_total": 286709944.1617236
   },
   "apps": [
     {
@@ -739,9 +739,9 @@
       "source_status": "3-Approved",
       "status_label": "Below Requirement",
       "meets_requirement": false,
-      "locked_balance": 14041.8871333829,
+      "locked_balance": 17494.2069001694,
       "required_lock": 5000000.0,
-      "shortfall": 4985958.112866617,
+      "shortfall": 4982505.793099831,
       "data_quality": [],
       "is_active": true
     },
@@ -907,7 +907,7 @@
       "source_status": "3-Approved",
       "status_label": "Meets Requirement",
       "meets_requirement": true,
-      "locked_balance": 8822802.509825574,
+      "locked_balance": 7916919.066080293,
       "required_lock": 5000000.0,
       "shortfall": 0.0,
       "data_quality": [],
