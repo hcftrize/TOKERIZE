@@ -4501,6 +4501,19 @@
     "logo_local": "logos\\tiva.png"
   },
   {
+    "name": "TKMatrix",
+    "slug": "tkmatrix",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ac7b686c6d38fa507a50c89_TKMAtrix.jpg",
+    "short_desc": "TKMatrix runs a Canton validator and operates TermPrime, fixed-rate term financing for institutions.",
+    "tags": [
+      "APPS (ALL)",
+      "VALIDATOR",
+      "FINANCING"
+    ],
+    "detail_text": "TKMatrix runs a Canton validator and operates TermPrime, fixed-rate term financing for institutions.",
+    "logo_local": "logos\\tkmatrix.jpg"
+  },
+  {
     "name": "ToTheMoon",
     "slug": "tothemoon",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a73d57cdbf26c0b55c871b6_tothemoon.jpg",
@@ -4828,6 +4841,20 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nVigil Markets\nhttps://vigilmarkets.com/\n\nA cryptographically secured spot exchange designed for privacy and performance in digital asset trading and custody.\n\nRoles\nVALIDATOR\nVALIDATOR",
     "logo_local": "logos\\vigil-markets.jpeg"
+  },
+  {
+    "name": "Virtu Financial",
+    "slug": "virtu-financial",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a10b4500b46dd56f73c1d49_Virtu%20Financial.png",
+    "short_desc": "Participated in the first and subsequent, on-chain repo transactions.",
+    "tags": [
+      "FINANCIAL INSTITUTIONS",
+      "LIQUIDITY",
+      "Network Utilities\nLIQUIDITY",
+      "Roles\nFINANCIAL INSTITUTIONS\nFINANCIAL INSTITUTIONS"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nVirtu Financial\nhttps://www.virtu.com/\n\nParticipated in the first and subsequent, more advanced, on-chain repo transactions to secure 24/7 liquidity.\n\nNetwork Utilities\nLIQUIDITY\nRoles\nFINANCIAL INSTITUTIONS\nFINANCIAL INSTITUTIONS",
+    "logo_local": "logos\\virtu-financial.png"
   },
   {
     "name": "Visa",
