@@ -3,9 +3,9 @@
   "scraped_at": "2026-04-28T11:15:33.797109+00:00",
   "bootstrap": true,
   "counts": {
-    "bondCreatedEvents": 10193,
+    "bondCreatedEvents": 10195,
     "increaseBondEvents": 364,
-    "bonds": 10193
+    "bonds": 10195
   },
   "data": {
     "bondCreatedEvents": [
@@ -112131,6 +112131,28 @@
         "blockNumber": "51663686",
         "timestamp": "1790116719",
         "txHash": "0x6425c4d92475079ce343fcfaced34ec7a7f98201c195025467b09232e8259a0f"
+      },
+      {
+        "id": "0x40ee7a111caa6a58ff750fc3ad5e2337b1994a7f5315f23c11da63112962376d-56",
+        "nftId": "10194",
+        "owner": "0x3e21f91838b6527a767aaca458f45c48776680bd",
+        "poolId": 2,
+        "amount": "7000000",
+        "date": "2026-10-12",
+        "blockNumber": "52510911",
+        "timestamp": "1791811169",
+        "txHash": "0x40ee7a111caa6a58ff750fc3ad5e2337b1994a7f5315f23c11da63112962376d"
+      },
+      {
+        "id": "0x01b3c2b6e903cfc406f74c5ba75231f83e6683488a83119e4dc071ca8c88742e-717",
+        "nftId": "10195",
+        "owner": "0x952dbb02b798baebae6a15150c5ece76dd794e37",
+        "poolId": 2,
+        "amount": "39.844658295469444096",
+        "date": "2026-10-13",
+        "blockNumber": "52538340",
+        "timestamp": "1791866027",
+        "txHash": "0x01b3c2b6e903cfc406f74c5ba75231f83e6683488a83119e4dc071ca8c88742e"
       }
     ],
     "increaseBondEvents": [
@@ -247920,8 +247942,34 @@
         "increaseCount": 0,
         "lastDepositDate": "2026-09-22",
         "lastDepositTimestamp": "1790116719"
+      },
+      {
+        "id": "10194",
+        "nftId": "10194",
+        "owner": "0x3e21f91838b6527a767aaca458f45c48776680bd",
+        "poolId": 2,
+        "createdAtDate": "2026-10-12",
+        "createdAtTimestamp": "1791811169",
+        "createdAtBlock": "52510911",
+        "totalDeposited": "7000000",
+        "increaseCount": 0,
+        "lastDepositDate": "2026-10-12",
+        "lastDepositTimestamp": "1791811169"
+      },
+      {
+        "id": "10195",
+        "nftId": "10195",
+        "owner": "0x952dbb02b798baebae6a15150c5ece76dd794e37",
+        "poolId": 2,
+        "createdAtDate": "2026-10-13",
+        "createdAtTimestamp": "1791866027",
+        "createdAtBlock": "52538340",
+        "totalDeposited": "39.844658295469444096",
+        "increaseCount": 0,
+        "lastDepositDate": "2026-10-13",
+        "lastDepositTimestamp": "1791866027"
       }
     ]
   },
-  "updated_at": "2026-10-12T05:31:50.930515+00:00"
+  "updated_at": "2026-10-13T05:31:36.968216+00:00"
 }
