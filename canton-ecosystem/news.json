@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-10-14T06:32:58+00:00",
-  "count": 525,
+  "updated_at": "2026-10-15T06:33:07+00:00",
+  "count": 528,
   "articles": [
+    {
+      "title": "Circle’s validator application sets out native USDC plans for Canton",
+      "category": "INSTITUTIONS",
+      "description": "Circle is preparing to bring native USDC to Canton. Its validator application marks a planned change in how dollar tokens reach the network, where USDCx is already in use.",
+      "url": "https://cantonnews.org/circle-s-validator-application-sets-out-native-usdc-plans-for-canton",
+      "published_at": "2026-10-15T05:51:25.615+00:00"
+    },
+    {
+      "title": "Kintsu Prime: what managed lending could add to Canton",
+      "category": "ECOSYSTEM",
+      "description": "Kintsu plans to pool stablecoins in vaults that fund selected lending markets. For depositors, the choice would shift from individual markets to a manager’s strategy.",
+      "url": "https://cantonnews.org/kintsu-prime-what-managed-lending-could-add-to-canton",
+      "published_at": "2026-10-15T00:26:47.461+00:00"
+    },
+    {
+      "title": "Canton’s Universal Burn proposal: the benefits, costs and open questions",
+      "category": "ECOSYSTEM",
+      "description": "The draft would bring more Canton activity into its CC fee system and offer discounts for busy applications. Bigger discounts would require a usage commitment backed by a CC deposit.",
+      "url": "https://cantonnews.org/canton-s-universal-burn-proposal-the-benefits-costs-and-open-questions",
+      "published_at": "2026-10-14T23:15:37.493+00:00"
+    },
+    {
+      "title": "Canton today: Meritz’s tokenization plans, Zebec’s wallet move and nine more updates",
+      "category": "INSTITUTIONS",
+      "description": "Meritz Securities signs a Canton agreement, Zebec brings C8 into its payments plans and SBC seeks Featured Asset status. The roundup also covers Cashen’s milestone, a completed institutional swap and updates for traders, builders and node operators.",
+      "url": "https://cantonnews.org/canton-today-meritz-s-tokenization-plans-zebec-s-wallet-move-and-nine-more-updates",
+      "published_at": "2026-10-14T07:42:33.117+00:00"
+    },
+    {
+      "title": "Hecto introduces Neoprime for pre-IPO exposure on Canton",
+      "category": "TOKENIZATION",
+      "description": "Hecto has introduced a Canton token built around private companies in defence, robotics and related industries. Trading on Cantex is planned, adding a concrete product to its earlier private-market roadmap.",
+      "url": "https://cantonnews.org/hecto-introduces-neoprime-for-pre-ipo-exposure-on-canton",
+      "published_at": "2026-10-14T06:37:44.817+00:00"
+    },
     {
       "title": "Cashen passes 500 million locked Canton Coin, worth over $60 million",
       "category": "ECOSYSTEM",
@@ -73,6 +108,13 @@
       "published_at": "2026-10-12T09:23:19.002+00:00"
     },
     {
+      "title": "Canton Development Fund approves 1.2 million CC for BitDynamics",
+      "category": "ECOSYSTEM",
+      "description": "BitDynamics has secured funding approval for improvements to Splice, covering grant controls, transaction-cost monitoring and tools for network operators. The work is split into two milestones with a six-month target.",
+      "url": "https://cantonnews.org/canton-development-fund-approves-1-2-million-cc-for-bitdynamics",
+      "published_at": "2026-10-10T13:34:26.723+00:00"
+    },
+    {
       "title": "Nuxaris locks 25 million CC as cBNB seeks Featured App status",
       "category": "ECOSYSTEM",
       "description": "Nuxaris has locked 25 million Canton Coin through Cashen for cBNB. Its separate Featured App application focuses on bringing the BNB-backed asset to more Canton trading venues.",
@@ -87,13 +129,6 @@
       "published_at": "2026-10-10T13:34:26.723+00:00"
     },
     {
-      "title": "HestiaX operates a Canton MainNet validator",
-      "category": "ECOSYSTEM",
-      "description": "HestiaX runs a validator on Canton MainNet alongside its work on renewable-energy finance software. Its platform is designed to prepare project data and contracted revenues for institutional financing.",
-      "url": "https://cantonnews.org/hestiax-operates-a-canton-mainnet-validator",
-      "published_at": "2026-10-10T13:34:26.723+00:00"
-    },
-    {
       "title": "PixelPlex proposes a simpler way to add Canton tokens to apps",
       "category": "TECHNOLOGY",
       "description": "PixelPlex’s Open Token Standard draft would give developers a consistent way to find the software and information needed to support Canton tokens. Issuers could opt in without changing existing transfer and settlement processes.",
@@ -101,10 +136,10 @@
       "published_at": "2026-10-10T13:34:26.723+00:00"
     },
     {
-      "title": "Canton Development Fund approves 1.2 million CC for BitDynamics",
+      "title": "HestiaX operates a Canton MainNet validator",
       "category": "ECOSYSTEM",
-      "description": "BitDynamics has secured funding approval for improvements to Splice, covering grant controls, transaction-cost monitoring and tools for network operators. The work is split into two milestones with a six-month target.",
-      "url": "https://cantonnews.org/canton-development-fund-approves-1-2-million-cc-for-bitdynamics",
+      "description": "HestiaX runs a validator on Canton MainNet alongside its work on renewable-energy finance software. Its platform is designed to prepare project data and contracted revenues for institutional financing.",
+      "url": "https://cantonnews.org/hestiax-operates-a-canton-mainnet-validator",
       "published_at": "2026-10-10T13:34:26.723+00:00"
     },
     {
@@ -115,10 +150,10 @@
       "published_at": "2026-10-10T12:13:16.698+00:00"
     },
     {
-      "title": "BootNode seeks funding for a shared Canton app-testing toolkit",
+      "title": "Digital Asset proposes a voting app for Canton Super Validator delegates",
       "category": "ECOSYSTEM",
-      "description": "BootNode has proposed canton-testkit, an open-source library to help Canton teams test transactions from setup to ledger confirmation. It is requesting 702,000 CC, with payment tied to a working release and adoption in existing test suites.",
-      "url": "https://cantonnews.org/bootnode-seeks-funding-for-a-shared-canton-app-testing-toolkit",
+      "description": "Digital Asset is seeking 1 million CC to let Super Validator operators authorise other parties to vote on their behalf. The proposed app would separate voting responsibilities from node operations while keeping one vote per Super Validator node.",
+      "url": "https://cantonnews.org/digital-asset-proposes-a-voting-app-for-canton-super-validator-delegates",
       "published_at": "2026-10-09T09:59:12.98+00:00"
     },
     {
@@ -129,13 +164,6 @@
       "published_at": "2026-10-09T09:59:12.98+00:00"
     },
     {
-      "title": "Canton proposal would extend CC burn across MainNet",
-      "category": "TECHNOLOGY",
-      "description": "A new draft would replace license fees for dedicated Canton synchronizers with CC burn and extend rewards to their apps and validators. It also proposes volume discounts, with detailed pricing to follow in a separate proposal.",
-      "url": "https://cantonnews.org/canton-proposal-would-extend-cc-burn-across-mainnet",
-      "published_at": "2026-10-09T09:59:12.98+00:00"
-    },
-    {
       "title": "Kintsu opens its private beta on Canton",
       "category": "ECOSYSTEM",
       "description": "Kintsu has opened its private beta to early borrowers, lenders and vault managers. The project is developing lending markets, managed vaults and staking for Canton, with its current beta environment running on testnet.",
@@ -143,17 +171,24 @@
       "published_at": "2026-10-09T09:59:12.98+00:00"
     },
     {
-      "title": "Moonsong Labs invites institutions to help shape Canton vault platform",
-      "category": "ECOSYSTEM",
-      "description": "Moonsong Labs is recruiting more design partners for VaultKit, a toolkit for running investment products on Canton. Institutions keep the software in their own environment and help shape its development.",
-      "url": "https://cantonnews.org/moonsong-labs-invites-institutions-to-help-shape-canton-vault-platform",
+      "title": "Broadridge’s Canton-based repo platform processes $7.5 trillion in September",
+      "category": "INSTITUTIONS",
+      "description": "Broadridge’s Distributed Ledger Repo platform averaged $359 billion in daily transactions during September. The Canton-based service now sits within the company’s wider DLX offering for tokenized markets.",
+      "url": "https://cantonnews.org/broadridge-s-canton-based-repo-platform-processes-7-5-trillion-in-september",
       "published_at": "2026-10-09T09:59:12.98+00:00"
     },
     {
-      "title": "Digital Asset proposes a voting app for Canton Super Validator delegates",
+      "title": "BitSafe seeks Canton Featured App status for HYPE-backed CHYPE",
       "category": "ECOSYSTEM",
-      "description": "Digital Asset is seeking 1 million CC to let Super Validator operators authorise other parties to vote on their behalf. The proposed app would separate voting responsibilities from node operations while keeping one vote per Super Validator node.",
-      "url": "https://cantonnews.org/digital-asset-proposes-a-voting-app-for-canton-super-validator-delegates",
+      "description": "BitSafe is seeking Featured App status for CHYPE, a planned HYPE-backed Canton asset, with Temple its first intended integration.",
+      "url": "https://cantonnews.org/bitsafe-seeks-canton-featured-app-status-for-hype-backed-chype",
+      "published_at": "2026-10-09T09:59:12.98+00:00"
+    },
+    {
+      "title": "BootNode seeks funding for a shared Canton app-testing toolkit",
+      "category": "ECOSYSTEM",
+      "description": "BootNode has proposed canton-testkit, an open-source library to help Canton teams test transactions from setup to ledger confirmation. It is requesting 702,000 CC, with payment tied to a working release and adoption in existing test suites.",
+      "url": "https://cantonnews.org/bootnode-seeks-funding-for-a-shared-canton-app-testing-toolkit",
       "published_at": "2026-10-09T09:59:12.98+00:00"
     },
     {
@@ -164,17 +199,24 @@
       "published_at": "2026-10-09T09:59:12.98+00:00"
     },
     {
-      "title": "Maha Wallet partners with Cashen for a 5 million CC lock",
+      "title": "Brickken seeks Canton funding for a regulated-token standard",
       "category": "ECOSYSTEM",
-      "description": "Maha Wallet is partnering with Cashen to meet Canton’s Featured App locking requirement with 5 million CC. The arrangement addresses the capital requirement, which sits alongside a separate approval process.",
-      "url": "https://cantonnews.org/maha-wallet-partners-with-cashen-for-a-5-million-cc-lock",
-      "published_at": "2026-10-09T09:59:12.98+00:00"
+      "description": "Brickken is seeking 5.85 million CC for a 15-month project to develop shared compliance controls for tokenized assets on Canton, with funding for an implementation, audit and developer tools.",
+      "url": "https://cantonnews.org/brickken-seeks-canton-funding-for-a-regulated-token-standard",
+      "published_at": "2026-10-08T08:20:32.032+00:00"
     },
     {
       "title": "Kaiko joins Canton’s work on tokenized collateral",
       "category": "INSTITUTIONS",
       "description": "Kaiko has joined the Canton Foundation’s Collateral Sub-Committee, contributing pricing data and connections to institutional systems as the group develops requirements for accepting tokenized collateral.",
       "url": "https://cantonnews.org/kaiko-joins-canton-s-work-on-tokenized-collateral",
+      "published_at": "2026-10-08T08:20:32.032+00:00"
+    },
+    {
+      "title": "Cantex adds Edel tokens linked to Nvidia and SpaceX",
+      "category": "ECOSYSTEM",
+      "description": "NVDAe and SPCXe are now trading on Cantex, expanding Edel’s Canton offering beyond its existing index-linked tokens. Access to the exchange remains invitation-only.",
+      "url": "https://cantonnews.org/cantex-adds-edel-tokens-linked-to-nvidia-and-spacex",
       "published_at": "2026-10-08T08:20:32.032+00:00"
     },
     {
@@ -192,24 +234,10 @@
       "published_at": "2026-10-08T08:20:32.032+00:00"
     },
     {
-      "title": "Cantex adds Edel tokens linked to Nvidia and SpaceX",
-      "category": "ECOSYSTEM",
-      "description": "NVDAe and SPCXe are now trading on Cantex, expanding Edel’s Canton offering beyond its existing index-linked tokens. Access to the exchange remains invitation-only.",
-      "url": "https://cantonnews.org/cantex-adds-edel-tokens-linked-to-nvidia-and-spacex",
-      "published_at": "2026-10-08T08:20:32.032+00:00"
-    },
-    {
       "title": "Canton approves 18 more validator operators",
       "category": "ECOSYSTEM",
       "description": "Canton’s October 7 batch approves 18 operators, including elebank limited and Enflux, with applicants planning tokenized deposits, trading and payment tools.",
       "url": "https://cantonnews.org/canton-approves-18-more-validator-operators",
-      "published_at": "2026-10-08T08:20:32.032+00:00"
-    },
-    {
-      "title": "Brickken seeks Canton funding for a regulated-token standard",
-      "category": "ECOSYSTEM",
-      "description": "Brickken is seeking 5.85 million CC for a 15-month project to develop shared compliance controls for tokenized assets on Canton, with funding for an implementation, audit and developer tools.",
-      "url": "https://cantonnews.org/brickken-seeks-canton-funding-for-a-regulated-token-standard",
       "published_at": "2026-10-08T08:20:32.032+00:00"
     },
     {
@@ -218,27 +246,6 @@
       "description": "Canton is building a broader institutional finance ecosystem around tokenized assets, custody, bonds, yield, and onchain ownership. As Ripple Custody and Doppler Finance expand into the network, Canton is also strengthening its links to the XRPL ecosystem, while $CC becomes more central to its growth.",
       "url": "https://cantonnews.org/the-cantonalization-of-finance",
       "published_at": "2026-10-07T14:38:45.322612+00:00"
-    },
-    {
-      "title": "ForecastDesk seeks Canton Featured App status for prediction markets",
-      "category": "ECOSYSTEM",
-      "description": "ForecastDesk has applied for Featured App status following its September MainNet launch. The prediction platform lets users trade event outcomes from their own Canton wallets, with payments and positions settled together.",
-      "url": "https://cantonnews.org/forecastdesk-seeks-canton-featured-app-status-for-prediction-markets",
-      "published_at": "2026-10-07T09:58:17.153+00:00"
-    },
-    {
-      "title": "Canton proposal adds a way to transfer locked CC",
-      "category": "ECOSYSTEM",
-      "description": "An update to CIP-0127 proposes a way to change the owner of locked Canton Coin while keeping the lock in place. It would let participants move to a new custodian without first unlocking or replacing the funds.",
-      "url": "https://cantonnews.org/canton-proposal-adds-a-way-to-transfer-locked-cc",
-      "published_at": "2026-10-07T09:58:17.153+00:00"
-    },
-    {
-      "title": "Fairmint proposes a common NFT format for Canton",
-      "category": "ECOSYSTEM",
-      "description": "Fairmint has proposed a shared format for unique assets on Canton, covering everything from tickets and memberships to regulated certificates. Equity certificates are its first planned production use.",
-      "url": "https://cantonnews.org/fairmint-proposes-a-common-nft-format-for-canton",
-      "published_at": "2026-10-07T09:58:17.153+00:00"
     },
     {
       "title": "Marex’s Canton Super Validator arrangement takes effect on MainNet",
@@ -262,10 +269,17 @@
       "published_at": "2026-10-07T09:58:17.153+00:00"
     },
     {
-      "title": "Unhedged launches October XP rewards with up to $3,000 per user",
+      "title": "ForecastDesk seeks Canton Featured App status for prediction markets",
       "category": "ECOSYSTEM",
-      "description": "Unhedged’s new XP program awards points for trading fees and pays rewards as users reach higher levels. Its October season has 10 levels, starting with a $10 reward and offering up to $3,000 in total.",
-      "url": "https://cantonnews.org/unhedged-launches-october-xp-rewards-with-up-to-3-000-per-user",
+      "description": "ForecastDesk has applied for Featured App status following its September MainNet launch. The prediction platform lets users trade event outcomes from their own Canton wallets, with payments and positions settled together.",
+      "url": "https://cantonnews.org/forecastdesk-seeks-canton-featured-app-status-for-prediction-markets",
+      "published_at": "2026-10-07T09:58:17.153+00:00"
+    },
+    {
+      "title": "Fairmint proposes a common NFT format for Canton",
+      "category": "ECOSYSTEM",
+      "description": "Fairmint has proposed a shared format for unique assets on Canton, covering everything from tickets and memberships to regulated certificates. Equity certificates are its first planned production use.",
+      "url": "https://cantonnews.org/fairmint-proposes-a-common-nft-format-for-canton",
       "published_at": "2026-10-07T09:58:17.153+00:00"
     },
     {
@@ -276,11 +290,18 @@
       "published_at": "2026-10-07T09:58:17.153+00:00"
     },
     {
-      "title": "Utila joins DTCC's tokenization working group",
-      "category": "INSTITUTIONS",
-      "description": "Utila has joined DTCC's industry working group on institutional tokenization. It brings experience in managing Canton assets, approving transfers and connecting blockchain activity with the systems financial institutions already use.",
-      "url": "https://cantonnews.org/utila-joins-dtcc-s-tokenization-working-group",
-      "published_at": "2026-10-06T15:52:19.288+00:00"
+      "title": "Unhedged launches October XP rewards with up to $3,000 per user",
+      "category": "ECOSYSTEM",
+      "description": "Unhedged’s new XP program awards points for trading fees and pays rewards as users reach higher levels. Its October season has 10 levels, starting with a $10 reward and offering up to $3,000 in total.",
+      "url": "https://cantonnews.org/unhedged-launches-october-xp-rewards-with-up-to-3-000-per-user",
+      "published_at": "2026-10-07T09:58:17.153+00:00"
+    },
+    {
+      "title": "Canton proposal adds a way to transfer locked CC",
+      "category": "ECOSYSTEM",
+      "description": "An update to CIP-0127 proposes a way to change the owner of locked Canton Coin while keeping the lock in place. It would let participants move to a new custodian without first unlocking or replacing the funds.",
+      "url": "https://cantonnews.org/canton-proposal-adds-a-way-to-transfer-locked-cc",
+      "published_at": "2026-10-07T09:58:17.153+00:00"
     },
     {
       "title": "Zenith warns of fake token listings and scam testnet links",
@@ -290,24 +311,10 @@
       "published_at": "2026-10-06T15:52:19.288+00:00"
     },
     {
-      "title": "Cancore’s Genesis Points program passes 50,000 users",
-      "category": "ECOSYSTEM",
-      "description": "Cancore’s latest update puts participation in its Genesis Points program above 50,000 users. Swaps earn points, and no snapshot had been taken when the October 6 update was published.",
-      "url": "https://cantonnews.org/cancore-s-genesis-points-program-passes-50-000-users",
-      "published_at": "2026-10-06T15:52:19.288+00:00"
-    },
-    {
-      "title": "Bitkub adds Canton Coin trading against the Thai baht",
-      "category": "MARKETS",
-      "description": "Canton Coin is available to trade against the Thai baht on Bitkub. The exchange announced the listing on October 1, with Canton sharing the news on October 6. The announcement confirms trading availability, not deposit or withdrawal support.",
-      "url": "https://cantonnews.org/bitkub-adds-canton-coin-trading-against-the-thai-baht",
-      "published_at": "2026-10-06T15:52:19.288+00:00"
-    },
-    {
-      "title": "Canton awards MainNet allocations to 43 named organisations",
-      "category": "ECOSYSTEM",
-      "description": "Canton’s latest MainNet allocation notice names 43 distinct organisations, including Kaleido, OmniStake and MZF Protocol. The awards give recipients an allocation for a validator node; they do not confirm that the nodes are already running.",
-      "url": "https://cantonnews.org/canton-awards-mainnet-allocations-to-43-named-organisations",
+      "title": "Utila joins DTCC's tokenization working group",
+      "category": "INSTITUTIONS",
+      "description": "Utila has joined DTCC's industry working group on institutional tokenization. It brings experience in managing Canton assets, approving transfers and connecting blockchain activity with the systems financial institutions already use.",
+      "url": "https://cantonnews.org/utila-joins-dtcc-s-tokenization-working-group",
       "published_at": "2026-10-06T15:52:19.288+00:00"
     },
     {
@@ -325,25 +332,18 @@
       "published_at": "2026-10-06T15:52:19.288+00:00"
     },
     {
-      "title": "ANDRA launches ETF tokenization infrastructure on Canton",
-      "category": "INSTITUTIONS",
-      "description": "ANDRA has launched a Canton-based platform for ETF issuers that connects onchain activity with official ownership records and existing fund infrastructure. An industry working group will examine settlement, compliance and potential pilots. The announcement does not name a live tokenized ETF.",
-      "url": "https://cantonnews.org/andra-launches-etf-tokenization-infrastructure-on-canton",
-      "published_at": "2026-10-06T07:32:15.391+00:00"
+      "title": "Canton awards MainNet allocations to 43 named organisations",
+      "category": "ECOSYSTEM",
+      "description": "Canton’s latest MainNet allocation notice names 43 distinct organisations, including Kaleido, OmniStake and MZF Protocol. The awards give recipients an allocation for a validator node; they do not confirm that the nodes are already running.",
+      "url": "https://cantonnews.org/canton-awards-mainnet-allocations-to-43-named-organisations",
+      "published_at": "2026-10-06T15:52:19.288+00:00"
     },
     {
-      "title": "Canton advances Splice upgrades across MainNet and TestNet",
-      "category": "TECHNOLOGY",
-      "description": "Splice 0.8.3 is ready for MainNet deployment, while 0.8.4 has cleared the same stage on TestNet. Each October 5 notice confirms that two-thirds of Super Validator nodes had upgraded, including the Global Synchronizer Foundation’s node.",
-      "url": "https://cantonnews.org/canton-advances-splice-upgrades-across-mainnet-and-testnet",
-      "published_at": "2026-10-06T07:32:15.391+00:00"
-    },
-    {
-      "title": "LG CNS launches KITL with plans for Korean institutional access to Canton",
-      "category": "INSTITUTIONS",
-      "description": "LG CNS has launched KITL, combining wallets, transaction processing, fee sponsorship and record collection for financial institutions. An MOU with the Canton Foundation covers infrastructure for Korean institutions to join Canton Network, alongside four other digital-asset partnerships.",
-      "url": "https://cantonnews.org/lg-cns-launches-kitl-with-plans-for-korean-institutional-access-to-canton",
-      "published_at": "2026-10-06T07:32:15.391+00:00"
+      "title": "Cancore’s Genesis Points program passes 50,000 users",
+      "category": "ECOSYSTEM",
+      "description": "Cancore’s latest update puts participation in its Genesis Points program above 50,000 users. Swaps earn points, and no snapshot had been taken when the October 6 update was published.",
+      "url": "https://cantonnews.org/cancore-s-genesis-points-program-passes-50-000-users",
+      "published_at": "2026-10-06T15:52:19.288+00:00"
     },
     {
       "title": "Canton’s developer update adds dAppBooster demos and setup guides",
@@ -367,13 +367,6 @@
       "published_at": "2026-10-06T07:32:15.391+00:00"
     },
     {
-      "title": "Kora tops $7 million in 24-hour trading volume",
-      "category": "ECOSYSTEM",
-      "description": "Kora's October 5 update puts its 24-hour trading volume above $7 million. The dated platform snapshot follows September listings for Canton Coin, gold and silver against USDCx, and measures completed trading rather than assets held on the exchange.",
-      "url": "https://cantonnews.org/kora-tops-7-million-in-24-hour-trading-volume",
-      "published_at": "2026-10-06T07:32:15.391+00:00"
-    },
-    {
       "title": "Canton Development Fund pays 5.08 million CC across four milestones",
       "category": "ECOSYSTEM",
       "description": "The Canton Development Fund has paid 5,081,500 CC across four milestones for Splice Portfolio, traffic accounting, BitSafe maintenance and Daml 3 training. The receipts confirm payment for defined work, not completion of the wider grant programs.",
@@ -388,10 +381,10 @@
       "published_at": "2026-10-06T07:32:15.391+00:00"
     },
     {
-      "title": "Cantor8 names winners of its August Canton hackathon",
+      "title": "Kora tops $7 million in 24-hour trading volume",
       "category": "ECOSYSTEM",
-      "description": "Team Mandate took first place in Cantor8's August hackathon, followed by Lattice Scan, Vorem and DamnLE. The October 5 results highlight controlled AI-agent spending, private indexing and security, with further details about the Cantor8 Accelerator still to come.",
-      "url": "https://cantonnews.org/cantor8-names-winners-of-its-august-canton-hackathon",
+      "description": "Kora's October 5 update puts its 24-hour trading volume above $7 million. The dated platform snapshot follows September listings for Canton Coin, gold and silver against USDCx, and measures completed trading rather than assets held on the exchange.",
+      "url": "https://cantonnews.org/kora-tops-7-million-in-24-hour-trading-volume",
       "published_at": "2026-10-06T07:32:15.391+00:00"
     },
     {
@@ -406,6 +399,34 @@
       "category": "ECOSYSTEM",
       "description": "Tradecraft's October 5 update puts total value locked on Canton above $3.5 million, following its September milestone of more than $3 million. TVL measures assets held in the platform's pools, not trading volume or revenue, and the figure is a platform-provided snapshot.",
       "url": "https://cantonnews.org/tradecraft-passes-3-5-million-in-total-value-locked-on-canton",
+      "published_at": "2026-10-06T07:32:15.391+00:00"
+    },
+    {
+      "title": "Canton advances Splice upgrades across MainNet and TestNet",
+      "category": "TECHNOLOGY",
+      "description": "Splice 0.8.3 is ready for MainNet deployment, while 0.8.4 has cleared the same stage on TestNet. Each October 5 notice confirms that two-thirds of Super Validator nodes had upgraded, including the Global Synchronizer Foundation’s node.",
+      "url": "https://cantonnews.org/canton-advances-splice-upgrades-across-mainnet-and-testnet",
+      "published_at": "2026-10-06T07:32:15.391+00:00"
+    },
+    {
+      "title": "Cantor8 names winners of its August Canton hackathon",
+      "category": "ECOSYSTEM",
+      "description": "Team Mandate took first place in Cantor8's August hackathon, followed by Lattice Scan, Vorem and DamnLE. The October 5 results highlight controlled AI-agent spending, private indexing and security, with further details about the Cantor8 Accelerator still to come.",
+      "url": "https://cantonnews.org/cantor8-names-winners-of-its-august-canton-hackathon",
+      "published_at": "2026-10-06T07:32:15.391+00:00"
+    },
+    {
+      "title": "ANDRA launches ETF tokenization infrastructure on Canton",
+      "category": "INSTITUTIONS",
+      "description": "ANDRA has launched a Canton-based platform for ETF issuers that connects onchain activity with official ownership records and existing fund infrastructure. An industry working group will examine settlement, compliance and potential pilots. The announcement does not name a live tokenized ETF.",
+      "url": "https://cantonnews.org/andra-launches-etf-tokenization-infrastructure-on-canton",
+      "published_at": "2026-10-06T07:32:15.391+00:00"
+    },
+    {
+      "title": "LG CNS launches KITL with plans for Korean institutional access to Canton",
+      "category": "INSTITUTIONS",
+      "description": "LG CNS has launched KITL, combining wallets, transaction processing, fee sponsorship and record collection for financial institutions. An MOU with the Canton Foundation covers infrastructure for Korean institutions to join Canton Network, alongside four other digital-asset partnerships.",
+      "url": "https://cantonnews.org/lg-cns-launches-kitl-with-plans-for-korean-institutional-access-to-canton",
       "published_at": "2026-10-06T07:32:15.391+00:00"
     },
     {
