@@ -267,6 +267,18 @@
     "logo_local": "logos\\binance-wallet.png"
   },
   {
+    "name": "Birdeye",
+    "slug": "birdeye",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ace78c9f75eadbab513deb2_6ace78c86eb3f570a783c3d1_birdeye-logo.png",
+    "description": "",
+    "external_url": "birdeye.so",
+    "tags": [
+      "Infrastructure",
+      "Analytics"
+    ],
+    "logo_local": "logos\\birdeye.png"
+  },
+  {
     "name": "Bitget Wallet",
     "slug": "bitget-wallet",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c5a2b1b164fb7f4c1bd_6ab35c5a4a52accb54fe1a26_bitget-wallet-logo.jpeg",
@@ -954,6 +966,18 @@
       "CEXs"
     ],
     "logo_local": "logos\\extended.png"
+  },
+  {
+    "name": "FAZE",
+    "slug": "faze",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6acf16f935ba975aacb36dd3_6acf16f8999599e1856ab88f_faze-logo.jpeg",
+    "description": "",
+    "external_url": "https://faze.fun",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\faze.jpeg"
   },
   {
     "name": "Fireblocks",
@@ -1682,6 +1706,20 @@
     "logo_local": "logos\\pdax.png"
   },
   {
+    "name": "Peach",
+    "slug": "peach",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6aca6824aa22f258daed43fa_6aca68216dea7d47e8171ba0_peach-logo.svg",
+    "description": "",
+    "external_url": "https://www.peach.ag/arc/swap?sell=0x3600000000000000000000000000000000000000&buy=0x171a4217b86a807a64eb94757db6849fb4bdbaa0",
+    "tags": [
+      "Developer Tools",
+      "Crosschain",
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\peach.svg"
+  },
+  {
     "name": "Phantom",
     "slug": "phantom",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c9169ef76b1daeb82a6_6ab35c91cb4d6682f18e99a4_phantom-logo.png",
@@ -2078,6 +2116,18 @@
     "logo_local": "logos\\swissborg.png"
   },
   {
+    "name": "Symbiosis",
+    "slug": "symbiosis",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ace75406429a5df6bd9191d_6ace753fc6af53088461bb47_symbiosis-logo.svg",
+    "description": "",
+    "external_url": "https://symbiosis.finance",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\symbiosis.svg"
+  },
+  {
     "name": "T-RIZE",
     "slug": "t-rize",
     "logo_cdn": "",
@@ -2163,6 +2213,18 @@
     "external_url": "https://tokocrypto.com/",
     "tags": [],
     "logo_local": "logos\\tokocrypto.png"
+  },
+  {
+    "name": "Tolly",
+    "slug": "tolly",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6acf1374999599e18568db12_6acf13731b33366e3b3c0a0d_tolly-logo.png",
+    "description": "",
+    "external_url": "https://tollylabs.com/tokens",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\tolly.png"
   },
   {
     "name": "Transak",
