@@ -1158,5 +1158,25 @@
     "created": "2026-09-14",
     "approved": "2026-09-25",
     "description": "This CIP proposes granting Marex participation as a Super Validator (SV) with a maximum Weight of 10.\n\nGiven Marex's position as a global financial services platform and its capabilities across execution, clearing, financing, collateral management, and prime services, Marex's participation is expected to advance institutional adoption of the Canton Network, support the development of regulated capital-markets use cases, and contribute meaningfully to network governance and growth.\n\nThis CIP establishes an umbrella, milestone-based program through which Marex can earn SV Weight of up to 10 by delivering initiatives that materially advance the Canton ecosystem.\n\nThis program contains confidential commitments to the ecosystem. Those commitments and milestones have been agreed with the Tokenomics Committee and SVAC and will be made available to the public when appropriate.\n\n- **Total Earnable Weight:** 10 (maximum)\n- **Accrual Destination:** Escrow, consistent with existing SV escrow mechanics\n- **Confidentiality:** The applicable governance bodies will review the milestones and inform the Super Validators when they have been met"
+  },
+  {
+    "id": "CIP-0127",
+    "number": 127,
+    "title": "On-Chain Enforcement of FA and SV Locking (Implementation of CIP-0116 and CIP-0105)",
+    "type": "Governance",
+    "status": "Proposed",
+    "created": "Aug 10, 2026",
+    "approved": "",
+    "description": "This CIP serves to align the stakeholders of CIP-0105 (SV Locking) and CIP-0116 (FA Locking) on the implementation of on-chain enforcement of SV and FA locking. It is motivated by the fact that the concrete mechanisms chosen to implement locking have a material impact on the operability of SVs, FAs, and staking apps.\n\nThe proposed implementation closely follows the high-level guidance laid out by these two CIPs except for the following changes:"
+  },
+  {
+    "id": "CIP-0129",
+    "number": 129,
+    "title": "Universal Burn and Synchronizer Pricing",
+    "type": "Tokenomics",
+    "status": "Proposed",
+    "created": "2026-10-07",
+    "approved": "",
+    "description": "Traffic on Canton MainNet is paid for in two different ways. On the Global Synchronizer, users burn Canton Coin (CC) for traffic, and apps and validators earn rewards based on that traffic. Traffic on dedicated synchronizers doesn't burn anything. Historically, it has been paid for through license fees to Digital Asset.\n\n \n\nThis CIP proposes universal burn: every synchronizer running production workloads burns CC for its traffic at the Global Synchronizer's list price, and apps and validators earn rewards for that traffic just as they would on the Global Synchronizer. To incentivize high-volume use cases to run on Canton, dedicated synchronizers will also get a volume-based pricing curve, plus further discounts for operators who commit to a level of throughput, back it with collateral, and maintain the commitment over time.\n\n \n\nWe are asking the Super Validators (SVs) to approve this framework. Once it is approved, universal burn can be implemented. A second CIP will propose the implementation details of the pricing curve and the discounts, along with initial parameters."
   }
 ]
