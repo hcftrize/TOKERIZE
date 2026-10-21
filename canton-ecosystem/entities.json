@@ -1768,6 +1768,20 @@
     "logo_local": "logos\\elwood-technologies.jpg"
   },
   {
+    "name": "Enflux",
+    "slug": "enflux",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ad225e3ba2a3f523ecd7925_26e947c4-5af7-4592-9929-e36291212727.png",
+    "short_desc": "Market making and trading infrastructure delivering deep, transparent liquidity for digital assets.",
+    "tags": [
+      "VALIDATOR",
+      "LIQUIDITY",
+      "Network Utilities\nLIQUIDITY",
+      "Roles\nVALIDATOR\nVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nEnflux\nhttps://enflux.io\nEnflux is a market-making and trading infrastructure provider bringing institutional and token liquidity to the Canton Network. Since 2023, our team of quantitative traders and engineers has supported more than 120 clients and 40 token launches across leading Layer-1 networks, DeFi protocols and Tier-1 exchanges. Our in-house trading systems provide continuous liquidity, tight spreads and stable order books through retainer, loan-based and self-service market-making models, along with DEX liquidity management.\nNetwork Utilities\nLIQUIDITY\nRoles\nVALIDATOR\nVALIDATOR",
+    "logo_local": "logos\\enflux.png"
+  },
+  {
     "name": "EquiLend",
     "slug": "equilend",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515d0be49a30b72804a0e_Equilend-icon.jpeg",
@@ -2908,6 +2922,31 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nKlarSign\nhttps://klarsign.com/\n\nSecure Document Signing on Canton Network KlarSign is the privacy-enabled, blockchain- based signing solution that ensures documents remain verifiable, immutable, and independent of any single vendor.\n\nNetwork Utilities\nDEVELOPER TOOLS\nRoles\nAPPS (FEATURED)VALIDATORAPPS (ALL)\nAPPS (FEATURED)VALIDATORAPPS (ALL)",
     "logo_local": "logos\\klarsign.jpg"
+  },
+  {
+    "name": "Knova",
+    "slug": "knova",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ad7d4b11511a2a8e1cfa2dd_42ddc2d7-e988-432e-9134-49bdc55d31fd.png",
+    "short_desc": "The universal operating layer for tokenized and traditional assets—without replacing existing system",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "CANTON FOUNDATION MEMBER",
+      "COMPLIANCE",
+      "DATA & ANALYTICS",
+      "DEVELOPER TOOLS",
+      "Network Utilities\nCOMPLIANCEDATA & ANALYTICSDEVELOPER TOOLSINTEROPERABILITYPAYMENTSSTABLECOINSSYSTEM INTEGRATORSTOKENIZED ASSETS",
+      "INTEROPERABILITY",
+      "PAYMENTS",
+      "STABLECOINS",
+      "SYSTEM INTEGRATORS",
+      "TOKENIZED ASSETS",
+      "Roles\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERSERVICE PROVIDERVALIDATOR\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERSERVICE PROVIDERVALIDATOR",
+      "SERVICE PROVIDER",
+      "VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nKnova\nhttps://www.knova.finance/\nKnova allows financial institutions to scale their operations across tokenized and traditional assets without changing their existing systems. The modular software solution provides 3 core capabilities: (1) cross venue and asset standardization, (2) operations and execution tooling and (3) various options for sharing the data back to client existing systems. The software is on-prem/cloud agonostic, SOC II Type II, and owned/operated by the client.\nNetwork Utilities\nCOMPLIANCEDATA & ANALYTICSDEVELOPER TOOLSINTEROPERABILITYPAYMENTSSTABLECOINSSYSTEM INTEGRATORSTOKENIZED ASSETS\nRoles\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERSERVICE PROVIDERVALIDATOR\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERSERVICE PROVIDERVALIDATOR",
+    "logo_local": "logos\\knova.png"
   },
   {
     "name": "Koch Energy Services",
