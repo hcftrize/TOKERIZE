@@ -3,7 +3,7 @@
   "scraped_at": "2026-04-26T15:35:46.515386+00:00",
   "bootstrap": true,
   "counts": {
-    "bondBrokenEvents": 98082
+    "bondBrokenEvents": 98083
   },
   "data": {
     "bondBrokenEvents": [
@@ -882744,8 +882744,17 @@
         "blockNumber": "52874922",
         "timestamp": "1792539191",
         "txHash": "0xe08a58a461d30b4d9b81d8ef472bef2465c175117bd4a943413f097534032d78"
+      },
+      {
+        "id": "0xb4377765f0e03be873b71d4c6dd1c26e7f7dd6b12dcfb38f25b40881825d3840-318",
+        "nftId": "9671",
+        "amount": "5027.546296296296296297",
+        "date": "2026-10-21",
+        "blockNumber": "52896742",
+        "timestamp": "1792582831",
+        "txHash": "0xb4377765f0e03be873b71d4c6dd1c26e7f7dd6b12dcfb38f25b40881825d3840"
       }
     ]
   },
-  "updated_at": "2026-10-21T05:31:47.432971+00:00"
+  "updated_at": "2026-10-22T05:31:50.984647+00:00"
 }
