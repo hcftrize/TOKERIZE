@@ -3,8 +3,8 @@
   "scraped_at": "2026-04-26T15:44:27.695872+00:00",
   "bootstrap": true,
   "counts": {
-    "nftTransferEvents": 10195,
-    "bondOwners": 10195
+    "nftTransferEvents": 10196,
+    "bondOwners": 10196
   },
   "data": {
     "nftTransferEvents": [
@@ -112152,6 +112152,17 @@
         "blockNumber": "52538340",
         "timestamp": "1791866027",
         "txHash": "0x01b3c2b6e903cfc406f74c5ba75231f83e6683488a83119e4dc071ca8c88742e"
+      },
+      {
+        "id": "0x60289c699f2b98ec7befdc647f3023794d7574c9a896f5bebcdb6e4b926708ca-208",
+        "tokenId": "10196",
+        "from": "0x0000000000000000000000000000000000000000",
+        "to": "0xa7c3da56c62f2edd8957bfac934c0d0637d22c10",
+        "isMint": true,
+        "date": "2026-10-22",
+        "blockNumber": "52947205",
+        "timestamp": "1792683757",
+        "txHash": "0x60289c699f2b98ec7befdc647f3023794d7574c9a896f5bebcdb6e4b926708ca"
       }
     ],
     "bondOwners": [
@@ -214104,8 +214115,18 @@
         "lastTransferDate": "2026-10-13",
         "lastTransferTimestamp": "1791866027",
         "transferCount": 1
+      },
+      {
+        "id": "10196",
+        "tokenId": "10196",
+        "owner": "0xa7c3da56c62f2edd8957bfac934c0d0637d22c10",
+        "mintDate": "2026-10-22",
+        "mintTimestamp": "1792683757",
+        "lastTransferDate": "2026-10-22",
+        "lastTransferTimestamp": "1792683757",
+        "transferCount": 1
       }
     ]
   },
-  "updated_at": "2026-10-22T05:31:53.231628+00:00"
+  "updated_at": "2026-10-23T05:31:46.921222+00:00"
 }
