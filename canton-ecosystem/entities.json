@@ -3133,6 +3133,26 @@
     "logo_local": "logos\\liberty-city-ventures.png"
   },
   {
+    "name": "LimeChain",
+    "slug": "limechain",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ada1a60d6ff070f748fb3ee_5094d5b8-5768-4d97-baa8-aff69b05237d.png",
+    "short_desc": "Blockchain & Web3 Solutions for Enterprises and Startups",
+    "tags": [
+      "SERVICE PROVIDER",
+      "DEVELOPER TOOLS",
+      "INTEROPERABILITY",
+      "PAYMENTS",
+      "Network Utilities\nDEVELOPER TOOLSINTEROPERABILITYPAYMENTSSTABLECOINSSYSTEM INTEGRATORSTOKENIZED ASSETSWALLETS",
+      "STABLECOINS",
+      "SYSTEM INTEGRATORS",
+      "TOKENIZED ASSETS",
+      "WALLETS",
+      "Roles\nSERVICE PROVIDER\nSERVICE PROVIDER"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nLimeChain\nhttps://limechain.tech/\nLimeChain is a blockchain consulting and engineering partner for enterprises, financial institutions and product teams. It combines strategic advice with hands-on development, helping clients move from use-case definition and architecture to working products and ongoing technical support. Its expertise spans blockchain infrastructure, smart contracts, tokenisation and decentralised finance, including integration with existing financial systems. For Canton-based projects, LimeChain brings this broader engineering experience together with practical knowledge of Daml and the Canton stack.\nNetwork Utilities\nDEVELOPER TOOLSINTEROPERABILITYPAYMENTSSTABLECOINSSYSTEM INTEGRATORSTOKENIZED ASSETSWALLETS\nRoles\nSERVICE PROVIDER\nSERVICE PROVIDER",
+    "logo_local": "logos\\limechain.png"
+  },
+  {
     "name": "Liquidity Tech (LTP)",
     "slug": "liquidity-tech-ltp",
     "logo_cdn": "https://cdn.prod.website-files.com/696805252243366e13a64c82/697a4b2e91c884840963f200_yellow-arrow-right.svg",
