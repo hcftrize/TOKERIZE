@@ -3,7 +3,7 @@
   "scraped_at": "2026-05-05T11:09:36.105804+00:00",
   "bootstrap": true,
   "counts": {
-    "tokensReleasedEvents": 90842,
+    "tokensReleasedEvents": 90855,
     "bondMigratedEvents": 0,
     "vestingUpdatedEvents": 9678,
     "vestedTokenClawedEvents": 0
@@ -908429,6 +908429,136 @@
         "blockNumber": "53083217",
         "timestamp": "1792955781",
         "txHash": "0x2031612216eeb2d19f618870ce662e54ec4ca7507c6b3f0c8a490ce58a2726ec"
+      },
+      {
+        "id": "0x9a16a00213b4e135e4ee6650ebb7ef5070ea11f8d74ac23ea26b174c58c9f960-28",
+        "nftId": "4330",
+        "to": "0x94b23f92b8d934c9548feae9b261090d51cb9ea3",
+        "amount": "19.825843658728242385",
+        "date": "2026-10-26",
+        "blockNumber": "53120593",
+        "timestamp": "1793030533",
+        "txHash": "0x9a16a00213b4e135e4ee6650ebb7ef5070ea11f8d74ac23ea26b174c58c9f960"
+      },
+      {
+        "id": "0x3acd95b05841e1828e47809a7d0173d6d3010333a54b9873a946b6bb91b5a44e-140",
+        "nftId": "15",
+        "to": "0x78485e6e2383268cda7f3762b2fa878e64338444",
+        "amount": "367.293644548822117385",
+        "date": "2026-10-26",
+        "blockNumber": "53121940",
+        "timestamp": "1793033227",
+        "txHash": "0x3acd95b05841e1828e47809a7d0173d6d3010333a54b9873a946b6bb91b5a44e"
+      },
+      {
+        "id": "0xf14b59f5496cbaa907dec32b0cd8c20f367babaea40a71c2fd8958b2bb3ca9ab-250",
+        "nftId": "9942",
+        "to": "0x78485e6e2383268cda7f3762b2fa878e64338444",
+        "amount": "311.378904722216325184",
+        "date": "2026-10-26",
+        "blockNumber": "53122687",
+        "timestamp": "1793034721",
+        "txHash": "0xf14b59f5496cbaa907dec32b0cd8c20f367babaea40a71c2fd8958b2bb3ca9ab"
+      },
+      {
+        "id": "0x7dbb2eb2ea7960e3b0623c4d1f881fb772aaca1c10c97719fef47d91a1d113e9-207",
+        "nftId": "9671",
+        "to": "0x4689cde63b535b81c2ea0fd8681223f6d3dea398",
+        "amount": "0",
+        "date": "2026-10-26",
+        "blockNumber": "53126478",
+        "timestamp": "1793042303",
+        "txHash": "0x7dbb2eb2ea7960e3b0623c4d1f881fb772aaca1c10c97719fef47d91a1d113e9"
+      },
+      {
+        "id": "0x87f691c58922bf82d8bd0052ee19af3dcef7f3f190fc28a767d001592599235f-71",
+        "nftId": "9671",
+        "to": "0x4689cde63b535b81c2ea0fd8681223f6d3dea398",
+        "amount": "0",
+        "date": "2026-10-26",
+        "blockNumber": "53126478",
+        "timestamp": "1793042303",
+        "txHash": "0x87f691c58922bf82d8bd0052ee19af3dcef7f3f190fc28a767d001592599235f"
+      },
+      {
+        "id": "0xb128c39ccde925ddf8b55375b2dc1fddceea78285333023faaf3eaa5f7cbd95f-5",
+        "nftId": "9671",
+        "to": "0x4689cde63b535b81c2ea0fd8681223f6d3dea398",
+        "amount": "0",
+        "date": "2026-10-26",
+        "blockNumber": "53126478",
+        "timestamp": "1793042303",
+        "txHash": "0xb128c39ccde925ddf8b55375b2dc1fddceea78285333023faaf3eaa5f7cbd95f"
+      },
+      {
+        "id": "0x27a211d020ef165839d1106b9ce8e6e7c12d71cd7254b006e9252eef3eec2dde-162",
+        "nftId": "9671",
+        "to": "0x4689cde63b535b81c2ea0fd8681223f6d3dea398",
+        "amount": "0",
+        "date": "2026-10-26",
+        "blockNumber": "53126479",
+        "timestamp": "1793042305",
+        "txHash": "0x27a211d020ef165839d1106b9ce8e6e7c12d71cd7254b006e9252eef3eec2dde"
+      },
+      {
+        "id": "0x471f45d84c6782a8203d7bb74572addbbe7da3f1bae41e9a73cc61d8c23e7b96-7",
+        "nftId": "9671",
+        "to": "0x4689cde63b535b81c2ea0fd8681223f6d3dea398",
+        "amount": "0",
+        "date": "2026-10-26",
+        "blockNumber": "53126479",
+        "timestamp": "1793042305",
+        "txHash": "0x471f45d84c6782a8203d7bb74572addbbe7da3f1bae41e9a73cc61d8c23e7b96"
+      },
+      {
+        "id": "0x66921d24036b86bb348207dbc1e9e3367f966dab478294b33dea429e81ede031-255",
+        "nftId": "9671",
+        "to": "0x4689cde63b535b81c2ea0fd8681223f6d3dea398",
+        "amount": "0",
+        "date": "2026-10-26",
+        "blockNumber": "53134229",
+        "timestamp": "1793057805",
+        "txHash": "0x66921d24036b86bb348207dbc1e9e3367f966dab478294b33dea429e81ede031"
+      },
+      {
+        "id": "0x29d23edd358ff2cf4e4e6caeacf42585eac5b97585107d3d901868f2cbb870c5-4",
+        "nftId": "9671",
+        "to": "0x4689cde63b535b81c2ea0fd8681223f6d3dea398",
+        "amount": "0",
+        "date": "2026-10-26",
+        "blockNumber": "53134230",
+        "timestamp": "1793057807",
+        "txHash": "0x29d23edd358ff2cf4e4e6caeacf42585eac5b97585107d3d901868f2cbb870c5"
+      },
+      {
+        "id": "0x8ab7f4e38294883786eb7275d00a3a92e28110c91e067a12d3c99f03a18088ea-694",
+        "nftId": "9671",
+        "to": "0x4689cde63b535b81c2ea0fd8681223f6d3dea398",
+        "amount": "0",
+        "date": "2026-10-26",
+        "blockNumber": "53134230",
+        "timestamp": "1793057807",
+        "txHash": "0x8ab7f4e38294883786eb7275d00a3a92e28110c91e067a12d3c99f03a18088ea"
+      },
+      {
+        "id": "0xa05dc9cb83f21ae3c10a0994dd48fa99c0555989cd1c8d7dd28781c1627fb0dc-528",
+        "nftId": "9671",
+        "to": "0x4689cde63b535b81c2ea0fd8681223f6d3dea398",
+        "amount": "0",
+        "date": "2026-10-26",
+        "blockNumber": "53134230",
+        "timestamp": "1793057807",
+        "txHash": "0xa05dc9cb83f21ae3c10a0994dd48fa99c0555989cd1c8d7dd28781c1627fb0dc"
+      },
+      {
+        "id": "0x77dae3a8a31868541fbc3d0f8b507c450305a4761066c26e6f87736e75f6dabe-7",
+        "nftId": "9671",
+        "to": "0x4689cde63b535b81c2ea0fd8681223f6d3dea398",
+        "amount": "0",
+        "date": "2026-10-26",
+        "blockNumber": "53134231",
+        "timestamp": "1793057809",
+        "txHash": "0x77dae3a8a31868541fbc3d0f8b507c450305a4761066c26e6f87736e75f6dabe"
       }
     ],
     "bondMigratedEvents": [],
@@ -1024572,5 +1024702,5 @@
     ],
     "vestedTokenClawedEvents": []
   },
-  "updated_at": "2026-10-26T05:31:49.461645+00:00"
+  "updated_at": "2026-10-27T05:31:46.861587+00:00"
 }
