@@ -934,7 +934,7 @@
     "number": 104,
     "title": "Traffic-Based App Rewards",
     "type": "Tokenomics",
-    "status": "Approved",
+    "status": "Proposed Amendment",
     "created": "2026-01-29",
     "approved": "2026-02-12",
     "description": "This CIP proposes to improve the quality of the app reward incentives by removing featured app markers and instead basing an app’s rewards on the actual traffic spent on (sub-)transactions that change the state managed by the app.\nThis is achieved by measuring traffic spent directly on the Global Synchronizer using only sequencer and mediator data.\nThis removes the need for app builders to create `FeaturedAppActivityMarker`s in all the right places, and instead measures the *actual burn* contributed by *all activity* of an app provider party by default.\n\nTo enable validator operators to manage the traffic costs incurred by validating (as opposed to submitting) transactions and to foster decentralization of apps and wallets, this CIP also proposes to make protocol-conformant confirmation responses free.\nThus validator nodes only pay for the submission of transactions by their users, which is an action that validators can explicitly gate, and charge for, if required.\n\nThis CIP further proposes to implement these changes in a way that improves the throughput of the Global Synchronizer, and reduces the transaction cost of app transactions.\nConcretely it proposes to avoid using the `DSO` party in app transactions for the sole purpose of recording app activity, thereby reducing the size of app transactions, and avoiding the need for the SV nodes to validate and confirm extra sub-transactions concerning the `DSO` party."
@@ -1164,9 +1164,9 @@
     "number": 127,
     "title": "On-Chain Enforcement of FA and SV Locking (Implementation of CIP-0116 and CIP-0105)",
     "type": "Governance",
-    "status": "Proposed",
+    "status": "Approved",
     "created": "Aug 10, 2026",
-    "approved": "",
+    "approved": "Oct 23, 2026",
     "description": "This CIP serves to align the stakeholders of CIP-0105 (SV Locking) and CIP-0116 (FA Locking) on the implementation of on-chain enforcement of SV and FA locking. It is motivated by the fact that the concrete mechanisms chosen to implement locking have a material impact on the operability of SVs, FAs, and staking apps.\n\nThe proposed implementation closely follows the high-level guidance laid out by these two CIPs except for the following changes:"
   },
   {
@@ -1174,9 +1174,9 @@
     "number": 129,
     "title": "Universal Burn and Synchronizer Pricing",
     "type": "Tokenomics",
-    "status": "Proposed",
+    "status": "Approved",
     "created": "2026-10-07",
-    "approved": "",
+    "approved": "2026-10-23",
     "description": "Traffic on Canton MainNet is paid for in two different ways. On the Global Synchronizer, users burn Canton Coin (CC) for traffic, and apps and validators earn rewards based on that traffic. Traffic on dedicated synchronizers doesn't burn anything. Historically, it has been paid for through license fees to Digital Asset.\n\n \n\nThis CIP proposes universal burn: every synchronizer running production workloads burns CC for its traffic at the Global Synchronizer's list price, and apps and validators earn rewards for that traffic just as they would on the Global Synchronizer. To incentivize high-volume use cases to run on Canton, dedicated synchronizers will also get a volume-based pricing curve, plus further discounts for operators who commit to a level of throughput, back it with collateral, and maintain the commitment over time.\n\n \n\nWe are asking the Super Validators (SVs) to approve this framework. Once it is approved, universal burn can be implemented. A second CIP will propose the implementation details of the pricing curve and the discounts, along with initial parameters."
   }
 ]

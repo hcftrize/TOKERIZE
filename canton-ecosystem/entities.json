@@ -927,6 +927,25 @@
     "logo_local": "logos\\castleton-commodities-international.jpeg"
   },
   {
+    "name": "CatalyX by IntellectEU",
+    "slug": "catalyx-by-intellecteu",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ada4893355c9d5a984c4a75_a9c93e42-ab70-49ff-944e-544d2ebdd04d.png",
+    "short_desc": "Validator infrastructure, tooling, and Daml engineering on Canton, from first node to live app",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "CANTON FOUNDATION MEMBER",
+      "DEVELOPER TOOLS",
+      "NAAS PROVIDER",
+      "Network Utilities\nDEVELOPER TOOLSNAAS PROVIDER",
+      "Roles\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERMARKET INFRASTRUCTURESUPER VALIDATOR\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERMARKET INFRASTRUCTURESUPER VALIDATOR",
+      "MARKET INFRASTRUCTURE",
+      "SUPER VALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nCatalyX by IntellectEU\nhttps://www.catalyx.solutions/canton-network\nIntellectEU, a founding member of the Canton Foundation, takes institutions from the first Canton node to production applications through CatalyX. Infrastructure, custody and wallet connectivity, Daml application development and operations, with one partner for all of it.\nNetwork Utilities\nDEVELOPER TOOLSNAAS PROVIDER\nRoles\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERMARKET INFRASTRUCTURESUPER VALIDATOR\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERMARKET INFRASTRUCTURESUPER VALIDATOR",
+    "logo_local": "logos\\catalyx-by-intellecteu.png"
+  },
+  {
     "name": "Cauri",
     "slug": "cauri",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a3c68edb8545752c64fdb3e_ea4c33f0-fd6d-473a-aa1e-c714e34b9af0.png",
@@ -1268,6 +1287,28 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nCredShields\nhttps://credshields.com/\n\nA security company delivering web3 application security through smart contract audits, AI-powered risk detection, and continuous monitoring, enabling enterprises and blockchain protocols to build, deploy, and scale systems securely.\n\nRoles\nAPPS (ALL)SERVICE PROVIDER\nAPPS (ALL)SERVICE PROVIDER",
     "logo_local": "logos\\credshields.jpg"
+  },
+  {
+    "name": "Cryptio",
+    "slug": "cryptio",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6adb827d0a615c8f513e256a_4dc0a3cb-7532-4757-a7f6-5ecc73f19734.svg",
+    "short_desc": "Back Office Data infrastructure for Canton : accounting, reconciliation, controls, intelligence.",
+    "tags": [
+      "APPS (ALL)",
+      "APPS (FEATURED)",
+      "CANTON FOUNDATION MEMBER",
+      "COMPLIANCE",
+      "DATA & ANALYTICS",
+      "DEVELOPER TOOLS",
+      "Network Utilities\nCOMPLIANCEDATA & ANALYTICSDEVELOPER TOOLSINTEROPERABILITYSYSTEM INTEGRATORS",
+      "INTEROPERABILITY",
+      "SYSTEM INTEGRATORS",
+      "Roles\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERFINANCIAL INSTITUTIONSMARKET INFRASTRUCTURE\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERFINANCIAL INSTITUTIONSMARKET INFRASTRUCTURE",
+      "FINANCIAL INSTITUTIONS",
+      "MARKET INFRASTRUCTURE"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nCryptio\nhttps://cryptio.co/\nCryptio is the data layer for institutions putting real assets on-chain. Banks, asset managers and token issuers building on networks like Canton need one trusted view of their tokenized positions, cash and counterparties, across on-chain and traditional systems. We ingest data from 150+ blockchains, custodians, exchanges and internal systems, then index and normalize it into standardized, accounting-grade data models that respect privacy and permissioning. That data is then available to every team and tool that needs it: through APIs and MCPs for AI agents, through our intelligence products for exposure, risk and investor reporting, and through exports into ERPs, data warehouses and risk systems. On the back office side, the same data powers reconciliation, accounting under GAAP and IFRS, and audit-ready controls. Trusted by 400+ digital asset institutions, SOC 1 and SOC 2 Type II certified.\nNetwork Utilities\nCOMPLIANCEDATA & ANALYTICSDEVELOPER TOOLSINTEROPERABILITYSYSTEM INTEGRATORS\nRoles\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERFINANCIAL INSTITUTIONSMARKET INFRASTRUCTURE\nAPPS (ALL)APPS (FEATURED)CANTON FOUNDATION MEMBERFINANCIAL INSTITUTIONSMARKET INFRASTRUCTURE",
+    "logo_local": "logos\\cryptio.svg"
   },
   {
     "name": "Crypto Finance AG",
@@ -3133,6 +3174,26 @@
     "logo_local": "logos\\liberty-city-ventures.png"
   },
   {
+    "name": "LimeChain",
+    "slug": "limechain",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ada1a60d6ff070f748fb3ee_5094d5b8-5768-4d97-baa8-aff69b05237d.png",
+    "short_desc": "Blockchain & Web3 Solutions for Enterprises and Startups",
+    "tags": [
+      "SERVICE PROVIDER",
+      "DEVELOPER TOOLS",
+      "INTEROPERABILITY",
+      "PAYMENTS",
+      "Network Utilities\nDEVELOPER TOOLSINTEROPERABILITYPAYMENTSSTABLECOINSSYSTEM INTEGRATORSTOKENIZED ASSETSWALLETS",
+      "STABLECOINS",
+      "SYSTEM INTEGRATORS",
+      "TOKENIZED ASSETS",
+      "WALLETS",
+      "Roles\nSERVICE PROVIDER\nSERVICE PROVIDER"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nLimeChain\nhttps://limechain.tech/\nLimeChain is a blockchain consulting and engineering partner for enterprises, financial institutions and product teams. It combines strategic advice with hands-on development, helping clients move from use-case definition and architecture to working products and ongoing technical support. Its expertise spans blockchain infrastructure, smart contracts, tokenisation and decentralised finance, including integration with existing financial systems. For Canton-based projects, LimeChain brings this broader engineering experience together with practical knowledge of Daml and the Canton stack.\nNetwork Utilities\nDEVELOPER TOOLSINTEROPERABILITYPAYMENTSSTABLECOINSSYSTEM INTEGRATORSTOKENIZED ASSETSWALLETS\nRoles\nSERVICE PROVIDER\nSERVICE PROVIDER",
+    "logo_local": "logos\\limechain.png"
+  },
+  {
     "name": "Liquidity Tech (LTP)",
     "slug": "liquidity-tech-ltp",
     "logo_cdn": "https://cdn.prod.website-files.com/696805252243366e13a64c82/697a4b2e91c884840963f200_yellow-arrow-right.svg",
@@ -3602,6 +3663,20 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nNode Monster\nhttps://www.node.monster/\n\nNode.Monster provides high-performance, institutional-grade node operations to support the Canton ecosystem.\n\nNetwork Utilities\nNAAS\nRoles\nVALIDATORSERVICE PROVIDER\nVALIDATORSERVICE PROVIDER",
     "logo_local": "logos\\node-monster.png"
+  },
+  {
+    "name": "node101",
+    "slug": "node101",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ada660eda2ef56947829d4e_152fd781-8cbb-416a-80c1-950a8d123100.png",
+    "short_desc": "Blockchain infrastructure provider since 2022, offering dedicated Canton nodes and enterprise RPC.",
+    "tags": [
+      "SERVICE PROVIDER",
+      "DEVELOPER TOOLS",
+      "Network Utilities\nDEVELOPER TOOLS",
+      "Roles\nSERVICE PROVIDER\nSERVICE PROVIDER"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nnode101\nhttps://node101.io\nnode101 is a blockchain infrastructure provider founded in 2022 in Istanbul, Türkiye. For the Canton Network, node101 offers a fully managed dedicated node with HTTP and WebSocket access, no monthly request quota, load balancing, monitoring through the 101 Dashboard, incident reports and 24/7 technical support, backed by a published SLA. Beyond Canton, node101 runs validators on proof-of-stake networks including Celestia, Cosmos Hub, Babylon and Monad, and provides white-label validator services, dedicated and shared nodes, blockchain consulting and product development for exchanges, custodians, financial institutions and foundations. node101 operates an ISO/IEC 27001 certified information security management system.\nNetwork Utilities\nDEVELOPER TOOLS\nRoles\nSERVICE PROVIDER\nSERVICE PROVIDER",
+    "logo_local": "logos\\node101.png"
   },
   {
     "name": "NodeOps",
