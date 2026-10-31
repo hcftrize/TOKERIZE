@@ -84,6 +84,42 @@
     "logo_local": "logos\\alcove.png"
   },
   {
+    "name": "Aleo (via xReserve)",
+    "slug": "aleo-via-xreserve",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae15036b73b6c2bc7f03fd1_6ae15035da437e788e07be9b_aleo-via-xreserve-logo.svg",
+    "description": "",
+    "external_url": "aleo.org",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\aleo-via-xreserve.svg"
+  },
+  {
+    "name": "Allium",
+    "slug": "allium",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1805c54b35346d82f8fd3_6ae1805ba91f6e49f1e090d0_allium-logo.png",
+    "description": "",
+    "external_url": "https://www.allium.so/",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\allium.png"
+  },
+  {
+    "name": "Allnodes",
+    "slug": "allnodes",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1848f976c071fafbda2fa_6ae1844c81175669950c0882_allnodes-logo.svg",
+    "description": "",
+    "external_url": "https://arc.publicnode.com/",
+    "tags": [
+      "Infrastructure",
+      "RPC Providers"
+    ],
+    "logo_local": "logos\\allnodes.svg"
+  },
+  {
     "name": "AllUnity",
     "slug": "allunity",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/695fe1b471d894335b2b9fa5_AU-logo.jpg",
@@ -94,6 +130,18 @@
       "Stablecoin Issuers"
     ],
     "logo_local": "logos\\allunity.jpg"
+  },
+  {
+    "name": "Anchorage",
+    "slug": "anchorage",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae110f28599fd226e05f8f8_6ae110f01630b70483199bf4_anchorage-logo.png",
+    "description": "",
+    "external_url": "https://www.anchorage.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\anchorage.png"
   },
   {
     "name": "Argus",
@@ -231,6 +279,18 @@
     "logo_local": "logos\\bankr.svg"
   },
   {
+    "name": "BCW",
+    "slug": "bcw",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae18068d55d98be5e56ec7d_6ae18067b01bcbfdb71de67c_bcw-logo.webp",
+    "description": "",
+    "external_url": "https://www.bcw.group/",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\bcw.webp"
+  },
+  {
     "name": "BDACS (KRW1)",
     "slug": "bdacs-krw1-2",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/693187c663bdbaf3ca02e2c8_%5BBDACS%5DLOGO_Horizon.png",
@@ -353,6 +413,20 @@
     "logo_local": "logos\\blackrock.svg"
   },
   {
+    "name": "Blockaid",
+    "slug": "blockaid",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae134183ee99ed7b76666bf_6ae13416679fa96b08c0e958_blockaid-logo.svg",
+    "description": "",
+    "external_url": "https://blockaid.io",
+    "tags": [
+      "Infrastructure",
+      "Analytics",
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\blockaid.svg"
+  },
+  {
     "name": "Blockdaemon",
     "slug": "blockdaemon",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd16e00a1722c911996a98_Blockdaemon-Badge-Purple.svg",
@@ -449,6 +523,18 @@
     "logo_local": "logos\\btg-pactual.svg"
   },
   {
+    "name": "Bungee",
+    "slug": "bungee",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae15740cb7eaf1d6ffbf81a_6ae1573e9444c0abc1319f77_bungee-logo.svg",
+    "description": "",
+    "external_url": "bungee.exchange",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\bungee.svg"
+  },
+  {
     "name": "BVNK",
     "slug": "bvnk",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab349928301f8fa023f7464_6ab349914f73db8addd22193_bvnk-logo.jpeg",
@@ -507,6 +593,18 @@
       "Fintechs"
     ],
     "logo_local": "logos\\catena-labs.svg"
+  },
+  {
+    "name": "Ceffu",
+    "slug": "ceffu",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae117f7dbb9e874c5351b63_6ae117f6bcc1cfc4296843e0_ceffu-logo.png",
+    "description": "",
+    "external_url": "https://www.ceffu.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\ceffu.png"
   },
   {
     "name": "Centrifuge",
@@ -618,6 +716,18 @@
       "Analytics"
     ],
     "logo_local": "logos\\coingecko.png"
+  },
+  {
+    "name": "CoinMarketCap",
+    "slug": "coinmarketcap",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1807593362bcf12cd4973_6ae18074d1f4736a6a40c5c5_coinmarketcap-logo.jpeg",
+    "description": "",
+    "external_url": "https://coinmarketcap.com",
+    "tags": [
+      "Infrastructure",
+      "Analytics"
+    ],
+    "logo_local": "logos\\coinmarketcap.jpeg"
   },
   {
     "name": "Coins.ph",
@@ -738,6 +848,18 @@
       "Wallet Services"
     ],
     "logo_local": "logos\\dcent.webp"
+  },
+  {
+    "name": "DeFiLlama",
+    "slug": "defillama",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1817fee00d473fdcfbfa1_6ae1816e9fd3f813597098a2_defillama-logo.png",
+    "description": "",
+    "external_url": "https://defillama.com",
+    "tags": [
+      "Infrastructure",
+      "Analytics"
+    ],
+    "logo_local": "logos\\defillama.png"
   },
   {
     "name": "Definitive",
@@ -873,6 +995,18 @@
     "logo_local": "logos\\dtcc.png"
   },
   {
+    "name": "Dune",
+    "slug": "dune",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae182024cacdb3637932e12_6ae181ecee5b2575f0f6353f_dune-logo.svg",
+    "description": "",
+    "external_url": "https://dune.com",
+    "tags": [
+      "Infrastructure",
+      "Analytics"
+    ],
+    "logo_local": "logos\\dune.svg"
+  },
+  {
     "name": "Dynamic",
     "slug": "dynamic",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd14b4a6585fdb17dae834_dynamic-icon.svg",
@@ -892,6 +1026,18 @@
       "PSPs"
     ],
     "logo_local": "logos\\ebanx.svg"
+  },
+  {
+    "name": "Eco",
+    "slug": "eco",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae15e4516e5b5348c92fd29_6ae15e435fb68bc404714b45_eco-logo.svg",
+    "description": "",
+    "external_url": "eco.org",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\eco.svg"
   },
   {
     "name": "edgeX",
@@ -968,6 +1114,18 @@
     "logo_local": "logos\\extended.png"
   },
   {
+    "name": "Fast",
+    "slug": "fast",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae16c68777f477452c6ce26_6ae165514d3c809ee40d2db9_fast-logo.svg",
+    "description": "",
+    "external_url": "https://fast.xyz/",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\fast.svg"
+  },
+  {
     "name": "FAZE",
     "slug": "faze",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6acf16f935ba975aacb36dd3_6acf16f8999599e1856ab88f_faze-logo.jpeg",
@@ -978,6 +1136,20 @@
       "DEXs"
     ],
     "logo_local": "logos\\faze.jpeg"
+  },
+  {
+    "name": "Figment",
+    "slug": "figment",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1848d976c071fafbda2c8_6ae18449df33246475831fef_figment-logo.svg",
+    "description": "",
+    "external_url": "https://figment.io",
+    "tags": [
+      "Infrastructure",
+      "Validators",
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\figment.svg"
   },
   {
     "name": "Fireblocks",
@@ -1038,6 +1210,18 @@
       "DEXs"
     ],
     "logo_local": "logos\\fomo.png"
+  },
+  {
+    "name": "Fordefi",
+    "slug": "fordefi",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae11f03e5d952271e4b089e_6ae11efe309a2796b8c22134_fordefi-logo.svg",
+    "description": "",
+    "external_url": "https://fordefi.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\fordefi.svg"
   },
   {
     "name": "Forte AUD",
@@ -1247,6 +1431,20 @@
     "logo_local": "logos\\hurupay.jpg"
   },
   {
+    "name": "Hypernative",
+    "slug": "hypernative",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae142242f5b29242af32573_6ae14223961a04156332786b_hypernative-logo.svg",
+    "description": "",
+    "external_url": "hypernative.io",
+    "tags": [
+      "Infrastructure",
+      "Analytics",
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\hypernative.svg"
+  },
+  {
     "name": "imToken",
     "slug": "imtoken",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab35c81776b2468728d25f8_6ab35c80436bc54d08754129_imtoken-logo.png",
@@ -1295,6 +1493,18 @@
     "logo_local": "logos\\jpyc.png"
   },
   {
+    "name": "Kaleido",
+    "slug": "kaleido",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1848d976c071fafbda2d0_6ae1844a5b480b1e4b0a97f7_kaleido-logo.svg",
+    "description": "",
+    "external_url": "https://kaleido.io",
+    "tags": [
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\kaleido.svg"
+  },
+  {
     "name": "Keyrock",
     "slug": "keyrock",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6900e1519f258f328ca00578_Keyrock_Logo_01_RGB_Black.svg",
@@ -1305,6 +1515,32 @@
       "Market Makers"
     ],
     "logo_local": "logos\\keyrock.svg"
+  },
+  {
+    "name": "Kiln",
+    "slug": "kiln",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1848d976c071fafbda2df_6ae1844cdf332464758320f3_kiln-logo.svg",
+    "description": "",
+    "external_url": "https://kiln.fi",
+    "tags": [
+      "Infrastructure",
+      "Analytics",
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\kiln.svg"
+  },
+  {
+    "name": "Komainu",
+    "slug": "komainu",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1260784979417c0329653_6ae12605c3541b6959afd1de_komainu-logo.png",
+    "description": "",
+    "external_url": "komainu.com",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\komainu.png"
   },
   {
     "name": "Kraken",
@@ -1813,6 +2049,18 @@
     "logo_local": "logos\\pump-fun.png"
   },
   {
+    "name": "Pyth",
+    "slug": "pyth",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae0d8b04a2c075c26d13bc9_6ae0d8ac6c52d1cc79c72e76_pyth-logo.svg",
+    "description": "",
+    "external_url": "https://www.pyth.network",
+    "tags": [
+      "Developer Tools",
+      "Oracles"
+    ],
+    "logo_local": "logos\\pyth.svg"
+  },
+  {
     "name": "QuickNode",
     "slug": "quicknode",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd12d85ce3de4f3d2cdcb6_quicknode-icon.svg",
@@ -1894,6 +2142,18 @@
     "logo_local": "logos\\redstone.svg"
   },
   {
+    "name": "Relay",
+    "slug": "relay",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae17362a050ec0462d89b18_6ae1735ecb7eaf1d6fffdefa_relay-logo.svg",
+    "description": "",
+    "external_url": "https://relay.link/",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\relay.svg"
+  },
+  {
     "name": "RhinoFi",
     "slug": "rhinofi",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ab359f7c77433c53da07d75_6ab359f7ea3e95a7e57101cf_rhinofi-logo.png",
@@ -1916,6 +2176,18 @@
       "CEXs"
     ],
     "logo_local": "logos\\robinhood.svg"
+  },
+  {
+    "name": "Safe",
+    "slug": "safe",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae12d16e5d952271e4fa775_6ae12d0c84979417c033a571_safe-logo.svg",
+    "description": "",
+    "external_url": "safe.global",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\safe.svg"
   },
   {
     "name": "SafePal",
@@ -1990,6 +2262,32 @@
     "logo_local": "logos\\societe-generale.svg"
   },
   {
+    "name": "Socket",
+    "slug": "socket",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1804db117d9aa321d3048_6ae1804c0d8e4578f34d9095_socket-logo.svg",
+    "description": "",
+    "external_url": "https://www.socket.tech/",
+    "tags": [
+      "Developer Tools",
+      "Crosschain"
+    ],
+    "logo_local": "logos\\socket.svg"
+  },
+  {
+    "name": "Socure",
+    "slug": "socure",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae14935c8b5980995f23228_6ae14931c4a927d549715430_socure-logo.png",
+    "description": "",
+    "external_url": "socure.com",
+    "tags": [
+      "Infrastructure",
+      "Analytics",
+      "Developer Tools",
+      "Tools"
+    ],
+    "logo_local": "logos\\socure.png"
+  },
+  {
     "name": "Stablecorp",
     "slug": "stablecorp",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fbf49134b8eddc013bbc28_stablecorp.svg",
@@ -2048,6 +2346,18 @@
       "Borrow/Lend"
     ],
     "logo_local": "logos\\steakhouse-financial.png"
+  },
+  {
+    "name": "Stork",
+    "slug": "stork",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1848e976c071fafbda2e4_6ae1844ce83b39ffb7d93a17_stork-logo.png",
+    "description": "",
+    "external_url": "https://stork.network",
+    "tags": [
+      "Developer Tools",
+      "Oracles"
+    ],
+    "logo_local": "logos\\stork.png"
   },
   {
     "name": "Sumitomo Corporation",
@@ -2183,6 +2493,18 @@
       "Tools"
     ],
     "logo_local": "logos\\tenderly.svg"
+  },
+  {
+    "name": "The Graph",
+    "slug": "the-graph",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae1848e976c071fafbda2e9_6ae1844cee00d473fdcffb19_the-graph-logo.svg",
+    "description": "",
+    "external_url": "https://thegraph.com",
+    "tags": [
+      "Developer Tools",
+      "Oracles"
+    ],
+    "logo_local": "logos\\the-graph.svg"
   },
   {
     "name": "thirdweb",
@@ -2462,6 +2784,18 @@
       "PSPs"
     ],
     "logo_local": "logos\\yellow-card.svg"
+  },
+  {
+    "name": "Zengo",
+    "slug": "zengo",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6ae0dfb89791e392d71784ea_6ae0dfb6cd2c7eb790540d31_zengo-logo.png",
+    "description": "",
+    "external_url": "https://zengo.com/",
+    "tags": [
+      "Developer Tools",
+      "Wallet Services"
+    ],
+    "logo_local": "logos\\zengo.png"
   },
   {
     "name": "Zerion",
