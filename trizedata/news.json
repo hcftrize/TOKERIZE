@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-10-01T14:07:31+00:00",
-  "count": 53,
+  "updated_at": "2026-11-01T14:28:55+00:00",
+  "count": 57,
   "articles": [
+    {
+      "title": "Link:NYC",
+      "category": "EVENTS",
+      "description": "New-York City",
+      "url": "event:link-nyc:2026-10-29",
+      "published_at": "2026-10-29",
+      "start_date": "2026-10-29",
+      "end_date": "2026-10-29",
+      "image": null,
+      "external_url": "https://chain.link/events/linknyc"
+    },
+    {
+      "title": "T-RIZE Integrates Chainlink CCIP into Its Tokenization Infrastructure on Canton",
+      "category": "NEWS",
+      "description": "The integration supports tokenized asset transfers between the Canton Network and supported EVM networks.MONTRÉAL, October 21, 2026 — T-RIZE Group has integrated Chainlink’s Cross-Chain Interoperability Protocol (CCIP) into its tokenization infrastructure on the Canton Network. Completed in techn…",
+      "url": "https://www.t-rize.io/news/T-RIZE-Integrates-Chainlink-CCIP-on-Canton",
+      "published_at": "2026-10-21T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/4VIno61NRu5PIHwMdQpgpR/494f30f08bb57cc10fa3a7a36f49137e/T-RIZE___Chainlink.png?w=800"
+    },
+    {
+      "title": "T-RIZE Selected to Join Tokenized Asset Coalition",
+      "category": "NEWS",
+      "description": "T-RIZE brings institutional market architecture and federated intelligence expertise to the coalition.MONTRÉAL, October 15, 2026 — T-RIZE Group Corporation today announced that it has been selected to join the Tokenized Asset Coalition (TAC). The Canadian financial technology company will contrib…",
+      "url": "https://www.t-rize.io/news/T-RIZE-Selected-to-Join-Tokenized-Asset-Coalition",
+      "published_at": "2026-10-15T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/5rRCNW5CGegBV327uaIjSq/81c7bea9c225bcdb62700ee4c2c76812/unnamed.png?w=800"
+    },
+    {
+      "title": "Canada's Tokenization Opportunity Runs Through Collateral",
+      "category": "ARTICLE",
+      "description": "As Canada's banks build digital money, collateral is the most practical place to prove that tokenized assets can strengthen financing markets. It is also where T-RIZE's institutional infrastructure has a clear role to play.In the space of a few weeks, Canada's digital finance agenda has moved fro…",
+      "url": "https://www.t-rize.io/news/Canadas-tokenization-Opportunity-Runs-Through-Collateral",
+      "published_at": "2026-10-08T10:00+01:00",
+      "image": "https://images.ctfassets.net/n5wr4ufmavp8/6SaC5YIJiGvaJxKzTdjEFw/868f08e7dd390c08dd08b73d5673068a/unnamed.png?w=800"
+    },
     {
       "title": "TOKEN2049",
       "category": "EVENTS",
@@ -14,17 +49,6 @@
       "external_url": "https://www.token2049.com/singapore"
     },
     {
-      "title": "SIBOS Miami",
-      "category": "EVENTS",
-      "description": "Miami, FL",
-      "url": "event:sibos-miami:2026-09-28",
-      "published_at": "2026-09-28",
-      "start_date": "2026-09-28",
-      "end_date": "2026-10-01",
-      "image": null,
-      "external_url": "https://www.sibos.com/"
-    },
-    {
       "title": "Exploit Summit",
       "category": "EVENTS",
       "description": "Montreal, Canada",
@@ -34,6 +58,17 @@
       "end_date": "2026-09-29",
       "image": null,
       "external_url": "https://exploitsummit.com/"
+    },
+    {
+      "title": "SIBOS Miami",
+      "category": "EVENTS",
+      "description": "Miami, FL",
+      "url": "event:sibos-miami:2026-09-28",
+      "published_at": "2026-09-28",
+      "start_date": "2026-09-28",
+      "end_date": "2026-10-01",
+      "image": null,
+      "external_url": "https://www.sibos.com/"
     },
     {
       "title": "T-RIZE Joins the Canton Foundation’s Collateral Subcommittee, Chaired by DTCC",
