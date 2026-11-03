@@ -2143,6 +2143,10 @@
     {
       "date": "2026-11-02",
       "value": 884148928.68
+    },
+    {
+      "date": "2026-11-03",
+      "value": 884110459.4
     }
   ],
   "cex": [
@@ -4269,10 +4273,23 @@
     {
       "date": "2026-11-02",
       "value": 126730620.42
+    },
+    {
+      "date": "2026-11-03",
+      "value": 126771125.35
     }
   ],
   "unbonding": [],
   "whales": [
+    {
+      "date": "2026-11-03",
+      "amount": 10130964.19,
+      "from": "0xddd6111f4a5864acb3a6760643d307102a682ba5",
+      "to": "0x929312aff9e4611bba5da6adcd08b31eb487bbb5",
+      "from_label": "0xddd6…2ba5",
+      "to_label": "0x9293…bbb5",
+      "tx": "0x2f0d1770ed521eb9cf876dd8bcce2f77d7fa3283ade54c4fa6324deb1c6cb78a"
+    },
     {
       "date": "2026-11-02",
       "amount": 9729957.48,
@@ -4506,33 +4523,6 @@
       "from_label": "0x71f6…91c9",
       "to_label": "0x5be4…d08d",
       "tx": "0x81904b49338c23cadc919c9de82ce13ffb15320a63d440ad6e2513b31282f6b4"
-    },
-    {
-      "date": "2026-10-03",
-      "amount": 5305872.31,
-      "from": "0x02ac4617fe004cf8cd9c988ff9c905b2ec676c2d",
-      "to": "0x9771876b04e0f3008cc7733c5f23e1c76650e139",
-      "from_label": "Kraken Hot 1",
-      "to_label": "0x9771…e139",
-      "tx": "0x4d45538b505286807bc10d51aa06ce0e2dde94eeff6ebc7752e20dd4eea8d016"
-    },
-    {
-      "date": "2026-10-03",
-      "amount": 11095547.35,
-      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
-      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
-      "from_label": "0x71f6…91c9",
-      "to_label": "0x5be4…d08d",
-      "tx": "0x3cbf40ca31a4407f924ac408673086fd3335bbe915b7315280bd2e8c1cf60faf"
-    },
-    {
-      "date": "2026-10-03",
-      "amount": 11398218.69,
-      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
-      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
-      "from_label": "0x71f6…91c9",
-      "to_label": "0x5be4…d08d",
-      "tx": "0x36398668294d660380010e97039fe2f6cf593a8073407526ea2166c38bee505a"
     }
   ],
   "metadata": {
@@ -4551,7 +4541,7 @@
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe",
       "0x15Da7556D5ED888306839bed06f868AeaeDCb0d7"
     ],
-    "updated": "2026-11-02T23:59:27.314170+00:00"
+    "updated": "2026-11-03T23:59:30.279570+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
