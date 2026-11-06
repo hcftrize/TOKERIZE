@@ -1,6 +1,6 @@
 Arc Ecosystem — Entities not found on arc.io/ecosystem
-Checked: 2026-11-05
-Count: 23
+Checked: 2026-11-06
+Count: 42
 
 These entities exist in arcentities.json but were NOT found during scrape.
 Please check manually — remove from arcentities.json if confirmed gone.
@@ -27,4 +27,23 @@ Please check manually — remove from arcentities.json if confirmed gone.
 - Ormi Labs (slug: ormi-labs)
 - State Street (slug: state-street)
 - T-RIZE (slug: t-rize)
+- USD.ai (slug: usd-ai)
+- Utila (slug: utila)
+- VelaFi (slug: velafi)
+- Visa (slug: visa)
+- Vultisig (slug: vultisig)
+- WalletConnect (slug: walletconnect)
+- Wenia (slug: wenia)
 - WheelX (slug: wheelx)
+- Wirex (slug: wirex)
+- WisdomTree (slug: wisdomtree)
+- WorldPay (slug: worldpay-2)
+- Wormhole (slug: wormhole)
+- xStocks by Payward (slug: xstocks-by-payward)
+- Yellow Card (slug: yellow-card)
+- Zengo (slug: zengo)
+- Zerion (slug: zerion)
+- ZeroDev (slug: zerodev)
+- zkp2p (slug: zkp2p)
+- Zodia Custody (slug: zodia-custody)
+- Zodia Markets (slug: zodia-markets)
