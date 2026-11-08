@@ -2163,6 +2163,10 @@
     {
       "date": "2026-11-07",
       "value": 895205265.43
+    },
+    {
+      "date": "2026-11-08",
+      "value": 895205265.43
     }
   ],
   "cex": [
@@ -4309,6 +4313,10 @@
     {
       "date": "2026-11-07",
       "value": 117937771.36
+    },
+    {
+      "date": "2026-11-08",
+      "value": 117967775.89
     }
   ],
   "unbonding": [],
@@ -4600,33 +4608,6 @@
       "from_label": "0x71f6…91c9",
       "to_label": "0x5be4…d08d",
       "tx": "0x502a22b66244667161ba76686e066433d72c7c8c508820419c53cad07240d047"
-    },
-    {
-      "date": "2026-10-08",
-      "amount": 9932698.08,
-      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
-      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
-      "from_label": "0x71f6…91c9",
-      "to_label": "0x5be4…d08d",
-      "tx": "0xf89157a617a35cc016e19ac9cf78890a2cee8203595267d9e33f4f44eeb05a50"
-    },
-    {
-      "date": "2026-10-08",
-      "amount": 8819916.29,
-      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
-      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
-      "from_label": "0x71f6…91c9",
-      "to_label": "0x5be4…d08d",
-      "tx": "0xf016b83d2c86578b8067c47f42e93472c19b36f2313566ce3e65c1433bd86222"
-    },
-    {
-      "date": "2026-10-08",
-      "amount": 7701344.9,
-      "from": "0x71f692cc0d795aa50516a6cbe09c0dc2833d91c9",
-      "to": "0x5be479f54363910264ad875b75d314f84c70d08d",
-      "from_label": "0x71f6…91c9",
-      "to_label": "0x5be4…d08d",
-      "tx": "0x8d6da6967503f6a710f9a4e32980b49f297966649f1b734934c5cd273c53d0a2"
     }
   ],
   "metadata": {
@@ -4645,7 +4626,7 @@
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe",
       "0x15Da7556D5ED888306839bed06f868AeaeDCb0d7"
     ],
-    "updated": "2026-11-07T23:59:28.508891+00:00"
+    "updated": "2026-11-08T23:59:22.097506+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
