@@ -2549,6 +2549,18 @@
     "logo_local": "logos\\tolly.png"
   },
   {
+    "name": "Tower Exchange",
+    "slug": "tower-exchange",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6aee31de8819d74c43d418a8_6aee31daef7ccc22c5ab785f_tower-exchange-logo.svg",
+    "description": "",
+    "external_url": "https://tower.exchange/",
+    "tags": [
+      "Trading",
+      "DEXs"
+    ],
+    "logo_local": "logos\\tower-exchange.svg"
+  },
+  {
     "name": "Transak",
     "slug": "transak",
     "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/68fd0108ee31fc7f0e42d662_transak-icon.svg",
@@ -2784,6 +2796,18 @@
       "PSPs"
     ],
     "logo_local": "logos\\yellow-card.svg"
+  },
+  {
+    "name": "Zan",
+    "slug": "zan",
+    "logo_cdn": "https://cdn.prod.website-files.com/68af181813eec5493447a1ae/6aee38e61b9feb8581538109_6aee38e56c8286ec0f84edd1_zan-logo.png",
+    "description": "",
+    "external_url": "https://zan.top/",
+    "tags": [
+      "Infrastructure",
+      "RPC Providers"
+    ],
+    "logo_local": "logos\\zan.png"
   },
   {
     "name": "Zengo",

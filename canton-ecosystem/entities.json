@@ -3911,6 +3911,20 @@
     "logo_local": "logos\\partylayer.png"
   },
   {
+    "name": "Pashov Audit Group",
+    "slug": "pashov-audit-group",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6aee4f216653b9bef386d6e9_pashov.jpeg",
+    "short_desc": "Smart contract security: 500+ audits, 4,000+ bugs found. 4 senior auditors on every audit.",
+    "tags": [
+      "SERVICE PROVIDER",
+      "FORENSICS & SECURITY",
+      "Network Utilities\nFORENSICS & SECURITY",
+      "Roles\nSERVICE PROVIDER\nSERVICE PROVIDER"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nPashov Audit Group\nhttps://www.pashov.com/\n\nPashov Audit Group is the smart contract security firm trusted by the biggest names in the space: Aave, Uniswap, Polymarket, Ethena, LayerZero, Venus, Jupiter, Meteora, pump.fun, and many more. The firm has completed 500+ audits, found 4,000+ vulnerabilities, and secured over $100 billion in TVL across DeFi protocols. Every engagement is staffed by 4 dedicated senior auditors, all security contest champions, selected for the codebase. Quotes within 24 hours, kickoff within 48. Telegram for fast contact: @DanCryptoPT\n\nNetwork Utilities\nFORENSICS & SECURITY\nRoles\nSERVICE PROVIDER\nSERVICE PROVIDER",
+    "logo_local": "logos\\pashov-audit-group.jpeg"
+  },
+  {
     "name": "Paxos",
     "slug": "paxos",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69bdda8ead515e4387c7881e_paxos.jpg",
