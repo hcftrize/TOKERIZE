@@ -3,6 +3,7 @@
 // If the rebuilt balance is negative the transfers alone cannot explain it (routers, bridges...):
 // the answer then says "error" instead of showing a wrong number.
 const { CHAINS, CHAIN_ORDER, CHAIN_BY_ID, ZERO, query, fail, parseAddress, formatUnits } = require("./_db");
+const { loadBonds, summarize } = require("./_bonds");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") return res.status(405).json({ error: "method_not_allowed" });
@@ -48,10 +49,25 @@ module.exports = async function handler(req, res) {
     const total = chains.reduce((s, c) => s + c._balance, 0n);
     chains.forEach((c) => delete c._balance);
 
+    // Governance bonds + rank in the Top Holders (written once a day by the holders job).
+    // Optional: if those tables do not exist yet, the wallet page simply has no governance block.
+    let governance = null, rank = null;
+    try {
+      const nowSec = Math.floor(Date.now() / 1000);
+      const [bondRows, rk] = await Promise.all([
+        loadBonds([address]),
+        query(`SELECT rank FROM holders WHERE address = $1`, [address]),
+      ]);
+      if (bondRows.length) governance = summarize(bondRows, nowSec);
+      rank = rk.rows[0] ? rk.rows[0].rank : null;
+    } catch (_) { /* governance data not available yet */ }
+
     res.setHeader("Cache-Control", "public, s-maxage=30, stale-while-revalidate=120");
     return res.status(200).json({
       ok: true,
       address: "0x" + hex,
+      governance,
+      rank,
       is_zero_address: address.equals(ZERO),
       label: lab.rows[0] ? { label: lab.rows[0].label, category: lab.rows[0].category } : null,
       status: chains.length === 0 ? "no_activity" : anyError ? "error" : "ok",
