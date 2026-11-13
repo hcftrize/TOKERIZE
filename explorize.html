@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Explorize &mdash; RIZE Token Explorer &mdash; Tokerize</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Explorize: a community explorer for the RIZE token. Price, transfers, trades and holders across Base, Ethereum, BNB Chain and Polygon."/>
+<style>
+@font-face{font-family:'Rajdhani';src:url('/assets/fonts/rajdhani.semibold.ttf') format('truetype');font-weight:600;font-style:normal;}
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap');
+:root{
+  --black:#000; --navy:#0d2d4e; --navy2:#1a3a5c;
+  --bg:#030810; --panel:#060818; --panel2:#0a0e24;
+  --border:rgba(255,255,255,0.10); --border-strong:rgba(126,224,255,0.20);
+  --text:#f7f2e8; --muted:#b6c1d8; --dim:#7d89a3;
+  --cyan:#7ee0ff; --gold:#ffd36b; --green:#3DBE47; --red:#ff6b6b; --pink:#ff8ad8;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{max-width:100%;overflow-x:hidden;}
+body{font-family:'Rajdhani',"Trebuchet MS",Verdana,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+
+/* ---------- Tokerize shell ---------- */
+.site-header{width:100%;background:var(--black);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:96px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,0.08);}
+.site-header-logo img{height:72px;display:block;}
+.site-nav{display:flex;align-items:center;gap:0;}
+.site-nav a{color:#fff;text-decoration:none;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:6px 20px;transition:color 0.2s;border-right:1px solid rgba(255,255,255,0.1);}
+.site-nav a:first-child{border-left:1px solid rgba(255,255,255,0.1);}
+.site-nav a.nav-hub{background:var(--navy);border:none;padding:8px 20px;margin-left:16px;letter-spacing:1.5px;transition:background 0.2s;}
+.site-nav a.nav-hub:hover{background:var(--navy2);}
+.site-footer{background:var(--black);color:rgba(255,255,255,0.5);padding:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-top:0;border-top:1px solid rgba(255,255,255,0.08);}
+.footer-logo img{height:60px;}
+.footer-nav{display:flex;gap:24px;}
+.footer-nav a{color:#fff;text-decoration:none;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;letter-spacing:2px;text-transform:uppercase;}
+.footer-copy{font-family:'Rajdhani',sans-serif;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.85);}
+.footer-disclaimer{font-family:'DM Mono',monospace;font-size:12px;color:rgba(255,255,255,0.75);margin-top:4px;letter-spacing:0.3px;}
+.nav-toggle{display:none;}
+.nav-toggle-label{display:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px;margin-left:auto;}
+.nav-toggle-label span{display:block;width:24px;height:2px;background:#fff;transition:transform 0.2s,opacity 0.2s;}
+.nav-toggle:checked ~ .site-nav{display:flex;}
+.nav-toggle:checked + .nav-toggle-label span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle:checked + .nav-toggle-label span:nth-child(2){opacity:0;}
+.nav-toggle:checked + .nav-toggle-label span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ---------- Explorize dashboard ---------- */
+::-webkit-scrollbar{width:7px;height:7px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:4px;}
+.app{display:grid;gap:10px;padding:10px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto minmax(0,5fr) minmax(0,7fr);height:calc(100vh - 96px);min-height:780px;}
+.panel{background:var(--panel);border:1px solid var(--border);display:flex;flex-direction:column;min-height:0;min-width:0;position:relative;}
+.p-top{grid-column:1 / -1;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;padding:12px 18px;border-color:rgba(255,160,40,.0);flex-wrap:wrap;}
+.p-trades{grid-column:1;grid-row:2;}
+.p-info{grid-column:2;grid-row:2;}
+.p-holders{grid-column:1;grid-row:3;}
+.p-transfers{grid-column:2;grid-row:3;}
+
+/* header strip: price + key stats */
+.price-block{display:flex;align-items:center;gap:16px;min-width:0;}
+.price-block img{width:58px;height:58px;border-radius:50%;flex:none;background:#fff;}
+.pb-name{font-size:21px;font-weight:700;letter-spacing:1px;line-height:1;}
+.pb-name span{color:var(--dim);font-weight:600;margin-left:6px;}
+.pb-price{font-family:'DM Mono',monospace;font-size:30px;line-height:1.15;margin-top:4px;}
+.pb-chg{font-family:'DM Mono',monospace;font-size:13px;margin-top:2px;}
+.up{color:var(--green);}.down{color:var(--red);}
+.stats{display:flex;gap:28px;flex-wrap:wrap;justify-content:flex-end;}
+.stat .k{font-size:12px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);}
+.stat .v{font-family:'DM Mono',monospace;font-size:15px;margin-top:3px;white-space:nowrap;}
+
+/* panel header */
+.p-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 14px;min-height:42px;border-bottom:1px solid var(--border);flex:none;}
+.p-title{font-size:14px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+.p-tabs{display:flex;align-self:stretch;margin:0 -14px;}
+.p-tab{background:none;border:none;border-bottom:2px solid transparent;color:var(--dim);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:2.2px;text-transform:uppercase;padding:0 18px;cursor:pointer;}
+.p-tab:hover{color:var(--text);}
+.p-tab[aria-selected="true"]{color:var(--text);border-bottom-color:var(--cyan);background:rgba(126,224,255,.05);}
+.pager{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);}
+.icon-btn{background:none;border:1px solid transparent;color:var(--muted);cursor:pointer;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-family:inherit;}
+.icon-btn:hover:not(:disabled){color:var(--text);border-color:var(--border);}
+.icon-btn:disabled{opacity:.3;cursor:default;}
+.chips{display:flex;gap:8px;align-items:center;padding:8px 14px;flex-wrap:wrap;border-bottom:1px solid var(--border);flex:none;}
+.chips select,.chips input{font-family:'DM Mono',monospace;font-size:12px;color:var(--text);background:var(--panel2);border:1px solid var(--border-strong);border-radius:14px;height:28px;padding:0 12px;outline:none;}
+.chips select{cursor:pointer;color-scheme:dark;}
+.chips input{flex:1 1 200px;min-width:0;}
+.chips input:focus,.chips select:focus{border-color:var(--cyan);}
+.chip-x{background:var(--panel2);border:1px solid var(--border-strong);border-radius:14px;height:28px;width:28px;color:var(--muted);cursor:pointer;}
+.chip-x:hover{color:var(--text);}
+
+/* tables */
+.p-body{flex:1;min-height:0;overflow:auto;}
+table.t{width:100%;border-collapse:collapse;font-family:'DM Mono',monospace;font-size:12px;min-width:600px;}
+table.t th{position:sticky;top:0;z-index:2;background:var(--panel);font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;text-align:left;color:var(--dim);padding:9px 7px;border-bottom:1px solid var(--border);white-space:nowrap;}
+table.t td{padding:0 7px;height:40px;border-bottom:1px solid rgba(255,255,255,.04);white-space:nowrap;vertical-align:middle;}
+table.t tbody tr{cursor:pointer;}
+table.t tbody tr:nth-child(odd){background:rgba(255,255,255,.018);}
+table.t tbody tr:hover{background:rgba(126,224,255,.06);}
+table.t tbody tr.sel{background:rgba(126,224,255,.11);box-shadow:inset 2px 0 0 var(--cyan);}
+th.num,td.num{text-align:right;}
+.cdot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;}
+td.c{width:22px;padding-right:0;}
+a.tlink{color:var(--cyan);text-decoration:none;}
+a.tlink:hover{text-decoration:underline;}
+.th-time{background:none;border:none;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:0;}
+.th-time:hover{color:var(--text);}
+button.ad{background:none;border:none;font:inherit;color:var(--text);cursor:pointer;padding:0;text-align:left;}
+button.ad:hover .adn,button.ad:hover .ads{text-decoration:underline;}
+.adn{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:.3px;display:inline-block;max-width:96px;overflow:hidden;text-overflow:ellipsis;vertical-align:bottom;}
+.ads{color:var(--muted);}
+.adn + .ads{margin-left:6px;color:var(--dim);}
+.nul{color:var(--dim);}
+.tag{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;padding:1px 6px;border:1px solid var(--border);margin-left:6px;color:var(--muted);}
+.tag.mint{color:var(--green);border-color:rgba(61,190,71,.4);}
+.tag.burn{color:var(--red);border-color:rgba(255,107,107,.4);}
+.tk{display:inline-flex;align-items:center;gap:6px;}
+.tk img{width:15px;height:15px;border-radius:50%;background:#fff;}
+a.ext{color:var(--dim);text-decoration:none;margin-left:5px;font-size:11px;}
+a.ext:hover{color:var(--cyan);}
+.state{padding:36px 16px;text-align:center;font-family:'DM Mono',monospace;font-size:12.5px;color:var(--muted);}
+.state.err{color:var(--red);}
+.p-foot{flex:none;border-top:1px solid var(--border);padding:7px 14px;font-family:'DM Mono',monospace;font-size:11.5px;color:var(--dim);display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;}
+.sync{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.sync span{display:inline-flex;align-items:center;gap:6px;}
+.dot{width:7px;height:7px;border-radius:50%;background:#666;display:inline-block;}
+.dot.ok{background:var(--green);}.dot.warn{background:#e0a21a;}.dot.bad{background:#e0533d;}
+
+/* coming-soon panels */
+.soon-wrap{position:relative;flex:1;min-height:0;overflow:hidden;}
+.soon-wrap table.t tbody tr{cursor:default;}
+.skel{display:inline-block;height:9px;width:70%;background:rgba(255,255,255,.06);border-radius:3px;}
+.soon-over{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;background:linear-gradient(180deg,rgba(6,8,24,.35),rgba(6,8,24,.92) 55%);}
+.soon-over b{font-size:15px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;}
+.soon-over p{font-family:'DM Mono',monospace;font-size:12.5px;color:var(--muted);max-width:420px;line-height:1.65;}
+
+/* interactive panel: chart */
+.p-info .view{flex:1;min-height:0;display:flex;flex-direction:column;}
+.p-info .view[hidden]{display:none;}
+.ranges{display:flex;gap:2px;}
+.ranges button{background:none;border:none;color:var(--dim);font-family:'DM Mono',monospace;font-size:12px;padding:5px 9px;cursor:pointer;}
+.ranges button:hover{color:var(--text);}
+.ranges button[aria-pressed="true"]{color:var(--text);background:rgba(255,255,255,.1);}
+.chart-box{flex:1;min-height:0;position:relative;margin:6px 8px 0;}
+.chart-box canvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.tip{position:absolute;pointer-events:none;background:#101530;border:1px solid var(--border-strong);padding:6px 9px;font-family:'DM Mono',monospace;font-size:12px;white-space:nowrap;display:none;z-index:3;}
+.tip small{display:block;color:var(--dim);font-size:11px;}
+.pstats{flex:none;display:grid;grid-template-columns:repeat(4,1fr) minmax(0,1.2fr);border-top:1px solid var(--border);}
+.pstats > div{padding:9px 10px;text-align:center;border-right:1px solid var(--border);}
+.pstats > div:last-child{border-right:none;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:3px;}
+.pstats .k{font-size:12px;font-weight:700;letter-spacing:1.6px;color:var(--dim);}
+.pstats .v{font-family:'DM Mono',monospace;font-size:14px;margin-top:2px;}
+.pstats .ar{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:12.5px;}
+.pstats .ar span:first-child{color:var(--dim);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:1.5px;font-size:12px;}
+
+/* interactive panel: details */
+.detail{flex:1;min-height:0;overflow:auto;padding:16px 18px;}
+.d-kicker{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.d-main{font-family:'DM Mono',monospace;font-size:13px;word-break:break-all;margin-top:6px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.d-lbl{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;background:var(--navy);color:#fff;padding:2px 8px;}
+.d-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.btn{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:1px solid var(--border-strong);background:var(--panel2);color:var(--text);padding:0 14px;height:30px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;}
+.btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.btn.on{background:rgba(126,224,255,.14);border-color:var(--cyan);color:var(--cyan);}
+.d-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:14px;}
+.d-cell{border:1px solid var(--border);padding:10px 12px;background:var(--panel2);}
+.d-cell .k{font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);}
+.d-cell .v{font-family:'DM Mono',monospace;font-size:15px;margin-top:3px;}
+.d-cell .s{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim);margin-top:2px;}
+.d-cell.total{border-color:var(--cyan);}
+.v.err{color:var(--red);}
+.d-sub{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin:18px 0 6px;}
+.d-kv{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font-family:'DM Mono',monospace;font-size:12.5px;margin-top:12px;}
+.d-kv dt{color:var(--dim);}
+.d-kv dd{word-break:break-all;}
+table.mini{width:100%;border-collapse:collapse;font-family:'DM Mono',monospace;font-size:12px;}
+table.mini th{font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);text-align:left;padding:6px 8px;border-bottom:1px solid var(--border);}
+table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
+.hint{color:var(--muted);font-family:'DM Mono',monospace;font-size:12.5px;line-height:1.7;max-width:460px;margin:34px auto;text-align:center;}
+
+.betanote{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--dim);padding:2px 12px 14px;}
+.betanote b{font-family:'Rajdhani',sans-serif;letter-spacing:2px;color:var(--text);background:var(--navy);padding:1px 7px;margin-right:8px;}
+
+@media(max-width:1100px){
+  .app{height:auto;min-height:0;grid-template-columns:minmax(0,1fr);grid-template-rows:none;}
+  .p-top,.p-trades,.p-info,.p-holders,.p-transfers{grid-column:1;grid-row:auto;}
+  .p-top{order:1}.p-info{order:2;height:440px}.p-transfers{order:3;height:600px}.p-trades{order:4;height:340px}.p-holders{order:5;height:340px}
+  .stats{justify-content:flex-start;gap:18px 26px;}
+}
+@media(max-width:768px){
+  .site-header{padding:0 16px;height:68px;position:relative;flex-wrap:wrap;}.site-header-logo img{height:48px;}
+  .nav-toggle-label{display:flex;}
+  .site-nav{display:none;position:absolute;top:68px;left:0;right:0;background:#000;flex-direction:column;gap:0;z-index:99;border-bottom:1px solid rgba(255,255,255,0.1);padding:8px 0;}
+  .site-nav a{font-size:14px;padding:12px 20px;border-right:none!important;border-left:none!important;border-bottom:1px solid rgba(255,255,255,0.07);letter-spacing:1.5px;width:100%;}
+  .site-nav a.nav-hub{margin-left:0;text-align:center;}
+  .site-footer{flex-direction:column;align-items:flex-start;padding:28px 16px;gap:16px;}
+  .app{padding:8px;gap:8px;}
+  .p-top{padding:12px;}
+  .price-block img{width:46px;height:46px;}
+  .pb-price{font-size:26px;}
+  .stats{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:12px;}
+  .pstats{grid-template-columns:repeat(2,1fr);}
+  .pstats > div:nth-child(2){border-right:none;}
+  .pstats > div{border-bottom:1px solid var(--border);}
+  .pstats > div:last-child{grid-column:1 / -1;border-bottom:none;}
+  .p-info{height:520px;}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a href="/" class="site-header-logo"><img src="/assets/header-footer/tokerize-header-footer.png" alt="Tokerize"/></a>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle"><label for="nav-toggle" class="nav-toggle-label"><span></span><span></span><span></span></label>
+  <nav class="site-nav">
+    <a href="/" class="nav-home">Home</a>
+    <a href="/about">About</a>
+    <a href="/news">News</a>
+    <a href="/hub" class="nav-hub">Tokerize Data Hub</a>
+  </nav>
+</header>
+
+<main class="app">
+  <!-- ============ RIZE LIVE PRICE PANEL ============ -->
+  <section class="panel p-top" aria-label="RIZE price">
+    <div class="price-block">
+      <img src="/assets/explore-rize/rize-token.png" alt="RIZE"/>
+      <div>
+        <div class="pb-name">RIZE <span>RIZE</span></div>
+        <div class="pb-price" id="pb-price">&mdash;</div>
+        <div class="pb-chg" id="pb-chg">&nbsp;</div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="k">24H Volume</div><div class="v" id="st-vol">&mdash;</div></div>
+      <div class="stat"><div class="k">Market Cap</div><div class="v" id="st-mcap">&mdash;</div></div>
+      <div class="stat"><div class="k">FDV</div><div class="v" id="st-fdv">&mdash;</div></div>
+      <div class="stat"><div class="k">Current Supply</div><div class="v" id="st-sup">&mdash;</div></div>
+      <div class="stat"><div class="k">Max Supply</div><div class="v" id="st-max">&mdash;</div></div>
+    </div>
+  </section>
+
+  <!-- ============ RIZE TRADES (soon) ============ -->
+  <section class="panel p-trades" aria-label="RIZE trades">
+    <div class="p-head"><div class="p-title">RIZE Trades</div><div class="pager"><span>7d &nbsp; 14d &nbsp; 30d</span></div></div>
+    <div class="soon-wrap">
+      <table class="t" style="min-width:0">
+        <thead><tr><th>Entity</th><th class="num">Value</th><th class="num">Change</th><th class="num">USD</th><th class="num">Change</th></tr></thead>
+        <tbody id="soon-trades"></tbody>
+      </table>
+      <div class="soon-over"><b>Coming soon</b><p>DEX trades and the biggest buyers and sellers, with the USD value at the time of each trade.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ INTERACTIVE PANEL ============ -->
+  <section class="panel p-info" aria-label="Price history and details">
+    <div class="p-head">
+      <div class="p-tabs" role="tablist">
+        <button class="p-tab" role="tab" id="tab-price" aria-selected="true">Price history</button>
+        <button class="p-tab" role="tab" id="tab-detail" aria-selected="false">Details</button>
+      </div>
+      <div class="ranges" id="ranges">
+        <button data-r="7" aria-pressed="false">1w</button>
+        <button data-r="30" aria-pressed="false">1m</button>
+        <button data-r="90" aria-pressed="false">3m</button>
+        <button data-r="365" aria-pressed="false">1y</button>
+        <button data-r="max" aria-pressed="true">All</button>
+      </div>
+    </div>
+    <div class="view" id="view-price">
+      <div class="chart-box" id="chart-box"><canvas id="chart"></canvas><div class="tip" id="tip"></div><div class="state" id="chart-state" style="position:absolute;inset:0;display:none;align-items:center;justify-content:center"></div></div>
+      <div class="pstats">
+        <div><div class="k">24H</div><div class="v" id="ps-24h">&mdash;</div></div>
+        <div><div class="k">7D</div><div class="v" id="ps-7d">&mdash;</div></div>
+        <div><div class="k">30D</div><div class="v" id="ps-30d">&mdash;</div></div>
+        <div><div class="k">180D</div><div class="v" id="ps-180d">&mdash;</div></div>
+        <div>
+          <div class="ar"><span>ATH</span><span id="ps-ath">&mdash;</span></div>
+          <div class="ar"><span>ATL</span><span id="ps-atl">&mdash;</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-detail" hidden>
+      <div class="detail" id="detail"></div>
+    </div>
+  </section>
+
+  <!-- ============ TOP HOLDERS (soon) ============ -->
+  <section class="panel p-holders" aria-label="RIZE top holders">
+    <div class="p-head"><div class="p-title">RIZE Top Holders</div><div class="pager"><button class="icon-btn" disabled>&lsaquo;</button>1 / &ndash;<button class="icon-btn" disabled>&rsaquo;</button></div></div>
+    <div class="soon-wrap">
+      <table class="t" style="min-width:0">
+        <thead><tr><th>Addresses</th><th>Chains</th><th class="num">Value</th><th class="num">Pct</th><th class="num">USD</th></tr></thead>
+        <tbody id="soon-holders"></tbody>
+      </table>
+      <div class="soon-over"><b>Coming soon</b><p>The largest RIZE holders across all chains, including governance and bonded RIZE.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ TRANSFERS ============ -->
+  <section class="panel p-transfers" aria-label="RIZE transfers">
+    <div class="p-head">
+      <div class="p-title">Transfers</div>
+      <div class="pager"><button class="icon-btn" id="pg-prev" aria-label="Previous page">&lsaquo;</button><span id="pg-label">1</span><button class="icon-btn" id="pg-next" aria-label="Next page">&rsaquo;</button></div>
+      <button class="icon-btn" id="b-refresh" title="Refresh" aria-label="Refresh">&#x21bb;</button>
+    </div>
+    <form class="chips" id="filters" autocomplete="off">
+      <select id="f-chain" aria-label="Chain">
+        <option value="all">All chains</option><option value="base">Base</option><option value="ethereum">Ethereum</option><option value="bsc">BNB Chain</option><option value="polygon">Polygon</option>
+      </select>
+      <select id="f-type" aria-label="Type">
+        <option value="all">All types</option><option value="transfer">Transfers</option><option value="mint">Mints</option><option value="burn">Burns</option>
+      </select>
+      <input type="text" id="f-address" placeholder="Search a wallet address (0x&hellip;)" spellcheck="false" aria-label="Wallet address"/>
+      <button type="button" class="chip-x" id="f-clear" title="Clear wallet filter" hidden>&times;</button>
+    </form>
+    <div class="p-body" id="tbody-wrap">
+      <table class="t">
+        <thead><tr>
+          <th class="c"></th>
+          <th><button type="button" class="th-time" id="th-time" title="Switch between relative and exact time"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.5V8l2.4 1.6"/></svg><span id="th-time-l">Ago</span></button></th>
+          <th>From</th><th>To</th><th class="num">Value</th><th>Token</th><th class="num">USD</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="state" id="state">Loading transfers&hellip;</div>
+    </div>
+    <div class="p-foot"><div class="sync" id="sync">Loading status&hellip;</div><span id="foot-note">USD uses the current RIZE price</span></div>
+  </section>
+</main>
+<p class="betanote"><b>BETA</b>Explorize reads RIZE <code>Transfer</code> events directly from each chain. Wallet balances are rebuilt from those transfers and may be unavailable for contracts such as routers and bridges.</p>
+
+<footer class="site-footer">
+  <div class="footer-logo"><img src="/assets/header-footer/tokerize-header-footer.png" alt="Tokerize"/></div>
+  <nav class="footer-nav">
+    <a href="/">Home</a><a href="/about">About</a><a href="/news">News</a><a href="/hub">Tokerize Data Hub</a>
+  </nav>
+  <div>
+    <p class="footer-copy">Tokerize &mdash; RIZE Community Tokenization Hub</p>
+    <p class="footer-disclaimer">Tokerize is a community built website.</p>
+    <p class="footer-disclaimer">We are not affiliated with T-RIZE or Canton Network.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var API = '/api/explorize';
+  var CHAINS = {
+    base:     { name: 'Base',      color: '#0052ff', tx: 'https://basescan.org/tx/',    addr: 'https://basescan.org/address/' },
+    ethereum: { name: 'Ethereum',  color: '#8ea0f0', tx: 'https://etherscan.io/tx/',    addr: 'https://etherscan.io/address/' },
+    bsc:      { name: 'BNB Chain', color: '#f0b90b', tx: 'https://bscscan.com/tx/',     addr: 'https://bscscan.com/address/' },
+    polygon:  { name: 'Polygon',   color: '#8247e5', tx: 'https://polygonscan.com/tx/', addr: 'https://polygonscan.com/address/' }
+  };
+  var ZERO = '0x0000000000000000000000000000000000000000';
+  var PAGE = 25;
+  var LOGO = '/assets/explore-rize/rize-token.png';
+
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+  var S = {
+    chain: 'all', type: 'all', address: '',
+    cursors: [null], page: 0, next: null, loading: false, reqId: 0,
+    timeMode: store('explorize.time') === 'abs' ? 'abs' : 'rel',
+    price: null, status: null, selected: null, chartRange: 'max', chartData: {}
+  };
+
+  /* ================= formatting ================= */
+  function commas(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+  function trimZeros(s) { return s.indexOf('.') >= 0 ? s.replace(/0+$/, '').replace(/\.$/, '') : s; }
+  function fmtCompact(str) {            // 10.838K, 258.504, 1.5M
+    var n = parseFloat(str);
+    if (!isFinite(n)) return '—';
+    if (n === 0) return '0';
+    var a = Math.abs(n), sfx = '', v = n;
+    if (a >= 1e9) { v = n / 1e9; sfx = 'B'; } else if (a >= 1e6) { v = n / 1e6; sfx = 'M'; } else if (a >= 1e3) { v = n / 1e3; sfx = 'K'; }
+    if (!sfx && a < 0.001) return '<0.001';
+    return trimZeros(v.toFixed(3)) + sfx;
+  }
+  function fmtUsdCompact(n) {
+    if (n == null || !isFinite(n)) return '—';
+    var a = Math.abs(n);
+    if (a >= 1e9) return '$' + trimZeros((n / 1e9).toFixed(2)) + 'B';
+    if (a >= 1e6) return '$' + trimZeros((n / 1e6).toFixed(2)) + 'M';
+    if (a >= 1e4) return '$' + trimZeros((n / 1e3).toFixed(2)) + 'K';
+    if (a >= 1) return '$' + commas(n.toFixed(2).replace(/\.00$/, '')).replace(/(\.\d)0$/, '$1');
+    if (a === 0) return '$0';
+    if (a < 0.01) return '$' + n.toPrecision(2);
+    return '$' + n.toFixed(3).replace(/0+$/, '');
+  }
+  function fmtUsdFull(n) { return n == null ? '—' : '$' + commas(Math.round(n)); }
+  function fmtPrice(p) {
+    if (p == null) return '—';
+    if (p >= 1) return '$' + p.toFixed(2);
+    if (p >= 0.01) return '$' + p.toFixed(4);
+    return '$' + p.toFixed(5);
+  }
+  function fmtPct(p) { return p == null ? '—' : (p > 0 ? '+' : '') + p.toFixed(2) + '%'; }
+  function short(a) { return a.slice(0, 6) + '…' + a.slice(-4); }
+  function shortTx(h) { return h.slice(0, 8) + '…' + h.slice(-6); }
+  function ago(iso) {
+    var s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
+    if (s < 60) return Math.floor(s) + 's ago';
+    if (s < 3600) return Math.floor(s / 60) + 'm ago';
+    if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+    if (s < 86400 * 7) return Math.floor(s / 86400) + 'd ago';
+    if (s < 86400 * 30) return Math.floor(s / (86400 * 7)) + 'w ago';
+    if (s < 86400 * 365) return Math.floor(s / (86400 * 30)) + 'M ago';
+    return Math.floor(s / (86400 * 365)) + 'y ago';
+  }
+  function exact(iso) { return new Date(iso).toISOString().replace('T', ' ').slice(0, 19); }
+  function isAddr(s) { return /^0x[0-9a-fA-F]{40}$/.test(s); }
+  function isHash(s) { return /^0x[0-9a-fA-F]{64}$/.test(s); }
+
+  /* ================= API ================= */
+  function getJson(url) {
+    var ctl = new AbortController();
+    var timer = setTimeout(function () { ctl.abort(); }, 15000);
+    return fetch(url, { signal: ctl.signal, headers: { Accept: 'application/json' } })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (d) {
+          if (!r.ok || d.error) { var e = new Error(d.error || 'http_' + r.status); e.code = d.error; throw e; }
+          return d;
+        });
+      })
+      .finally(function () { clearTimeout(timer); });
+  }
+  function api(path, params) {
+    var qs = Object.keys(params || {}).filter(function (k) { return params[k] !== '' && params[k] != null; })
+      .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]); }).join('&');
+    return getJson(API + path + (qs ? '?' + qs : ''));
+  }
+  function cg(path, params) {
+    var p = { path: path }; Object.keys(params || {}).forEach(function (k) { p[k] = params[k]; });
+    return getJson('/api/coingecko?' + new URLSearchParams(p).toString());
+  }
+  function explain(e) {
+    var c = e && e.code;
+    if (c === 'database_not_configured') return 'The Explorize database is not connected to this site yet.';
+    if (c === 'database_login_failed') return 'The database refused the login. Please check the connection settings.';
+    if (c === 'query_too_slow') return 'This query took too long. Try a narrower filter.';
+    if (c === 'database_unreachable') return 'The database cannot be reached right now. Try again in a moment.';
+    if (c === 'not_found') return 'Nothing found for this transaction in the indexed data.';
+    if (e && e.name === 'AbortError') return 'The request timed out. Try again.';
+    return 'Could not load data (' + (c || (e && e.message) || 'unknown error') + ').';
+  }
+
+  /* ================= price header ================= */
+  function setChange(node, text, pct) {
+    node.textContent = text;
+    node.className = node.className.replace(/\b(up|down)\b/g, '').trim() + (pct == null ? '' : pct >= 0 ? ' up' : ' down');
+  }
+  function loadMarket() {
+    cg('/coins/markets', { vs_currency: 'usd', ids: 'rize', price_change_percentage: '7d,30d' }).then(function (arr) {
+      var m = arr && arr[0]; if (!m) throw new Error('no data');
+      S.price = m.current_price;
+      $('pb-price').textContent = fmtPrice(m.current_price);
+      var d = m.price_change_24h, p = m.price_change_percentage_24h;
+      var ds = d == null ? '' : (d < 0 ? '-' : '+') + '$' + (Math.abs(d) < 0.00001 ? '0' : Math.abs(d).toPrecision(2)) + ' ';
+      setChange($('pb-chg'), ds + '(' + fmtPct(p) + ')', p);
+      $('st-vol').textContent = fmtUsdFull(m.total_volume);
+      $('st-mcap').textContent = fmtUsdFull(m.market_cap);
+      $('st-fdv').textContent = fmtUsdFull(m.fully_diluted_valuation);
+      $('st-sup').textContent = m.circulating_supply != null ? commas(Math.round(m.circulating_supply)) : '—';
+      $('st-max').textContent = m.max_supply != null ? commas(Math.round(m.max_supply)) : '—';
+      [['ps-24h', p], ['ps-7d', m.price_change_percentage_7d_in_currency], ['ps-30d', m.price_change_percentage_30d_in_currency]].forEach(function (x) {
+        var n = $(x[0]); setChange(n, fmtPct(x[1]), x[1]);
+      });
+      $('ps-ath').textContent = fmtPrice(m.ath); $('ps-atl').textContent = fmtPrice(m.atl);
+      refreshUsdCells();
+    }).catch(function () {
+      $('pb-price').textContent = 'N/A';
+      $('foot-note').textContent = 'USD values unavailable (price feed offline)';
+    });
+  }
+  function refreshUsdCells() {
+    document.querySelectorAll('#rows td.usd').forEach(function (td) {
+      var a = parseFloat(td.getAttribute('data-amt'));
+      td.textContent = S.price == null ? '—' : fmtUsdCompact(a * S.price);
+    });
+  }
+
+  /* ================= chart ================= */
+  var chart = { pts: null, hover: -1 };
+  function niceDecimals(span) { if (!(span > 0)) return 2; var d = -Math.floor(Math.log10(span / 4)) + 1; return Math.max(0, Math.min(7, d)); }
+  function drawChart() {
+    var cv = $('chart'), box = $('chart-box');
+    var dpr = window.devicePixelRatio || 1, W = box.clientWidth, H = box.clientHeight;
+    if (!W || !H) return;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    var c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, W, H);
+    var pts = chart.pts; if (!pts || pts.length < 2) return;
+    var L = 56, R = 8, T = 10, B = 24, w = W - L - R, h = H - T - B;
+    var t0 = pts[0][0], t1 = pts[pts.length - 1][0], lo = Infinity, hi = -Infinity;
+    pts.forEach(function (p) { if (p[1] < lo) lo = p[1]; if (p[1] > hi) hi = p[1]; });
+    var pad = (hi - lo) * 0.06 || hi * 0.05 || 1; lo = Math.max(0, lo - pad); hi += pad;
+    var X = function (t) { return L + (t - t0) / (t1 - t0) * w; }, Y = function (v) { return T + (1 - (v - lo) / (hi - lo)) * h; };
+    c.font = '11px "DM Mono",monospace'; c.fillStyle = '#7d89a3'; c.strokeStyle = 'rgba(255,255,255,.07)'; c.lineWidth = 1;
+    var dec = niceDecimals(hi - lo);
+    for (var i = 0; i <= 4; i++) {
+      var v = lo + (hi - lo) * i / 4, y = Math.round(Y(v)) + .5;
+      c.beginPath(); c.moveTo(L, y); c.lineTo(W - R, y); c.stroke();
+      c.textAlign = 'right'; c.textBaseline = 'middle'; c.fillText('$' + v.toFixed(dec), L - 6, y);
+    }
+    var span = t1 - t0, dayMs = 86400000;
+    c.textAlign = 'center'; c.textBaseline = 'top';
+    var n = Math.max(3, Math.min(6, Math.floor(w / 110)));
+    for (var j = 0; j < n; j++) {
+      var tt = t0 + span * (j + 0.5) / n, d = new Date(tt), s;
+      if (span <= 2 * dayMs) s = d.toISOString().slice(11, 16);
+      else if (span <= 130 * dayMs) s = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+      else s = d.toLocaleDateString('en-US', { month: 'short', year: '2-digit', timeZone: 'UTC' });
+      c.fillText(s, X(tt), H - B + 7);
+    }
+    var g = c.createLinearGradient(0, T, 0, T + h); g.addColorStop(0, 'rgba(126,224,255,.28)'); g.addColorStop(1, 'rgba(126,224,255,0)');
+    c.beginPath(); c.moveTo(X(pts[0][0]), T + h);
+    pts.forEach(function (p) { c.lineTo(X(p[0]), Y(p[1])); });
+    c.lineTo(X(t1), T + h); c.closePath(); c.fillStyle = g; c.fill();
+    c.beginPath(); pts.forEach(function (p, k) { if (k) c.lineTo(X(p[0]), Y(p[1])); else c.moveTo(X(p[0]), Y(p[1])); });
+    c.strokeStyle = '#7ee0ff'; c.lineWidth = 1.6; c.lineJoin = 'round'; c.stroke();
+    chart.geom = { L: L, R: R, T: T, h: h, w: w, t0: t0, t1: t1, X: X, Y: Y };
+    if (chart.hover >= 0) {
+      var p = pts[chart.hover], px = X(p[0]), py = Y(p[1]);
+      c.strokeStyle = 'rgba(255,255,255,.3)'; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(px, T); c.lineTo(px, T + h); c.stroke(); c.setLineDash([]);
+      c.fillStyle = '#7ee0ff'; c.beginPath(); c.arc(px, py, 3.5, 0, 6.283); c.fill();
+    }
+  }
+  function setupChartHover() {
+    var box = $('chart-box'), tip = $('tip');
+    box.addEventListener('mousemove', function (ev) {
+      var pts = chart.pts, g = chart.geom; if (!pts || !g) return;
+      var rect = box.getBoundingClientRect(), x = ev.clientX - rect.left;
+      var t = g.t0 + (x - g.L) / g.w * (g.t1 - g.t0), lo = 0, hi = pts.length - 1;
+      while (hi - lo > 1) { var mid = (lo + hi) >> 1; if (pts[mid][0] < t) lo = mid; else hi = mid; }
+      var i = Math.abs(pts[lo][0] - t) < Math.abs(pts[hi][0] - t) ? lo : hi;
+      chart.hover = i; drawChart();
+      var p = pts[i], px = g.X(p[0]);
+      tip.innerHTML = ''; tip.appendChild(document.createTextNode(fmtPrice(p[1]).replace(/(\.\d*?)0+$/, '$1'))); var sm = el('small', null, new Date(p[0]).toUTCString().slice(5, 22) + ' UTC'); tip.appendChild(sm);
+      tip.style.display = 'block';
+      var tw = tip.offsetWidth; tip.style.left = Math.min(Math.max(px - tw / 2, 0), box.clientWidth - tw) + 'px'; tip.style.top = '4px';
+    });
+    box.addEventListener('mouseleave', function () { chart.hover = -1; tip.style.display = 'none'; drawChart(); });
+    if (window.ResizeObserver) new ResizeObserver(drawChart).observe(box); else window.addEventListener('resize', drawChart);
+  }
+  function loadChart(range) {
+    S.chartRange = range;
+    document.querySelectorAll('#ranges button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.r === range ? 'true' : 'false'); });
+    var st = $('chart-state');
+    var show = function (pts) {
+      st.style.display = 'none'; chart.pts = pts; chart.hover = -1; drawChart();
+    };
+    if (S.chartData[range]) return show(S.chartData[range]);
+    st.style.display = 'flex'; st.textContent = 'Loading chart…';
+    cg('/coins/rize/market_chart', { vs_currency: 'usd', days: range }).then(function (d) {
+      var pts = (d && d.prices) || [];
+      if (pts.length < 2) throw new Error('empty');
+      S.chartData[range] = pts;
+      if (range === S.chartRange) show(pts);
+      if (range === 'max' || range === '365') set180(pts);
+    }).catch(function () {
+      if (range === S.chartRange) { st.style.display = 'flex'; st.textContent = 'Price history is unavailable right now.'; chart.pts = null; drawChart(); }
+    });
+  }
+  function set180(pts) {
+    var last = pts[pts.length - 1], target = last[0] - 180 * 86400000;
+    if (pts[0][0] > target + 3 * 86400000) return;
+    var best = pts[0]; pts.forEach(function (p) { if (Math.abs(p[0] - target) < Math.abs(best[0] - target)) best = p; });
+    var pct = (last[1] - best[1]) / best[1] * 100; setChange($('ps-180d'), fmtPct(pct), pct);
+  }
+  $('ranges').addEventListener('click', function (ev) { var b = ev.target.closest('button'); if (b) { showPanel('price'); loadChart(b.dataset.r); } });
+
+  /* ================= status / sync strip ================= */
+  function loadStatus() {
+    api('/status').then(function (d) { S.status = d; renderSync(); updatePager(); }).catch(function (e) {
+      $('sync').textContent = ''; var s = el('span'); s.appendChild(el('i', 'dot bad')); s.appendChild(document.createTextNode(explain(e))); $('sync').appendChild(s);
+    });
+  }
+  function renderSync() {
+    var box = $('sync'); box.textContent = '';
+    S.status.chains.forEach(function (c) {
+      var age = c.last_synced_at ? (Date.now() - new Date(c.last_synced_at).getTime()) / 1000 : Infinity;
+      var cls = age < 3 * 3600 ? 'ok' : age < 24 * 3600 ? 'warn' : 'bad';
+      var s = el('span'); s.appendChild(el('i', 'dot ' + cls));
+      s.appendChild(document.createTextNode(c.name + (c.last_synced_at ? ' ' + ago(c.last_synced_at).replace(' ago', '') : '')));
+      s.title = c.name + ': block ' + (c.last_block == null ? '—' : c.last_block.toLocaleString('en-US')) + ' · ' + c.transfers.toLocaleString('en-US') + ' transfers indexed';
+      box.appendChild(s);
+    });
+  }
+
+  /* ================= transfers table ================= */
+  function addrCell(addr, label, chain, kindIfNull) {
+    var td = el('td');
+    if (addr === ZERO) { td.appendChild(el('span', 'nul', 'Null address')); td.appendChild(el('span', 'tag ' + kindIfNull, kindIfNull)); return td; }
+    var b = el('button', 'ad'); b.type = 'button'; b.title = addr + (label ? ' — ' + label.label : '');
+    if (label) { b.appendChild(el('span', 'adn', label.label)); b.appendChild(el('span', 'ads', short(addr))); }
+    else b.appendChild(el('span', 'ads', short(addr)));
+    b.addEventListener('click', function (ev) { ev.stopPropagation(); selectWallet(addr); });
+    td.appendChild(b);
+    return td;
+  }
+  function timeText(iso) { return S.timeMode === 'abs' ? exact(iso) : ago(iso); }
+  function rowFor(t) {
+    var tr = el('tr'); tr.dataset.tx = t.tx; tr.dataset.chain = t.chain;
+    var c0 = el('td', 'c'); var dot = el('span', 'cdot'); dot.style.background = CHAINS[t.chain].color; dot.title = CHAINS[t.chain].name; c0.appendChild(dot); tr.appendChild(c0);
+    var tt = el('td'); var a = el('a', 'tlink', timeText(t.time)); a.href = CHAINS[t.chain].tx + t.tx; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.dataset.iso = t.time; a.title = (S.timeMode === 'abs' ? ago(t.time) : exact(t.time) + ' UTC') + ' — open transaction on ' + CHAINS[t.chain].name + ' explorer';
+    a.addEventListener('click', function (ev) { ev.stopPropagation(); }); tt.appendChild(a); tr.appendChild(tt);
+    tr.appendChild(addrCell(t.from, t.from_label, t.chain, 'mint'));
+    tr.appendChild(addrCell(t.to, t.to_label, t.chain, 'burn'));
+    var v = el('td', 'num', fmtCompact(t.amount)); v.title = t.amount + ' RIZE'; tr.appendChild(v);
+    var tk = el('td'); var w = el('span', 'tk'); var im = el('img'); im.src = LOGO; im.alt = ''; w.appendChild(im); w.appendChild(document.createTextNode('RIZE')); tk.appendChild(w); tr.appendChild(tk);
+    var u = el('td', 'num usd'); u.setAttribute('data-amt', t.amount); u.textContent = S.price == null ? '—' : fmtUsdCompact(parseFloat(t.amount) * S.price); tr.appendChild(u);
+    tr.addEventListener('click', function () { selectTx(t.chain, t.tx); });
+    if (S.selected && S.selected.kind === 'tx' && S.selected.hash === t.tx) tr.className = 'sel';
+    return tr;
+  }
+  function refreshTimes() {
+    document.querySelectorAll('#rows a.tlink').forEach(function (a) { a.textContent = timeText(a.dataset.iso); });
+    $('th-time-l').textContent = S.timeMode === 'abs' ? 'Time (UTC)' : 'Ago';
+  }
+  $('th-time').addEventListener('click', function () {
+    S.timeMode = S.timeMode === 'abs' ? 'rel' : 'abs'; store('explorize.time', S.timeMode);
+    document.querySelectorAll('#rows a.tlink').forEach(function (a) {
+      var iso = a.dataset.iso; a.textContent = timeText(iso);
+      a.title = (S.timeMode === 'abs' ? ago(iso) : exact(iso) + ' UTC') + ' — open transaction on explorer';
+    });
+    $('th-time-l').textContent = S.timeMode === 'abs' ? 'Time (UTC)' : 'Ago';
+  });
+  function setState(msg, isErr) { var s = $('state'); s.textContent = msg || ''; s.className = 'state' + (isErr ? ' err' : ''); s.hidden = !msg; }
+
+  function totalCount() {
+    if (!S.status || S.address || S.type !== 'all') return null;
+    if (S.chain === 'all') return S.status.total_transfers;
+    var c = S.status.chains.filter(function (x) { return x.chain === S.chain; })[0]; return c ? c.transfers : null;
+  }
+  function updatePager() {
+    var tot = totalCount();
+    $('pg-label').textContent = (S.page + 1) + (tot ? ' / ' + commas(Math.max(1, Math.ceil(tot / PAGE))) : '');
+    $('pg-prev').disabled = S.page === 0 || S.loading;
+    $('pg-next').disabled = !S.next || S.loading;
+  }
+  function load(opts) {
+    opts = opts || {};
+    var id = ++S.reqId; S.loading = true;
+    if (!opts.silent) { $('rows').textContent = ''; setState('Loading transfers…'); }
+    updatePager();
+    api('/transfers', { chain: S.chain, type: S.type, address: S.address, limit: PAGE, cursor: S.cursors[S.page] })
+      .then(function (d) {
+        if (id !== S.reqId) return;
+        var body = $('rows'); body.textContent = '';
+        var frag = document.createDocumentFragment(); d.items.forEach(function (t) { frag.appendChild(rowFor(t)); }); body.appendChild(frag);
+        S.next = d.next_cursor; S.cursors[S.page + 1] = d.next_cursor;
+        setState(d.items.length ? '' : 'No transfers match these filters.');
+        if (!opts.silent) $('tbody-wrap').scrollTop = 0;
+      })
+      .catch(function (e) { if (id === S.reqId && !opts.silent) { $('rows').textContent = ''; setState(explain(e), true); } })
+      .finally(function () { if (id === S.reqId) { S.loading = false; updatePager(); } });
+  }
+  function reload() { S.cursors = [null]; S.page = 0; S.next = null; syncUrl(); load(); }
+  $('pg-next').addEventListener('click', function () { if (S.next) { S.page++; load(); } });
+  $('pg-prev').addEventListener('click', function () { if (S.page > 0) { S.page--; load(); } });
+  $('b-refresh').addEventListener('click', function () { loadStatus(); loadMarket(); reload(); });
+
+  /* filters */
+  function applyAddressUi() { $('f-address').value = S.address; $('f-clear').hidden = !S.address; }
+  $('filters').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var a = $('f-address').value.trim();
+    if (a && !isAddr(a)) { $('rows').textContent = ''; setState('That does not look like a wallet address (0x followed by 40 hex characters).', true); return; }
+    S.address = a.toLowerCase(); applyAddressUi(); reload(); if (S.address) selectWallet(S.address);
+  });
+  $('f-chain').addEventListener('change', function () { S.chain = this.value; reload(); });
+  $('f-type').addEventListener('change', function () { S.type = this.value; reload(); });
+  $('f-clear').addEventListener('click', function () { S.address = ''; applyAddressUi(); reload(); markWalletButton(); });
+
+  /* ================= interactive panel ================= */
+  function showPanel(which) {
+    var price = which === 'price';
+    $('tab-price').setAttribute('aria-selected', price ? 'true' : 'false'); $('tab-detail').setAttribute('aria-selected', price ? 'false' : 'true');
+    $('view-price').hidden = !price; $('view-detail').hidden = price; $('ranges').style.visibility = price ? 'visible' : 'hidden';
+    if (price) requestAnimationFrame(drawChart);
+  }
+  $('tab-price').addEventListener('click', function () { showPanel('price'); });
+  $('tab-detail').addEventListener('click', function () { showPanel('detail'); });
+
+  function copyBtn(text) {
+    var b = el('button', 'btn', 'Copy'); b.type = 'button';
+    b.addEventListener('click', function () {
+      var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1200); };
+      try { navigator.clipboard.writeText(text).then(done, done); } catch (e) { done(); }
+    });
+    return b;
+  }
+  function kicker(text) { return el('div', 'd-kicker', text); }
+  function dcell(k, v, s, cls, extra) {
+    var c = el('div', 'd-cell' + (extra ? ' ' + extra : '')); c.appendChild(el('div', 'k', k)); c.appendChild(el('div', 'v' + (cls ? ' ' + cls : ''), v)); if (s) c.appendChild(el('div', 's', s)); return c;
+  }
+  function extLink(text, href) { var a = el('a', 'btn', text); a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
+  function clearSelectedRows() { document.querySelectorAll('#rows tr.sel').forEach(function (r) { r.classList.remove('sel'); }); }
+  function markWalletButton() { var b = $('btn-filter'); if (b) { b.classList.toggle('on', !!S.address && S.selected && S.selected.address === S.address); b.textContent = (b.classList.contains('on') ? 'Showing only this wallet' : 'Filter transfers by this wallet'); } }
+
+  function selectWallet(addr) {
+    addr = addr.toLowerCase();
+    S.selected = { kind: 'wallet', address: addr }; clearSelectedRows(); syncUrl();
+    var box = $('detail'); box.textContent = ''; box.appendChild(el('div', 'state', 'Loading wallet…')); showPanel('detail');
+    api('/wallet', { address: addr }).then(function (d) {
+      if (!S.selected || S.selected.address !== addr) return;
+      box.textContent = '';
+      box.appendChild(kicker('Wallet'));
+      var main = el('div', 'd-main'); main.appendChild(document.createTextNode(d.address)); if (d.label) main.appendChild(el('span', 'd-lbl', d.label.label)); box.appendChild(main);
+      var act = el('div', 'd-actions'); act.appendChild(copyBtn(d.address));
+      var f = el('button', 'btn', 'Filter transfers by this wallet'); f.type = 'button'; f.id = 'btn-filter';
+      f.addEventListener('click', function () { if (S.address === addr) S.address = ''; else S.address = addr; applyAddressUi(); reload(); markWalletButton(); });
+      act.appendChild(f);
+      Object.keys(CHAINS).forEach(function (k) { act.appendChild(extLink(CHAINS[k].name + ' ↗', CHAINS[k].addr + addr)); });
+      box.appendChild(act); markWalletButton();
+      var grid = el('div', 'd-grid');
+      if (d.is_zero_address) grid.appendChild(dcell('Null address', 'n/a', 'Used for mints and burns; it holds no balance.'));
+      else if (d.status === 'no_activity') grid.appendChild(dcell('Activity', 'None', 'No RIZE transfers found for this address.'));
+      else {
+        if (d.status === 'error') grid.appendChild(dcell('Total balance', 'error', 'Some balances cannot be rebuilt', 'err', 'total'));
+        else {
+          grid.appendChild(dcell('Total balance', fmtCompact(d.total_balance) + ' RIZE', S.price != null ? fmtUsdCompact(parseFloat(d.total_balance) * S.price) + ' · ' + d.transfers.toLocaleString('en-US') + ' transfers' : d.transfers.toLocaleString('en-US') + ' transfers', null, 'total'));
+        }
+        d.chains.forEach(function (c) {
+          var sub = c.transfers.toLocaleString('en-US') + ' transfers · last ' + ago(c.last_seen);
+          grid.appendChild(c.balance_status === 'error' ? dcell(c.name, 'error', sub, 'err') : dcell(c.name, fmtCompact(c.balance) + ' RIZE', sub));
+        });
+      }
+      box.appendChild(grid);
+    }).catch(function (e) { if (S.selected && S.selected.address === addr) { box.textContent = ''; box.appendChild(el('div', 'state err', explain(e))); } });
+  }
+
+  function selectTx(chain, hash) {
+    S.selected = { kind: 'tx', chain: chain, hash: hash }; syncUrl();
+    clearSelectedRows(); document.querySelectorAll('#rows tr').forEach(function (r) { if (r.dataset.tx === hash) r.classList.add('sel'); });
+    var box = $('detail'); box.textContent = ''; box.appendChild(el('div', 'state', 'Loading transaction…')); showPanel('detail');
+    api('/tx', { chain: chain, hash: hash }).then(function (d) {
+      if (!S.selected || S.selected.hash !== hash) return;
+      box.textContent = '';
+      box.appendChild(kicker('Transaction · ' + d.chain_name));
+      box.appendChild(el('div', 'd-main', d.tx));
+      var act = el('div', 'd-actions'); act.appendChild(copyBtn(d.tx)); act.appendChild(extLink('Open on explorer ↗', CHAINS[d.chain].tx + d.tx)); box.appendChild(act);
+      var kv = el('dl', 'd-kv');
+      var add = function (k, v) { kv.appendChild(el('dt', null, k)); kv.appendChild(el('dd', null, v)); };
+      add('Time', exact(d.time) + ' UTC (' + ago(d.time) + ')'); add('Block', d.block.toLocaleString('en-US')); add('Chain', d.chain_name);
+      add('RIZE moved', fmtCompact(d.total_amount) + ' RIZE' + (S.price != null ? ' (' + fmtUsdCompact(parseFloat(d.total_amount) * S.price) + ')' : '') + (d.transfers > 1 ? ' across ' + d.transfers + ' transfers' : ''));
+      box.appendChild(kv);
+      box.appendChild(el('div', 'd-sub', 'Transfers in this transaction'));
+      var tb = el('table', 'mini'); var th = el('thead'); var hr = el('tr'); ['From', 'To', 'Value'].forEach(function (h) { hr.appendChild(el('th', null, h)); }); th.appendChild(hr); tb.appendChild(th);
+      var body = el('tbody');
+      var who = function (addr, lbl, kind) {
+        var td = el('td');
+        if (addr === ZERO) { td.appendChild(el('span', 'nul', 'Null address')); td.appendChild(el('span', 'tag ' + kind, kind)); return td; }
+        var b = el('button', 'ad'); b.type = 'button'; b.title = addr;
+        if (lbl) b.appendChild(el('span', 'adn', lbl.label + ' ')); b.appendChild(el('span', 'ads', short(addr)));
+        b.addEventListener('click', function () { selectWallet(addr); }); td.appendChild(b); return td;
+      };
+      d.items.forEach(function (t) {
+        var r = el('tr'); r.appendChild(who(t.from, t.from_label, 'mint')); r.appendChild(who(t.to, t.to_label, 'burn')); var v = el('td', null, fmtCompact(t.amount) + ' RIZE'); v.title = t.amount; r.appendChild(v); body.appendChild(r);
+      });
+      tb.appendChild(body); box.appendChild(tb);
+    }).catch(function (e) { if (S.selected && S.selected.hash === hash) { box.textContent = ''; box.appendChild(kicker('Transaction')); box.appendChild(el('div', 'd-main', hash)); box.appendChild(el('div', 'state err', explain(e))); } });
+  }
+  function detailHint() {
+    var box = $('detail'); box.textContent = '';
+    box.appendChild(el('p', 'hint', 'Click a wallet or a transaction in the Transfers table to see its details here.'));
+  }
+
+  /* ================= placeholders (rows only to show the structure) ================= */
+  function skeletonRows(id, cols, n) {
+    var tb = $(id);
+    for (var i = 0; i < n; i++) { var tr = el('tr'); for (var j = 0; j < cols; j++) { var td = el('td', j ? 'num' : ''); td.appendChild(el('span', 'skel')); tr.appendChild(td); } tb.appendChild(tr); }
+  }
+
+  /* ================= URL state ================= */
+  function syncUrl() {
+    var p = new URLSearchParams();
+    if (S.chain !== 'all') p.set('chain', S.chain);
+    if (S.type !== 'all') p.set('type', S.type);
+    if (S.address) p.set('address', S.address);
+    if (S.selected && S.selected.kind === 'wallet') p.set('wallet', S.selected.address);
+    if (S.selected && S.selected.kind === 'tx') { p.set('tx', S.selected.hash); p.set('txchain', S.selected.chain); }
+    var qs = p.toString();
+    try { history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '')); } catch (e) { /* ignore */ }
+  }
+
+  /* ================= start ================= */
+  var q = new URLSearchParams(location.search);
+  if (CHAINS[q.get('chain')]) S.chain = q.get('chain');
+  if (['transfer', 'mint', 'burn'].indexOf(q.get('type')) >= 0) S.type = q.get('type');
+  if (isAddr(q.get('address') || '')) S.address = q.get('address').toLowerCase();
+  $('f-chain').value = S.chain; $('f-type').value = S.type; applyAddressUi(); refreshTimes();
+  skeletonRows('soon-trades', 5, 9); skeletonRows('soon-holders', 5, 9);
+  detailHint(); setupChartHover();
+  loadMarket(); loadChart('max'); loadStatus(); load();
+  if (isAddr(q.get('wallet') || '')) selectWallet(q.get('wallet'));
+  else if (isHash(q.get('tx') || '') && CHAINS[q.get('txchain')]) selectTx(q.get('txchain'), q.get('tx').toLowerCase());
+
+  setInterval(function () {
+    if (document.hidden) return;
+    loadStatus(); loadMarket();
+    if (S.page === 0 && !S.loading) load({ silent: true });
+    refreshTimes();
+  }, 60000);
+})();
+</script>
+</body>
+</html>
