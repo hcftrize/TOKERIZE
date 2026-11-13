@@ -51,6 +51,14 @@
     {
       "src": "/admin",
       "dest": "/admin.html"
+    },
+    {
+      "src": "/explorize",
+      "dest": "/explorize.html"
+    },
+    {
+      "src": "/api/explorize/(status|transfers|wallet)",
+      "dest": "/api/explorize/$1.js"
     }
   ],
   "functions": {
