@@ -1415,6 +1415,21 @@
     "logo_local": "logos\\d2x.png"
   },
   {
+    "name": "DA Registry",
+    "slug": "da-registry",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6af5f4dda5ec3cf208287a1c_Untitled%20Design%20(3).png",
+    "short_desc": "Native modular building blocks for tokenization, trading, financing and collateral management",
+    "tags": [
+      "APPS (FEATURED)",
+      "APPS (ALL)",
+      "DEVELOPER TOOLS",
+      "TOKENIZED ASSETS",
+      "INTEROPERABILITY"
+    ],
+    "detail_text": "Native modular building blocks for tokenization, trading, financing and collateral management",
+    "logo_local": "logos\\da-registry.png"
+  },
+  {
     "name": "DA Registry App",
     "slug": "da-registry-app",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69bdaaf8eee231c184ac17db_69a515dece5a0f7503eed643_logo_digital_asset.png",
