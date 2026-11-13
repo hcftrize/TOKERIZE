@@ -199,10 +199,32 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
 .achip{display:inline-flex;align-items:center;gap:6px;background:rgba(126,224,255,.1);border:1px solid var(--border-strong);padding:3px 4px 3px 11px;font-family:'DM Mono',monospace;font-size:13.5px;}
 .achip button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:17px;line-height:1;padding:0 6px;}
 .achip button:hover{color:var(--text);}
+.p-holders table.t{min-width:0;}
+.p-holders table.t td,.p-holders table.t th{padding-left:5px;padding-right:5px;}
+.p-holders table.t th{letter-spacing:1.2px;}
+.p-holders .adn{max-width:70px;}
+td.rk{width:44px;}
+td.rk{color:var(--dim);}
+th.tot,td.tot{background:rgba(126,224,255,.07);}
+td.tot{color:var(--cyan);font-weight:500;}
+.dash{color:var(--dim);}
+.bi{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;margin-left:8px;border:1px solid var(--dim);border-radius:50%;color:var(--muted);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;cursor:help;vertical-align:middle;line-height:1;}
+.bi:hover,.bi:focus{color:var(--cyan);border-color:var(--cyan);outline:none;}
+.bi.warn{border:none;width:auto;height:auto;border-radius:0;color:#ffb020;font-size:18px;margin-left:7px;}
+.bi.warn:hover,.bi.warn:focus{color:var(--gold);}
+.bi.vest{color:var(--gold);border-color:rgba(255,211,107,.6);}
+.bi.vest:hover,.bi.vest:focus{color:#fff;border-color:#fff;}
+.htip{position:fixed;z-index:300;display:none;max-width:400px;min-width:260px;background:#101530;border:1px solid var(--border-strong);padding:11px 13px;font-family:'DM Mono',monospace;font-size:13px;line-height:1.55;color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,.5);}
+.ginfo h5{font-family:'Rajdhani',sans-serif;font-size:13.5px;font-weight:700;letter-spacing:1.7px;text-transform:uppercase;color:var(--dim);margin:10px 0 3px;}
+.ginfo h5:first-child{margin-top:0;}
+.ginfo .row{display:flex;justify-content:space-between;gap:16px;}
+.ginfo .warnline{color:#ffb020;}
+.ginfo .dim{color:var(--dim);}
+.ginfo .vl{margin-bottom:4px;}
 @media(max-width:1100px){
   .app{height:auto;min-height:0;grid-template-columns:minmax(0,1fr);grid-template-rows:none;}
   .p-top,.p-trades,.p-info,.p-holders,.p-transfers{grid-column:1;grid-row:auto;}
-  .p-top{order:1}.p-info{order:2;height:440px}.p-transfers{order:3;height:600px}.p-trades{order:4;height:340px}.p-holders{order:5;height:340px}
+  .p-top{order:1}.p-info{order:2;height:440px}.p-transfers{order:3;height:600px}.p-trades{order:4;height:340px}.p-holders{order:5;height:560px}
   .stats{justify-content:flex-start;gap:18px 26px;}
 }
 @media(max-width:768px){
@@ -302,16 +324,33 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
     </div>
   </section>
 
-  <!-- ============ TOP HOLDERS (soon) ============ -->
+  <!-- ============ TOP HOLDERS ============ -->
   <section class="panel p-holders" aria-label="RIZE top holders">
-    <div class="p-head"><div class="p-title">RIZE Top Holders</div><div class="pager"><button class="icon-btn" disabled>&lsaquo;</button>1 / &ndash;<button class="icon-btn" disabled>&rsaquo;</button></div></div>
-    <div class="soon-wrap">
-      <table class="t" style="min-width:0">
-        <thead><tr><th>Addresses</th><th>Chains</th><th class="num">Value</th><th class="num">Pct</th><th class="num">USD</th></tr></thead>
-        <tbody id="soon-holders"></tbody>
-      </table>
-      <div class="soon-over"><b>Coming soon</b><p>The largest RIZE holders across all chains, including governance and bonded RIZE.</p></div>
+    <div class="p-head">
+      <div class="p-title">RIZE Top Holders</div>
+      <div class="pager" id="hpager">
+        <button class="icon-btn" id="hg-first" aria-label="First page" title="First page">&laquo;</button>
+        <button class="icon-btn" id="hg-prev" aria-label="Previous page" title="Previous page">&lsaquo;</button>
+        <input type="text" inputmode="numeric" class="pg-input" id="hg-input" value="1" aria-label="Page number" title="Type a page number and press Enter"/>
+        <span class="pg-of">/ <span id="hg-total">&hellip;</span></span>
+        <button class="icon-btn" id="hg-next" aria-label="Next page" title="Next page">&rsaquo;</button>
+        <button class="icon-btn" id="hg-last" aria-label="Last page" title="Last page">&raquo;</button>
+      </div>
     </div>
+    <div class="p-body" id="hbody-wrap">
+      <table class="t">
+        <thead><tr>
+          <th>Rank</th><th>Addresses</th>
+          <th class="num tot" title="Held + Bonded">Total</th>
+          <th class="num" title="Liquid RIZE, all chains together">Held</th>
+          <th class="num" title="RIZE locked in governance bonds on Base, including RIZE waiting to be released">Bonded</th>
+          <th>Token</th><th class="num">USD</th>
+        </tr></thead>
+        <tbody id="hrows"></tbody>
+      </table>
+      <div class="state" id="hstate">Loading holders&hellip;</div>
+    </div>
+    <div class="p-foot"><span id="h-foot">&nbsp;</span><span id="h-note">Total = Held + Bonded &middot; USD uses the current RIZE price</span></div>
   </section>
 
   <!-- ============ TRANSFERS ============ -->
@@ -369,7 +408,7 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
     <div class="p-foot"><div class="sync" id="sync">Loading status&hellip;</div><span id="foot-note">USD uses the current RIZE price</span></div>
   </section>
 </main>
-<p class="betanote"><b>BETA</b>Explorize reads RIZE <code>Transfer</code> events directly from each chain. Wallet balances are rebuilt from those transfers and may be unavailable for contracts such as routers and bridges.</p>
+<p class="betanote"><b>BETA</b>Explorize reads RIZE <code>Transfer</code> events directly from each chain. Wallet balances are rebuilt from those transfers and may be unavailable for contracts such as routers and bridges. The Top Holders ranking is different: balances are read directly from each chain and governance bonds from the T-RIZE contract, refreshed once a day.</p>
 
 <footer class="site-footer">
   <div class="footer-logo"><img src="/assets/header-footer/tokerize-header-footer.png" alt="Tokerize"/></div>
@@ -408,6 +447,9 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
     timeMode: store('explorize.time') === 'abs' ? 'abs' : 'rel',
     price: null, status: null, selected: null, chartRange: 'max', chartData: {}
   };
+
+  var H = { page: 1, pages: 1, total: null, loading: false, reqId: 0, meta: null };
+  var HPAGE = 50;
 
   /* ================= formatting ================= */
   function commas(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
@@ -518,7 +560,7 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
     });
   }
   function refreshUsdCells() {
-    document.querySelectorAll('#rows td.usd').forEach(function (td) {
+    document.querySelectorAll('#rows td.usd, #hrows td.usd').forEach(function (td) {
       var a = parseFloat(td.getAttribute('data-amt'));
       td.textContent = S.price == null ? '—' : fmtUsdCompact(a * S.price);
     });
@@ -806,12 +848,13 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
     var c = el('div', 'd-cell' + (extra ? ' ' + extra : '')); c.appendChild(el('div', 'k', k)); c.appendChild(el('div', 'v' + (cls ? ' ' + cls : ''), v)); if (s) c.appendChild(el('div', 's', s)); return c;
   }
   function extLink(text, href) { var a = el('a', 'btn', text); a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
-  function clearSelectedRows() { document.querySelectorAll('#rows tr.sel').forEach(function (r) { r.classList.remove('sel'); }); }
+  function clearSelectedRows() { document.querySelectorAll('#rows tr.sel, #hrows tr.sel').forEach(function (r) { r.classList.remove('sel'); }); }
   function markWalletButton() { var b = $('btn-filter'); if (b) { b.classList.toggle('on', !!S.address && S.selected && S.selected.address === S.address); b.textContent = (b.classList.contains('on') ? 'Showing only this wallet' : 'Filter transfers by this wallet'); } }
 
   function selectWallet(addr) {
     addr = addr.toLowerCase();
     S.selected = { kind: 'wallet', address: addr }; clearSelectedRows(); syncUrl();
+    document.querySelectorAll('#hrows tr').forEach(function (r) { if (r.dataset.addr === addr) r.classList.add('sel'); });
     var box = $('detail'); box.textContent = ''; box.appendChild(el('div', 'state', 'Loading wallet…')); showPanel('detail');
     api('/wallet', { address: addr }).then(function (d) {
       if (!S.selected || S.selected.address !== addr) return;
@@ -826,7 +869,7 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
       box.appendChild(act); markWalletButton();
       var grid = el('div', 'd-grid');
       if (d.is_zero_address) grid.appendChild(dcell('Null address', 'n/a', 'Used for mints and burns; it holds no balance.'));
-      else if (d.status === 'no_activity') grid.appendChild(dcell('Activity', 'None', 'No RIZE transfers found for this address.'));
+      else if (d.status === 'no_activity') grid.appendChild(dcell('Activity', 'None', d.governance ? 'No direct RIZE transfers: this wallet holds RIZE only through governance bonds.' : 'No RIZE transfers found for this address.'));
       else {
         if (d.status === 'error') grid.appendChild(dcell('Total balance', 'error', 'Some balances cannot be rebuilt', 'err', 'total'));
         else {
@@ -837,7 +880,13 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
           grid.appendChild(c.balance_status === 'error' ? dcell(c.name, 'error', sub, 'err') : dcell(c.name, fmtCompact(c.balance) + ' RIZE', sub));
         });
       }
+      if (d.rank) grid.insertBefore(dcell('Top holders rank', '#' + d.rank, 'among the 1,000 largest holders'), grid.firstChild);
+      if (d.governance) {
+        var g = d.governance;
+        grid.appendChild(dcell('Bonded (governance)', fmtCompact(g.locked) + ' RIZE', (S.price != null ? fmtUsdCompact(parseFloat(g.locked) * S.price) + ' \u00b7 ' : '') + g.bond_count + ' bond' + (g.bond_count === 1 ? '' : 's') + (g.has_vesting ? ' \u00b7 vesting' : ''), hasExit(g) ? 'err' : null));
+      }
       box.appendChild(grid);
+      if (d.governance) { box.appendChild(el('div', 'd-sub', 'Governance bonds')); box.appendChild(govInfo(d.governance)); }
     }).catch(function (e) { if (S.selected && S.selected.address === addr) { box.textContent = ''; box.appendChild(el('div', 'state err', explain(e))); } });
   }
 
@@ -877,6 +926,132 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
     box.appendChild(el('p', 'hint', 'Click a wallet or a transaction in the Transfers table to see its details here.'));
   }
 
+  /* ================= top holders ================= */
+  var MAXB = 12, MAXV = 6;
+  function dateUtc(sec) { return new Date(sec * 1000).toISOString().replace('T', ' ').slice(0, 16) + ' UTC'; }
+  function dayUtc(sec) { return new Date(sec * 1000).toISOString().slice(0, 10); }
+  function untilText(sec) {
+    var s = sec - Date.now() / 1000; if (s <= 0) return 'now';
+    var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
+    return 'in ' + (d ? d + 'd ' + h + 'h' : h ? h + 'h ' + m + 'm' : Math.max(m, 1) + 'm');
+  }
+  function rz(str) { return fmtCompact(str) + ' RIZE'; }
+  function govInfo(g) {
+    var box = el('div', 'ginfo');
+    box.appendChild(el('h5', null, 'Bonded in governance'));
+    box.appendChild(el('div', null, rz(g.locked) + ' in ' + g.bond_count + ' bond' + (g.bond_count === 1 ? '' : 's')));
+    var p = g.pending, wait = parseFloat(p.waiting) > 0, ready = parseFloat(p.ready) > 0;
+    if (wait || ready) {
+      box.appendChild(el('h5', null, 'Leaving the bonds'));
+      if (wait) box.appendChild(el('div', 'warnline', rz(p.waiting) + ' unbonding — releasable ' + untilText(p.next_release) + ' (' + dateUtc(p.next_release) + ')'));
+      if (ready) box.appendChild(el('div', 'warnline', rz(p.ready) + ' releasable (unbonding 7d queue ended)'));
+    }
+    box.appendChild(el('h5', null, 'Bond numbers'));
+    g.bonds.slice(0, MAXB).forEach(function (b) {
+      var r = el('div', 'row'); r.appendChild(el('span', null, '#' + b.id));
+      var t = parseFloat(b.bonded) > 0 ? rz(b.bonded) : ''; if (parseFloat(b.queued) > 0) t += (t ? ' + ' : '') + rz(b.queued) + ' unbonding';
+      r.appendChild(el('span', null, t)); box.appendChild(r);
+    });
+    if (g.bonds.length > MAXB) box.appendChild(el('div', 'dim', '+ ' + (g.bonds.length - MAXB) + ' more bond' + (g.bonds.length - MAXB === 1 ? '' : 's')));
+    var v = g.bonds.filter(function (b) { return b.vesting; });
+    if (v.length) {
+      box.appendChild(el('h5', null, 'Vesting'));
+      v.slice(0, MAXV).forEach(function (b) {
+        var x = b.vesting, now = Date.now() / 1000;
+        var line = '#' + b.id + ': ' + rz(x.locked) + ' still locked of ' + fmtCompact(x.amount) + '. ' +
+          (now < x.cliff_end ? 'Nothing unlocks before ' + dayUtc(x.cliff_end) + ', then linearly until ' + dayUtc(x.end) + '.' : 'Unlocking linearly until ' + dayUtc(x.end) + '.');
+        if (x.initiator) line += ' Set up by ' + short(x.initiator) + '.';
+        box.appendChild(el('div', 'vl', line));
+      });
+      if (v.length > MAXV) box.appendChild(el('div', 'dim', '+ ' + (v.length - MAXV) + ' more vesting bond' + (v.length - MAXV === 1 ? '' : 's')));
+    }
+    return box;
+  }
+
+  var htip = el('div', 'htip'); htip.id = 'htip'; htip.setAttribute('role', 'tooltip'); document.body.appendChild(htip);
+  var tipOwner = null;
+  function hideTip() { htip.style.display = 'none'; tipOwner = null; }
+  function showTip(anchor, g) {
+    htip.textContent = ''; htip.appendChild(govInfo(g)); htip.style.display = 'block'; tipOwner = anchor;
+    var r = anchor.getBoundingClientRect(), w = htip.offsetWidth, h = htip.offsetHeight;
+    var left = Math.min(Math.max(8, r.right - w), window.innerWidth - w - 8);
+    var top = r.bottom + 6; if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 6);
+    htip.style.left = left + 'px'; htip.style.top = top + 'px';
+  }
+  window.addEventListener('scroll', hideTip, true);
+  document.addEventListener('click', function (ev) { if (tipOwner && ev.target !== tipOwner) hideTip(); });
+  function infoIcon(g, warn) {
+    var b = el('span', 'bi' + (warn ? ' warn' : g.has_vesting ? ' vest' : ''), warn ? '⚠' : 'i');
+    b.tabIndex = 0; b.setAttribute('role', 'button');
+    b.setAttribute('aria-label', warn ? 'Bond details. This wallet has RIZE leaving its bonds.' : g.has_vesting ? 'Bond details, including a vesting schedule' : 'Bond details');
+    var show = function () { showTip(b, g); };
+    b.addEventListener('mouseenter', show); b.addEventListener('focus', show);
+    b.addEventListener('mouseleave', hideTip); b.addEventListener('blur', hideTip);
+    b.addEventListener('click', function (ev) { ev.stopPropagation(); if (tipOwner === b) hideTip(); else show(); });
+    return b;
+  }
+  function hasExit(g) { return parseFloat(g.pending.waiting) + parseFloat(g.pending.ready) > 0; }
+
+  function holderRow(it) {
+    var tr = el('tr'); tr.dataset.addr = it.address;
+    tr.appendChild(el('td', 'rk', String(it.rank)));
+    tr.appendChild(addrCell(it.address, it.label, 'base', 'mint'));
+    var tot = el('td', 'num tot', fmtCompact(it.total)); tot.title = it.total + ' RIZE'; tr.appendChild(tot);
+    var held = el('td', 'num', fmtCompact(it.held)); held.title = it.held + ' RIZE held on all chains'; tr.appendChild(held);
+    var bd = el('td', 'num');
+    if (it.governance) {
+      var g = it.governance;
+      bd.appendChild(document.createTextNode(fmtCompact(it.bonded)));
+      bd.appendChild(infoIcon(g, hasExit(g)));
+      bd.title = it.bonded + ' RIZE inside governance bonds';
+    } else bd.appendChild(el('span', 'dash', '–'));
+    tr.appendChild(bd);
+    var tk = el('td'); var w = el('span', 'tk'); var im = el('img'); im.src = LOGO; im.alt = ''; w.appendChild(im); w.appendChild(document.createTextNode('RIZE')); tk.appendChild(w); tr.appendChild(tk);
+    var u = el('td', 'num usd'); u.setAttribute('data-amt', it.total); u.textContent = S.price == null ? '—' : fmtUsdCompact(parseFloat(it.total) * S.price); tr.appendChild(u);
+    tr.addEventListener('click', function () { selectWallet(it.address); });
+    if (S.selected && S.selected.kind === 'wallet' && S.selected.address === it.address) tr.className = 'sel';
+    return tr;
+  }
+  function setHState(msg, isErr) { var s = $('hstate'); s.textContent = msg || ''; s.className = 'state' + (isErr ? ' err' : ''); s.hidden = !msg; }
+  function updateHPager() {
+    $('hg-input').value = H.page; $('hg-total').textContent = H.total == null ? '…' : commas(H.pages);
+    var first = H.page <= 1, last = H.total != null && H.page >= H.pages;
+    $('hg-first').disabled = first; $('hg-prev').disabled = first; $('hg-next').disabled = last; $('hg-last').disabled = last || H.total == null;
+  }
+  function loadHolders(opts) {
+    opts = opts || {};
+    var id = ++H.reqId; H.loading = true;
+    if (!opts.silent) { $('hrows').textContent = ''; setHState('Loading holders…'); }
+    api('/holders', { page: H.page, limit: HPAGE }).then(function (d) {
+      if (id !== H.reqId) return;
+      H.total = d.total; H.pages = d.pages; H.meta = d.meta;
+      if (!d.built) { $('hrows').textContent = ''; setHState('The holders ranking has not been built yet. It is refreshed once a day.'); $('h-foot').textContent = ''; return; }
+      if (H.page > d.pages) { H.page = d.pages; H.loading = false; syncUrl(); return loadHolders(opts); }
+      hideTip();
+      var body = $('hrows'); body.textContent = '';
+      var frag = document.createDocumentFragment(); d.items.forEach(function (it) { frag.appendChild(holderRow(it)); }); body.appendChild(frag);
+      setHState(d.items.length ? '' : 'No holders on this page.');
+      if (!opts.silent) $('hbody-wrap').scrollTop = 0;
+      $('h-foot').textContent = 'Updated ' + ago(d.meta.updated_at) + ' · top ' + commas(d.total) + ' holders' + (d.meta.contract_adds_up ? '' : ' · governance totals do not fully reconcile');
+      $('h-foot').title = 'Snapshot of Base block ' + (d.meta.base_block == null ? '—' : d.meta.base_block.toLocaleString('en-US')) + (d.meta.snapshot_time ? ' (' + exact(d.meta.snapshot_time) + ' UTC)' : '');
+    }).catch(function (e) { if (id === H.reqId && !opts.silent) { $('hrows').textContent = ''; setHState(explain(e), true); } })
+      .finally(function () { if (id === H.reqId) { H.loading = false; updateHPager(); } });
+    updateHPager();
+  }
+  function goH(p) {
+    p = Math.max(1, p || 1); if (H.total != null) p = Math.min(p, H.pages);
+    if (p === H.page && !H.loading) { updateHPager(); return; }
+    H.page = p; syncUrl(); loadHolders();
+  }
+  $('hg-first').addEventListener('click', function () { goH(1); });
+  $('hg-prev').addEventListener('click', function () { goH(H.page - 1); });
+  $('hg-next').addEventListener('click', function () { goH(H.page + 1); });
+  $('hg-last').addEventListener('click', function () { if (H.total != null) goH(H.pages); });
+  function commitHPage() { var n = parseInt(String($('hg-input').value).replace(/[^0-9]/g, ''), 10); goH(n || H.page); }
+  $('hg-input').addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); commitHPage(); this.blur(); } });
+  $('hg-input').addEventListener('change', commitHPage);
+  $('hg-input').addEventListener('focus', function () { this.select(); });
+
   /* ================= placeholders (rows only to show the structure) ================= */
   function skeletonRows(id, cols, n) {
     var tb = $(id);
@@ -891,6 +1066,7 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
     if (S.address) p.set('address', S.address);
     Object.keys(S.f).forEach(function (k) { if (S.f[k] !== '') p.set(k, S.f[k]); });
     if (S.page > 1) p.set('page', String(S.page));
+    if (H.page > 1) p.set('hpage', String(H.page));
     if (S.selected && S.selected.kind === 'wallet') p.set('wallet', S.selected.address);
     if (S.selected && S.selected.kind === 'tx') { p.set('tx', S.selected.hash); p.set('txchain', S.selected.chain); }
     var qs = p.toString();
@@ -905,12 +1081,13 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
   ['from', 'to'].forEach(function (k) { var v = q.get(k) || ''; if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(v)) S.f[k] = v; else if (/^\d{4}-\d{2}-\d{2}$/.test(v)) S.f[k] = v + (k === 'from' ? 'T00:00' : 'T23:59'); });
   ['minr', 'maxr', 'minu', 'maxu'].forEach(function (k) { var v = q.get(k) || ''; if (/^\d{1,15}(\.\d{1,12})?$/.test(v)) S.f[k] = v; });
   var pg = parseInt(q.get('page'), 10); if (pg > 1) S.page = Math.min(pg, 200000);
+  var hp = parseInt(q.get('hpage'), 10); if (hp > 1) H.page = Math.min(hp, 1000);
   Object.keys(FIELDS).forEach(function (k) { $(FIELDS[k]).value = S.f[k]; });
   if (activeCount()) { $('fpanel').hidden = false; $('b-filters').setAttribute('aria-expanded', 'true'); }
   $('f-chain').value = S.chain; $('f-type').value = S.type; applyAddressUi(); refreshTimes(); updatePager();
-  skeletonRows('soon-trades', 5, 9); skeletonRows('soon-holders', 5, 9);
+  skeletonRows('soon-trades', 5, 9); updateHPager();
   detailHint(); setupChartHover();
-  var marketReady = loadMarket(); loadChart('max'); loadStatus();
+  var marketReady = loadMarket(); loadChart('max'); loadStatus(); loadHolders();
   if (S.f.minu || S.f.maxu) marketReady.then(function () { load(); }, function () { load(); }); else load();
   if (isAddr(q.get('wallet') || '')) selectWallet(q.get('wallet'));
   else if (isHash(q.get('tx') || '') && CHAINS[q.get('txchain')]) selectTx(q.get('txchain'), q.get('tx').toLowerCase());
@@ -919,6 +1096,7 @@ table.mini td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.05);}
     if (document.hidden) return;
     loadStatus(); loadMarket();
     if (S.page === 1 && !S.loading && !S.f.to) load({ silent: true });
+    if (!H.loading) loadHolders({ silent: true });
     refreshTimes();
   }, 60000);
 })();
