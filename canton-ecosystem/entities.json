@@ -554,6 +554,20 @@
     "logo_local": "logos\\bitgo.jpeg"
   },
   {
+    "name": "Bitrue",
+    "slug": "bitrue",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6af12712499a76ecfcb5fbba_69ad8de2-b986-4d4b-8e46-fe3e46d6cd43.png",
+    "short_desc": "Bitrue is a global centralized exchange supporting Canton Coin (CC)",
+    "tags": [
+      "MARKET INFRASTRUCTURE",
+      "EXCHANGES",
+      "Network Utilities\nEXCHANGES",
+      "Roles\nMARKET INFRASTRUCTURE\nMARKET INFRASTRUCTURE"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nBitrue\nhttps://www.bitrue.com/\nBitrue is a leading cryptocurrency exchange offering access to 700+ cryptocurrencies, with services including spot trading, futures, OTC, staking, copy trading, and more.\nNetwork Utilities\nEXCHANGES\nRoles\nMARKET INFRASTRUCTURE\nMARKET INFRASTRUCTURE",
+    "logo_local": "logos\\bitrue.png"
+  },
+  {
     "name": "BitSafe",
     "slug": "bitsafe",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515cedacf132bc1bffe79_BitSafe-1.png",
