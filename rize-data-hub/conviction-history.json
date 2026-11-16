@@ -2195,6 +2195,10 @@
     {
       "date": "2026-11-15",
       "value": 895026626.26
+    },
+    {
+      "date": "2026-11-16",
+      "value": 895025164.24
     }
   ],
   "cex": [
@@ -4373,10 +4377,50 @@
     {
       "date": "2026-11-15",
       "value": 106941526.93
+    },
+    {
+      "date": "2026-11-16",
+      "value": 106584730.48
     }
   ],
   "unbonding": [],
   "whales": [
+    {
+      "date": "2026-11-16",
+      "amount": 11453557.44,
+      "from": "0xddd6111f4a5864acb3a6760643d307102a682ba5",
+      "to": "0x929312aff9e4611bba5da6adcd08b31eb487bbb5",
+      "from_label": "0xddd6…2ba5",
+      "to_label": "0x9293…bbb5",
+      "tx": "0x3e372d004404b826230268e74e1d269b9f9ae4d55e6cc3d5c04d14167adc62f6"
+    },
+    {
+      "date": "2026-11-16",
+      "amount": 12469352.24,
+      "from": "0xddd6111f4a5864acb3a6760643d307102a682ba5",
+      "to": "0x929312aff9e4611bba5da6adcd08b31eb487bbb5",
+      "from_label": "0xddd6…2ba5",
+      "to_label": "0x9293…bbb5",
+      "tx": "0x8cf4d577c7271c084ba4c77d42116a188ba374e3bb0f35672f717b9728e1a4a9"
+    },
+    {
+      "date": "2026-11-16",
+      "amount": 12003294.03,
+      "from": "0xddd6111f4a5864acb3a6760643d307102a682ba5",
+      "to": "0x929312aff9e4611bba5da6adcd08b31eb487bbb5",
+      "from_label": "0xddd6…2ba5",
+      "to_label": "0x9293…bbb5",
+      "tx": "0x5bfe89bf7898d60cfd5277a810c134d0e50569e464e1939fd7082afe87a258b4"
+    },
+    {
+      "date": "2026-11-16",
+      "amount": 11424730.38,
+      "from": "0xddd6111f4a5864acb3a6760643d307102a682ba5",
+      "to": "0x929312aff9e4611bba5da6adcd08b31eb487bbb5",
+      "from_label": "0xddd6…2ba5",
+      "to_label": "0x9293…bbb5",
+      "tx": "0x36204819fb76309257a977a1efb22326baa8fa73fd1a4f3b8d9f5be420b2872f"
+    },
     {
       "date": "2026-11-14",
       "amount": 6812506.23,
@@ -4646,7 +4690,7 @@
       "0x0D0707963952f2fBA59dD06f2b425ace40b492Fe",
       "0x15Da7556D5ED888306839bed06f868AeaeDCb0d7"
     ],
-    "updated": "2026-11-15T23:59:22.014882+00:00"
+    "updated": "2026-11-16T23:59:28.223481+00:00"
   },
   "address_labels": {
     "0x5a134098bdbeb05da9eac35439c5624547ed26ee": "Governance Contract",
