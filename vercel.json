@@ -57,7 +57,7 @@
       "dest": "/explorize.html"
     },
     {
-      "src": "/api/explorize/(status|transfers|wallet|tx|holders)",
+      "src": "/api/explorize/(status|transfers|wallet|tx|holders|market)",
       "dest": "/api/explorize/$1.js"
     }
   ],
