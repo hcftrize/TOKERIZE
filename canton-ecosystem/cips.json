@@ -1198,5 +1198,15 @@
     "created": "July 1, 2026",
     "approved": "",
     "description": "**CapConnect+ (CC+)** is built to simplify and modernize the issuance and settlement of primary Commercial Paper (CP) transactions, with a view toward expanding the product set to Tap Issuances (TAPs), Medium Term Notes (MTNs), and other financial instruments.\n\nAs a Super Validator on the Canton Network, CC+ will onboard large publicly traded corporate CP issuers, their institutional investors and dealer counterparties, committing high-volume, large-notional transactions to the Canton Network. CC+ proposes a maximum reward weight of 5, released through escrow as milestones are achieved.\n\nCC+ will initially work with a top-tier corporate CP issuer, one of the largest in the United States, to bring corporate Commercial Paper onto the Canton Network through a structured, phased implementation, culminating in full atomic settlement in which both the CP instrument and the cash leg settle on Canton via DiSH and/or compatible on-chain cash infrastructure."
+  },
+  {
+    "id": "CIP-0132",
+    "number": 132,
+    "title": "Dedicated Synchronizer Paymaster Model",
+    "type": "Tokenomics",
+    "status": "Proposed",
+    "created": "2026-11-09",
+    "approved": "",
+    "description": "CIP-0129 (Universal Burn and Synchronizer Pricing) introduced universal burn for all synchronizers on the Canton Network, bringing dedicated synchronizers into the Canton Coin (CC) burn-mint economy. This CIP provides the technical specification for Phase 1 of Universal Burn: the Dedicated Synchronizer (dSync) Paymaster Model. Under this model, a trusted dedicated synchronizer operator can operate a dedicated synchronizer, get a traffic report for activity on that synchronizer, and their designated paymaster periodically pays for consumed traffic post-hoc by burning CC on the Global Synchronizer. Each burn records activity via CIP-0104’s activity recording hook, enabling the Paymaster to earn app rewards and validator rewards for activity on the dedicated synchronizer. This Phase 1 is an interim step towards later delivery of fully trustless and self-serve dedicated synchronizers."
   }
 ]
