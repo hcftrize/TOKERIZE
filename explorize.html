@@ -43,7 +43,7 @@ body{font-family:'Rajdhani',"Trebuchet MS",Verdana,sans-serif;background:var(--b
 
 /* ---------- Explorize dashboard ---------- */
 ::-webkit-scrollbar{width:7px;height:7px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:4px;}
-.app{display:grid;gap:10px;padding:10px;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);grid-template-rows:auto minmax(0,5fr) minmax(0,7fr);height:calc(100vh - 96px);min-height:860px;}
+.app{display:grid;gap:10px;padding:10px;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);grid-template-rows:auto minmax(0,6fr) minmax(0,6fr);height:calc(100vh - 96px);min-height:860px;}
 .panel{background:var(--panel);border:1px solid var(--border);display:flex;flex-direction:column;min-height:0;min-width:0;position:relative;}
 .p-top{grid-column:1 / -1;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;padding:12px 18px;border-color:rgba(255,160,40,.0);flex-wrap:wrap;}
 .p-trades{grid-column:1;grid-row:2;}
@@ -126,6 +126,36 @@ a.ext:hover{color:var(--cyan);}
 .soon-over{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;background:linear-gradient(180deg,rgba(6,8,24,.35),rgba(6,8,24,.92) 55%);}
 .soon-over b{font-size:17px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;}
 .soon-over p{font-family:'DM Mono',monospace;font-size:14.5px;color:var(--muted);max-width:420px;line-height:1.65;}
+
+/* market panel: trades / liquidity moves / bridges */
+.p-trades .p-head{padding-right:10px;}
+.p-trades table.t{min-width:0;}
+.p-trades table.t td,.p-trades table.t th{padding-left:5px;padding-right:5px;}
+.p-trades .adn{max-width:76px;}
+.p-trades .chips{padding:5px 14px;}
+.p-trades .chips select{height:28px;font-size:13px;}
+.p-trades .chip-x{height:28px;}
+.mk-strip{flex:none;display:flex;align-items:center;gap:8px 18px;flex-wrap:wrap;padding:4px 14px;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:13.5px;color:var(--muted);}
+.mk-strip[hidden],.mk-view[hidden]{display:none;}
+.mk-tot b{font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-right:6px;}
+.mk-tot .usd{color:var(--dim);margin-left:6px;}
+.mk-dim{color:var(--dim);}
+.mk-sub{font-size:13.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:10px 8px 4px;}
+.tag.buy,.tag.add,.tag.ok{color:var(--green);border-color:rgba(61,190,71,.4);}
+.tag.sell,.tag.remove,.tag.bad{color:var(--red);border-color:rgba(255,107,107,.4);}
+.tag.arb,.tag.collect{color:var(--cyan);border-color:rgba(126,224,255,.4);}
+.tag.wait{color:#e0a21a;border-color:rgba(224,162,26,.4);}
+.tag.reb{color:#e0a21a;border-color:rgba(224,162,26,.4);}
+.warn-i{color:#ffb020;margin-left:6px;cursor:help;}
+.vn{display:inline-flex;align-items:center;gap:7px;max-width:170px;}
+.vn.wrap{max-width:none;}
+.vn.wrap .vt{white-space:normal;line-height:1.05;font-size:15px;}
+.vt{overflow:hidden;text-overflow:ellipsis;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:.3px;}
+.vlogo{width:20px;height:20px;border-radius:50%;background:var(--panel2);border:1px solid var(--border-strong);display:inline-flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:9.5px;color:var(--muted);overflow:hidden;flex:none;}
+.vlogo img{width:100%;height:100%;object-fit:contain;background:#fff;display:block;}
+.vmore{color:var(--dim);margin-left:4px;font-size:13px;}
+table.t tbody tr.nohover{cursor:default;}
+table.t tbody tr.pl{cursor:pointer;}
 
 /* interactive panel: chart */
 .p-info .view{flex:1;min-height:0;display:flex;flex-direction:column;}
@@ -279,16 +309,63 @@ td.tot{color:var(--cyan);font-weight:500;}
     </div>
   </section>
 
-  <!-- ============ RIZE TRADES (soon) ============ -->
-  <section class="panel p-trades" aria-label="RIZE trades">
-    <div class="p-head"><div class="p-title">RIZE Trades</div><div class="pager"><span>7d &nbsp; 14d &nbsp; 30d</span></div></div>
-    <div class="soon-wrap">
-      <table class="t" style="min-width:0">
-        <thead><tr><th>Entity</th><th class="num">Value</th><th class="num">Change</th><th class="num">USD</th><th class="num">Change</th></tr></thead>
-        <tbody id="soon-trades"></tbody>
-      </table>
-      <div class="soon-over"><b>Coming soon</b><p>DEX trades and the biggest buyers and sellers, with the USD value at the time of each trade.</p></div>
+  <!-- ============ TRADES / LIQUIDITY MOVES / BRIDGES ============ -->
+  <section class="panel p-trades" aria-label="RIZE trades, liquidity moves and bridges">
+    <div class="p-head">
+      <div class="p-tabs" role="tablist">
+        <button class="p-tab" role="tab" id="mk-tab-trades" aria-selected="true">Trades</button>
+        <button class="p-tab" role="tab" id="mk-tab-liquidity" aria-selected="false">Liquidity moves</button>
+        <button class="p-tab" role="tab" id="mk-tab-bridges" aria-selected="false">Bridges</button>
+      </div>
+      <div class="pager">
+        <button class="icon-btn" id="mk-prev" aria-label="Previous page" title="Previous page">&lsaquo;</button>
+        <span class="pg-of" id="mk-page" style="margin:0 2px">1 / &hellip;</span>
+        <button class="icon-btn" id="mk-next" aria-label="Next page" title="Next page">&rsaquo;</button>
+        <button class="icon-btn" id="mk-refresh" title="Refresh" aria-label="Refresh">&#x21bb;</button>
+      </div>
     </div>
+    <div class="mk-strip" id="mk-strip"></div>
+    <div class="chips" id="mk-chips">
+      <select id="mk-chain" aria-label="Chain">
+        <option value="all">All chains</option><option value="base">Base</option><option value="ethereum">Ethereum</option><option value="bsc">BNB Chain</option><option value="polygon">Polygon</option>
+      </select>
+      <select id="mk-side" aria-label="Side">
+        <option value="all">Buys &amp; sells</option><option value="buy">Buys</option><option value="sell">Sells</option><option value="arbitrage">Arbitrage</option>
+      </select>
+      <select id="mk-venue" aria-label="Venue"><option value="">All venues</option></select>
+      <select id="mk-kind" aria-label="Kind" hidden>
+        <option value="all">All moves</option><option value="add">Added</option><option value="remove">Removed</option><option value="collect">Collected</option>
+      </select>
+      <button type="button" class="chip-x" id="mk-poolx" title="Show all pools" hidden style="width:auto;padding:0 12px;font-family:'DM Mono',monospace;font-size:13px"></button>
+    </div>
+    <div class="p-body" id="mk-wrap">
+      <div class="mk-view" id="mk-v-trades">
+        <table class="t">
+          <thead><tr><th class="c"></th><th>Ago</th><th>Side</th><th class="num">RIZE</th><th class="num">USD</th><th class="num">Price</th><th>Venue</th><th>Trader</th></tr></thead>
+          <tbody id="mk-rows"></tbody>
+        </table>
+      </div>
+      <div class="mk-view" id="mk-v-liquidity" hidden>
+        <div class="mk-sub">Pools &middot; what each one holds</div>
+        <table class="t">
+          <thead><tr><th>Pool</th><th class="num">RIZE inside</th><th class="num">Other asset</th><th class="num">7d adds / removes</th><th class="num">7d net RIZE</th></tr></thead>
+          <tbody id="mk-plines"></tbody>
+        </table>
+        <div class="mk-sub">Moves</div>
+        <table class="t">
+          <thead><tr><th class="c"></th><th>Ago</th><th>Move</th><th>Pool</th><th class="num">RIZE</th><th class="num">Other asset</th><th>Provider</th></tr></thead>
+          <tbody id="mk-lrows"></tbody>
+        </table>
+      </div>
+      <div class="mk-view" id="mk-v-bridges" hidden>
+        <table class="t">
+          <thead><tr><th>Sent</th><th>Route</th><th class="num">Burned</th><th class="num">Minted</th><th>Status</th><th>Transactions</th></tr></thead>
+          <tbody id="mk-brows"></tbody>
+        </table>
+      </div>
+      <div class="state" id="mk-state">Loading&hellip;</div>
+    </div>
+    <div class="p-foot"><span id="mk-foot">&nbsp;</span><span id="mk-note">Built from on-chain Swap events &middot; USD only when paid in a stablecoin</span></div>
   </section>
 
   <!-- ============ INTERACTIVE PANEL ============ -->
@@ -371,6 +448,9 @@ td.tot{color:var(--cyan);font-weight:500;}
       <select id="f-chain" aria-label="Chain">
         <option value="all">All chains</option><option value="base">Base</option><option value="ethereum">Ethereum</option><option value="bsc">BNB Chain</option><option value="polygon">Polygon</option>
       </select>
+      <select id="f-mode" aria-label="View" title="Raw: every transfer. Reconciled: hides the router, vault and relay hops of trades and liquidity moves.">
+        <option value="raw">Raw transfers</option><option value="reconciled">Reconciled</option>
+      </select>
       <select id="f-type" aria-label="Type">
         <option value="all">All types</option><option value="transfer">Transfers</option><option value="mint">Mints</option><option value="burn">Burns</option>
       </select>
@@ -441,7 +521,7 @@ td.tot{color:var(--cyan);font-weight:500;}
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 
   var S = {
-    chain: 'all', type: 'all', address: '',
+    chain: 'all', type: 'all', mode: 'raw', address: '',
     page: 1, pages: 1, total: null, loading: false, reqId: 0,
     f: { from: '', to: '', minr: '', maxr: '', minu: '', maxu: '' },
     timeMode: store('explorize.time') === 'abs' ? 'abs' : 'rel',
@@ -505,7 +585,7 @@ td.tot{color:var(--cyan);font-weight:500;}
     return fetch(url, { signal: ctl.signal, headers: { Accept: 'application/json' } })
       .then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (d) {
-          if (!r.ok || d.error) { var e = new Error(d.error || 'http_' + r.status); e.code = d.error; throw e; }
+          if (!r.ok || d.error) { var e = new Error(d.error || 'http_' + r.status); e.code = d.error; e.sub = d.code; throw e; }
           return d;
         });
       })
@@ -526,6 +606,7 @@ td.tot{color:var(--cyan);font-weight:500;}
     if (c === 'database_login_failed') return 'The database refused the login. Please check the connection settings.';
     if (c === 'query_too_slow') return 'This query took too long. Try a narrower filter.';
     if (c === 'database_unreachable') return 'The database cannot be reached right now. Try again in a moment.';
+    if (e && e.sub === '42P01') return 'The market layer is not built yet: run the "Explorize market layer" workflow once.';
     if (c === 'not_found') return 'Nothing found for this transaction in the indexed data.';
     if (e && e.name === 'AbortError') return 'The request timed out. Try again.';
     return 'Could not load data (' + (c || (e && e.message) || 'unknown error') + ').';
@@ -701,12 +782,12 @@ td.tot{color:var(--cyan);font-weight:500;}
     return tr;
   }
   function refreshTimes() {
-    document.querySelectorAll('#rows a.tlink').forEach(function (a) { a.textContent = timeText(a.dataset.iso); });
+    document.querySelectorAll('#rows a.tlink, #mk-rows a.tlink, #mk-lrows a.tlink, #mk-brows a.tlink').forEach(function (a) { a.textContent = timeText(a.dataset.iso); });
     $('th-time-l').textContent = S.timeMode === 'abs' ? 'Time (UTC)' : 'Ago';
   }
   $('th-time').addEventListener('click', function () {
     S.timeMode = S.timeMode === 'abs' ? 'rel' : 'abs'; store('explorize.time', S.timeMode);
-    document.querySelectorAll('#rows a.tlink').forEach(function (a) {
+    document.querySelectorAll('#rows a.tlink, #mk-rows a.tlink, #mk-lrows a.tlink, #mk-brows a.tlink').forEach(function (a) {
       var iso = a.dataset.iso; a.textContent = timeText(iso);
       a.title = (S.timeMode === 'abs' ? ago(iso) : exact(iso) + ' UTC') + ' — open transaction on explorer';
     });
@@ -740,7 +821,7 @@ td.tot{color:var(--cyan);font-weight:500;}
     if (r.err) { $('rows').textContent = ''; setState(r.err, true); return; }
     var id = ++S.reqId; S.loading = true;
     if (!opts.silent) { $('rows').textContent = ''; setState('Loading transfers…'); }
-    api('/transfers', { chain: S.chain, type: S.type, address: S.address, from: S.f.from, to: S.f.to, min: fnum(r.min), max: fnum(r.max), page: S.page, limit: PAGE })
+    api('/transfers', { chain: S.chain, type: S.type, mode: S.mode === 'reconciled' ? 'reconciled' : '', address: S.address, from: S.f.from, to: S.f.to, min: fnum(r.min), max: fnum(r.max), page: S.page, limit: PAGE })
       .then(function (d) {
         if (id !== S.reqId) return;
         S.total = d.total; S.pages = d.pages;
@@ -750,7 +831,9 @@ td.tot{color:var(--cyan);font-weight:500;}
         setState(d.items.length ? '' : 'No transfers match these filters.');
         if (!opts.silent) $('tbody-wrap').scrollTop = 0;
         var tot = d.total.toLocaleString('en-US') + ' transfer' + (d.total === 1 ? '' : 's');
-        $('foot-note').textContent = tot + ' · USD uses the current RIZE price';
+        var note = S.mode === 'reconciled' && d.mode !== 'reconciled' ? ' · market layer not built yet, showing every transfer' :
+          d.mode === 'reconciled' ? ' · router, vault and relay hops hidden' : '';
+        $('foot-note').textContent = tot + note + ' · USD uses the current RIZE price';
       })
       .catch(function (e) { if (id === S.reqId && !opts.silent) { $('rows').textContent = ''; setState(explain(e), true); } })
       .finally(function () { if (id === S.reqId) { S.loading = false; updatePager(); } });
@@ -809,7 +892,7 @@ td.tot{color:var(--cyan);font-weight:500;}
   $('fpanel').addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); applyFilters(); } });
   $('f-reset').addEventListener('click', function () {
     Object.keys(S.f).forEach(function (k) { S.f[k] = ''; $(FIELDS[k]).value = ''; });
-    S.address = ''; S.chain = 'all'; S.type = 'all'; $('f-chain').value = 'all'; $('f-type').value = 'all';
+    S.address = ''; S.chain = 'all'; S.type = 'all'; S.mode = 'raw'; $('f-chain').value = 'all'; $('f-type').value = 'all'; $('f-mode').value = 'raw';
     fmsg('USD filters use the current RIZE price.', false); applyAddressUi(); markWalletButton(); reload();
   });
   $('b-filters').addEventListener('click', function () {
@@ -823,6 +906,7 @@ td.tot{color:var(--cyan);font-weight:500;}
   });
   $('f-chain').addEventListener('change', function () { S.chain = this.value; reload(); });
   $('f-type').addEventListener('change', function () { S.type = this.value; reload(); });
+  $('f-mode').addEventListener('change', function () { S.mode = this.value; reload(); });
   $('f-clear').addEventListener('click', function () { S.address = ''; applyAddressUi(); reload(); markWalletButton(); });
 
   /* ================= interactive panel ================= */
@@ -848,7 +932,7 @@ td.tot{color:var(--cyan);font-weight:500;}
     var c = el('div', 'd-cell' + (extra ? ' ' + extra : '')); c.appendChild(el('div', 'k', k)); c.appendChild(el('div', 'v' + (cls ? ' ' + cls : ''), v)); if (s) c.appendChild(el('div', 's', s)); return c;
   }
   function extLink(text, href) { var a = el('a', 'btn', text); a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
-  function clearSelectedRows() { document.querySelectorAll('#rows tr.sel, #hrows tr.sel').forEach(function (r) { r.classList.remove('sel'); }); }
+  function clearSelectedRows() { document.querySelectorAll('#rows tr.sel, #hrows tr.sel, #mk-rows tr.sel, #mk-lrows tr.sel').forEach(function (r) { r.classList.remove('sel'); }); }
   function markWalletButton() { var b = $('btn-filter'); if (b) { b.classList.toggle('on', !!S.address && S.selected && S.selected.address === S.address); b.textContent = (b.classList.contains('on') ? 'Showing only this wallet' : 'Filter transfers by this wallet'); } }
 
   function selectWallet(addr) {
@@ -892,7 +976,7 @@ td.tot{color:var(--cyan);font-weight:500;}
 
   function selectTx(chain, hash) {
     S.selected = { kind: 'tx', chain: chain, hash: hash }; syncUrl();
-    clearSelectedRows(); document.querySelectorAll('#rows tr').forEach(function (r) { if (r.dataset.tx === hash) r.classList.add('sel'); });
+    clearSelectedRows(); document.querySelectorAll('#rows tr, #mk-rows tr, #mk-lrows tr').forEach(function (r) { if (r.dataset.tx === hash) r.classList.add('sel'); });
     var box = $('detail'); box.textContent = ''; box.appendChild(el('div', 'state', 'Loading transaction…')); showPanel('detail');
     api('/tx', { chain: chain, hash: hash }).then(function (d) {
       if (!S.selected || S.selected.hash !== hash) return;
@@ -905,6 +989,11 @@ td.tot{color:var(--cyan);font-weight:500;}
       add('Time', exact(d.time) + ' UTC (' + ago(d.time) + ')'); add('Block', d.block.toLocaleString('en-US')); add('Chain', d.chain_name);
       add('RIZE moved', fmtCompact(d.total_amount) + ' RIZE' + (S.price != null ? ' (' + fmtUsdCompact(parseFloat(d.total_amount) * S.price) + ')' : '') + (d.transfers > 1 ? ' across ' + d.transfers + ' transfers' : ''));
       box.appendChild(kv);
+      var mk = el('div'); box.appendChild(mk);
+      api('/market', { view: 'tx', chain: chain, hash: hash }).then(function (m) {
+        if (!S.selected || S.selected.hash !== hash) return;
+        renderMarketTx(mk, m);
+      }).catch(function () { /* not a trade or a liquidity move: the raw transfers below are the whole story */ });
       box.appendChild(el('div', 'd-sub', 'Transfers in this transaction'));
       var tb = el('table', 'mini'); var th = el('thead'); var hr = el('tr'); ['From', 'To', 'Value'].forEach(function (h) { hr.appendChild(el('th', null, h)); }); th.appendChild(hr); tb.appendChild(th);
       var body = el('tbody');
@@ -1052,6 +1141,267 @@ td.tot{color:var(--cyan);font-weight:500;}
   $('hg-input').addEventListener('change', commitHPage);
   $('hg-input').addEventListener('focus', function () { this.select(); });
 
+  /* ================= market layer: trades / liquidity moves / bridges ================= */
+  var M = { view: 'trades', chain: 'all', side: 'all', venue: '', kind: 'all', pool: '', poolName: '', win: '7',
+            page: 1, pages: 1, total: null, reqId: 0, loading: false, totals: null, unpriced: 0, venuesReady: false };
+  var MLIM = 25;
+  var FLAG_TEXT = {
+    events_vs_transfers: 'The Swap events and the token transfers do not agree. Worth a look.',
+    rfq_event_vs_transfers: 'The market maker’s fill event and the token transfers do not agree. Worth a look.',
+    unknown_pool_id: 'Swap on a pool that is not in the registry yet.'
+  };
+  var TAG_TEXT = {
+    'multi-venue': 'Split across several pools', rfq: 'Filled by a market maker (RFQ)',
+    'native-leg': 'One side was paid in the chain’s native coin (amount read from the event)',
+    erc4337: 'Sent through a smart account (ERC-4337)', skimmed: 'A small RIZE fee was skimmed on the way',
+    'usd-partial': 'USD covers only the part paid in a stablecoin', arbitrage: 'The same RIZE went through several pools and netted to zero'
+  };
+
+  function venueBadge(v, wrap) {
+    var nm = v.venue_name || v.name || '?', w = el('span', 'vn' + (wrap ? ' wrap' : '')), box = el('span', 'vlogo');
+    box.textContent = (v.initials || nm).replace(/[^A-Za-z0-9 ]/g, '').split(/\s+/).filter(Boolean).slice(0, 2).map(function (x) { return x[0].toUpperCase(); }).join('') || '?';
+    if (v.venue_logo) {
+      var im = new Image(); im.alt = '';
+      im.onload = function () { box.textContent = ''; box.appendChild(im); };                  // a missing file simply keeps the initials
+      im.src = '/assets/explorize/venues/' + encodeURIComponent(v.venue_logo);
+    }
+    w.appendChild(box); w.appendChild(el('span', 'vt', nm)); w.title = v.name || nm;
+    return w;
+  }
+  function counterText(list) {
+    return (list || []).map(function (c) { return (c.amount != null ? fmtCompact(c.amount) : '?') + ' ' + c.symbol; }).join(' + ');
+  }
+  function sideTag(side) { return el('span', 'tag ' + (side === 'arbitrage' ? 'arb' : side), side === 'arbitrage' ? 'arb' : side); }
+  function timeCell(iso, chain, tx) {
+    var tt = el('td'); var a = el('a', 'tlink', timeText(iso)); a.href = CHAINS[chain].tx + tx; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.dataset.iso = iso; a.title = (S.timeMode === 'abs' ? ago(iso) : exact(iso) + ' UTC') + ' — open transaction on ' + CHAINS[chain].name + ' explorer';
+    a.addEventListener('click', function (ev) { ev.stopPropagation(); }); tt.appendChild(a); return tt;
+  }
+  function chainDot(chain) { var c0 = el('td', 'c'); var dot = el('span', 'cdot'); dot.style.background = CHAINS[chain].color; dot.title = CHAINS[chain].name; c0.appendChild(dot); return c0; }
+  function mkState(msg, isErr) { var s = $('mk-state'); s.textContent = msg || ''; s.className = 'state' + (isErr ? ' err' : ''); s.hidden = !msg; }
+
+  function tradeRow(t) {
+    var tr = el('tr'); tr.dataset.tx = t.tx; tr.dataset.chain = t.chain;
+    tr.appendChild(chainDot(t.chain)); tr.appendChild(timeCell(t.time, t.chain, t.tx));
+    var sd = el('td'); sd.appendChild(sideTag(t.side));
+    var why = t.flags.map(function (f) { return FLAG_TEXT[f] || f; });
+    if (why.length) { var w = el('span', 'warn-i', '⚠'); w.title = why.join(' '); sd.appendChild(w); }
+    tr.appendChild(sd);
+    var v = el('td', 'num', fmtCompact(t.rize)); v.title = t.rize + ' RIZE'; tr.appendChild(v);
+    var partial = t.tags.indexOf('usd-partial') >= 0;
+    var u = el('td', 'num usd', t.usd == null ? '—' : fmtUsdCompact(t.usd) + (partial ? '*' : ''));
+    u.title = t.usd == null ? 'No dollar value: paid in ' + (counterText(t.counter) || 'a token that is not a known stablecoin') :
+      (partial ? 'Only the part paid in a stablecoin is priced. ' : '') + 'Paid / received: ' + counterText(t.counter);
+    tr.appendChild(u);
+    tr.appendChild(el('td', 'num', t.price_usd == null ? '—' : fmtPrice(t.price_usd)));
+    var vn = el('td');
+    if (t.venues.length) {
+      vn.appendChild(venueBadge(t.venues[0]));
+      if (t.venues.length > 1) { var more = el('span', 'vmore', '+' + (t.venues.length - 1)); more.title = t.venues.map(function (x) { return x.name; }).join('\n'); vn.appendChild(more); }
+    } else vn.appendChild(el('span', 'mk-dim', '—'));
+    tr.appendChild(vn);
+    tr.appendChild(addrCell(t.trader || ZERO, t.trader_label, t.chain, 'mint'));
+    tr.addEventListener('click', function () { selectTx(t.chain, t.tx); });
+    if (S.selected && S.selected.kind === 'tx' && S.selected.hash === t.tx) tr.className = 'sel';
+    return tr;
+  }
+
+  function renderTotals() {
+    var box = $('mk-strip'); box.textContent = '';
+    if (M.view !== 'trades' || !M.totals) { box.hidden = true; return; }
+    box.hidden = false;
+    var rg = el('div', 'ranges');
+    ['7', '14', '30'].forEach(function (w) {
+      var b = el('button', null, w + 'd'); b.type = 'button'; b.setAttribute('aria-pressed', M.win === w ? 'true' : 'false');
+      b.addEventListener('click', function () { M.win = w; renderTotals(); }); rg.appendChild(b);
+    });
+    box.appendChild(rg);
+    var t = M.totals[M.win];
+    [['Buys', t.buy, 'up'], ['Sells', t.sell, 'down']].forEach(function (x) {
+      var s = el('span', 'mk-tot'); s.appendChild(el('b', x[2], x[0]));
+      s.appendChild(document.createTextNode(x[1].trades.toLocaleString('en-US') + ' · ' + fmtCompact(x[1].rize) + ' RIZE'));
+      s.appendChild(el('span', 'usd', fmtUsdCompact(x[1].usd))); box.appendChild(s);
+    });
+    var net = parseFloat(t.buy.rize) - parseFloat(t.sell.rize);
+    var n = el('span', 'mk-tot'); n.appendChild(el('b', null, 'Net'));
+    n.appendChild(el('span', net >= 0 ? 'up' : 'down', (net >= 0 ? '+' : '−') + fmtCompact(String(Math.abs(net))) + ' RIZE')); box.appendChild(n);
+    if (t.arbitrage.trades) { var a = el('span', 'mk-dim', t.arbitrage.trades + ' arbitrage'); box.appendChild(a); }
+  }
+
+  function liquidityLine(p) {
+    var tr = el('tr'); tr.className = 'pl' + (M.pool === p.key ? ' sel' : ''); tr.title = 'Click to show only the moves of this pool';
+    var c = el('td'); c.style.whiteSpace = 'normal'; c.appendChild(venueBadge({ venue_name: p.name, venue_logo: p.venue_logo, initials: p.venue_name, name: p.name + ' (' + (p.venue_name || 'no venue') + ')' }, true)); tr.appendChild(c);
+    var sn = p.snapshot;
+    var r = el('td', 'num', sn ? fmtCompact(sn.rize) : '—'); if (sn) r.title = sn.rize + ' RIZE at block ' + sn.block + ' (' + ago(sn.at) + ')';
+    else r.title = p.kind === 'v4' || p.kind === 'infinity' ? 'Several pools share one contract: its balance is not this pool’s' : 'No photograph yet (run the snapshot job)';
+    tr.appendChild(r);
+    tr.appendChild(el('td', 'num', sn && sn.counter != null ? fmtCompact(sn.counter) + ' ' + sn.counter_symbol : '—'));
+    tr.appendChild(el('td', 'num', p.moves_7d.adds + ' / ' + p.moves_7d.removes));
+    var n = parseFloat(p.moves_7d.net_rize);
+    tr.appendChild(el('td', 'num ' + (n > 0 ? 'up' : n < 0 ? 'down' : ''), n === 0 ? '0' : (n > 0 ? '+' : '−') + fmtCompact(String(Math.abs(n)))));
+    tr.addEventListener('click', function () {
+      if (M.pool === p.key) { M.pool = ''; M.poolName = ''; } else { M.pool = p.key; M.poolName = p.name; }
+      syncPoolChip(); mkReload();
+    });
+    return tr;
+  }
+  function liquidityRow(m) {
+    var tr = el('tr'); tr.dataset.tx = m.tx; tr.dataset.chain = m.chain;
+    tr.appendChild(chainDot(m.chain)); tr.appendChild(timeCell(m.time, m.chain, m.tx));
+    var k = el('td'); k.appendChild(el('span', 'tag ' + m.kind, m.kind));
+    if (m.rebalance) { var rb = el('span', 'tag reb', 'rebalance'); rb.title = 'Liquidity was removed and added again in the same transaction'; k.appendChild(rb); }
+    tr.appendChild(k);
+    var pc = el('td'); pc.style.whiteSpace = 'normal'; pc.appendChild(venueBadge({ venue_name: m.pool.name, venue_logo: m.pool.venue_logo, initials: m.pool.venue_name, name: m.pool.name + ' (' + (m.pool.venue_name || '') + ')' }, true)); tr.appendChild(pc);
+    var rz = m.rize == null ? null : parseFloat(m.rize);
+    var rc = el('td', 'num ' + (rz > 0 ? 'up' : rz < 0 ? 'down' : ''), rz == null ? 'n/a' : (rz >= 0 ? '+' : '−') + fmtCompact(String(Math.abs(rz))));
+    if (rz == null) rc.title = 'The amount cannot be read exactly from this transaction'; tr.appendChild(rc);
+    var oc = m.counter.length ? m.counter.map(function (c) { var a = parseFloat(c.amount); return (a >= 0 ? '+' : '−') + fmtCompact(String(Math.abs(a))) + ' ' + c.symbol; }).join(' ') : '—';
+    tr.appendChild(el('td', 'num', oc));
+    tr.appendChild(addrCell(m.provider || ZERO, m.provider_label, m.chain, 'mint'));
+    tr.addEventListener('click', function () { selectTx(m.chain, m.tx); });
+    if (S.selected && S.selected.kind === 'tx' && S.selected.hash === m.tx) tr.className = 'sel';
+    return tr;
+  }
+  var VERDICT = { reconciled: ['ok', 'reconciled'], in_flight: ['wait', 'in flight'], failed: ['bad', 'failed'], mismatch: ['bad', 'amounts differ'] };
+  function bridgeRow(b) {
+    var tr = el('tr'); tr.className = 'nohover';
+    var tt = el('td'); if (b.sent_at) { var sp = el('span', null, timeText(b.sent_at)); sp.title = exact(b.sent_at) + ' UTC'; tt.appendChild(sp); } else tt.textContent = '—'; tr.appendChild(tt);
+    var rt = el('td'); [b.source, b.dest].forEach(function (k, i) {
+      if (i) rt.appendChild(document.createTextNode(' → '));
+      var d = el('span', 'cdot'); d.style.background = (CHAINS[k] || {}).color || '#666'; d.style.marginRight = '5px'; rt.appendChild(d);
+      rt.appendChild(document.createTextNode((CHAINS[k] || { name: k }).name));
+    }); tr.appendChild(rt);
+    var bu = el('td', 'num', fmtCompact(b.burned)); bu.title = b.burned + ' RIZE burned on ' + b.source; tr.appendChild(bu);
+    var mi = el('td', 'num', b.dest_tx ? fmtCompact(b.minted) : '—'); mi.title = b.minted + ' RIZE minted on ' + b.dest; tr.appendChild(mi);
+    var v = VERDICT[b.verdict] || ['wait', b.verdict]; var st = el('td'); var tg = el('span', 'tag ' + v[0], v[1]);
+    tg.title = 'Chainlink CCIP status: ' + (b.status || 'unknown') + (b.verdict === 'mismatch' ? '. The amount burned and the amount minted are not equal.' : ''); st.appendChild(tg); tr.appendChild(st);
+    var tx = el('td');
+    [[b.source, b.source_tx, 'send'], [b.dest, b.dest_tx, 'receive']].forEach(function (x) {
+      if (!x[1] || !CHAINS[x[0]]) return;
+      var a = el('a', 'ext', x[2] + ' ↗'); a.href = CHAINS[x[0]].tx + x[1]; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.title = x[1]; tx.appendChild(a);
+    }); tr.appendChild(tx);
+    return tr;
+  }
+  function syncPoolChip() {
+    var b = $('mk-poolx'); b.hidden = !M.pool; b.textContent = M.pool ? M.poolName + ' ×' : '';
+  }
+  function mkUpdatePager() {
+    $('mk-page').textContent = M.page + ' / ' + (M.total == null ? '…' : commas(M.pages));
+    $('mk-prev').disabled = M.page <= 1; $('mk-next').disabled = M.total != null && M.page >= M.pages;
+  }
+  function mkShowView() {
+    ['trades', 'liquidity', 'bridges'].forEach(function (v) {
+      $('mk-v-' + v).hidden = M.view !== v; $('mk-tab-' + v).setAttribute('aria-selected', M.view === v ? 'true' : 'false');
+    });
+    $('mk-side').hidden = $('mk-venue').hidden = M.view !== 'trades'; $('mk-kind').hidden = M.view !== 'liquidity';
+    $('mk-chain').hidden = false; $('mk-chips').hidden = false;
+    $('mk-note').textContent = M.view === 'bridges' ? 'Burns and mints come from our own transfers; the messages come from the Chainlink CCIP API' :
+      M.view === 'liquidity' ? 'Amounts of added / removed liquidity come from the pool events' : 'Built from on-chain Swap events · USD only when paid in a stablecoin';
+    renderTotals();
+  }
+  function mkLoad(opts) {
+    opts = opts || {};
+    var id = ++M.reqId; M.loading = true; var view = M.view;
+    if (!opts.silent) { mkState('Loading…'); }
+    var params = { view: view, chain: M.chain, page: M.page, limit: MLIM };
+    if (view === 'trades') { params.side = M.side; params.venue = M.venue; }
+    if (view === 'liquidity') { params.kind = M.kind; params.pool = M.pool; }
+    api('/market', params).then(function (d) {
+      if (id !== M.reqId) return;
+      M.total = d.total; M.pages = d.pages;
+      if (M.page > d.pages) { M.page = d.pages; M.loading = false; return mkLoad(opts); }
+      var frag = document.createDocumentFragment();
+      if (view === 'trades') {
+        M.totals = d.totals; M.unpriced = d.unpriced_30d; renderTotals();
+        $('mk-rows').textContent = ''; d.items.forEach(function (t) { frag.appendChild(tradeRow(t)); }); $('mk-rows').appendChild(frag);
+        mkState(d.items.length ? '' : 'No trades here yet. They appear as the market job reads the chains.');
+      } else if (view === 'liquidity') {
+        $('mk-plines').textContent = ''; d.pools.forEach(function (p) { frag.appendChild(liquidityLine(p)); }); $('mk-plines').appendChild(frag);
+        var f2 = document.createDocumentFragment();
+        $('mk-lrows').textContent = ''; d.items.forEach(function (m) { f2.appendChild(liquidityRow(m)); }); $('mk-lrows').appendChild(f2);
+        mkState(d.pools.length ? '' : 'No pool known yet.');
+      } else {
+        $('mk-brows').textContent = ''; d.items.forEach(function (b) { frag.appendChild(bridgeRow(b)); }); $('mk-brows').appendChild(frag);
+        var s = d.summary, box = $('mk-strip'); box.hidden = false; box.textContent = '';
+        var parts = [s.messages.toLocaleString('en-US') + ' CCIP messages', s.success + ' delivered', s.in_flight + ' in flight', s.failed + ' failed'];
+        Object.keys(s.burns_without_message).forEach(function (k) { if (s.burns_without_message[k]) parts.push(s.burns_without_message[k] + ' burns on ' + ((CHAINS[k] || {}).name || k) + ' with no message'); });
+        box.appendChild(el('span', null, parts.join(' · ')));
+        mkState(d.items.length ? '' : 'No bridge message yet. Run the CCIP step of the market job.');
+      }
+      if (!opts.silent) $('mk-wrap').scrollTop = 0;
+      $('mk-foot').textContent = view === 'liquidity' ? d.total.toLocaleString('en-US') + ' move' + (d.total === 1 ? '' : 's') :
+        d.total.toLocaleString('en-US') + (view === 'trades' ? ' trade' : ' message') + (d.total === 1 ? '' : 's');
+    }).catch(function (e) { if (id === M.reqId && !opts.silent) { mkState(explain(e), true); } })
+      .finally(function () { if (id === M.reqId) { M.loading = false; mkUpdatePager(); } });
+    mkUpdatePager();
+  }
+  function mkReload() { M.page = 1; M.pages = 1; M.total = null; mkShowView(); mkLoad(); }
+  function mkSetView(v) { if (M.view === v) return; M.view = v; M.totals = v === 'trades' ? M.totals : null; mkReload(); }
+  ['trades', 'liquidity', 'bridges'].forEach(function (v) { $('mk-tab-' + v).addEventListener('click', function () { mkSetView(v); }); });
+  $('mk-chain').addEventListener('change', function () { M.chain = this.value; mkReload(); });
+  $('mk-side').addEventListener('change', function () { M.side = this.value; mkReload(); });
+  $('mk-venue').addEventListener('change', function () { M.venue = this.value; mkReload(); });
+  $('mk-kind').addEventListener('change', function () { M.kind = this.value; mkReload(); });
+  $('mk-poolx').addEventListener('click', function () { M.pool = ''; M.poolName = ''; syncPoolChip(); mkReload(); });
+  $('mk-prev').addEventListener('click', function () { if (M.page > 1) { M.page--; mkLoad(); } });
+  $('mk-next').addEventListener('click', function () { if (M.total == null || M.page < M.pages) { M.page++; mkLoad(); } });
+  $('mk-refresh').addEventListener('click', function () { mkLoad(); });
+  function loadVenues() {                      // the venue filter lists the venues that really have a pool
+    api('/market', { view: 'pools' }).then(function (d) {
+      var used = {}; d.items.forEach(function (p) { if (p.venue) used[p.venue] = true; });
+      d.venues.forEach(function (v) { if (used[v.key]) { var o = el('option', null, v.name); o.value = v.key; $('mk-venue').appendChild(o); } });
+    }).catch(function () { /* the filter just stays on "All venues" */ });
+  }
+
+  /* what the market layer knows about one transaction, shown in the Details panel */
+  function renderMarketTx(box, m) {
+    box.textContent = '';
+    var t = m.trade;
+    if (t) {
+      box.appendChild(el('div', 'd-sub', 'Reconciled trade'));
+      var grid = el('div', 'd-grid');
+      var sc = dcell('Side', t.side === 'buy' ? 'Buy' : t.side === 'sell' ? 'Sell' : 'Arbitrage', t.side === 'buy' ? 'RIZE left the pools' : t.side === 'sell' ? 'RIZE entered the pools' : 'RIZE went through the pools and netted to zero', t.side === 'buy' ? 'up' : t.side === 'sell' ? 'down' : '');
+      grid.appendChild(sc);
+      grid.appendChild(dcell('RIZE', fmtCompact(t.rize), t.rize + ' RIZE'));
+      grid.appendChild(dcell('Paid / received', counterText(t.counter) || '—', t.usd == null ? 'No dollar value (not a stablecoin)' : fmtUsdCompact(t.usd) + (t.price_usd ? ' at ' + fmtPrice(t.price_usd) : '')));
+      var who = t.trader ? short(t.trader) : '—';
+      grid.appendChild(dcell('Trader', t.trader_label ? t.trader_label.label : who, t.trader_label ? who : (t.router_label ? 'via ' + t.router_label.label : '')));
+      box.appendChild(grid);
+      if (t.trader) {
+        var act = el('div', 'd-actions'); var tb = el('button', 'btn', 'Open trader wallet'); tb.type = 'button';
+        tb.addEventListener('click', function () { selectWallet(t.trader); }); act.appendChild(tb); box.appendChild(act);
+      }
+      box.appendChild(el('div', 'd-sub', 'Fills (' + t.fills.length + ')'));
+      var tbl = el('table', 'mini'), th = el('thead'), hr = el('tr');
+      ['Pool', 'Direction', 'RIZE', 'Other asset', 'USD'].forEach(function (h) { hr.appendChild(el('th', null, h)); }); th.appendChild(hr); tbl.appendChild(th);
+      var body = el('tbody');
+      t.fills.forEach(function (f) {
+        var r = el('tr'); var pc = el('td'); pc.appendChild(venueBadge({ venue_name: f.pool.name, venue_logo: f.pool.venue_logo, initials: f.pool.venue_name, name: f.pool.name + ' (' + (f.pool.venue_name || '') + ')' }, true)); r.appendChild(pc);
+        r.appendChild(el('td', null, f.direction === 'sell' ? 'sold into the pool' : 'bought from the pool'));
+        r.appendChild(el('td', null, fmtCompact(f.rize))); r.appendChild(el('td', null, counterText(f.counter) || '—'));
+        r.appendChild(el('td', null, f.usd == null ? '—' : fmtUsdCompact(f.usd))); body.appendChild(r);
+      });
+      tbl.appendChild(body); box.appendChild(tbl);
+      var notes = [];
+      t.tags.forEach(function (g) { if (TAG_TEXT[g]) notes.push(TAG_TEXT[g]); });
+      t.flags.forEach(function (g) { notes.push('⚠ ' + (FLAG_TEXT[g] || g)); });
+      if (notes.length) { var nb = el('div', 'hint'); nb.style.textAlign = 'left'; nb.style.margin = '12px 0 0'; nb.style.maxWidth = 'none'; nb.textContent = notes.join(' · '); box.appendChild(nb); }
+    }
+    if (m.liquidity && m.liquidity.length) {
+      box.appendChild(el('div', 'd-sub', 'Liquidity moves'));
+      var lt = el('table', 'mini'), lh = el('thead'), lr = el('tr');
+      ['Move', 'Pool', 'RIZE', 'Other asset'].forEach(function (h) { lr.appendChild(el('th', null, h)); }); lh.appendChild(lr); lt.appendChild(lh);
+      var lb = el('tbody');
+      m.liquidity.forEach(function (x) {
+        var r = el('tr'); var k = el('td'); k.appendChild(el('span', 'tag ' + x.kind, x.kind)); if (x.rebalance) k.appendChild(el('span', 'tag reb', 'rebalance')); r.appendChild(k);
+        var pc = el('td'); pc.appendChild(venueBadge({ venue_name: x.pool.name, venue_logo: x.pool.venue_logo, initials: x.pool.venue_name, name: x.pool.name }, true)); r.appendChild(pc);
+        r.appendChild(el('td', null, x.rize == null ? 'n/a' : (parseFloat(x.rize) >= 0 ? '+' : '−') + fmtCompact(String(Math.abs(parseFloat(x.rize))))));
+        r.appendChild(el('td', null, x.counter.length ? x.counter.map(function (c) { return fmtCompact(c.amount) + ' ' + c.symbol; }).join(' ') : '—')); lb.appendChild(r);
+      });
+      lt.appendChild(lb); box.appendChild(lt);
+    }
+  }
+
   /* ================= placeholders (rows only to show the structure) ================= */
   function skeletonRows(id, cols, n) {
     var tb = $(id);
@@ -1063,6 +1413,7 @@ td.tot{color:var(--cyan);font-weight:500;}
     var p = new URLSearchParams();
     if (S.chain !== 'all') p.set('chain', S.chain);
     if (S.type !== 'all') p.set('type', S.type);
+    if (S.mode === 'reconciled') p.set('mode', 'reconciled');
     if (S.address) p.set('address', S.address);
     Object.keys(S.f).forEach(function (k) { if (S.f[k] !== '') p.set(k, S.f[k]); });
     if (S.page > 1) p.set('page', String(S.page));
@@ -1084,8 +1435,9 @@ td.tot{color:var(--cyan);font-weight:500;}
   var hp = parseInt(q.get('hpage'), 10); if (hp > 1) H.page = Math.min(hp, 1000);
   Object.keys(FIELDS).forEach(function (k) { $(FIELDS[k]).value = S.f[k]; });
   if (activeCount()) { $('fpanel').hidden = false; $('b-filters').setAttribute('aria-expanded', 'true'); }
-  $('f-chain').value = S.chain; $('f-type').value = S.type; applyAddressUi(); refreshTimes(); updatePager();
-  skeletonRows('soon-trades', 5, 9); updateHPager();
+  if (q.get('mode') === 'reconciled') S.mode = 'reconciled';
+  $('f-chain').value = S.chain; $('f-type').value = S.type; $('f-mode').value = S.mode; applyAddressUi(); refreshTimes(); updatePager();
+  updateHPager(); mkShowView(); mkUpdatePager(); mkLoad(); loadVenues();
   detailHint(); setupChartHover();
   var marketReady = loadMarket(); loadChart('max'); loadStatus(); loadHolders();
   if (S.f.minu || S.f.maxu) marketReady.then(function () { load(); }, function () { load(); }); else load();
@@ -1096,6 +1448,7 @@ td.tot{color:var(--cyan);font-weight:500;}
     if (document.hidden) return;
     loadStatus(); loadMarket();
     if (S.page === 1 && !S.loading && !S.f.to) load({ silent: true });
+    if (M.page === 1 && !M.loading) mkLoad({ silent: true });
     if (!H.loading) loadHolders({ silent: true });
     refreshTimes();
   }, 60000);
