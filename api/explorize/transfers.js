@@ -2,6 +2,8 @@
 //   chain=all|base|ethereum|bsc|polygon   type=all|transfer|mint|burn   address=0x...
 //   from=2026-11-01 | 2026-11-01T08:30      (UTC, inclusive)      to=... (UTC, inclusive)
 //   min=1000  max=50000                      (amount in RIZE, inclusive)
+//   mode=raw|reconciled   raw = every transfer (default); reconciled = hides the plumbing of the transactions the market layer
+//                         already turned into a trade or a liquidity move (routers, vaults, relays) - see /api/explorize/market
 //   page=1 (1-based)   limit=25 (max 100)
 // Newest first. Answers with the page of rows plus the exact total, so the page can show "1 / N".
 const { CHAINS, CHAIN_BY_ID, ZERO, query, fail, parseAddress, formatUnits } = require("./_db");
@@ -51,9 +53,22 @@ module.exports = async function handler(req, res) {
   if (min === false) return res.status(400).json({ error: "bad_min" });
   const max = parseRize(q.max);
   if (max === false) return res.status(400).json({ error: "bad_max" });
+  const mode = String(q.mode || "raw").toLowerCase();
+  if (!["raw", "reconciled"].includes(mode)) return res.status(400).json({ error: "bad_mode" });
   const limit = Math.min(Math.max(parseInt(q.limit, 10) || 25, 1), 100);
   const page = Math.min(Math.max(parseInt(q.page, 10) || 1, 1), MAX_PAGE);
 
+  const PLUMBING = `NOT EXISTS (SELECT 1 FROM trades x WHERE x.chain_id = transfers.chain_id AND x.tx_hash = transfers.tx_hash)
+      AND NOT EXISTS (SELECT 1 FROM liquidity_events y WHERE y.chain_id = transfers.chain_id AND y.tx_hash = transfers.tx_hash)`;
+  // The market tables exist once the enrich job has run once; before that, "reconciled" quietly means "raw".
+  try {
+    return await answer(mode === "reconciled");
+  } catch (err) {
+    if (mode === "reconciled" && err && err.code === "42P01") return answer(false).catch((e) => fail(res, e));
+    return fail(res, err);
+  }
+
+  async function answer(reconciled) {
   // WHERE clause with numbered parameters (only the filters that are present)
   const params = [];
   const add = (v) => { params.push(v); return "$" + params.length; };
@@ -67,6 +82,7 @@ module.exports = async function handler(req, res) {
   if (to) where.push(`block_time <= ${add(to)}::timestamptz`);
   if (min) where.push(`amount >= ${add(min)}::numeric`);
   if (max) where.push(`amount <= ${add(max)}::numeric`);
+  if (reconciled) where.push(PLUMBING);
   const whereSql = where.length ? "WHERE " + where.join(" AND ") : "";
   const countParams = params.slice();
 
@@ -102,7 +118,7 @@ module.exports = async function handler(req, res) {
   const FAST_OFFSET = Number(process.env.EXPLORIZE_FAST_OFFSET || 25000);
   const offset = (page - 1) * limit;
 
-  try {
+  {
     let total, rows;
     if (offset <= FAST_OFFSET) {
       // near the top: page and count in parallel
@@ -150,9 +166,9 @@ module.exports = async function handler(req, res) {
       total,
       pages: Math.max(1, Math.ceil(total / limit)),
       count: items.length,
+      mode: reconciled ? "reconciled" : "raw",
       items,
     });
-  } catch (err) {
-    return fail(res, err);
+  }
   }
 };
