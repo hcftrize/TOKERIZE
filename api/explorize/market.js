@@ -342,6 +342,7 @@ async function viewBridges(q, res) {
            encode(m.source_tx,'hex') AS source_tx, encode(m.dest_tx,'hex') AS dest_tx,
            encode(m.sender,'hex') AS sender, encode(m.receiver,'hex') AS receiver, m.amount::text AS amount,
            m.sent_at, m.received_at,
+           m.raw->'sourceNetworkInfo'->>'name' AS src_name, m.raw->'destNetworkInfo'->>'name' AS dest_name,
            (SELECT COALESCE(SUM(amount),0) FROM transfers x WHERE x.chain_id = m.source_chain_id AND x.tx_hash = m.source_tx
                AND x.to_addr = $1)::text AS burned,
            (SELECT COALESCE(SUM(amount),0) FROM transfers x WHERE x.chain_id = m.dest_chain_id AND x.tx_hash = m.dest_tx
@@ -360,13 +361,17 @@ async function viewBridges(q, res) {
   const [list, count, summary, missing] = await Promise.all([
     query(listSql, params), query(countSql, params.slice(1, params.length - 2)), query(summarySql), query(missingSql)]);
   const items = list.rows.map((r) => {
+    // a destination we do not index (another kind of network): only the burn side can be checked
+    const outside = !CHAIN_BY_ID[r.dest_chain_id];
     const reconciled = r.status === "SUCCESS" && r.dest_tx && BigInt(r.burned) > 0n && r.burned === r.minted;
+    const burnOnly = r.status === "SUCCESS" && outside && r.amount != null && BigInt(r.burned) > 0n && r.burned === r.amount;
     let verdict = "in_flight";
     if (r.status === "FAILED") verdict = "failed";
-    else if (r.status === "SUCCESS") verdict = reconciled ? "reconciled" : "mismatch";
+    else if (r.status === "SUCCESS") verdict = burnOnly ? "burn_only" : reconciled && !outside ? "reconciled" : "mismatch";
     return {
       id: "0x" + r.id, status: r.status, verdict,
-      source: chainKey(r.source_chain_id), dest: chainKey(r.dest_chain_id),
+      source: CHAIN_BY_ID[r.source_chain_id] ? chainKey(r.source_chain_id) : (r.src_name || "other"),
+      dest: CHAIN_BY_ID[r.dest_chain_id] ? chainKey(r.dest_chain_id) : (r.dest_name || "other"),
       source_tx: r.source_tx ? "0x" + r.source_tx : null, dest_tx: r.dest_tx ? "0x" + r.dest_tx : null,
       sender: r.sender ? "0x" + r.sender : null, receiver: r.receiver ? "0x" + r.receiver : null,
       amount_ccip: r.amount == null ? null : formatUnits(r.amount),

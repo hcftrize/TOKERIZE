@@ -1262,7 +1262,7 @@ td.tot{color:var(--cyan);font-weight:500;}
     if (S.selected && S.selected.kind === 'tx' && S.selected.hash === m.tx) tr.className = 'sel';
     return tr;
   }
-  var VERDICT = { reconciled: ['ok', 'reconciled'], in_flight: ['wait', 'in flight'], failed: ['bad', 'failed'], mismatch: ['bad', 'amounts differ'] };
+  var VERDICT = { reconciled: ['ok', 'reconciled'], burn_only: ['ok', 'burn checked'], in_flight: ['wait', 'in flight'], failed: ['bad', 'failed'], mismatch: ['bad', 'amounts differ'] };
   function bridgeRow(b) {
     var tr = el('tr'); tr.className = 'nohover';
     var tt = el('td'); if (b.sent_at) { var sp = el('span', null, timeText(b.sent_at)); sp.title = exact(b.sent_at) + ' UTC'; tt.appendChild(sp); } else tt.textContent = '—'; tr.appendChild(tt);
@@ -1274,7 +1274,7 @@ td.tot{color:var(--cyan);font-weight:500;}
     var bu = el('td', 'num', fmtCompact(b.burned)); bu.title = b.burned + ' RIZE burned on ' + b.source; tr.appendChild(bu);
     var mi = el('td', 'num', b.dest_tx ? fmtCompact(b.minted) : '—'); mi.title = b.minted + ' RIZE minted on ' + b.dest; tr.appendChild(mi);
     var v = VERDICT[b.verdict] || ['wait', b.verdict]; var st = el('td'); var tg = el('span', 'tag ' + v[0], v[1]);
-    tg.title = 'Chainlink CCIP status: ' + (b.status || 'unknown') + (b.verdict === 'mismatch' ? '. The amount burned and the amount minted are not equal.' : ''); st.appendChild(tg); tr.appendChild(st);
+    tg.title = 'Chainlink CCIP status: ' + (b.status || 'unknown') + (b.verdict === 'mismatch' ? '. The amount burned and the amount minted are not equal.' : b.verdict === 'burn_only' ? '. The destination is a network Explorize does not index: only the burn side is checked.' : ''); st.appendChild(tg); tr.appendChild(st);
     var tx = el('td');
     [[b.source, b.source_tx, 'send'], [b.dest, b.dest_tx, 'receive']].forEach(function (x) {
       if (!x[1] || !CHAINS[x[0]]) return;
