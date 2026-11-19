@@ -335,6 +335,8 @@ async function viewBridges(q, res) {
                AND x.to_addr = ${ZERO_SQL})::text AS burned,
            (SELECT COALESCE(SUM(amount),0) FROM transfers x WHERE x.chain_id = m.dest_chain_id AND x.tx_hash = m.dest_tx
                AND x.from_addr = ${ZERO_SQL})::text AS minted,
+           (SELECT sum(g.amount) FROM ccip_messages g WHERE g.source_chain_id = m.source_chain_id AND g.source_tx = m.source_tx)::text AS src_group,
+           (SELECT sum(g.amount) FROM ccip_messages g WHERE g.dest_chain_id = m.dest_chain_id AND g.dest_tx = m.dest_tx)::text AS dst_group,
            sl.label AS sender_label, sl.category AS sender_category, sl.logo AS sender_logo,
            rl.label AS receiver_label, rl.category AS receiver_category, rl.logo AS receiver_logo
       FROM ccip_messages m
@@ -361,8 +363,10 @@ async function viewBridges(q, res) {
     let verdict = "in_flight";
     if (r.status === "FAILED") verdict = "failed";
     else if (r.status === "SUCCESS") {
-      const srcOk = !s.indexed ? null : burned > 0n && (amount == null || burned === amount);
-      const dstOk = !d.indexed ? null : minted > 0n && (amount == null || minted === amount);
+      // CCIP executes several messages in one transaction: the mint is then the SUM of the messages that share it
+      const srcGroup = r.src_group == null ? null : BigInt(r.src_group), dstGroup = r.dst_group == null ? null : BigInt(r.dst_group);
+      const srcOk = !s.indexed ? null : burned > 0n && (amount == null || burned === amount || burned === srcGroup);
+      const dstOk = !d.indexed ? null : minted > 0n && (amount == null || minted === amount || minted === dstGroup);
       if (srcOk === false || dstOk === false) verdict = "mismatch";
       else if (srcOk === null && dstOk === null) verdict = "unchecked";
       else verdict = srcOk !== null && dstOk !== null ? "reconciled" : srcOk !== null ? "burn_only" : "mint_only";
@@ -377,6 +381,7 @@ async function viewBridges(q, res) {
       receiver_label: labelOf(r.receiver_label, r.receiver_category, r.receiver_logo),
       amount_ccip: r.amount == null ? null : formatUnits(r.amount),
       burned: formatUnits(r.burned), minted: formatUnits(r.minted),
+      batched: !!(r.dst_group != null && amount != null && BigInt(r.dst_group) !== amount && BigInt(r.minted) === BigInt(r.dst_group)),
       sent_at: r.sent_at ? r.sent_at.toISOString() : null, received_at: r.received_at ? r.received_at.toISOString() : null,
       url: "https://ccip.chain.link/msg/0x" + r.id,
     };
