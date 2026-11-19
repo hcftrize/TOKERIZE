@@ -143,7 +143,8 @@ a.ext:hover{color:var(--cyan);}
 .mk-sub{font-size:13.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:10px 8px 4px;}
 .tag.buy,.tag.add,.tag.ok{color:var(--green);border-color:rgba(61,190,71,.4);}
 .tag.sell,.tag.remove,.tag.bad{color:var(--red);border-color:rgba(255,107,107,.4);}
-.tag.arb,.tag.collect{color:var(--cyan);border-color:rgba(126,224,255,.4);}
+.tag.collect{color:var(--cyan);border-color:rgba(126,224,255,.4);}
+.tag.arb{color:#fff;border-color:rgba(255,255,255,.6);}
 .tag.wait{color:#e0a21a;border-color:rgba(224,162,26,.4);}
 .tag.reb{color:#e0a21a;border-color:rgba(224,162,26,.4);}
 .warn-i{color:#ffb020;margin-left:6px;cursor:help;}
@@ -279,7 +280,7 @@ button.ad:hover .vt{text-decoration:underline;}
 .pop .pop-act:hover{text-decoration:underline;}
 .tag.etype{margin-left:0;}
 .tag.liquidity{color:var(--gold);border-color:rgba(255,211,107,.4);}
-.tag.ccip{color:var(--pink);border-color:rgba(255,138,216,.4);}
+.tag.ccip{color:#0847F7;border-color:#0847F7;background:rgba(8,71,247,.14);}   /* Chainlink blue */
 .tag.in_cex,.tag.out_cex{color:#e0a21a;border-color:rgba(224,162,26,.4);}
 .p-trades .fbtn{height:28px;font-size:14px;}
 .th-time svg{flex:none;}
@@ -1555,9 +1556,9 @@ button.ad:hover .vt{text-decoration:underline;}
     var tk = el('td'), w = el('span', 'tk'), im = el('img'); im.src = LOGO; im.alt = ''; w.appendChild(im); w.appendChild(document.createTextNode('RIZE')); tk.appendChild(w); tr.appendChild(tk);
     var rt = el('td'); rt.appendChild(routeSide(b.source, b.source_name)); var ar = el('span', 'mk-dim', '→'); ar.style.margin = '0 8px'; rt.appendChild(ar); rt.appendChild(routeSide(b.dest, b.dest_name)); tr.appendChild(rt);
     var bu = el('td', 'num', CHAINS[b.source] ? fmtCompact(b.burned) : '—'); bu.title = CHAINS[b.source] ? b.burned + ' RIZE burned on ' + netName(b.source, b.source_name) : netName(b.source, b.source_name) + ' is not indexed by Explorize'; tr.appendChild(bu);
-    var mi = el('td', 'num', CHAINS[b.dest] && b.dest_tx ? fmtCompact(b.minted) : '—'); mi.title = CHAINS[b.dest] ? b.minted + ' RIZE minted on ' + netName(b.dest, b.dest_name) + (b.batched ? ' (one mint for several messages delivered together)' : '') : netName(b.dest, b.dest_name) + ' is not indexed by Explorize'; tr.appendChild(mi);
+    var mi = el('td', 'num', CHAINS[b.dest] && b.dest_tx ? fmtCompact(b.minted) : '—'); mi.title = CHAINS[b.dest] ? b.minted + ' RIZE minted on ' + netName(b.dest, b.dest_name) : netName(b.dest, b.dest_name) + ' is not indexed by Explorize'; tr.appendChild(mi);
     var st = el('td'); st.appendChild(statusTag(b));
-    if (b.verdict === 'mismatch') { var wi = el('span', 'warn-i', '⚠'); wi.title = 'The amount burned or minted does not match the CCIP message. Worth a look.'; st.appendChild(wi); }
+    if (b.verdict === 'mismatch' && CHAINS[b.source] && CHAINS[b.dest]) { var wi = el('span', 'warn-i', '⚠'); wi.title = 'The amount burned or minted does not match the CCIP message. Worth a look.'; st.appendChild(wi); }
     tr.appendChild(st);
     return tr;
   }
