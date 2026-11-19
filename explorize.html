@@ -3,7 +3,19 @@
 <head>
 <meta charset="UTF-8"/>
 <title>Explorize &mdash; RIZE Token Explorer &mdash; Tokerize</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" id="vp" content="width=device-width, initial-scale=1.0"/>
+<script>
+/* On a phone, lay the page out like Chrome's "desktop site" (a 980px wide page scaled to the screen): the explorer is a
+   dense multi-panel tool and reads far better that way than squeezed into 360px. Computers and tablets are untouched. */
+(function () {
+  try {
+    var w = Math.min(screen.width || 9999, screen.height || 9999);
+    if (w < 700 && ('ontouchstart' in window || (navigator.maxTouchPoints || 0) > 0)) {
+      document.getElementById('vp').setAttribute('content', 'width=980');
+    }
+  } catch (e) { /* keep the default viewport */ }
+})();
+</script>
 <meta name="description" content="Explorize: a community explorer for the RIZE token. Price, transfers, trades and holders across Base, Ethereum, BNB Chain and Polygon."/>
 <style>
 @font-face{font-family:'Rajdhani';src:url('/assets/fonts/rajdhani.semibold.ttf') format('truetype');font-weight:600;font-style:normal;}
@@ -128,7 +140,12 @@ a.ext:hover{color:var(--cyan);}
 .soon-over p{font-family:'DM Mono',monospace;font-size:14.5px;color:var(--muted);max-width:420px;line-height:1.65;}
 
 /* market panel: trades / liquidity moves / bridges */
-.p-trades .p-head{padding-right:10px;}
+.p-trades .p-head{padding-right:8px;}
+.p-trades .p-tab{padding:0 12px;letter-spacing:1.6px;}
+.p-trades .pager{gap:2px;flex:none;}
+.p-trades .pager .icon-btn{width:26px;height:28px;font-size:16px;}
+.p-trades .pg-input{width:46px;height:28px;font-size:14px;}
+.p-trades .pg-of{font-size:14px;margin:0 4px 0 2px;}
 .p-trades table.t{min-width:0;}
 .p-trades table.t td,.p-trades table.t th{padding-left:5px;padding-right:5px;}
 .p-trades .adn{max-width:76px;}
@@ -295,7 +312,7 @@ button.ad:hover .vt{text-decoration:underline;}
 @media(max-width:1100px){
   .app{height:auto;min-height:0;grid-template-columns:minmax(0,1fr);grid-template-rows:none;}
   .p-top,.p-trades,.p-info,.p-holders,.p-transfers{grid-column:1;grid-row:auto;}
-  .p-top{order:1}.p-info{order:2;height:440px}.p-transfers{order:3;height:600px}.p-trades{order:4;height:340px}.p-holders{order:5;height:560px}
+  .p-top{order:1}.p-info{order:2;height:440px}.p-transfers{order:3;height:600px}.p-trades{order:4;height:600px}.p-holders{order:5;height:560px}
   .stats{justify-content:flex-start;gap:18px 26px;}
 }
 @media(max-width:768px){
@@ -351,17 +368,20 @@ button.ad:hover .vt{text-decoration:underline;}
   </section>
 
   <!-- ============ TRADES / LIQUIDITY MOVES / BRIDGES ============ -->
-  <section class="panel p-trades" aria-label="RIZE trades, liquidity moves and bridges">
+  <section class="panel p-trades" aria-label="RIZE trades, liquidity moves and CCIP bridges">
     <div class="p-head">
       <div class="p-tabs" role="tablist">
         <button class="p-tab" role="tab" id="mk-tab-trades" aria-selected="true">Trades</button>
         <button class="p-tab" role="tab" id="mk-tab-liquidity" aria-selected="false">Liquidity moves</button>
-        <button class="p-tab" role="tab" id="mk-tab-bridges" aria-selected="false">Bridges</button>
+        <button class="p-tab" role="tab" id="mk-tab-bridges" aria-selected="false">CCIP</button>
       </div>
       <div class="pager">
+        <button class="icon-btn" id="mk-first" aria-label="First page" title="First page">&laquo;</button>
         <button class="icon-btn" id="mk-prev" aria-label="Previous page" title="Previous page">&lsaquo;</button>
-        <span class="pg-of" id="mk-page" style="margin:0 2px">1 / &hellip;</span>
+        <input type="text" inputmode="numeric" class="pg-input" id="mk-input" value="1" aria-label="Page number" title="Type a page number and press Enter"/>
+        <span class="pg-of">/ <span id="mk-total">&hellip;</span></span>
         <button class="icon-btn" id="mk-next" aria-label="Next page" title="Next page">&rsaquo;</button>
+        <button class="icon-btn" id="mk-last" aria-label="Last page" title="Last page">&raquo;</button>
         <button class="icon-btn" id="mk-refresh" title="Refresh" aria-label="Refresh">&#x21bb;</button>
       </div>
     </div>
@@ -1564,8 +1584,9 @@ button.ad:hover .vt{text-decoration:underline;}
   }
 
   function mkUpdatePager() {
-    $('mk-page').textContent = M.page + ' / ' + (M.total == null ? '…' : commas(M.pages));
-    $('mk-prev').disabled = M.page <= 1; $('mk-next').disabled = M.total != null && M.page >= M.pages;
+    $('mk-input').value = M.page; $('mk-total').textContent = M.total == null ? '…' : commas(M.pages);
+    var first = M.page <= 1, last = M.total != null && M.page >= M.pages;
+    $('mk-first').disabled = first; $('mk-prev').disabled = first; $('mk-next').disabled = last; $('mk-last').disabled = last || M.total == null;
   }
   function mkShowView() {
     var tr = M.view === 'trades', lq = M.view === 'liquidity', br = M.view === 'bridges';
@@ -1616,7 +1637,7 @@ button.ad:hover .vt{text-decoration:underline;}
         mkState(d.items.length ? '' : 'No liquidity move matches these filters.');
       } else {
         $('mk-brows').textContent = ''; d.items.forEach(function (b) { frag.appendChild(bridgeRow(b)); }); $('mk-brows').appendChild(frag);
-        mkState(d.items.length ? '' : 'No bridge message matches these filters.');
+        mkState(d.items.length ? '' : 'No CCIP message matches these filters.');
       }
       if (!opts.silent) $('mk-wrap').scrollTop = 0;
       var noun = view === 'trades' ? ' trade' : view === 'liquidity' ? ' move' : ' message';
@@ -1635,8 +1656,19 @@ button.ad:hover .vt{text-decoration:underline;}
   $('mk-f-apply').addEventListener('click', mkApplyFilters);
   $('mk-fpanel').addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); mkApplyFilters(); } });
   $('mk-f-reset').addEventListener('click', function () { M.fv[M.view] = blankF(); mkReload(); });
-  $('mk-prev').addEventListener('click', function () { if (M.page > 1) { M.page--; mkLoad(); } });
-  $('mk-next').addEventListener('click', function () { if (M.total == null || M.page < M.pages) { M.page++; mkLoad(); } });
+  function mkGo(p) {
+    p = Math.max(1, p || 1); if (M.total != null) p = Math.min(p, M.pages);
+    if (p === M.page && !M.loading) { mkUpdatePager(); return; }
+    M.page = p; mkLoad();
+  }
+  $('mk-first').addEventListener('click', function () { mkGo(1); });
+  $('mk-prev').addEventListener('click', function () { mkGo(M.page - 1); });
+  $('mk-next').addEventListener('click', function () { mkGo(M.page + 1); });
+  $('mk-last').addEventListener('click', function () { if (M.total != null) mkGo(M.pages); });
+  function mkCommitPage() { var n = parseInt(String($('mk-input').value).replace(/[^0-9]/g, ''), 10); mkGo(n || M.page); }
+  $('mk-input').addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); mkCommitPage(); this.blur(); } });
+  $('mk-input').addEventListener('change', mkCommitPage);
+  $('mk-input').addEventListener('focus', function () { this.select(); });
   $('mk-refresh').addEventListener('click', function () { mkLoad(); });
   function loadVenues() {                              // the venue and pool filters list what really exists
     api('/market', { view: 'pools' }).then(function (d) {
