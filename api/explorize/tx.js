@@ -15,13 +15,13 @@ module.exports = async function handler(req, res) {
       `SELECT p.chain_id, p.block_number, p.block_time, p.log_index,
               encode(p.from_addr, 'hex') AS from_hex, encode(p.to_addr, 'hex') AS to_hex,
               p.amount::text AS amount_raw,
-              fl.label AS from_label, fl.category AS from_category,
-              tl.label AS to_label,   tl.category AS to_category
+              fl.label AS from_label, fl.category AS from_category, fl.logo AS from_logo,
+              tl.label AS to_label,   tl.category AS to_category, tl.logo AS to_logo
          FROM transfers p
-         LEFT JOIN LATERAL (SELECT label, category FROM labels
+         LEFT JOIN LATERAL (SELECT label, category, logo FROM labels
                              WHERE address = p.from_addr AND chain_id IN (0, p.chain_id)
                              ORDER BY chain_id DESC LIMIT 1) fl ON true
-         LEFT JOIN LATERAL (SELECT label, category FROM labels
+         LEFT JOIN LATERAL (SELECT label, category, logo FROM labels
                              WHERE address = p.to_addr AND chain_id IN (0, p.chain_id)
                              ORDER BY chain_id DESC LIMIT 1) tl ON true
         WHERE p.chain_id = $1 AND p.tx_hash = $2
@@ -36,8 +36,8 @@ module.exports = async function handler(req, res) {
       log_index: row.log_index,
       from: "0x" + row.from_hex,
       to: "0x" + row.to_hex,
-      from_label: row.from_label ? { label: row.from_label, category: row.from_category } : null,
-      to_label: row.to_label ? { label: row.to_label, category: row.to_category } : null,
+      from_label: row.from_label ? { label: row.from_label, category: row.from_category, logo: row.from_logo || null } : null,
+      to_label: row.to_label ? { label: row.to_label, category: row.to_category, logo: row.to_logo || null } : null,
       kind: row.from_hex === zeroHex ? "mint" : row.to_hex === zeroHex ? "burn" : "transfer",
       amount: formatUnits(row.amount_raw),
     }));
