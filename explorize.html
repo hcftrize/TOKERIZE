@@ -710,14 +710,25 @@ button.ad:hover .vt{text-decoration:underline;}
   function withLogoList(cb) {
     if (logoList !== null) { cb(); return; }
     logoWait.push(cb); if (logoWait.length > 1) return;
-    fetch('https://data.jsdelivr.com/v1/packages/gh/' + LOGO_REPO + '?structure=flat').then(function (r) { return r.json(); }).then(function (d) {
-      var set = {}, re = new RegExp('^/' + LOGO_DIR + '(venues|entities|tokens|networks|ui)/([^/]+)\\.(svg|png|jpe?g|webp)$', 'i');
-      (d.files || []).forEach(function (f) {
-        var m = re.exec(f.name || ''); if (!m) return;
+    var re = new RegExp('^/?' + LOGO_DIR + '(venues|entities|tokens|networks|ui)/([^/]+)\\.(svg|png|jpe?g|webp)$', 'i');
+    function listOf(paths) {
+      var set = {};
+      paths.forEach(function (path) {
+        var m = re.exec(path || ''); if (!m) return;
         var k = m[1].toLowerCase() + '/' + m[2].toLowerCase(); (set[k] = set[k] || []).push(m[2] + '.' + m[3].toLowerCase());
       });
-      logoList = set;
-    }).catch(function () { logoList = false; }).then(function () { var w = logoWait; logoWait = []; w.forEach(function (f) { f(); }); });
+      return set;
+    }
+    var branch = LOGO_REPO.split('@');
+    fetch('https://api.github.com/repos/' + branch[0] + '/git/trees/' + branch[1] + '?recursive=1')       // always up to date
+      .then(function (r) { if (!r.ok) throw new Error('github ' + r.status); return r.json(); })
+      .then(function (d) { return listOf((d.tree || []).map(function (x) { return x.path; })); })
+      .catch(function () {                                                                                   // rate limited: jsDelivr's list
+        return fetch('https://data.jsdelivr.com/v1/packages/gh/' + LOGO_REPO + '?structure=flat').then(function (r) { return r.json(); })
+          .then(function (d) { return listOf((d.files || []).map(function (f) { return f.name; })); });
+      })
+      .then(function (set) { logoList = set; }, function () { logoList = false; })
+      .then(function () { var w = logoWait; logoWait = []; w.forEach(function (f) { f(); }); });
   }
   var logoCache = {};
   function findLogo(folders, base, ok, miss) {
@@ -775,7 +786,6 @@ button.ad:hover .vt{text-decoration:underline;}
   }
   function copyIcon(text) {                           // shown when the pointer is on an address (see .ac:hover .cp)
     var b = el('button', 'cp'); b.type = 'button'; b.title = 'Copy'; b.setAttribute('aria-label', 'Copy ' + text); b.innerHTML = COPY_SVG;
-    findLogo(['ui'], 'copy', function (url) { var im = new Image(); im.alt = ''; im.src = url; b.textContent = ''; b.appendChild(im); });
     b.addEventListener('click', function (ev) {
       ev.stopPropagation(); ev.preventDefault();
       copyText(text, function () { b.classList.add('done'); b.title = 'Copied'; setTimeout(function () { b.classList.remove('done'); b.title = 'Copy'; }, 1200); });
@@ -813,8 +823,10 @@ button.ad:hover .vt{text-decoration:underline;}
   }
   function refreshUsdCells() {
     document.querySelectorAll('#rows td.usd, #hrows td.usd').forEach(function (td) {
-      var a = parseFloat(td.getAttribute('data-amt'));
-      td.textContent = S.price == null ? '—' : fmtUsdCompact(a * S.price);
+      var raw = td.getAttribute('data-amt');
+      if (raw == null) return;                         // a trade's own dollar value (fixed at the time of the trade): leave it
+      var a = parseFloat(raw);
+      if (S.price != null && isFinite(a)) td.textContent = fmtUsdCompact(a * S.price);
     });
   }
 
@@ -896,6 +908,14 @@ button.ad:hover .vt{text-decoration:underline;}
       if (range === S.chartRange) show(pts);
       if (range === 'max' || range === '365') set180(pts);
     }).catch(function () {
+      if (range === 'max') {                          // the free price API can refuse the full history: show the last year instead
+        return cg('/coins/rize/market_chart', { vs_currency: 'usd', days: '365' }).then(function (d) {
+          var pts = (d && d.prices) || []; if (pts.length < 2) throw new Error('empty');
+          S.chartData.max = pts; if (range === S.chartRange) show(pts); set180(pts);
+        }).catch(function () {
+          if (range === S.chartRange) { st.style.display = 'flex'; st.textContent = 'Price history is unavailable right now.'; chart.pts = null; drawChart(); }
+        });
+      }
       if (range === S.chartRange) { st.style.display = 'flex'; st.textContent = 'Price history is unavailable right now.'; chart.pts = null; drawChart(); }
     });
   }
