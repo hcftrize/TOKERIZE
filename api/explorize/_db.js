@@ -5,7 +5,7 @@ const { Pool } = require("pg");
 const CHAINS = {
   base:     { id: 8453, name: "Base" },
   ethereum: { id: 1,    name: "Ethereum" },
-  bsc:      { id: 56,   name: "BNB Chain" },
+  bsc:      { id: 56,   name: "BSC" },
   polygon:  { id: 137,  name: "Polygon" },
 };
 const CHAIN_ORDER = ["base", "ethereum", "bsc", "polygon"];
