@@ -699,8 +699,26 @@ button.ad:hover .vt{text-decoration:underline;}
   function initials(nm) {
     return String(nm || '').replace(/[^A-Za-z0-9 ]/g, '').split(/\s+/).filter(Boolean).slice(0, 2).map(function (x) { return x[0].toUpperCase(); }).join('') || '?';
   }
-  /* A logo is a file in /assets/explorize/<folder>/<name>.<svg|png|jpg|jpeg|webp>. The first extension that exists wins;
-     the answer is remembered so a missing file is only looked for once per visit. */
+  /* Logos live in the EXPLORIZE repository (assets/explorize/<folder>/<name>.<svg|png|jpg|jpeg|webp>), served by jsDelivr, so the
+     whole explorer is managed from that one repo. The folder listing is fetched once, so only files that exist are requested;
+     if the listing cannot be read, each extension is tried in turn. Branch files are cached by jsDelivr for a few hours.
+     The first extension that exists wins and the answer is remembered for the visit. */
+  var LOGO_REPO = 'hcftrize/EXPLORIZE@main', LOGO_DIR = 'assets/explorize/';
+  var LOGO_BASE = 'https://cdn.jsdelivr.net/gh/' + LOGO_REPO + '/' + LOGO_DIR;
+  var LOGO_EXT = ['svg', 'png', 'jpg', 'jpeg', 'webp'];
+  var logoList = null, logoWait = [];                 // null = not read yet, false = unreadable, object = {folder/name: [file names]}
+  function withLogoList(cb) {
+    if (logoList !== null) { cb(); return; }
+    logoWait.push(cb); if (logoWait.length > 1) return;
+    fetch('https://data.jsdelivr.com/v1/packages/gh/' + LOGO_REPO + '?structure=flat').then(function (r) { return r.json(); }).then(function (d) {
+      var set = {}, re = new RegExp('^/' + LOGO_DIR + '(venues|entities|tokens|networks|ui)/([^/]+)\\.(svg|png|jpe?g|webp)$', 'i');
+      (d.files || []).forEach(function (f) {
+        var m = re.exec(f.name || ''); if (!m) return;
+        var k = m[1].toLowerCase() + '/' + m[2].toLowerCase(); (set[k] = set[k] || []).push(m[2] + '.' + m[3].toLowerCase());
+      });
+      logoList = set;
+    }).catch(function () { logoList = false; }).then(function () { var w = logoWait; logoWait = []; w.forEach(function (f) { f(); }); });
+  }
   var logoCache = {};
   function findLogo(folders, base, ok, miss) {
     base = String(base).replace(/\.(svg|png|jpe?g|webp)$/i, '');
@@ -708,14 +726,23 @@ button.ad:hover .vt{text-decoration:underline;}
     if (typeof c === 'string') { if (c) ok(c); else if (miss) miss(); return; }
     if (c) { c.push({ ok: ok, miss: miss }); return; }
     logoCache[key] = [{ ok: ok, miss: miss }];
-    var tries = [], i = 0;
-    folders.forEach(function (f) { ['svg', 'png', 'jpg', 'jpeg', 'webp'].forEach(function (x) { tries.push('/assets/explorize/' + f + '/' + encodeURIComponent(base) + '.' + x); }); });
-    (function next() {
-      if (i >= tries.length) { var w = logoCache[key]; logoCache[key] = ''; w.forEach(function (x) { if (x.miss) x.miss(); }); return; }
-      var url = tries[i++], im = new Image();
-      im.onload = function () { var w = logoCache[key]; logoCache[key] = url; w.forEach(function (x) { x.ok(url); }); };
-      im.onerror = next; im.src = url;
-    })();
+    withLogoList(function () {
+      var tries = [], i = 0;
+      folders.forEach(function (f) {
+        if (logoList) {
+          var names = logoList[f + '/' + base.toLowerCase()] || [];
+          LOGO_EXT.forEach(function (x) { names.forEach(function (n) { if (n.slice(n.lastIndexOf('.') + 1) === x) tries.push(LOGO_BASE + f + '/' + encodeURIComponent(n)); }); });
+        } else {
+          LOGO_EXT.forEach(function (x) { tries.push(LOGO_BASE + f + '/' + encodeURIComponent(base) + '.' + x); });
+        }
+      });
+      (function next() {
+        if (i >= tries.length) { var w = logoCache[key]; logoCache[key] = ''; w.forEach(function (x) { if (x.miss) x.miss(); }); return; }
+        var url = tries[i++], im = new Image();
+        im.onload = function () { var w = logoCache[key]; logoCache[key] = url; w.forEach(function (x) { x.ok(url); }); };
+        im.onerror = next; im.src = url;
+      })();
+    });
   }
   function logoSpan(folders, base, text, cls) {      // round logo; the initials stay when the file does not exist
     var box = el('span', cls || 'vlogo'); box.textContent = initials(text);
