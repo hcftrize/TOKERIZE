@@ -25,9 +25,9 @@ module.exports = async function handler(req, res) {
                     invariant_diff::text AS invariant_diff FROM holders_meta WHERE id = 1`),
       query(`SELECT COUNT(*)::int AS n FROM holders`),
       query(`SELECT h.rank, encode(h.address, 'hex') AS addr, h.held::text AS held, h.bonded::text AS bonded,
-                    h.queued::text AS queued, h.bond_count, h.total::text AS total, l.label, l.category
+                    h.queued::text AS queued, h.bond_count, h.total::text AS total, l.label, l.category, l.logo
                FROM holders h
-               LEFT JOIN LATERAL (SELECT label, category FROM labels WHERE address = h.address
+               LEFT JOIN LATERAL (SELECT label, category, logo FROM labels WHERE address = h.address
                                    ORDER BY (chain_id = 0) DESC, chain_id LIMIT 1) l ON true
               ORDER BY h.rank LIMIT $1 OFFSET $2`, [limit, offset]),
     ]);
@@ -45,7 +45,7 @@ module.exports = async function handler(req, res) {
       return {
         rank: r.rank,
         address: "0x" + r.addr,
-        label: r.label ? { label: r.label, category: r.category } : null,
+        label: r.label ? { label: r.label, category: r.category, logo: r.logo || null } : null,
         total: formatUnits(r.total),
         held: formatUnits(r.held),
         bonded: formatUnits(BigInt(r.bonded) + BigInt(r.queued)),   // all RIZE still inside the contract
