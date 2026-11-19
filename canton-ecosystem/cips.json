@@ -1194,9 +1194,9 @@
     "number": 131,
     "title": "Add CapConnect+ (CC+) as a Super Validator (Max Weight 5)",
     "type": "Governance",
-    "status": "Proposed",
+    "status": "Approved",
     "created": "July 1, 2026",
-    "approved": "",
+    "approved": "November 18, 2026",
     "description": "**CapConnect+ (CC+)** is built to simplify and modernize the issuance and settlement of primary Commercial Paper (CP) transactions, with a view toward expanding the product set to Tap Issuances (TAPs), Medium Term Notes (MTNs), and other financial instruments.\n\nAs a Super Validator on the Canton Network, CC+ will onboard large publicly traded corporate CP issuers, their institutional investors and dealer counterparties, committing high-volume, large-notional transactions to the Canton Network. CC+ proposes a maximum reward weight of 5, released through escrow as milestones are achieved.\n\nCC+ will initially work with a top-tier corporate CP issuer, one of the largest in the United States, to bring corporate Commercial Paper onto the Canton Network through a structured, phased implementation, culminating in full atomic settlement in which both the CP instrument and the cash leg settle on Canton via DiSH and/or compatible on-chain cash infrastructure."
   },
   {
