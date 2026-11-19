@@ -17,52 +17,7 @@ const { CHAINS, CHAIN_BY_ID, ZERO, query, fail, parseAddress, formatUnits } = re
 const MAX_PAGE = 20000;
 const NATIVE_KEY = "0x" + "0".repeat(40);
 
-// ---- small caches for the lookup tables (they change only when the labels files change) -------------------------
-let lookups = null, lookupsAt = 0;
-async function getLookups() {
-  if (lookups && Date.now() - lookupsAt < 300000) return lookups;
-  const [t, p, v] = await Promise.all([
-    query("SELECT chain_id, encode(address,'hex') AS a, symbol, decimals FROM tokens"),
-    query("SELECT chain_id, encode(pool_key,'hex') AS k, name, venue, kind, fee, status, source, note, " +
-          "encode(token0,'hex') AS t0, encode(token1,'hex') AS t1 FROM pools"),
-    query("SELECT key, name, kind, logo FROM venues"),
-  ]);
-  const tokens = {}, pools = {}, venues = {};
-  for (const r of t.rows) tokens[r.chain_id + ":0x" + r.a] = { symbol: r.symbol, decimals: r.decimals };
-  for (const r of p.rows) pools[r.chain_id + ":0x" + r.k] = r;
-  for (const r of v.rows) venues[r.key] = { key: r.key, name: r.name, kind: r.kind, logo: r.logo || null };
-  lookups = { tokens, pools, venues };
-  lookupsAt = Date.now();
-  return lookups;
-}
-
-function tokenOf(L, chainId, addr) {
-  const t = L.tokens[chainId + ":" + String(addr).toLowerCase()];
-  return t || { symbol: null, decimals: null };
-}
-function counterList(L, chainId, obj) {
-  const out = [];
-  for (const [addr, raw] of Object.entries(obj || {})) {
-    const t = tokenOf(L, chainId, addr);
-    out.push({
-      address: addr,
-      symbol: t.symbol || (addr.slice(0, 6) + "…" + addr.slice(-4)),
-      known: !!t.symbol,
-      amount: t.decimals == null ? null : formatUnits(raw, t.decimals),
-      raw: String(raw),
-    });
-  }
-  return out;
-}
-function poolInfo(L, chainId, key) {
-  const p = L.pools[chainId + ":" + String(key).toLowerCase()];
-  if (!p) return { key, name: String(key).slice(0, 8) + "…" + String(key).slice(-4), venue: null, venue_name: null, venue_logo: null };
-  const v = L.venues[p.venue] || null;
-  return { key, name: p.name, venue: p.venue || null, venue_name: v ? v.name : null, venue_logo: v ? v.logo : null,
-           kind: p.kind, status: p.status };
-}
-const chainKey = (id) => CHAIN_BY_ID[id] || String(id);
-const labelOf = (label, category) => (label ? { label, category } : null);
+const { getLookups, tokenOf, counterList, poolInfo, chainKey, labelOf, netInfo } = require("./_lookups");
 const hex = (b) => (b ? "0x" + Buffer.from(b).toString("hex") : null);
 
 // "2026-11-01" or "2026-11-01T08:30" (UTC) -> ISO; end=true rounds up
@@ -168,11 +123,11 @@ async function viewTrades(q, res) {
            encode(t.trader,'hex') AS trader_hex, encode(t.sender,'hex') AS sender_hex, encode(t.router,'hex') AS router_hex,
            t.rize::text AS rize_raw, t.counter, t.usd::text AS usd, t.price_usd::text AS price_usd, t.fills, t.swap_count,
            t.tags, t.flags,
-           tl.label AS trader_label, tl.category AS trader_category, rl.label AS router_label, rl.category AS router_category
+           tl.label AS trader_label, tl.category AS trader_category, tl.logo AS trader_logo, rl.label AS router_label, rl.category AS router_category, rl.logo AS router_logo
       FROM trades t
-      LEFT JOIN LATERAL (SELECT label, category FROM labels WHERE address = t.trader AND chain_id IN (0, t.chain_id)
+      LEFT JOIN LATERAL (SELECT label, category, logo FROM labels WHERE address = t.trader AND chain_id IN (0, t.chain_id)
                           ORDER BY chain_id DESC LIMIT 1) tl ON true
-      LEFT JOIN LATERAL (SELECT label, category FROM labels WHERE address = t.router AND chain_id IN (0, t.chain_id)
+      LEFT JOIN LATERAL (SELECT label, category, logo FROM labels WHERE address = t.router AND chain_id IN (0, t.chain_id)
                           ORDER BY chain_id DESC LIMIT 1) rl ON true
      ${whereSql}
      ORDER BY t.block_time DESC, t.chain_id DESC, t.block_number DESC, t.tx_hash DESC
@@ -193,8 +148,10 @@ async function viewTrades(q, res) {
       FROM trades t ${baseSql ? baseSql + " AND" : "WHERE"} t.block_time >= now() - interval '30 days'
      GROUP BY t.side`;
 
+  const wantTotals = String(q.totals || "") === "1";   // the totals strip is gone from the page; kept for the analysis tab
   const [list, count, totals] = await Promise.all([
-    query(listSql, listParams), query(countSql, listParams.slice(0, params.length)), query(totalsSql, baseCount)]);
+    query(listSql, listParams), query(countSql, listParams.slice(0, params.length)),
+    wantTotals ? query(totalsSql, baseCount) : Promise.resolve({ rows: [] })]);
   const items = list.rows.map((r) => {
     const fills = (r.fills || []).map((f) => poolInfo(L, r.chain_id, f.pool));
     const seen = new Set();
@@ -202,9 +159,9 @@ async function viewTrades(q, res) {
     return {
       chain: chainKey(r.chain_id), chain_name: CHAINS[chainKey(r.chain_id)] ? CHAINS[chainKey(r.chain_id)].name : "",
       block: Number(r.block_number), time: r.block_time.toISOString(), tx: "0x" + r.tx_hex, side: r.side,
-      trader: r.trader_hex ? "0x" + r.trader_hex : null, trader_label: labelOf(r.trader_label, r.trader_category),
+      trader: r.trader_hex ? "0x" + r.trader_hex : null, trader_label: labelOf(r.trader_label, r.trader_category, r.trader_logo),
       sender: r.sender_hex ? "0x" + r.sender_hex : null,
-      router: r.router_hex ? "0x" + r.router_hex : null, router_label: labelOf(r.router_label, r.router_category),
+      router: r.router_hex ? "0x" + r.router_hex : null, router_label: labelOf(r.router_label, r.router_category, r.router_logo),
       rize: formatUnits(r.rize_raw),
       usd: r.usd == null ? null : Number(r.usd), price_usd: r.price_usd == null ? null : Number(r.price_usd),
       counter: counterList(L, r.chain_id, r.counter),
@@ -222,7 +179,8 @@ async function viewTrades(q, res) {
   }
   const total = Number(count.rows[0].n);
   return send(res, { ok: true, view: "trades", page, limit, total, pages: Math.max(1, Math.ceil(total / limit)),
-                     count: items.length, items, totals: win, unpriced_30d: unpriced30 });
+                     count: items.length, items, totals: wantTotals ? win : undefined,
+                     unpriced_30d: wantTotals ? unpriced30 : undefined });
 }
 
 // ------------------------------------------------------------------------------------------------ liquidity
@@ -248,9 +206,9 @@ async function viewLiquidity(q, res) {
   const eventsSql = `
     SELECT e.chain_id, e.block_number, e.block_time, encode(e.tx_hash,'hex') AS tx_hex, e.seq, encode(e.pool_key,'hex') AS pool_hex,
            e.kind, encode(e.provider,'hex') AS provider_hex, e.rize::text AS rize_raw, e.counter, e.detail,
-           pl.label AS provider_label, pl.category AS provider_category
+           pl.label AS provider_label, pl.category AS provider_category, pl.logo AS provider_logo
       FROM liquidity_events e
-      LEFT JOIN LATERAL (SELECT label, category FROM labels WHERE address = e.provider AND chain_id IN (0, e.chain_id)
+      LEFT JOIN LATERAL (SELECT label, category, logo FROM labels WHERE address = e.provider AND chain_id IN (0, e.chain_id)
                           ORDER BY chain_id DESC LIMIT 1) pl ON true
      ${whereSql}
      ORDER BY e.block_time DESC, e.chain_id DESC, e.block_number DESC, e.tx_hash DESC, e.seq DESC
@@ -277,15 +235,16 @@ async function viewLiquidity(q, res) {
      ${poolWhere}
      ORDER BY CASE p.chain_id WHEN 8453 THEN 0 WHEN 1 THEN 1 WHEN 56 THEN 2 ELSE 3 END, p.name`;
 
+  const wantPools = String(q.pools || "") === "1";   // the per-pool lines are no longer shown; kept for later
   const [ev, count, lines] = await Promise.all([query(eventsSql, params), query(countSql, params.slice(0, params.length - 2)),
-                                               query(linesSql, pp)]);
+                                               wantPools ? query(linesSql, pp) : Promise.resolve({ rows: [] })]);
   const items = ev.rows.map((r) => {
     const info = poolInfo(L, r.chain_id, "0x" + r.pool_hex);
     const d = r.detail || {};
     return {
       chain: chainKey(r.chain_id), time: r.block_time.toISOString(), block: Number(r.block_number), tx: "0x" + r.tx_hex,
       pool: info, kind: r.kind,
-      provider: r.provider_hex ? "0x" + r.provider_hex : null, provider_label: labelOf(r.provider_label, r.provider_category),
+      provider: r.provider_hex ? "0x" + r.provider_hex : null, provider_label: labelOf(r.provider_label, r.provider_category, r.provider_logo),
       rize: r.rize_raw == null ? null : formatUnits(r.rize_raw),
       counter: counterList(L, r.chain_id, r.counter),
       rebalance: d.tx_verdict === "liquidity_rebalance",
@@ -307,7 +266,7 @@ async function viewLiquidity(q, res) {
   });
   const total = Number(count.rows[0].n);
   return send(res, { ok: true, view: "liquidity", page, limit, total, pages: Math.max(1, Math.ceil(total / limit)),
-                     count: items.length, items, pools });
+                     count: items.length, items, pools: wantPools ? pools : undefined });
 }
 
 // ------------------------------------------------------------------------------------------------ pools
@@ -328,15 +287,44 @@ async function viewPools(q, res) {
 }
 
 // ------------------------------------------------------------------------------------------------ bridges
+// network key of one side of a message, in SQL (indexed chains by id, Canton by the name the CCIP API gives)
+const netSql = (side) => `(CASE m.${side}_chain_id WHEN 8453 THEN 'base' WHEN 1 THEN 'ethereum' WHEN 56 THEN 'bsc' WHEN 137 THEN 'polygon'
+    ELSE CASE WHEN lower(coalesce(m.raw->'${side}NetworkInfo'->>'name','')) LIKE '%canton%'
+              THEN CASE WHEN lower(m.raw->'${side}NetworkInfo'->>'name') LIKE '%test%' THEN 'canton-testnet' ELSE 'canton' END
+              ELSE 'other' END END)`;
+const ZERO_SQL = `decode('${"0".repeat(40)}','hex')`;
+const NET_KEYS = ["base", "ethereum", "bsc", "polygon", "canton"];
+
 async function viewBridges(q, res) {
-  const ck = String(q.chain || "all").toLowerCase();
-  if (ck !== "all" && !CHAINS[ck]) return bad(res, "bad_chain");
+  const side = (v) => { const k = String(v || "all").toLowerCase(); return k === "all" || NET_KEYS.includes(k) ? k : false; };
+  const ck = side(q.chain); if (ck === false) return bad(res, "bad_chain");
+  const src = side(q.src); if (src === false) return bad(res, "bad_src");
+  const dst = side(q.dst); if (dst === false) return bad(res, "bad_dst");
+  const from = parseTime(q.from, false); if (from === false) return bad(res, "bad_from");
+  const to = parseTime(q.to, true); if (to === false) return bad(res, "bad_to");
+  const min = parseRize(q.min); if (min === false) return bad(res, "bad_min");
+  const max = parseRize(q.max); if (max === false) return bad(res, "bad_max");
+  const address = parseAddress(q.address); if (address === false) return bad(res, "bad_address");
   const { limit, page, offset } = paging(q);
-  const params = [ZERO];
-  let where = "";
-  if (ck !== "all") { params.push(CHAINS[ck].id); where = "WHERE m.source_chain_id = $2 OR m.dest_chain_id = $2"; }
+
+  const params = [];
+  const add = (v) => { params.push(v); return "$" + params.length; };
+  const match = (expr, k) => (k === "canton" ? `${expr} LIKE 'canton%'` : `${expr} = ${add(k)}`);
+  const where = [];
+  if (ck !== "all") where.push(`(${match(netSql("source"), ck)} OR ${match(netSql("dest"), ck)})`);
+  if (src !== "all") where.push(match(netSql("source"), src));
+  if (dst !== "all") where.push(match(netSql("dest"), dst));
+  const tm = "COALESCE(m.sent_at, m.received_at)";
+  if (from) where.push(`${tm} >= ${add(from)}::timestamptz`);
+  if (to) where.push(`${tm} <= ${add(to)}::timestamptz`);
+  if (min) where.push(`m.amount >= ${add(min)}::numeric`);
+  if (max) where.push(`m.amount <= ${add(max)}::numeric`);
+  if (address) { const p = add(address); where.push(`(m.sender = ${p} OR m.receiver = ${p})`); }
+  const whereSql = where.length ? "WHERE " + where.join(" AND ") : "";
+  const filterParams = params.slice();
   const lp = "$" + (params.push(limit), params.length);
   const op = "$" + (params.push(offset), params.length);
+
   const listSql = `
     SELECT encode(m.message_id,'hex') AS id, m.status, m.source_chain_id, m.dest_chain_id,
            encode(m.source_tx,'hex') AS source_tx, encode(m.dest_tx,'hex') AS dest_tx,
@@ -344,49 +332,61 @@ async function viewBridges(q, res) {
            m.sent_at, m.received_at,
            m.raw->'sourceNetworkInfo'->>'name' AS src_name, m.raw->'destNetworkInfo'->>'name' AS dest_name,
            (SELECT COALESCE(SUM(amount),0) FROM transfers x WHERE x.chain_id = m.source_chain_id AND x.tx_hash = m.source_tx
-               AND x.to_addr = $1)::text AS burned,
+               AND x.to_addr = ${ZERO_SQL})::text AS burned,
            (SELECT COALESCE(SUM(amount),0) FROM transfers x WHERE x.chain_id = m.dest_chain_id AND x.tx_hash = m.dest_tx
-               AND x.from_addr = $1)::text AS minted
-      FROM ccip_messages m ${where}
-     ORDER BY m.sent_at DESC NULLS LAST, m.message_id
+               AND x.from_addr = ${ZERO_SQL})::text AS minted,
+           sl.label AS sender_label, sl.category AS sender_category, sl.logo AS sender_logo,
+           rl.label AS receiver_label, rl.category AS receiver_category, rl.logo AS receiver_logo
+      FROM ccip_messages m
+      LEFT JOIN LATERAL (SELECT label, category, logo FROM labels WHERE address = m.sender AND chain_id IN (0, m.source_chain_id)
+                          ORDER BY chain_id DESC LIMIT 1) sl ON true
+      LEFT JOIN LATERAL (SELECT label, category, logo FROM labels WHERE address = m.receiver AND chain_id IN (0, m.dest_chain_id)
+                          ORDER BY chain_id DESC LIMIT 1) rl ON true
+     ${whereSql}
+     ORDER BY ${tm} DESC NULLS LAST, m.message_id
      LIMIT ${lp} OFFSET ${op}`;
-  const countSql = `SELECT COUNT(*)::bigint AS n FROM ccip_messages m ${where.replace(/\$2/g, "$1")}`;
+  const countSql = `SELECT COUNT(*)::bigint AS n FROM ccip_messages m ${whereSql}`;
   const summarySql = `
     SELECT COUNT(*)::bigint AS messages,
            COUNT(*) FILTER (WHERE m.status = 'SUCCESS')::bigint AS success,
            COUNT(*) FILTER (WHERE m.status = 'FAILED')::bigint AS failed,
            COUNT(*) FILTER (WHERE m.status IS NULL OR m.status NOT IN ('SUCCESS','FAILED'))::bigint AS in_flight
       FROM ccip_messages m`;
-  const missingSql = `SELECT chain_id, COUNT(*)::bigint AS n FROM ccip_checked WHERE NOT found GROUP BY chain_id`;
-  const [list, count, summary, missing] = await Promise.all([
-    query(listSql, params), query(countSql, params.slice(1, params.length - 2)), query(summarySql), query(missingSql)]);
+  const [list, count, summary] = await Promise.all([
+    query(listSql, params), query(countSql, filterParams), query(summarySql)]);
   const items = list.rows.map((r) => {
-    // a destination we do not index (another kind of network): only the burn side can be checked
-    const outside = !CHAIN_BY_ID[r.dest_chain_id];
-    const reconciled = r.status === "SUCCESS" && r.dest_tx && BigInt(r.burned) > 0n && r.burned === r.minted;
-    const burnOnly = r.status === "SUCCESS" && outside && r.amount != null && BigInt(r.burned) > 0n && r.burned === r.amount;
+    const s = netInfo(r.source_chain_id, r.src_name), d = netInfo(r.dest_chain_id, r.dest_name);
+    const burned = BigInt(r.burned), minted = BigInt(r.minted), amount = r.amount == null ? null : BigInt(r.amount);
+    // What the indexed transfers prove on each side we can see. A side we do not index (Canton) cannot be checked.
     let verdict = "in_flight";
     if (r.status === "FAILED") verdict = "failed";
-    else if (r.status === "SUCCESS") verdict = burnOnly ? "burn_only" : reconciled && !outside ? "reconciled" : "mismatch";
+    else if (r.status === "SUCCESS") {
+      const srcOk = !s.indexed ? null : burned > 0n && (amount == null || burned === amount);
+      const dstOk = !d.indexed ? null : minted > 0n && (amount == null || minted === amount);
+      if (srcOk === false || dstOk === false) verdict = "mismatch";
+      else if (srcOk === null && dstOk === null) verdict = "unchecked";
+      else verdict = srcOk !== null && dstOk !== null ? "reconciled" : srcOk !== null ? "burn_only" : "mint_only";
+    }
     return {
       id: "0x" + r.id, status: r.status, verdict,
-      source: CHAIN_BY_ID[r.source_chain_id] ? chainKey(r.source_chain_id) : (r.src_name || "other"),
-      dest: CHAIN_BY_ID[r.dest_chain_id] ? chainKey(r.dest_chain_id) : (r.dest_name || "other"),
+      source: s.key, source_name: s.indexed ? CHAINS[s.key].name : s.name,
+      dest: d.key, dest_name: d.indexed ? CHAINS[d.key].name : d.name,
       source_tx: r.source_tx ? "0x" + r.source_tx : null, dest_tx: r.dest_tx ? "0x" + r.dest_tx : null,
       sender: r.sender ? "0x" + r.sender : null, receiver: r.receiver ? "0x" + r.receiver : null,
+      sender_label: labelOf(r.sender_label, r.sender_category, r.sender_logo),
+      receiver_label: labelOf(r.receiver_label, r.receiver_category, r.receiver_logo),
       amount_ccip: r.amount == null ? null : formatUnits(r.amount),
       burned: formatUnits(r.burned), minted: formatUnits(r.minted),
       sent_at: r.sent_at ? r.sent_at.toISOString() : null, received_at: r.received_at ? r.received_at.toISOString() : null,
+      url: "https://ccip.chain.link/msg/0x" + r.id,
     };
   });
   const s = summary.rows[0];
-  const noMsg = {};
-  for (const r of missing.rows) noMsg[chainKey(r.chain_id)] = Number(r.n);
   const total = Number(count.rows[0].n);
   return send(res, { ok: true, view: "bridges", page, limit, total, pages: Math.max(1, Math.ceil(total / limit)),
                      count: items.length, items,
                      summary: { messages: Number(s.messages), success: Number(s.success), failed: Number(s.failed),
-                                in_flight: Number(s.in_flight), burns_without_message: noMsg } });
+                                in_flight: Number(s.in_flight) } });
 }
 
 // ------------------------------------------------------------------------------------------------ one transaction
@@ -401,11 +401,11 @@ async function viewTx(q, res) {
     query(`SELECT t.block_number, t.block_time, t.side, encode(t.trader,'hex') AS trader_hex, encode(t.sender,'hex') AS sender_hex,
                   encode(t.router,'hex') AS router_hex, t.rize::text AS rize_raw, t.counter, t.usd::text AS usd,
                   t.price_usd::text AS price_usd, t.fills, t.swap_count, t.tags, t.flags, t.extra,
-                  tl.label AS trader_label, tl.category AS trader_category, rl.label AS router_label, rl.category AS router_category
+                  tl.label AS trader_label, tl.category AS trader_category, tl.logo AS trader_logo, rl.label AS router_label, rl.category AS router_category, rl.logo AS router_logo
              FROM trades t
-             LEFT JOIN LATERAL (SELECT label, category FROM labels WHERE address = t.trader AND chain_id IN (0, t.chain_id)
+             LEFT JOIN LATERAL (SELECT label, category, logo FROM labels WHERE address = t.trader AND chain_id IN (0, t.chain_id)
                                  ORDER BY chain_id DESC LIMIT 1) tl ON true
-             LEFT JOIN LATERAL (SELECT label, category FROM labels WHERE address = t.router AND chain_id IN (0, t.chain_id)
+             LEFT JOIN LATERAL (SELECT label, category, logo FROM labels WHERE address = t.router AND chain_id IN (0, t.chain_id)
                                  ORDER BY chain_id DESC LIMIT 1) rl ON true
             WHERE t.chain_id = $1 AND t.tx_hash = $2`, [cid, h]),
     query(`SELECT e.block_number, e.block_time, e.seq, encode(e.pool_key,'hex') AS pool_hex, e.kind,
@@ -420,9 +420,9 @@ async function viewTx(q, res) {
   if (t.rows.length) {
     const r = t.rows[0];
     trade = {
-      side: r.side, trader: r.trader_hex ? "0x" + r.trader_hex : null, trader_label: labelOf(r.trader_label, r.trader_category),
+      side: r.side, trader: r.trader_hex ? "0x" + r.trader_hex : null, trader_label: labelOf(r.trader_label, r.trader_category, r.trader_logo),
       sender: r.sender_hex ? "0x" + r.sender_hex : null,
-      router: r.router_hex ? "0x" + r.router_hex : null, router_label: labelOf(r.router_label, r.router_category),
+      router: r.router_hex ? "0x" + r.router_hex : null, router_label: labelOf(r.router_label, r.router_category, r.router_logo),
       rize: formatUnits(r.rize_raw), usd: r.usd == null ? null : Number(r.usd),
       price_usd: r.price_usd == null ? null : Number(r.price_usd), counter: counterList(L, cid, r.counter),
       swaps: r.swap_count, tags: r.tags || [], flags: r.flags || [],
@@ -459,4 +459,4 @@ module.exports = async function handler(req, res) {
     return fail(res, err);
   }
 };
-module.exports._test = { parseKey, parseUsd, counterList, poolInfo, NATIVE_KEY, hex };
+module.exports._test = { parseKey, parseUsd, counterList, poolInfo, NATIVE_KEY, hex, parseRize, parseTime, netSql };
