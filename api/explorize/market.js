@@ -337,6 +337,8 @@ async function viewBridges(q, res) {
                AND x.from_addr = ${ZERO_SQL})::text AS minted,
            (SELECT sum(g.amount) FROM ccip_messages g WHERE g.source_chain_id = m.source_chain_id AND g.source_tx = m.source_tx)::text AS src_group,
            (SELECT sum(g.amount) FROM ccip_messages g WHERE g.dest_chain_id = m.dest_chain_id AND g.dest_tx = m.dest_tx)::text AS dst_group,
+           (SELECT count(*) FROM transfers x WHERE x.chain_id = m.source_chain_id AND x.tx_hash = m.source_tx)::int AS src_rows,
+           (SELECT count(*) FROM transfers x WHERE x.chain_id = m.dest_chain_id AND x.tx_hash = m.dest_tx)::int AS dst_rows,
            sl.label AS sender_label, sl.category AS sender_category, sl.logo AS sender_logo,
            rl.label AS receiver_label, rl.category AS receiver_category, rl.logo AS receiver_logo
       FROM ccip_messages m
@@ -365,8 +367,9 @@ async function viewBridges(q, res) {
     else if (r.status === "SUCCESS") {
       // CCIP executes several messages in one transaction: the mint is then the SUM of the messages that share it
       const srcGroup = r.src_group == null ? null : BigInt(r.src_group), dstGroup = r.dst_group == null ? null : BigInt(r.dst_group);
-      const srcOk = !s.indexed ? null : burned > 0n && (amount == null || burned === amount || burned === srcGroup);
-      const dstOk = !d.indexed ? null : minted > 0n && (amount == null || minted === amount || minted === dstGroup);
+      // a transaction that is not in our transfers at all cannot be checked: unchecked (null), not a mismatch
+      const srcOk = !s.indexed || !r.src_rows ? null : burned > 0n && (amount == null || burned === amount || burned === srcGroup);
+      const dstOk = !d.indexed || !r.dst_rows ? null : minted > 0n && (amount == null || minted === amount || minted === dstGroup);
       if (srcOk === false || dstOk === false) verdict = "mismatch";
       else if (srcOk === null && dstOk === null) verdict = "unchecked";
       else verdict = srcOk !== null && dstOk !== null ? "reconciled" : srcOk !== null ? "burn_only" : "mint_only";
