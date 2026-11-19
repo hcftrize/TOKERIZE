@@ -3,7 +3,7 @@
   "scraped_at": "2026-05-05T11:09:36.105804+00:00",
   "bootstrap": true,
   "counts": {
-    "tokensReleasedEvents": 91472,
+    "tokensReleasedEvents": 91476,
     "bondMigratedEvents": 0,
     "vestingUpdatedEvents": 9682,
     "vestedTokenClawedEvents": 1
@@ -914729,6 +914729,46 @@
         "blockNumber": "58684429",
         "timestamp": "1794927261",
         "txHash": "0x813b7df2562c33240a24d6831465d9aedaa7999d5d832bb5fe9b3bdbb1de4abc"
+      },
+      {
+        "id": "0x734faf6610aa72dc0ba13e8ebd081df54192ff9f227aef1ddd1493c3467dc3e6-66",
+        "nftId": "9979",
+        "to": "0x537c62ca27aeaaa452f5d2966b3020d7a5f5b710",
+        "amount": "8934.669829405228473488",
+        "date": "2026-11-18",
+        "blockNumber": "59004447",
+        "timestamp": "1794991265",
+        "txHash": "0x734faf6610aa72dc0ba13e8ebd081df54192ff9f227aef1ddd1493c3467dc3e6"
+      },
+      {
+        "id": "0x61e9ead769a0e73b31748261156451324dd5e24a835f3f0f74dc302e6d8a8983-73",
+        "nftId": "9979",
+        "to": "0x537c62ca27aeaaa452f5d2966b3020d7a5f5b710",
+        "amount": "0",
+        "date": "2026-11-18",
+        "blockNumber": "59004519",
+        "timestamp": "1794991279",
+        "txHash": "0x61e9ead769a0e73b31748261156451324dd5e24a835f3f0f74dc302e6d8a8983"
+      },
+      {
+        "id": "0xe1d66c460bd93d1c655f30f5dad54d06bb72cfd45c5f15ff518559b52ba0b22a-24",
+        "nftId": "10018",
+        "to": "0x537c62ca27aeaaa452f5d2966b3020d7a5f5b710",
+        "amount": "5271.145346418320204543",
+        "date": "2026-11-18",
+        "blockNumber": "59004607",
+        "timestamp": "1794991297",
+        "txHash": "0xe1d66c460bd93d1c655f30f5dad54d06bb72cfd45c5f15ff518559b52ba0b22a"
+      },
+      {
+        "id": "0xa4c27c01ea58132cd2ee3b728975e55fd99d47798b832e72fcfb57b00390e585-1",
+        "nftId": "9641",
+        "to": "0x497ea8312236f3de48e7f14214a1820f4b3bcd26",
+        "amount": "330802.881944444444444444",
+        "date": "2026-11-19",
+        "blockNumber": "59288515",
+        "timestamp": "1795048078",
+        "txHash": "0xa4c27c01ea58132cd2ee3b728975e55fd99d47798b832e72fcfb57b00390e585"
       }
     ],
     "bondMigratedEvents": [],
@@ -1030931,5 +1030971,5 @@
       }
     ]
   },
-  "updated_at": "2026-11-18T05:31:49.679608+00:00"
+  "updated_at": "2026-11-19T05:31:41.823078+00:00"
 }
