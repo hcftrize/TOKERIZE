@@ -387,13 +387,13 @@ button.ad:hover .vt{text-decoration:underline;}
     </div>
     <div class="chips" id="mk-chips">
       <select id="mk-chain" aria-label="Chain">
-        <option value="all">All chains</option><option value="base">Base</option><option value="ethereum">Ethereum</option><option value="bsc">BNB Chain</option><option value="polygon">Polygon</option>
+        <option value="all">All chains</option><option value="base">Base</option><option value="ethereum">Ethereum</option><option value="bsc">BSC</option><option value="polygon">Polygon</option>
       </select>
       <select id="mk-src" aria-label="From network" hidden>
-        <option value="all">From: any</option><option value="base">From Base</option><option value="ethereum">From Ethereum</option><option value="bsc">From BNB Chain</option><option value="polygon">From Polygon</option><option value="canton">From Canton</option>
+        <option value="all">From: any</option><option value="base">From Base</option><option value="ethereum">From Ethereum</option><option value="bsc">From BSC</option><option value="polygon">From Polygon</option><option value="canton">From Canton</option>
       </select>
       <select id="mk-dst" aria-label="To network" hidden>
-        <option value="all">To: any</option><option value="base">To Base</option><option value="ethereum">To Ethereum</option><option value="bsc">To BNB Chain</option><option value="polygon">To Polygon</option><option value="canton">To Canton</option>
+        <option value="all">To: any</option><option value="base">To Base</option><option value="ethereum">To Ethereum</option><option value="bsc">To BSC</option><option value="polygon">To Polygon</option><option value="canton">To Canton</option>
       </select>
       <select id="mk-side" aria-label="Side">
         <option value="all">All trades</option><option value="buy">Buys</option><option value="sell">Sells</option><option value="arbitrage">Arbitrage</option>
@@ -522,7 +522,7 @@ button.ad:hover .vt{text-decoration:underline;}
     </div>
     <form class="chips" id="filters" autocomplete="off">
       <select id="f-chain" aria-label="Chain">
-        <option value="all">All chains</option><option value="base">Base</option><option value="ethereum">Ethereum</option><option value="bsc">BNB Chain</option><option value="polygon">Polygon</option>
+        <option value="all">All chains</option><option value="base">Base</option><option value="ethereum">Ethereum</option><option value="bsc">BSC</option><option value="polygon">Polygon</option>
       </select>
       <span class="dd" id="dd-types">
         <button type="button" class="fbtn" id="b-types" aria-expanded="false" aria-controls="pop-types">Types <span class="badge" id="b-types-n"></span></button>
@@ -582,7 +582,7 @@ button.ad:hover .vt{text-decoration:underline;}
   var CHAINS = {
     base:     { name: 'Base',      color: '#0052ff', tx: 'https://basescan.org/tx/',    addr: 'https://basescan.org/address/' },
     ethereum: { name: 'Ethereum',  color: '#8ea0f0', tx: 'https://etherscan.io/tx/',    addr: 'https://etherscan.io/address/' },
-    bsc:      { name: 'BNB Chain', color: '#f0b90b', tx: 'https://bscscan.com/tx/',     addr: 'https://bscscan.com/address/' },
+    bsc:      { name: 'BSC', color: '#f0b90b', tx: 'https://bscscan.com/tx/',     addr: 'https://bscscan.com/address/' },
     polygon:  { name: 'Polygon',   color: '#8247e5', tx: 'https://polygonscan.com/tx/', addr: 'https://polygonscan.com/address/' }
   };
   var ZERO = '0x0000000000000000000000000000000000000000';
@@ -689,7 +689,7 @@ button.ad:hover .vt{text-decoration:underline;}
   var NETS = {
     base:             { name: 'Base',           color: '#0052ff' },
     ethereum:         { name: 'Ethereum',       color: '#627eea' },
-    bsc:              { name: 'BNB Chain',      color: '#f0b90b' },
+    bsc:              { name: 'BSC',      color: '#f0b90b' },
     polygon:          { name: 'Polygon',        color: '#8247e5' },
     canton:           { name: 'Canton',         color: '#2c3e63' },
     'canton-testnet': { name: 'Canton Testnet', color: '#2c3e63' }
@@ -1318,7 +1318,7 @@ button.ad:hover .vt{text-decoration:underline;}
     }).catch(function (e) { if (BAL.box === bx) st.textContent = explain(e); });
     return wrap;
   }
-  function explorersMenu(addr) {                       // one button, one menu: Base, Ethereum, BNB Chain, Polygon
+  function explorersMenu(addr) {                       // one button, one menu: Base, Ethereum, BSC, Polygon
     var dd = el('span', 'dd'), b = el('button', 'btn', 'Explorers ▾'), pop = el('div', 'pop'); b.type = 'button'; pop.hidden = true;
     Object.keys(CHAINS).forEach(function (k) {
       var a = el('a'); a.href = CHAINS[k].addr + addr; a.target = '_blank'; a.rel = 'noopener noreferrer';
