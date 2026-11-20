@@ -1,0 +1,37 @@
+name: Telegram webhook (rizeby)
+
+# Manual tool: checks the bot token, resets the webhook and prints its state, from GitHub's servers
+# (useful when your own network cannot reach api.telegram.org). Needs the secret TELEGRAM_TOKEN.
+on:
+  workflow_dispatch:
+    inputs:
+      reset:
+        description: "Delete the webhook (and the pending messages) then set it again"
+        type: boolean
+        default: true
+      url:
+        description: "Webhook URL"
+        default: "https://tokerize.top/api/rizeby/telegram"
+
+jobs:
+  webhook:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      URL: ${{ inputs.url }}
+    steps:
+      - name: Token present?
+        run: |
+          if [ -z "$TOKEN" ]; then echo "The secret TELEGRAM_TOKEN is missing (Settings > Secrets and variables > Actions)"; exit 1; fi
+      - name: Call Telegram
+        run: |
+          call() { curl -sS --max-time 40 --retry 3 --retry-delay 5 --retry-all-errors "https://api.telegram.org/bot${TOKEN}/$1" "${@:2}"; echo; }
+          echo "--- getMe";            call getMe | sed -E 's/"(id|first_name)":[^,]*,?//g'
+          if [ "${{ inputs.reset }}" = "true" ]; then
+            echo "--- deleteWebhook (pending messages dropped)"; call deleteWebhook --get --data-urlencode "drop_pending_updates=true"
+            echo "--- setWebhook";   call setWebhook --get --data-urlencode "url=${URL}" --data-urlencode "drop_pending_updates=true"
+          fi
+          echo "--- getWebhookInfo";   call getWebhookInfo
+      - name: Does the endpoint answer?
+        run: curl -sS --max-time 30 -i "${URL}" | head -5
