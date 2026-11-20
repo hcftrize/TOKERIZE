@@ -269,7 +269,7 @@ module.exports = async function handler(req, res) {
       }
       return it;
     });
-    res.setHeader("Cache-Control", "public, s-maxage=15, stale-while-revalidate=60");
+    res.setHeader("Cache-Control", "public, s-maxage=20, stale-while-revalidate=20");
     return res.status(200).json({
       ok: true, page, limit, total, pages: total == null ? null : Math.max(1, Math.ceil(total / limit)),
       count: items.length, mode: "reconciled", types, items,
@@ -365,7 +365,7 @@ module.exports = async function handler(req, res) {
         amount: formatUnits(row.amount_raw),
       };
     });
-    res.setHeader("Cache-Control", "public, s-maxage=15, stale-while-revalidate=60");
+    res.setHeader("Cache-Control", "public, s-maxage=20, stale-while-revalidate=20");
     return res.status(200).json({
       ok: true,
       page,
