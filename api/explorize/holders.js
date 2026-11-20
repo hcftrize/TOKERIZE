@@ -7,7 +7,7 @@ const { query, fail, formatUnits } = require("./_db");
 const { loadBonds, summarize } = require("./_bonds");
 
 const NOT_BUILT = (res, page, limit) => {
-  res.setHeader("Cache-Control", "public, s-maxage=30, stale-while-revalidate=60");
+  res.setHeader("Cache-Control", "public, s-maxage=20, stale-while-revalidate=20");
   return res.status(200).json({ ok: true, built: false, page, limit, total: 0, pages: 1, count: 0, items: [], meta: null });
 };
 
@@ -55,7 +55,7 @@ module.exports = async function handler(req, res) {
       };
     });
 
-    res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+    res.setHeader("Cache-Control", "public, s-maxage=20, stale-while-revalidate=20");
     return res.status(200).json({
       ok: true,
       built: true,

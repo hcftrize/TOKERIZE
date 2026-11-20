@@ -928,16 +928,18 @@ button.ad:hover .vt{text-decoration:underline;}
   $('ranges').addEventListener('click', function (ev) { var b = ev.target.closest('button'); if (b) { showPanel('price'); loadChart(b.dataset.r); } });
 
   /* ================= status / sync strip ================= */
+  /* Everything on the page comes from one published state (the "Unified update explorize" run): S.version is its time. */
   function loadStatus() {
-    api('/status').then(function (d) { S.status = d; renderSync(); updatePager(); }).catch(function (e) {
+    return api('/status').then(function (d) { S.status = d; renderSync(); updatePager(); return d; }).catch(function (e) {
       $('sync').textContent = ''; var s = el('span'); s.appendChild(el('i', 'dot bad')); s.appendChild(document.createTextNode(explain(e))); $('sync').appendChild(s);
+      return null;
     });
   }
   function renderSync() {
     var box = $('sync'); box.textContent = '';
     S.status.chains.forEach(function (c) {
       var age = c.last_synced_at ? (Date.now() - new Date(c.last_synced_at).getTime()) / 1000 : Infinity;
-      var cls = age < 3 * 3600 ? 'ok' : age < 24 * 3600 ? 'warn' : 'bad';
+      var cls = age < 40 * 60 ? 'ok' : age < 3 * 3600 ? 'warn' : 'bad';
       var s = el('span'); s.appendChild(el('i', 'dot ' + cls));
       s.appendChild(document.createTextNode(c.name + (c.last_synced_at ? ' ' + ago(c.last_synced_at).replace(' ago', '') : '')));
       s.title = c.name + ': block ' + (c.last_block == null ? '—' : c.last_block.toLocaleString('en-US')) + ' · ' + c.transfers.toLocaleString('en-US') + ' transfers indexed';
@@ -1812,17 +1814,29 @@ button.ad:hover .vt{text-decoration:underline;}
   $('f-chain').value = S.chain; buildTypesPop(); initTimeHeaders(); applyAddressUi(); refreshTimes(); updatePager();
   updateHPager(); mkShowView(); mkSyncFilterUi(); mkUpdatePager(); mkLoad(); loadVenues();
   detailHint(); setupChartHover(); showPanel('detail');   // Details is the home of the explorer, the price chart is one tab away
-  var marketReady = loadMarket(); loadChart('max'); loadStatus(); loadHolders();
+  var marketReady = loadMarket(); loadChart('max'); loadHolders();
+  loadStatus().then(function (d) { S.version = d && d.last_update ? d.last_update.published_at : null; });
   if (S.f.minu || S.f.maxu) marketReady.then(function () { load(); }, function () { load(); }); else load();
   if (isAddr(q.get('wallet') || '')) selectWallet(q.get('wallet'), true);
   else if (isHash(q.get('tx') || '') && CHAINS[q.get('txchain')]) selectTx(q.get('txchain'), q.get('tx').toLowerCase());
 
-  setInterval(function () {
-    if (document.hidden) return;
-    loadStatus(); loadMarket();
+  /* The price moves every minute; the data panels move together, only when a new unified update was published (every panel
+     reads the same state, so refreshing them in the same instant keeps trades, transfers, CCIP and holders in agreement). */
+  function refreshPanels() {
     if (S.page === 1 && !S.loading && !S.f.to) load({ silent: true });
     if (M.page === 1 && !M.loading) mkLoad({ silent: true });
     if (!H.loading) loadHolders({ silent: true });
+  }
+  setInterval(function () {
+    if (document.hidden) return;
+    loadMarket();
+    loadStatus().then(function (d) {
+      if (!d) return;
+      var v = d.last_update ? d.last_update.published_at : null;
+      var changed = v === null || v !== S.version;           // no unified update published yet: keep refreshing every minute
+      S.version = v;
+      if (changed) refreshPanels();
+    });
     refreshTimes();
   }, 60000);
 })();

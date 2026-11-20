@@ -65,7 +65,7 @@ module.exports = async function handler(req, res) {
       rank = rk.rows[0] ? rk.rows[0].rank : null;
     } catch (_) { /* governance data not available yet */ }
 
-    res.setHeader("Cache-Control", "public, s-maxage=30, stale-while-revalidate=120");
+    res.setHeader("Cache-Control", "public, s-maxage=20, stale-while-revalidate=20");
     return res.status(200).json({
       ok: true,
       address: "0x" + hex,
@@ -113,7 +113,7 @@ async function history(res, address, hex) {
       approximate = floor < 0n;
       for (const [key, v] of raw) points.push({ t: key, balance: formatUnits(v - floor) });
     }
-    res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+    res.setHeader("Cache-Control", "public, s-maxage=20, stale-while-revalidate=20");
     return res.status(200).json({ ok: true, address: "0x" + hex, approximate, points });
   } catch (err) {
     return fail(res, err);

@@ -42,7 +42,7 @@ module.exports = async function handler(req, res) {
       amount: formatUnits(row.amount_raw),
     }));
     const total = r.rows.reduce((s, row) => s + BigInt(row.amount_raw), 0n);
-    res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
+    res.setHeader("Cache-Control", "public, s-maxage=20, stale-while-revalidate=20");
     return res.status(200).json({
       ok: true,
       chain: CHAIN_BY_ID[r.rows[0].chain_id],

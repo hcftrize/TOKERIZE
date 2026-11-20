@@ -25,11 +25,25 @@ module.exports = async function handler(req, res) {
       };
     }
     const chains = CHAIN_ORDER.filter((k) => byKey[k]).map((k) => byKey[k]);
-    res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+    // the last "Unified update explorize" run that was published (everything on the page is at that state); null before the first one
+    let lastUpdate = null, lastFailure = null;
+    try {
+      const u = await query(
+        `SELECT ok, started_at, finished_at, note FROM unified_runs
+          WHERE id IN ((SELECT max(id) FROM unified_runs WHERE ok), (SELECT max(id) FROM unified_runs WHERE NOT ok))`);
+      for (const row of u.rows) {
+        if (row.ok) lastUpdate = { started_at: row.started_at.toISOString(), published_at: row.finished_at.toISOString() };
+        else lastFailure = { at: row.finished_at.toISOString() };
+      }
+      if (lastUpdate && lastFailure && lastFailure.at < lastUpdate.published_at) lastFailure = null;   // only a failure AFTER the last success matters
+    } catch (e) { /* the table does not exist yet */ }
+    res.setHeader("Cache-Control", "public, s-maxage=20, stale-while-revalidate=20");
     return res.status(200).json({
       ok: true,
       now: new Date().toISOString(),
       total_transfers: chains.reduce((s, c) => s + c.transfers, 0),
+      last_update: lastUpdate,
+      last_failure: lastFailure,
       chains,
     });
   } catch (err) {
