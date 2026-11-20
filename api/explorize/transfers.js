@@ -90,7 +90,7 @@ module.exports = async function handler(req, res) {
     const cid = chainKey !== "all" ? CHAINS[chainKey].id : null;
     const branches = [];   // { ord, sql, count }   sql selects the shared columns, count selects 1 per event
 
-    const COLS = "etype, chain_id, chain2_id, name1, name2, block_number, block_time, sub, tx_hash, from_addr, to_addr, amount, usd, meta, ord";
+    const COLS = "etype, chain_id, chain2_id, name1, name2, block_number, block_time, sub, tx_hash, from_addr, to_addr, amount, usd, price_usd, meta, ord";
 
     // --- trades (buy / sell / arb)
     const ts = ["buy", "sell", "arb"].filter(want);
@@ -110,7 +110,7 @@ module.exports = async function handler(req, res) {
                      NULL::text AS name1, NULL::text AS name2, t.block_number, t.block_time, 0 AS sub, t.tx_hash,
                      CASE WHEN t.side = 'buy' THEN NULL ELSE t.trader END AS from_addr,
                      CASE WHEN t.side = 'buy' THEN t.trader ELSE NULL END AS to_addr,
-                     t.rize AS amount, t.usd, t.fills AS meta, 1 AS ord ${from_}`,
+                     t.rize AS amount, t.usd, t.price_usd, t.fills AS meta, 1 AS ord ${from_}`,
       });
     }
 
@@ -133,7 +133,7 @@ module.exports = async function handler(req, res) {
         sql: `SELECT 'liquidity'::text AS etype, e.chain_id, NULL::int AS chain2_id, NULL::text AS name1, NULL::text AS name2,
                      MIN(e.block_number) AS block_number, MIN(e.block_time) AS block_time, 0 AS sub, e.tx_hash,
                      (array_agg(e.provider) FILTER (WHERE e.provider IS NOT NULL))[1] AS from_addr, NULL::bytea AS to_addr,
-                     GREATEST(${ins}, ${outs}) AS amount, NULL::numeric AS usd,
+                     GREATEST(${ins}, ${outs}) AS amount, NULL::numeric AS usd, NULL::numeric AS price_usd,
                      jsonb_build_object('pool', encode((array_agg(e.pool_key ORDER BY e.seq))[1], 'hex'),
                                         'dir', CASE WHEN ${ins} >= ${outs} THEN 'add' ELSE 'remove' END,
                                         'pools', COUNT(DISTINCT e.pool_key), 'moves', COUNT(*)) AS meta,
@@ -160,7 +160,7 @@ module.exports = async function handler(req, res) {
                      m.sender AS from_addr, m.receiver AS to_addr,
                      COALESCE(m.amount, (SELECT SUM(x.amount) FROM transfers x WHERE x.chain_id = m.source_chain_id
                                             AND x.tx_hash = m.source_tx AND x.to_addr = ${zero})) AS amount,
-                     NULL::numeric AS usd,
+                     NULL::numeric AS usd, NULL::numeric AS price_usd,
                      jsonb_build_object('status', m.status, 'source_tx', encode(m.source_tx, 'hex'),
                                         'dest_tx', encode(m.dest_tx, 'hex')) AS meta,
                      3 AS ord ${from_}`,
@@ -189,7 +189,7 @@ module.exports = async function handler(req, res) {
         ord: 4, count: `SELECT 1 ${from_}`,
         sql: `SELECT ${kind} AS etype, transfers.chain_id, NULL::int AS chain2_id, NULL::text AS name1, NULL::text AS name2,
                      transfers.block_number, transfers.block_time, transfers.log_index AS sub, transfers.tx_hash,
-                     transfers.from_addr, transfers.to_addr, transfers.amount, NULL::numeric AS usd, NULL::jsonb AS meta,
+                     transfers.from_addr, transfers.to_addr, transfers.amount, NULL::numeric AS usd, NULL::numeric AS price_usd, NULL::jsonb AS meta,
                      4 AS ord ${from_}`,
       });
     }
@@ -199,7 +199,7 @@ module.exports = async function handler(req, res) {
     const pageSql = (dir, lim, off) => `
       SELECT u.etype, u.chain_id, u.chain2_id, u.name1, u.name2, u.block_number, u.block_time, u.sub, u.tx_hash,
              encode(u.from_addr,'hex') AS from_hex, encode(u.to_addr,'hex') AS to_hex, u.amount::text AS amount_raw,
-             u.usd::text AS usd, u.meta,
+             u.usd::text AS usd, u.price_usd::text AS price_usd, u.meta,
              fl.label AS from_label, fl.category AS from_category, fl.logo AS from_logo,
              tl.label AS to_label, tl.category AS to_category, tl.logo AS to_logo
         FROM (
@@ -247,6 +247,7 @@ module.exports = async function handler(req, res) {
         from_label: labelOf(r.from_label, r.from_category, r.from_logo), to_label: labelOf(r.to_label, r.to_category, r.to_logo),
         amount: formatUnits(r.amount_raw == null ? "0" : r.amount_raw),
         usd: r.usd == null ? null : Number(r.usd),
+        price_usd: r.price_usd == null ? null : Number(r.price_usd),
       };
       if (net2) {
         it.chain2 = net2.key; it.chain2_name = net2.indexed ? CHAINS[net2.key].name : net2.name;

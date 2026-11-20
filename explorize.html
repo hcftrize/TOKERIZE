@@ -97,13 +97,13 @@ body{font-family:'Rajdhani',"Trebuchet MS",Verdana,sans-serif;background:var(--b
 /* tables */
 .p-body{flex:1;min-height:0;overflow:auto;}
 table.t{width:100%;border-collapse:collapse;font-family:'DM Mono',monospace;font-size:14px;min-width:600px;}
-table.t th{position:sticky;top:0;z-index:2;background:var(--panel);font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;text-align:left;color:var(--dim);padding:9px 7px;border-bottom:1px solid var(--border);white-space:nowrap;}
+table.t th{position:sticky;top:0;z-index:2;background:var(--panel);font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;text-align:left;color:var(--dim);padding:9px 8px;border-bottom:1px solid var(--border);white-space:nowrap;}
 table.t td{padding:0 8px;height:46px;border-bottom:1px solid rgba(255,255,255,.04);white-space:nowrap;vertical-align:middle;}
 table.t tbody tr{cursor:pointer;}
 table.t tbody tr:nth-child(odd){background:rgba(255,255,255,.018);}
 table.t tbody tr:hover{background:rgba(126,224,255,.06);}
 table.t tbody tr.sel{background:rgba(126,224,255,.11);box-shadow:inset 2px 0 0 var(--cyan);}
-th.num,td.num{text-align:right;}
+table.t th.num,table.t td.num{text-align:right;}   /* more specific than table.t th (text-align:left): headers sit above their numbers */
 .cdot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;}
 td.c{width:22px;padding-right:0;}
 a.tlink{color:var(--cyan);text-decoration:none;}
@@ -553,7 +553,7 @@ button.ad:hover .vt{text-decoration:underline;}
         <thead><tr>
           <th class="c"></th>
           <th data-timeth="Ago|Time (UTC)"></th>
-          <th>Type</th><th>From</th><th>To</th><th class="num">Value</th><th>Token</th><th class="num">USD</th>
+          <th>Type</th><th class="num">Price</th><th>From</th><th>To</th><th class="num">Value</th><th>Token</th><th class="num">USD</th>
         </tr></thead>
         <tbody id="rows"></tbody>
       </table>
@@ -1035,6 +1035,10 @@ button.ad:hover .vt{text-decoration:underline;}
     if (type === 'ccip') tr.appendChild(timeLink(t.time, t.url, 'open the message on the Chainlink CCIP explorer'));
     else tr.appendChild(timeLink(t.time, CHAINS[t.chain].tx + t.tx, 'open transaction on ' + CHAINS[t.chain].name + ' explorer'));
     tr.appendChild(typeCell(type, t));
+    var isTrade = type === 'buy' || type === 'sell' || type === 'arb';       // execution price of the trade; a dash for everything else
+    var px = el('td', 'num', isTrade && t.price_usd != null ? fmtPrice(t.price_usd) : '—');
+    if (isTrade && t.price_usd != null) px.title = 'Execution price of the trade (USD per RIZE)'; else px.className = 'num nul';
+    tr.appendChild(px);
     var fromC, toC;
     if (type === 'buy') { fromC = venueTd(t.venues); toC = addrCell(t.to, t.to_label); }
     else if (type === 'sell' || type === 'arb') { fromC = addrCell(t.from, t.from_label); toC = venueTd(t.venues); }
