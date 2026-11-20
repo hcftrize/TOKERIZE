@@ -554,6 +554,21 @@
     "logo_local": "logos\\bitgo.jpeg"
   },
   {
+    "name": "Bitpanda",
+    "slug": "bitpanda",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6a8f00354908df58c7bc1b5a_bitpanda_logo.jpg",
+    "short_desc": "Bitpanda expands access to the Canton ecosystem by offering Canton Coin (CC) trading.",
+    "tags": [
+      "MARKET INFRASTRUCTURE",
+      "VALIDATOR",
+      "EXCHANGES",
+      "Network Utilities\nEXCHANGES",
+      "Roles\nMARKET INFRASTRUCTUREVALIDATOR\nMARKET INFRASTRUCTUREVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nBitpanda\nhttps://www.bitpanda.com/\n\nBitpanda is a European digital asset platform that supports the Canton Network ecosystem by making Canton Coin (CC), the network's native utility token, available for trading.\n\nThrough its platform, Bitpanda enables users to buy, sell, and trade CC, expanding access to the token across European markets. By supporting CC trading, Bitpanda contributes to the broader accessibility and liquidity of Canton Coin, connecting its established customer base with the growing Canton ecosystem.\n\n‍\n\nNetwork Utilities\nEXCHANGES\nRoles\nMARKET INFRASTRUCTUREVALIDATOR\nMARKET INFRASTRUCTUREVALIDATOR",
+    "logo_local": "logos\\bitpanda.jpg"
+  },
+  {
     "name": "Bitrue",
     "slug": "bitrue",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6af12712499a76ecfcb5fbba_69ad8de2-b986-4d4b-8e46-fe3e46d6cd43.png",
@@ -1201,6 +1216,18 @@
     "logo_local": "logos\\coin-metrics-canton-data-app.jpg"
   },
   {
+    "name": "CoinCover",
+    "slug": "coincover",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6aff5f315ea0b2d10f6fe773_Coin%20Cover%20Logo%20-%20for%20eco%20page.jpg",
+    "short_desc": "We make sure you and your customers can hold digital assets with confidence.",
+    "tags": [
+      "Network UtilitiesNo items found.",
+      "RolesNo items found.No items found."
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nCoinCover\nhttps://www.coincover.com/\n\nWe make sure you and your customers can hold digital assets with confidence. Safe in the knowledge that we're standing guard.",
+    "logo_local": "logos\\coincover.jpg"
+  },
+  {
     "name": "CoinShares",
     "slug": "coinshares",
     "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/69a515e0ace5625cf01debfb_Coinshares-icon.png",
@@ -1738,6 +1765,23 @@
     ],
     "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nEdgevana\nhttps://www.edgevana.com/\n\nEdgevana is a major validator platform focused on highly performant decentralized infrastructure with deep expertise in running nodes and optimizing operations and staking rewards.\n\nNetwork Utilities\nNAAS\nRoles\nVALIDATORSERVICE PROVIDER\nVALIDATORSERVICE PROVIDER",
     "logo_local": "logos\\edgevana.svg"
+  },
+  {
+    "name": "EDX",
+    "slug": "edx",
+    "logo_cdn": "https://cdn.prod.website-files.com/696a7c934170f11ec9d70eee/6ae8cef605d912c13f9af197_Square%20DA%20Brand%20Social%20Template.png",
+    "short_desc": "EDX Markets supports Canton Coin trading, stablecoin settlement, and network validation.",
+    "tags": [
+      "MARKET INFRASTRUCTURE",
+      "VALIDATOR",
+      "EXCHANGES",
+      "LIQUIDITY",
+      "PAYMENTS",
+      "Network Utilities\nEXCHANGESLIQUIDITYPAYMENTS",
+      "Roles\nMARKET INFRASTRUCTUREVALIDATOR\nMARKET INFRASTRUCTUREVALIDATOR"
+    ],
+    "detail_text": "Canton Network\nDevelopers\nUse Cases\nResources\nSpeak to an expert\nEDX\nhttps://edxmarkets.com/\n\nEDX Markets is an institutional digital asset trading platform combining exchange technology with central clearing and settlement infrastructure. Through its strategic partnership with the Canton Network, EDX is expanding institutional access to Canton Coin (CC) and supporting the development of more efficient digital asset markets.\n\nAs part of the partnership, EDX Markets is bringing Canton Coin trading and settlement to its institutional spot exchange, supporting stablecoin settlement on Canton, and participating as a network validator. These capabilities aim to improve trading efficiency, reduce settlement friction, and enable greater capital efficiency for institutional market participants.\n\nBy combining its institutional trading and clearing infrastructure with Canton's privacy-enabled, interoperable network, EDX Markets is helping bridge traditional financial market infrastructure and blockchain-based finance, supporting broader institutional adoption of digital assets.\n\n‍\n\nNetwork Utilities\nEXCHANGESLIQUIDITYPAYMENTS\nRoles\nMARKET INFRASTRUCTUREVALIDATOR\nMARKET INFRASTRUCTUREVALIDATOR",
+    "logo_local": "logos\\edx.png"
   },
   {
     "name": "Efficient Frontier",
