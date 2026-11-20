@@ -103,7 +103,7 @@ table.t tbody tr{cursor:pointer;}
 table.t tbody tr:nth-child(odd){background:rgba(255,255,255,.018);}
 table.t tbody tr:hover{background:rgba(126,224,255,.06);}
 table.t tbody tr.sel{background:rgba(126,224,255,.11);box-shadow:inset 2px 0 0 var(--cyan);}
-table.t th.num,table.t td.num{text-align:right;}   /* more specific than table.t th (text-align:left): headers sit above their numbers */
+table.t th.num,table.t td.num{text-align:left;}   /* every column, numbers included, starts at the left edge of its header: same padding on th and td */
 .cdot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;}
 td.c{width:22px;padding-right:0;}
 a.tlink{color:var(--cyan);text-decoration:none;}
