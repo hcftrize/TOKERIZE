@@ -59,7 +59,7 @@ function paging(q) {
   return { limit, page, offset: (page - 1) * limit };
 }
 function send(res, body, cache) {
-  res.setHeader("Cache-Control", cache || "public, s-maxage=15, stale-while-revalidate=60");
+  res.setHeader("Cache-Control", cache || "public, s-maxage=20, stale-while-revalidate=20");
   return res.status(200).json(body);
 }
 const bad = (res, error) => res.status(400).json({ error });
@@ -283,7 +283,7 @@ async function viewPools(q, res) {
   });
   items.sort((a, b) => (a.chain + a.name).localeCompare(b.chain + b.name));
   return send(res, { ok: true, view: "pools", count: items.length, items,
-                     venues: Object.values(L.venues) }, "public, s-maxage=300, stale-while-revalidate=600");
+                     venues: Object.values(L.venues) }, "public, s-maxage=20, stale-while-revalidate=20");
 }
 
 // ------------------------------------------------------------------------------------------------ bridges
@@ -451,7 +451,7 @@ async function viewTx(q, res) {
   });
   return send(res, { ok: true, view: "tx", chain: ck, chain_name: CHAINS[ck].name, tx: hash.toLowerCase(),
                      block: Number(first.block_number), time: first.block_time.toISOString(), trade, liquidity },
-              "public, s-maxage=300, stale-while-revalidate=600");
+              "public, s-maxage=20, stale-while-revalidate=20");
 }
 
 const VIEWS = { trades: viewTrades, liquidity: viewLiquidity, pools: viewPools, bridges: viewBridges, tx: viewTx };
