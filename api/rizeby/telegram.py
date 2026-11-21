@@ -551,6 +551,15 @@ async def route_command(cmd: str, args: list, chat_id: int, message_id: int = 0,
         if bot_mid: _cache_bot_msg(bot_mid, "govwallet", p, combined, reply_chat_id, reply_thread_id)
 
     # ── Fun ───────────────────────────────────────────────────────────────
+    # TEMPORARY: not in /help nor in the command menu
+    elif cmd_lower == "howbigarewefucked":
+        from commands.temp_kraken import cmd_howbigarewefucked
+        await send_message(reply_chat_id, await cmd_howbigarewefucked(), thread_id=reply_thread_id)
+
+    elif cmd_lower == "howbigarewefucked_details":
+        from commands.temp_kraken import cmd_howbigarewefucked_details
+        await send_message(reply_chat_id, await cmd_howbigarewefucked_details(), thread_id=reply_thread_id)
+
     elif cmd_lower in ("sayhello", "hello", "hi", "start"):
         from commands.fun import cmd_sayhello
         await send_message(reply_chat_id, await cmd_sayhello(args), thread_id=reply_thread_id)
@@ -923,6 +932,10 @@ def parse_update(body: dict):
     full_text_lower = text.lower().strip()
     if full_text_lower in ("see wallet", "seewallet"):
         return "cmd", (chat_id, "see wallet", [], msg_id, thread_id, reply_to_msg_id)
+
+    # TEMPORARY /howbigarewefucked: replying "details" to its answer (recognised by its first line, so it also works after a cold start)
+    if not is_command and first == "details" and reply_to and "RIZE left on Kraken" in (reply_to.get("text") or ""):
+        return "cmd", (chat_id, "howbigarewefucked_details", [], msg_id, thread_id, reply_to_msg_id)
 
     if not is_command and first not in known_keywords:
         # Only treat free text as a search/lookup continuation if it's an
