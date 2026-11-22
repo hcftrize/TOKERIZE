@@ -195,7 +195,10 @@ table.t tbody tr.pl{cursor:pointer;}
 .pstats .ar span:first-child{color:var(--dim);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:1.5px;font-size:14px;}
 
 /* interactive panel: details */
-.detail{flex:1;min-height:0;overflow:auto;padding:16px 18px;}
+.detail{flex:1;min-height:0;overflow:auto;padding:16px 18px;position:relative;}
+.d-close{position:absolute;top:14px;right:16px;width:28px;height:28px;padding:0;background:var(--panel2);border:1px solid var(--border-strong);color:var(--muted);font-size:18px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;}
+.d-close:hover{border-color:var(--cyan);color:var(--cyan);}
+.x-pad{padding-right:40px;}
 .d-kicker{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
 .d-main{font-family:'DM Mono',monospace;font-size:15px;word-break:break-all;margin-top:6px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
 .d-lbl{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;background:var(--navy);color:#fff;padding:2px 8px;}
@@ -1351,8 +1354,9 @@ button.ad:hover .vt{text-decoration:underline;}
     api('/wallet', { address: addr }).then(function (d) {
       if (!S.selected || S.selected.address !== addr) return;
       box.textContent = '';
-      box.appendChild(kicker('Wallet'));
-      var main = el('div', 'd-main'); main.appendChild(document.createTextNode(d.address)); if (d.label) main.appendChild(el('span', 'd-lbl', d.label.label)); box.appendChild(main);
+      var wk = kicker('Wallet'); wk.classList.add('x-pad'); box.appendChild(wk);
+      box.appendChild(closeX('wallet'));
+      var main = el('div', 'd-main x-pad'); main.appendChild(document.createTextNode(d.address)); if (d.label) main.appendChild(el('span', 'd-lbl', d.label.label)); box.appendChild(main);
       var act = el('div', 'd-actions'); act.appendChild(copyBtn(d.address));
       var f = el('button', 'btn', 'Filter transfers by this wallet'); f.type = 'button'; f.id = 'btn-filter';
       f.addEventListener('click', function () { if (S.address === addr) S.address = ''; else S.address = addr; applyAddressUi(); reload(); markWalletButton(); });
@@ -1376,7 +1380,7 @@ button.ad:hover .vt{text-decoration:underline;}
       }
       box.appendChild(grid);
       if (d.governance) { box.appendChild(el('div', 'd-sub', 'Governance bonds')); box.appendChild(govInfo(d.governance)); }
-    }).catch(function (e) { if (S.selected && S.selected.address === addr) { box.textContent = ''; box.appendChild(el('div', 'state err', explain(e))); } });
+    }).catch(function (e) { if (S.selected && S.selected.address === addr) { box.textContent = ''; box.appendChild(closeX('wallet')); box.appendChild(el('div', 'state err', explain(e))); } });
   }
 
   function selectTx(chain, hash) {
@@ -1386,8 +1390,9 @@ button.ad:hover .vt{text-decoration:underline;}
     api('/tx', { chain: chain, hash: hash }).then(function (d) {
       if (!S.selected || S.selected.hash !== hash) return;
       box.textContent = '';
-      box.appendChild(kicker('Transaction · ' + d.chain_name));
-      box.appendChild(el('div', 'd-main', d.tx));
+      var tk = kicker('Transaction · ' + d.chain_name); tk.classList.add('x-pad'); box.appendChild(tk);
+      box.appendChild(closeX('transaction'));
+      box.appendChild(el('div', 'd-main x-pad', d.tx));
       var act = el('div', 'd-actions'); act.appendChild(copyBtn(d.tx)); act.appendChild(extLink('Open on explorer ↗', CHAINS[d.chain].tx + d.tx)); box.appendChild(act);
       var kv = el('dl', 'd-kv');
       var add = function (k, v) { kv.appendChild(el('dt', null, k)); kv.appendChild(el('dd', null, v)); };
@@ -1406,12 +1411,19 @@ button.ad:hover .vt{text-decoration:underline;}
         var r = el('tr'); r.appendChild(addrCell(t.from, t.from_label)); r.appendChild(addrCell(t.to, t.to_label)); var v = el('td', null, fmtCompact(t.amount) + ' RIZE'); v.title = t.amount; r.appendChild(v); body.appendChild(r);
       });
       tb.appendChild(body); box.appendChild(tb);
-    }).catch(function (e) { if (S.selected && S.selected.hash === hash) { box.textContent = ''; box.appendChild(kicker('Transaction')); box.appendChild(el('div', 'd-main', hash)); box.appendChild(el('div', 'state err', explain(e))); } });
+    }).catch(function (e) { if (S.selected && S.selected.hash === hash) { box.textContent = ''; var ek = kicker('Transaction'); ek.classList.add('x-pad'); box.appendChild(ek); box.appendChild(closeX('transaction')); box.appendChild(el('div', 'd-main x-pad', hash)); box.appendChild(el('div', 'state err', explain(e))); } });
   }
   function syncDetailBar() {                           // the Details bar shows the wallet or the transaction that is open
     var sel = S.selected, v = '';
     if (sel && sel.kind === 'wallet') v = sel.address; else if (sel && sel.kind === 'tx') v = sel.hash;
     if (!sel || sel.kind !== 'search') $('d-address').value = v;
+  }
+  function closeX(what) {                              // the small cross at the top right of the Details module
+    var x = el('button', 'd-close', '×'); x.type = 'button'; x.title = 'Close the ' + what + ' details'; x.setAttribute('aria-label', 'Close ' + what + ' details');
+    x.addEventListener('click', closeDetails); return x;
+  }
+  function closeDetails() {                            // closes the open wallet only: the Transfers filter is left as it is
+    clearSelectedRows(); detailHint(); syncUrl();
   }
   function detailHint() {
     var box = $('detail'); box.textContent = ''; S.selected = null; syncDetailBar();
@@ -1440,7 +1452,7 @@ button.ad:hover .vt{text-decoration:underline;}
       }, function (e) {
         if (e && e.code !== 'not_found' && !first) first = e;
         if (--left > 0 || !live()) return;
-        box.textContent = ''; box.appendChild(kicker('Transaction')); box.appendChild(el('div', 'd-main', hash));
+        box.textContent = ''; var nk = kicker('Transaction'); nk.classList.add('x-pad'); box.appendChild(nk); box.appendChild(closeX('transaction')); box.appendChild(el('div', 'd-main x-pad', hash));
         box.appendChild(el('div', 'state err', first ? explain(first) : 'No transaction with this hash was found in the indexed RIZE data on any chain.'));
       });
     });
