@@ -473,6 +473,9 @@ button.ad:hover .vt{text-decoration:underline;}
       </div>
     </div>
     <div class="view" id="view-detail">
+      <form class="chips" id="d-form" autocomplete="off">
+        <input type="text" id="d-address" placeholder="Search a wallet address or a transaction (0x&hellip;)" spellcheck="false" aria-label="Wallet address or transaction hash"/>
+      </form>
       <div class="detail" id="detail"></div>
     </div>
   </section>
@@ -1337,7 +1340,7 @@ button.ad:hover .vt{text-decoration:underline;}
 
   function selectWallet(addr, keepFilters) {
     addr = addr.toLowerCase();
-    S.selected = { kind: 'wallet', address: addr }; clearSelectedRows();
+    S.selected = { kind: 'wallet', address: addr }; clearSelectedRows(); syncDetailBar();
     if (!keepFilters) {                                // a click on a wallet leaves it as the one and only Transfers filter
       Object.keys(S.f).forEach(function (k) { S.f[k] = ''; $(FIELDS[k]).value = ''; });
       S.address = addr; S.chain = 'all'; S.types = ALL_TYPES.slice(); $('f-chain').value = 'all'; syncTypesUi();
@@ -1377,7 +1380,7 @@ button.ad:hover .vt{text-decoration:underline;}
   }
 
   function selectTx(chain, hash) {
-    S.selected = { kind: 'tx', chain: chain, hash: hash }; syncUrl();
+    S.selected = { kind: 'tx', chain: chain, hash: hash }; syncUrl(); syncDetailBar();
     clearSelectedRows(); document.querySelectorAll('#rows tr, #mk-rows tr, #mk-lrows tr').forEach(function (r) { if (r.dataset.tx === hash) r.classList.add('sel'); });
     var box = $('detail'); box.textContent = ''; box.appendChild(el('div', 'state', 'Loading transaction…')); showPanel('detail');
     api('/tx', { chain: chain, hash: hash }).then(function (d) {
@@ -1405,10 +1408,49 @@ button.ad:hover .vt{text-decoration:underline;}
       tb.appendChild(body); box.appendChild(tb);
     }).catch(function (e) { if (S.selected && S.selected.hash === hash) { box.textContent = ''; box.appendChild(kicker('Transaction')); box.appendChild(el('div', 'd-main', hash)); box.appendChild(el('div', 'state err', explain(e))); } });
   }
-  function detailHint() {
-    var box = $('detail'); box.textContent = '';
-    box.appendChild(el('p', 'hint', 'Click a wallet or a transaction in the Transfers table to see its details here.'));
+  function syncDetailBar() {                           // the Details bar shows the wallet or the transaction that is open
+    var sel = S.selected, v = '';
+    if (sel && sel.kind === 'wallet') v = sel.address; else if (sel && sel.kind === 'tx') v = sel.hash;
+    if (!sel || sel.kind !== 'search') $('d-address').value = v;
   }
+  function detailHint() {
+    var box = $('detail'); box.textContent = ''; S.selected = null; syncDetailBar();
+    box.appendChild(el('p', 'hint', 'Type or click a wallet or a transaction to see its details here.'));
+  }
+
+  /* ---- the Details search bar: paste or type a wallet (it also filters Transfers, removable as usual) or a transaction ---- */
+  function openFromBar(raw) {
+    var v = raw.trim().toLowerCase(), box = $('detail');
+    if (isAddr(v)) {                                   // same as the Transfers bar: filter, then open the wallet
+      S.address = v; applyAddressUi(); reload(); selectWallet(v, true); return;
+    }
+    if (isHash(v)) { findTx(v); return; }
+    S.selected = null; box.textContent = '';
+    box.appendChild(el('div', 'state err', 'That is not a wallet address (0x followed by 40 hex characters) or a transaction hash (0x followed by 64 hex characters).'));
+    showPanel('detail');
+  }
+  function findTx(hash) {                              // a hash does not say which chain it is on: ask the four, take the one that knows it
+    var keys = Object.keys(CHAINS), left = keys.length, first = null, box = $('detail');
+    S.selected = { kind: 'search', hash: hash }; clearSelectedRows();
+    box.textContent = ''; box.appendChild(el('div', 'state', 'Looking for this transaction…')); showPanel('detail');
+    var live = function () { return S.selected && S.selected.kind === 'search' && S.selected.hash === hash; };
+    keys.forEach(function (k) {
+      api('/tx', { chain: k, hash: hash }).then(function () {
+        if (live()) selectTx(k, hash);
+      }, function (e) {
+        if (e && e.code !== 'not_found' && !first) first = e;
+        if (--left > 0 || !live()) return;
+        box.textContent = ''; box.appendChild(kicker('Transaction')); box.appendChild(el('div', 'd-main', hash));
+        box.appendChild(el('div', 'state err', first ? explain(first) : 'No transaction with this hash was found in the indexed RIZE data on any chain.'));
+      });
+    });
+  }
+  $('d-form').addEventListener('submit', function (ev) { ev.preventDefault(); var v = $('d-address').value.trim(); if (v) openFromBar(v); });
+  $('d-address').addEventListener('input', function () {      // pasting a full address or hash is enough: no need to press Enter
+    var v = this.value.trim().toLowerCase();
+    var cur = S.selected && (S.selected.kind === 'wallet' ? S.selected.address : S.selected.hash);
+    if ((isAddr(v) || isHash(v)) && v !== cur) openFromBar(v);
+  });
 
   /* ================= top holders ================= */
   var MAXB = 12, MAXV = 6;
