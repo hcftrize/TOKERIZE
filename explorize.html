@@ -1250,23 +1250,42 @@ button.ad:hover .vt{text-decoration:underline;}
     c.quadraticCurveTo(x + w, y + h, x + w - r, y + h); c.lineTo(x + r, y + h); c.quadraticCurveTo(x, y + h, x, y + h - r);
     c.lineTo(x, y + r); c.quadraticCurveTo(x, y, x + r, y); c.closePath();
   }
+  function balTicks(lo, hi, n) {                       // round values (0, 200K, 400K...) between lo and hi
+    var raw = (hi - lo) / n, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p;
+    var step = (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p, vals = [];
+    if (!(step > 0) || !isFinite(step)) return { step: 1, vals: [lo, hi], ref: hi };
+    for (var v = Math.ceil(lo / step - 1e-9) * step, k = 0; v <= hi + step * 1e-9 && k < 12; v += step, k++) vals.push(Math.abs(v) < step * 1e-9 ? 0 : v);
+    return { step: step, vals: vals, ref: Math.max.apply(null, vals.map(Math.abs)) };
+  }
+  function fmtAxis(v, step, ref) {                     // short scale label: one unit for the whole scale, decimals that fit the step
+    if (v === 0) return '0';
+    var a = ref || Math.abs(v), div = a >= 1e9 ? 1e9 : a >= 1e6 ? 1e6 : a >= 1e3 ? 1e3 : 1, sfx = div === 1e9 ? 'B' : div === 1e6 ? 'M' : div === 1e3 ? 'K' : '';
+    var x = step / div, d = 0;
+    while (d < 6 && Math.abs(x * Math.pow(10, d) - Math.round(x * Math.pow(10, d))) > 1e-6) d++;
+    return (v / div).toFixed(d) + sfx;
+  }
   function drawBal() {
     var cv = BAL.cv, box = BAL.box; if (!cv || !box || !box.isConnected) return;
     var dpr = window.devicePixelRatio || 1, W = box.clientWidth, Ht = box.clientHeight; if (!W || !Ht) return;
     cv.width = Math.round(W * dpr); cv.height = Math.round(Ht * dpr);
     var c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, W, Ht);
     var pts = balPoints(); if (!pts || pts.length < 2) return;
-    var L = 60, R = 14, T = 16, B = 28, w = W - L - R, h = Ht - T - B;
+    var R = 14, T = 16, B = 28, h = Ht - T - B;
     var t0 = pts[0][0], t1 = pts[pts.length - 1][0], lo = Infinity, hi = -Infinity;
     pts.forEach(function (p) { if (p[1] < lo) lo = p[1]; if (p[1] > hi) hi = p[1]; });
     var pad = (hi - lo) * 0.08 || hi * 0.05 || 1; lo = Math.max(0, lo - pad); hi += pad;
+    /* the scale labels are measured BEFORE the plot area is placed: the left margin always fits the widest one (a fixed margin
+       used to cut the first digit of labels such as 157.255K, which made a rising scale read like a falling one) */
+    var ticks = balTicks(lo, hi, 4), labels = ticks.vals.map(function (v) { return fmtAxis(v, ticks.step, ticks.ref); });
+    c.font = '12.5px "DM Mono",monospace';
+    var L = Math.min(120, Math.max(44, Math.ceil(Math.max.apply(null, labels.map(function (t) { return c.measureText(t).width; }))) + 16)), w = W - L - R;
     var X = function (t) { return L + (t - t0) / (t1 - t0) * w; }, Y = function (v) { return T + (1 - (v - lo) / (hi - lo)) * h; };
-    c.font = '12.5px "DM Mono",monospace'; c.fillStyle = '#7d89a3'; c.strokeStyle = 'rgba(255,255,255,.07)'; c.lineWidth = 1;
-    for (var i = 0; i <= 3; i++) {
-      var v = lo + (hi - lo) * i / 3, y = Math.round(Y(v)) + .5;
+    c.fillStyle = '#7d89a3'; c.strokeStyle = 'rgba(255,255,255,.07)'; c.lineWidth = 1;
+    ticks.vals.forEach(function (v, i) {
+      var y = Math.round(Y(v)) + .5;
       c.beginPath(); c.moveTo(L, y); c.lineTo(W - R, y); c.stroke();
-      c.textAlign = 'right'; c.textBaseline = 'middle'; c.fillText(fmtCompact(String(v)), L - 7, y);
-    }
+      c.textAlign = 'right'; c.textBaseline = 'middle'; c.fillText(labels[i], L - 7, y);
+    });
     var span = t1 - t0, dayMs = 86400000, n = Math.max(2, Math.min(5, Math.floor(w / 120)));
     c.textAlign = 'center'; c.textBaseline = 'top';
     for (var j = 0; j < n; j++) {
