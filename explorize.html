@@ -315,7 +315,29 @@ button.ad:hover .vt{text-decoration:underline;}
 .tag.etype{margin-left:0;display:inline-flex;align-items:center;justify-content:center;line-height:1;padding:4px 7px 3px 9px;min-width:44px;}
 .tag.liquidity{color:var(--gold);border-color:rgba(255,211,107,.4);}
 .tag.ccip{color:#0847F7;border-color:#0847F7;}   /* Chainlink blue */
-.tag.in_cex,.tag.out_cex{color:#e0a21a;border-color:rgba(224,162,26,.4);}
+.tag.in_cex{color:var(--red);border-color:rgba(255,107,107,.4);}      /* RIZE going into an exchange: red, like a sell */
+.tag.out_cex{color:var(--green);border-color:rgba(61,190,71,.4);}     /* RIZE leaving an exchange: green, like a buy */
+.tag.cex_ntral{color:var(--muted);border-color:var(--border-strong);} /* exchange to exchange: neutral */
+.th-f{background:none;border:none;color:var(--dim);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0 0 0 4px;margin:0;vertical-align:middle;}
+.th-f:hover,.th-f[aria-expanded="true"]{color:var(--text);}
+.th-f.on{color:var(--cyan);}
+.th-f svg{flex:none;}
+.qf{position:fixed;z-index:80;width:290px;max-width:calc(100vw - 16px);background:#101530;border:1px solid var(--border-strong);padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.55);font-family:'DM Mono',monospace;font-size:13.5px;color:var(--text);}
+.qf h6{margin:0 0 8px;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);}
+.qf input[type=text]{width:100%;box-sizing:border-box;font-family:'DM Mono',monospace;font-size:14px;color:var(--text);background:var(--panel2);border:1px solid var(--border-strong);height:34px;padding:0 10px;outline:none;}
+.qf input[type=text]:focus{border-color:var(--cyan);}
+.qf .qf-row{display:flex;gap:8px;}
+.qf .qf-row label{flex:1;display:flex;flex-direction:column;gap:4px;color:var(--dim);font-size:12.5px;}
+.qf .qf-act{display:flex;gap:8px;margin-top:10px;align-items:center;}
+.qf .qf-msg{color:var(--red);font-size:12.5px;margin-top:6px;}
+.qf .qf-list{margin-top:8px;max-height:260px;overflow:auto;}
+.qf .qf-sec{font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;font-size:12.5px;color:var(--dim);padding:6px 4px 3px;}
+.qf .qf-it{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;background:none;border:none;color:var(--text);font:inherit;padding:6px 4px;cursor:pointer;text-align:left;}
+.qf .qf-it:hover,.qf .qf-it.cur{background:rgba(126,224,255,.09);}
+.qf .qf-it .n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.qf .qf-it .c{color:var(--dim);font-size:12.5px;flex:none;}
+.qf .qf-empty{color:var(--dim);padding:8px 4px;}
+#mk-active{display:inline-flex;gap:6px;align-items:center;}
 .p-trades .fbtn{height:28px;font-size:14px;}
 .th-time svg{flex:none;}
 /* wallet balance chart (Details) */
@@ -421,6 +443,7 @@ button.ad:hover .vt{text-decoration:underline;}
       </select>
       <select id="mk-pool" aria-label="Pool" hidden><option value="">All pools</option></select>
       <button type="button" class="fbtn" id="mk-fbtn" aria-expanded="false" aria-controls="mk-fpanel">Filters <span class="badge" id="mk-fn"></span></button>
+      <span id="mk-active"></span>
     </div>
     <div class="fpanel" id="mk-fpanel" hidden>
       <div class="fgrid">
@@ -440,7 +463,7 @@ button.ad:hover .vt{text-decoration:underline;}
     <div class="p-body" id="mk-wrap">
       <div class="mk-view" id="mk-v-trades">
         <table class="t">
-          <thead><tr><th class="c"></th><th data-timeth="Ago|Time (UTC)"></th><th>Side</th><th class="num">RIZE</th><th class="num">USD</th><th class="num">Price</th><th>Venue</th><th>Trader</th></tr></thead>
+          <thead><tr><th class="c"></th><th data-timeth="Ago|Time (UTC)"></th><th data-qf="side">Side</th><th class="num" data-qf="mk-value">RIZE</th><th class="num" data-qf="mk-usd">USD</th><th class="num">Price</th><th data-qf="venue">Venue</th><th data-qf="trader">Trader</th></tr></thead>
           <tbody id="mk-rows"></tbody>
         </table>
       </div>
@@ -580,7 +603,7 @@ button.ad:hover .vt{text-decoration:underline;}
       <div class="factions">
         <button type="button" class="btn" id="f-apply">Apply</button>
         <button type="button" class="btn ghost" id="f-reset">Reset all</button>
-        <span class="fnote" id="fmsg">USD filters use the current RIZE price.</span>
+        <span class="fnote" id="fmsg"></span>
       </div>
     </div>
     <div class="actives" id="actives" hidden></div>
@@ -589,13 +612,13 @@ button.ad:hover .vt{text-decoration:underline;}
         <thead><tr>
           <th class="c"></th>
           <th data-timeth="Ago|Time (UTC)"></th>
-          <th>Type</th><th class="num">Price</th><th>From</th><th>To</th><th class="num">Value</th><th>Token</th><th class="num">USD</th>
+          <th>Type</th><th class="num">Price</th><th data-qf="src">From</th><th data-qf="dst">To</th><th class="num" data-qf="value">Value</th><th>Token</th><th class="num" data-qf="usd">USD</th>
         </tr></thead>
         <tbody id="rows"></tbody>
       </table>
       <div class="state" id="state">Loading transfers&hellip;</div>
     </div>
-    <div class="p-foot"><div class="sync" id="sync">Loading status&hellip;</div><span id="foot-note">USD uses the current RIZE price</span></div>
+    <div class="p-foot"><div class="sync" id="sync">Loading status&hellip;</div><span><span id="foot-note"></span><span class="bi" id="usd-info" tabindex="0" role="button" aria-label="About the USD column">i</span></span></div>
   </section>
 </main>
 
@@ -630,7 +653,7 @@ button.ad:hover .vt{text-decoration:underline;}
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
 
   var S = {
-    chain: 'all', types: [], mode: 'reconciled', address: '',
+    chain: 'all', types: [], mode: 'reconciled', address: '', src: '', dst: '',      // src / dst: 0x… or entity:Name
     page: 1, pages: 1, total: null, loading: false, reqId: 0,
     f: { from: '', to: '', minr: '', maxr: '', minu: '', maxu: '' },
     timeMode: store('explorize.time') === 'abs' ? 'abs' : 'rel',
@@ -994,7 +1017,8 @@ button.ad:hover .vt{text-decoration:underline;}
     ['mint', 'MINT', 'RIZE created outside a bridge'],
     ['burn', 'BURN', 'RIZE destroyed outside a bridge'],
     ['in_cex', 'CEX IN', 'RIZE sent to an exchange'],
-    ['out_cex', 'CEX OUT', 'RIZE withdrawn from an exchange']
+    ['out_cex', 'CEX OUT', 'RIZE withdrawn from an exchange'],
+    ['cex_ntral', 'CEX NTRAL', 'RIZE moved between two exchange addresses (inside one exchange or from one exchange to another)']
   ];
   var ALL_TYPES = TYPES.map(function (x) { return x[0]; });
   var TYPE_LABEL = {}; TYPES.forEach(function (x) { TYPE_LABEL[x[0]] = x[1]; });
@@ -1097,18 +1121,16 @@ button.ad:hover .vt{text-decoration:underline;}
   S.types = ALL_TYPES.slice();
   function setState(msg, isErr) { var s = $('state'); s.textContent = msg || ''; s.className = 'state' + (isErr ? ' err' : ''); s.hidden = !msg; }
 
-  /* ---- value filters: RIZE and USD (USD is converted with the current price) ---- */
+  /* ---- value filters: RIZE and USD (the server compares the exact value recorded for a trade, and amount x current price for the other lines) ---- */
   var FIELDS = { from: 'f-from', to: 'f-to', minr: 'f-minr', maxr: 'f-maxr', minu: 'f-minu', maxu: 'f-maxu' };
   function readNum(v) { if (v === '' || v == null) return null; var n = parseFloat(String(v).replace(/,/g, '')); return isFinite(n) && n >= 0 ? n : NaN; }
   function fnum(n) { return n == null ? '' : n.toFixed(8).replace(/0+$/, '').replace(/\.$/, ''); }
   function effRange() {
     var a = readNum(S.f.minr), b = readNum(S.f.maxr), c = readNum(S.f.minu), d = readNum(S.f.maxu);
     if ([a, b, c, d].some(function (x) { return x !== null && isNaN(x); })) return { err: 'Amounts must be positive numbers.' };
-    if ((c !== null || d !== null) && !S.price) return { err: 'USD filters need the live RIZE price, which is unavailable right now.' };
+    if ((c !== null || d !== null) && !S.price) return { err: 'USD filters need the live RIZE price (used for the lines that are not trades), which is unavailable right now.' };
     var lo = [], hi = [];
-    if (a !== null) lo.push(a); if (c !== null) lo.push(c / S.price);
-    if (b !== null) hi.push(b); if (d !== null) hi.push(d / S.price);
-    return { min: lo.length ? Math.max.apply(null, lo) : null, max: hi.length ? Math.min.apply(null, hi) : null };
+    return { min: a, max: b, minu: c, maxu: d };
   }
 
   function updatePager() {
@@ -1124,11 +1146,11 @@ button.ad:hover .vt{text-decoration:underline;}
     var id = ++S.reqId; S.loading = true;
     if (!S.types.length && S.mode !== 'raw') {                       // no kind ticked: nothing to ask the server
       S.total = 0; S.pages = 1; S.loading = false; $('rows').textContent = ''; setState('No transaction type is selected. Tick at least one in Types.');
-      $('foot-note').textContent = '0 events · USD uses the current RIZE price'; updatePager(); return;
+      $('foot-note').textContent = '0 events'; updatePager(); return;
     }
     if (!opts.silent) { $('rows').textContent = ''; setState('Loading transfers…'); }
     var every = S.types.length === ALL_TYPES.length;
-    api('/transfers', { chain: S.chain, mode: S.mode, types: (S.mode === 'raw' || every) ? '' : S.types.join(','), address: S.address, from: S.f.from, to: S.f.to, min: fnum(r.min), max: fnum(r.max), page: S.page, limit: PAGE })
+    api('/transfers', { chain: S.chain, mode: S.mode, types: (S.mode === 'raw' || every) ? '' : S.types.join(','), address: S.address, from: S.f.from, to: S.f.to, min: fnum(r.min), max: fnum(r.max), minu: fnum(r.minu), maxu: fnum(r.maxu), price: (r.minu != null || r.maxu != null) ? S.price.toFixed(12).replace(/0+$/, '') : '', src: S.src, dst: S.dst, page: S.page, limit: PAGE })
       .then(function (d) {
         if (id !== S.reqId) return;
         S.total = d.total; S.pages = d.pages;
@@ -1140,7 +1162,7 @@ button.ad:hover .vt{text-decoration:underline;}
         var noun = d.mode === 'reconciled' ? 'event' : 'transfer';
         var tot = d.total == null ? 'many ' + noun + 's' : d.total.toLocaleString('en-US') + ' ' + noun + (d.total === 1 ? '' : 's');
         var note = S.mode === 'reconciled' && d.mode !== 'reconciled' ? ' · market layer not built yet, showing every transfer' : '';
-        $('foot-note').textContent = tot + note + ' · USD uses the current RIZE price';
+        $('foot-note').textContent = tot + note;
       })
       .catch(function (e) { if (id === S.reqId && !opts.silent) { $('rows').textContent = ''; setState(explain(e), true); } })
       .finally(function () { if (id === S.reqId) { S.loading = false; updatePager(); } });
@@ -1171,6 +1193,8 @@ button.ad:hover .vt{text-decoration:underline;}
     var chips = [];
     var dt = function (v) { return v.replace('T', ' ') + ' UTC'; };
     if (S.address) chips.push(['Wallet ' + short(S.address), function () { S.address = ''; applyAddressUi(); markWalletButton(); }]);
+    if (S.src) chips.push(['From ' + partyText(S.src), function () { S.src = ''; }]);
+    if (S.dst) chips.push(['To ' + partyText(S.dst), function () { S.dst = ''; }]);
     var defs = [['from', function (v) { return 'From ' + dt(v); }], ['to', function (v) { return 'To ' + dt(v); }],
       ['minr', function (v) { return '≥ ' + commas(v) + ' RIZE'; }], ['maxr', function (v) { return '≤ ' + commas(v) + ' RIZE'; }],
       ['minu', function (v) { return '≥ $' + commas(v); }], ['maxu', function (v) { return '≤ $' + commas(v); }]];
@@ -1182,6 +1206,7 @@ button.ad:hover .vt{text-decoration:underline;}
     });
     box.hidden = !chips.length;
     var n = activeCount(); $('b-filters-n').textContent = n ? String(n) : '';
+    if (typeof qfRefresh === 'function') qfRefresh();
   }
   function applyFilters() {
     var f = {}; Object.keys(FIELDS).forEach(function (k) { f[k] = $(FIELDS[k]).value.trim(); });
@@ -1192,7 +1217,7 @@ button.ad:hover .vt{text-decoration:underline;}
     if ((f.minu || f.maxu) && !S.price) { fmsg('USD filters need the live RIZE price, which is unavailable right now.', true); return; }
     if (f.minr && f.maxr && parseFloat(f.minr) > parseFloat(f.maxr)) { fmsg('The minimum RIZE value is above the maximum.', true); return; }
     if (f.minu && f.maxu && parseFloat(f.minu) > parseFloat(f.maxu)) { fmsg('The minimum USD value is above the maximum.', true); return; }
-    fmsg('USD filters use the current RIZE price.', false);
+    fmsg('', false);
     S.f = f; reload();
   }
   $('f-apply').addEventListener('click', applyFilters);
@@ -1200,7 +1225,7 @@ button.ad:hover .vt{text-decoration:underline;}
   $('f-reset').addEventListener('click', function () {
     Object.keys(S.f).forEach(function (k) { S.f[k] = ''; $(FIELDS[k]).value = ''; });
     S.address = ''; S.chain = 'all'; S.types = ALL_TYPES.slice(); $('f-chain').value = 'all'; syncTypesUi();
-    fmsg('USD filters use the current RIZE price.', false); applyAddressUi(); markWalletButton(); reload();
+    S.src = ''; S.dst = ''; fmsg('', false); applyAddressUi(); markWalletButton(); reload();
   });
   $('b-filters').addEventListener('click', function () {
     var open = $('fpanel').hidden; $('fpanel').hidden = !open; this.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -1401,7 +1426,7 @@ button.ad:hover .vt{text-decoration:underline;}
     S.selected = { kind: 'wallet', address: addr }; clearSelectedRows(); syncDetailBar();
     if (!keepFilters) {                                // a click on a wallet leaves it as the one and only Transfers filter
       Object.keys(S.f).forEach(function (k) { S.f[k] = ''; $(FIELDS[k]).value = ''; });
-      S.address = addr; S.chain = 'all'; S.types = ALL_TYPES.slice(); $('f-chain').value = 'all'; syncTypesUi();
+      S.address = addr; S.src = ''; S.dst = ''; S.chain = 'all'; S.types = ALL_TYPES.slice(); $('f-chain').value = 'all'; syncTypesUi();
       $('fpanel').hidden = true; $('b-filters').setAttribute('aria-expanded', 'false'); applyAddressUi(); reload();
     } else syncUrl();
     document.querySelectorAll('#hrows tr').forEach(function (r) { if (r.dataset.addr === addr) r.classList.add('sel'); });
@@ -1564,8 +1589,9 @@ button.ad:hover .vt{text-decoration:underline;}
   var htip = el('div', 'htip'); htip.id = 'htip'; htip.setAttribute('role', 'tooltip'); document.body.appendChild(htip);
   var tipOwner = null;
   function hideTip() { htip.style.display = 'none'; tipOwner = null; }
-  function showTip(anchor, g) {
-    htip.textContent = ''; htip.appendChild(govInfo(g)); htip.style.display = 'block'; tipOwner = anchor;
+  function showTip(anchor, g) { showNodeTip(anchor, govInfo(g)); }
+  function showNodeTip(anchor, node) {
+    htip.textContent = ''; htip.appendChild(node); htip.style.display = 'block'; tipOwner = anchor;
     var r = anchor.getBoundingClientRect(), w = htip.offsetWidth, h = htip.offsetHeight;
     var left = Math.min(Math.max(8, r.right - w), window.innerWidth - w - 8);
     var top = r.bottom + 6; if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 6);
@@ -1735,7 +1761,7 @@ button.ad:hover .vt{text-decoration:underline;}
 
   /* ================= market layer: trades / liquidity moves / bridges ================= */
   function blankF() { return { from: '', to: '', minr: '', maxr: '', minu: '', maxu: '' }; }
-  var M = { view: 'trades', chain: 'all', src: 'all', dst: 'all', side: 'all', venue: '', kind: 'all', pool: '', fopen: false,
+  var M = { view: 'trades', chain: 'all', src: 'all', dst: 'all', side: 'all', venue: '', kind: 'all', pool: '', trader: '', fopen: false,
             page: 1, pages: 1, total: null, reqId: 0, loading: false,
             fv: { trades: blankF(), liquidity: blankF(), bridges: blankF() } };   // value filters are kept per tab
   var MLIM = 25;
@@ -1854,6 +1880,7 @@ button.ad:hover .vt{text-decoration:underline;}
     var f = M.fv[M.view]; MF.forEach(function (k) { $('mk-f-' + k).value = f[k]; });
     var n = MF.filter(function (k) { return f[k] !== '' && (M.view === 'trades' || (k !== 'minu' && k !== 'maxu')); }).length;
     $('mk-fn').textContent = n ? String(n) : ''; $('mk-fmsg').textContent = ''; $('mk-fmsg').className = 'fnote';
+    mkRenderActive(); if (typeof qfRefresh === 'function') qfRefresh();
   }
   function mkMsg(t, err) { var m = $('mk-fmsg'); m.textContent = t; m.className = 'fnote' + (err ? ' err' : ''); }
   function mkApplyFilters() {
@@ -1871,7 +1898,7 @@ button.ad:hover .vt{text-decoration:underline;}
     var id = ++M.reqId; M.loading = true; var view = M.view, f = M.fv[view];
     if (!opts.silent) { mkState('Loading…'); }
     var params = { view: view, page: M.page, limit: MLIM };
-    if (view === 'trades') { params.chain = M.chain; params.side = M.side; params.venue = M.venue; params.from = f.from; params.to = f.to; params.min = f.minr; params.max = f.maxr; params.minu = f.minu; params.maxu = f.maxu; }
+    if (view === 'trades') { params.chain = M.chain; params.side = M.side; params.venue = M.venue; params.from = f.from; params.to = f.to; params.min = f.minr; params.max = f.maxr; params.minu = f.minu; params.maxu = f.maxu; params.trader = M.trader; }
     if (view === 'liquidity') { params.chain = M.chain; params.kind = M.kind; params.pool = M.pool; }
     if (view === 'bridges') { params.src = M.src; params.dst = M.dst; params.from = f.from; params.to = f.to; params.min = f.minr; params.max = f.maxr; }
     api('/market', params).then(function (d) {
@@ -1905,7 +1932,7 @@ button.ad:hover .vt{text-decoration:underline;}
   $('mk-fbtn').addEventListener('click', function () { M.fopen = !M.fopen; this.setAttribute('aria-expanded', M.fopen ? 'true' : 'false'); $('mk-fpanel').hidden = !M.fopen; });
   $('mk-f-apply').addEventListener('click', mkApplyFilters);
   $('mk-fpanel').addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); mkApplyFilters(); } });
-  $('mk-f-reset').addEventListener('click', function () { M.fv[M.view] = blankF(); mkReload(); });
+  $('mk-f-reset').addEventListener('click', function () { M.fv[M.view] = blankF(); M.trader = ''; mkReload(); });
   function mkGo(p) {
     p = Math.max(1, p || 1); if (M.total != null) p = Math.min(p, M.pages);
     if (p === M.page && !M.loading) { mkUpdatePager(); return; }
@@ -1983,6 +2010,175 @@ button.ad:hover .vt{text-decoration:underline;}
     for (var i = 0; i < n; i++) { var tr = el('tr'); for (var j = 0; j < cols; j++) { var td = el('td', j ? 'num' : ''); td.appendChild(el('span', 'skel')); tr.appendChild(td); } tb.appendChild(tr); }
   }
 
+
+  /* ================= quick filters: a small funnel in the column header opens a pop-up to filter that column ================= */
+  var FUNNEL = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h12l-4.6 5.5V13L6.6 11.4V8.5z"/></svg>';
+  var qfBox = null, qfAnchor = null, qfBtns = {};
+  function partyText(v) { return v.indexOf('entity:') === 0 ? v.slice(7) : short(v); }
+  function qfClose() { if (qfBox) { qfBox.remove(); qfBox = null; } if (qfAnchor) { qfAnchor.setAttribute('aria-expanded', 'false'); qfAnchor = null; } }
+  function qfOpen(anchor, title, build) {
+    var same = qfAnchor === anchor; qfClose(); if (same) return;
+    qfBox = el('div', 'qf'); qfBox.setAttribute('role', 'dialog'); qfBox.appendChild(el('h6', null, title));
+    document.body.appendChild(qfBox); qfAnchor = anchor; anchor.setAttribute('aria-expanded', 'true');
+    var first = build(qfBox);
+    var r = anchor.getBoundingClientRect(), w = qfBox.offsetWidth, h = qfBox.offsetHeight;
+    var left = Math.min(Math.max(8, r.left), window.innerWidth - w - 8), top = r.bottom + 6;
+    if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 6);
+    qfBox.style.left = left + 'px'; qfBox.style.top = top + 'px'; qfBox._ax = r.left; qfBox._ay = r.top;
+    if (first) setTimeout(function () { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }, 0);
+  }
+  document.addEventListener('mousedown', function (ev) { if (qfBox && !qfBox.contains(ev.target) && !(qfAnchor && qfAnchor.contains(ev.target))) qfClose(); });
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') qfClose(); });
+  window.addEventListener('scroll', function (ev) {      // close when the column moved away from under the pop-up
+    if (!qfBox || !qfAnchor || qfBox.contains(ev.target)) return;
+    var r = qfAnchor.getBoundingClientRect(); if (Math.abs(r.left - qfBox._ax) > 3 || Math.abs(r.top - qfBox._ay) > 3) qfClose();
+  }, true);
+  window.addEventListener('resize', qfClose);
+
+  function qfButtons(box, apply, clear, hasValue) {
+    var act = el('div', 'qf-act');
+    var a = el('button', 'btn', 'Apply'); a.type = 'button'; a.addEventListener('click', apply); act.appendChild(a);
+    var c = el('button', 'btn ghost', 'Clear'); c.type = 'button'; c.addEventListener('click', clear); c.disabled = !hasValue; act.appendChild(c);
+    box.appendChild(act); return a;
+  }
+  /* a minimum and a maximum */
+  function qfRange(anchor, title, unit, cur, apply) {
+    qfOpen(anchor, title, function (box) {
+      var row = el('div', 'qf-row'), ins = [];
+      [['Min', cur.min, 'e.g. 1000'], ['Max', cur.max, 'e.g. 50000']].forEach(function (d) {
+        var lab = el('label', null, d[0] + ' (' + unit + ')'), i = el('input'); i.type = 'text'; i.inputMode = 'decimal'; i.value = d[1] || ''; i.placeholder = d[2]; i.autocomplete = 'off';
+        lab.appendChild(i); row.appendChild(lab); ins.push(i);
+      });
+      box.appendChild(row);
+      var msg = el('div', 'qf-msg'); msg.hidden = true;
+      function go() {
+        var v = ins.map(function (i) { return i.value.replace(/[,\s]/g, ''); });
+        if (v.some(function (x) { return x !== '' && !/^\d{1,15}(\.\d{1,12})?$/.test(x); })) { msg.textContent = 'Amounts must be positive numbers.'; msg.hidden = false; return; }
+        if (v[0] !== '' && v[1] !== '' && parseFloat(v[0]) > parseFloat(v[1])) { msg.textContent = 'The minimum is above the maximum.'; msg.hidden = false; return; }
+        qfClose(); apply(v[0], v[1]);
+      }
+      qfButtons(box, go, function () { qfClose(); apply('', ''); }, !!(cur.min || cur.max));
+      box.appendChild(msg);
+      ins.forEach(function (i) { i.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); go(); } }); });
+      return ins[0];
+    });
+  }
+  /* a fixed list (side, venue), with a small search when it is long */
+  function qfList(anchor, title, options, current, apply) {
+    qfOpen(anchor, title, function (box) {
+      var inp = null, list = el('div', 'qf-list');
+      function draw(t) {
+        list.textContent = ''; t = (t || '').toLowerCase(); var n = 0;
+        options.forEach(function (o) {
+          if (t && o[1].toLowerCase().indexOf(t) < 0) return; n++;
+          var b = el('button', 'qf-it' + (o[0] === current ? ' cur' : '')); b.type = 'button'; b.appendChild(el('span', 'n', o[1]));
+          b.addEventListener('click', function () { qfClose(); apply(o[0]); }); list.appendChild(b);
+        });
+        if (!n) list.appendChild(el('div', 'qf-empty', 'Nothing matches.'));
+      }
+      if (options.length > 8) { inp = el('input'); inp.type = 'text'; inp.placeholder = 'Search…'; inp.autocomplete = 'off'; inp.addEventListener('input', function () { draw(inp.value); }); box.appendChild(inp); }
+      draw(''); box.appendChild(list); return inp;
+    });
+  }
+  /* a wallet or an entity: type to search, or paste a 0x */
+  function qfParty(anchor, title, current, apply) {
+    qfOpen(anchor, title, function (box) {
+      var inp = el('input'); inp.type = 'text'; inp.placeholder = 'Paste a 0x… or type a name (e.g. Kraken)'; inp.autocomplete = 'off'; inp.spellcheck = false;
+      box.appendChild(inp);
+      var list = el('div', 'qf-list'); box.appendChild(list);
+      var act = el('div', 'qf-act'); var c = el('button', 'btn ghost', 'Clear'); c.type = 'button'; c.disabled = !current;
+      c.addEventListener('click', function () { qfClose(); apply(''); }); act.appendChild(c); box.appendChild(act);
+      if (current) list.appendChild(el('div', 'qf-sec', 'Now: ' + partyText(current)));
+      var seq = 0, timer = null;
+      function pick(v) { qfClose(); apply(v); }
+      function row(parts, value) {
+        var b = el('button', 'qf-it'); b.type = 'button';
+        parts.forEach(function (p) { b.appendChild(p); }); b.addEventListener('click', function () { pick(value); }); return b;
+      }
+      function render(d, text) {
+        list.textContent = '';
+        if (isAddr(text)) { list.appendChild(row([el('span', 'n', 'Use this address'), el('span', 'c', short(text.toLowerCase()))], text.toLowerCase())); return; }
+        if (d.entities.length) {
+          list.appendChild(el('div', 'qf-sec', 'Entities (all their addresses)'));
+          d.entities.forEach(function (e) {
+            var nm = el('span', 'n'); if (e.logo) nm.appendChild(logoSpan(['entities', 'venues'], e.logo, e.name)); nm.appendChild(document.createTextNode(' ' + e.name));
+            list.appendChild(row([nm, el('span', 'c', e.addresses + ' address' + (e.addresses === 1 ? '' : 'es'))], 'entity:' + e.name));
+          });
+        }
+        if (d.wallets.length) {
+          list.appendChild(el('div', 'qf-sec', 'Wallets'));
+          d.wallets.forEach(function (w) { list.appendChild(row([el('span', 'n', w.label), el('span', 'c', short(w.address))], w.address)); });
+        }
+        if (!d.entities.length && !d.wallets.length) list.appendChild(el('div', 'qf-empty', text.length < 2 ? 'Type at least 2 characters.' : 'No entity or labelled wallet found.'));
+      }
+      inp.addEventListener('input', function () {
+        var t = inp.value.trim(); clearTimeout(timer); var id = ++seq;
+        if (isAddr(t)) { render({ entities: [], wallets: [] }, t); return; }
+        if (t.length < 2) { render({ entities: [], wallets: [] }, t); return; }
+        timer = setTimeout(function () {
+          api('/transfers', { suggest: t }).then(function (d) { if (id === seq && qfBox) render(d, t); }).catch(function () { if (id === seq && qfBox) { list.textContent = ''; list.appendChild(el('div', 'qf-empty', 'Search unavailable right now.')); } });
+        }, 180);
+      });
+      inp.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter') { ev.preventDefault(); var t = inp.value.trim(); if (isAddr(t)) pick(t.toLowerCase()); else { var f = list.querySelector('.qf-it'); if (f) f.click(); } }
+      });
+      return inp;
+    });
+  }
+
+  /* what each column does */
+  function setT(k, v) { S.f[k] = v; $(FIELDS[k]).value = v; }
+  var QF_DEFS = {
+    src:   { title: 'From', on: function () { return !!S.src; }, open: function (a) { qfParty(a, 'From (wallet or entity)', S.src, function (v) { S.src = v; reload(); }); } },
+    dst:   { title: 'To', on: function () { return !!S.dst; }, open: function (a) { qfParty(a, 'To (wallet or entity)', S.dst, function (v) { S.dst = v; reload(); }); } },
+    value: { title: 'Value', on: function () { return !!(S.f.minr || S.f.maxr); }, open: function (a) { qfRange(a, 'Value', 'RIZE', { min: S.f.minr, max: S.f.maxr }, function (lo, hi) { setT('minr', lo); setT('maxr', hi); reload(); }); } },
+    usd:   { title: 'USD', on: function () { return !!(S.f.minu || S.f.maxu); }, open: function (a) {
+      if (!S.price) { fmsg('USD filters need the live RIZE price, which is unavailable right now.', true); $('fpanel').hidden = false; return; }
+      qfRange(a, 'Value (USD)', 'USD', { min: S.f.minu, max: S.f.maxu }, function (lo, hi) { setT('minu', lo); setT('maxu', hi); reload(); }); } },
+    side:  { title: 'Side', on: function () { return M.side !== 'all'; }, open: function (a) {
+      qfList(a, 'Side', [['all', 'All sides'], ['buy', 'Buy'], ['sell', 'Sell'], ['arbitrage', 'Arbitrage']], M.side, function (v) { M.side = v; $('mk-side').value = v; mkReload(); }); } },
+    'mk-value': { title: 'RIZE', on: function () { var f = M.fv.trades; return !!(f.minr || f.maxr); }, open: function (a) {
+      var f = M.fv.trades; qfRange(a, 'Trade size', 'RIZE', { min: f.minr, max: f.maxr }, function (lo, hi) { f.minr = lo; f.maxr = hi; mkReload(); }); } },
+    'mk-usd': { title: 'USD', on: function () { var f = M.fv.trades; return !!(f.minu || f.maxu); }, open: function (a) {
+      var f = M.fv.trades; qfRange(a, 'Trade value (USD)', 'USD', { min: f.minu, max: f.maxu }, function (lo, hi) { f.minu = lo; f.maxu = hi; mkReload(); }); } },
+    venue: { title: 'Venue', on: function () { return !!M.venue; }, open: function (a) {
+      var opts = [['', 'All venues']]; Array.prototype.forEach.call($('mk-venue').options, function (o) { if (o.value) opts.push([o.value, o.textContent]); });
+      qfList(a, 'Venue', opts, M.venue, function (v) { M.venue = v; $('mk-venue').value = v; mkReload(); }); } },
+    trader: { title: 'Trader', on: function () { return !!M.trader; }, open: function (a) { qfParty(a, 'Trader (wallet or entity)', M.trader, function (v) { M.trader = v; mkReload(); }); } }
+  };
+  function initQuickFilters() {
+    document.querySelectorAll('th[data-qf]').forEach(function (th) {
+      var key = th.getAttribute('data-qf'), d = QF_DEFS[key]; if (!d) return;
+      var b = el('button', 'th-f'); b.type = 'button'; b.innerHTML = FUNNEL; b.title = 'Filter ' + d.title; b.setAttribute('aria-label', 'Filter ' + d.title); b.setAttribute('aria-expanded', 'false');
+      b.addEventListener('click', function (ev) { ev.stopPropagation(); d.open(b); });
+      th.appendChild(b); qfBtns[key] = b;
+    });
+    qfRefresh();
+  }
+  function qfRefresh() { Object.keys(qfBtns).forEach(function (k) { qfBtns[k].classList.toggle('on', !!QF_DEFS[k].on()); }); }
+  function mkRenderActive() {                          // the trader filter has no menu of its own: a small removable chip says it is on
+    var box = $('mk-active'); if (!box) return; box.textContent = '';
+    if (!M.trader || M.view !== 'trades') return;
+    var chip = el('span', 'achip'); chip.appendChild(document.createTextNode('Trader ' + partyText(M.trader)));
+    var x = el('button', null, '×'); x.type = 'button'; x.title = 'Remove this filter'; x.setAttribute('aria-label', 'Remove trader filter');
+    x.addEventListener('click', function () { M.trader = ''; mkReload(); }); chip.appendChild(x); box.appendChild(chip);
+  }
+
+  /* the small (i) under Transfers: what the USD column means */
+  function initUsdInfo() {
+    var b = $('usd-info'); if (!b) return;
+    var node = function () {
+      var box = el('div', 'ginfo');
+      box.appendChild(el('h5', null, 'USD column and USD filters'));
+      box.appendChild(el('div', null, 'Trades (buy, sell, arb): the exact dollar value recorded at the time of the trade.'));
+      box.appendChild(el('div', null, 'Every other line: not adjusted to the date of the transfer, it uses the current RIZE price.'));
+      return box;
+    };
+    var show = function () { showNodeTip(b, node()); };
+    b.addEventListener('mouseenter', show); b.addEventListener('focus', show); b.addEventListener('mouseleave', hideTip); b.addEventListener('blur', hideTip);
+    b.addEventListener('click', function (ev) { ev.stopPropagation(); if (tipOwner === b) hideTip(); else show(); });
+  }
+
   /* ================= URL state ================= */
   function syncUrl() {
     var p = new URLSearchParams();
@@ -1990,6 +2186,8 @@ button.ad:hover .vt{text-decoration:underline;}
     if (S.types.length !== ALL_TYPES.length) p.set('types', S.types.length ? S.types.join(',') : 'none');
     if (S.mode === 'raw') p.set('mode', 'raw');
     if (S.address) p.set('address', S.address);
+    if (S.src) p.set('src', S.src);
+    if (S.dst) p.set('dst', S.dst);
     Object.keys(S.f).forEach(function (k) { if (S.f[k] !== '') p.set(k, S.f[k]); });
     if (S.page > 1) p.set('page', String(S.page));
     if (H.page > 1) p.set('hpage', String(H.page));
@@ -2007,6 +2205,7 @@ button.ad:hover .vt{text-decoration:underline;}
   var tp = (q.get('types') || '').split(',').filter(function (x) { return ALL_TYPES.indexOf(x) >= 0; });
   if (tp.length) S.types = tp; else if (q.get('types') === 'none') S.types = [];
   if (isAddr(q.get('address') || '')) S.address = q.get('address').toLowerCase();
+  ['src', 'dst'].forEach(function (k) { var v = q.get(k) || ''; if (isAddr(v)) S[k] = v.toLowerCase(); else if (/^entity:.{1,60}$/.test(v)) S[k] = v; });
   ['from', 'to'].forEach(function (k) { var v = q.get(k) || ''; if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(v)) S.f[k] = v; else if (/^\d{4}-\d{2}-\d{2}$/.test(v)) S.f[k] = v + (k === 'from' ? 'T00:00' : 'T23:59'); });
   ['minr', 'maxr', 'minu', 'maxu'].forEach(function (k) { var v = q.get(k) || ''; if (/^\d{1,15}(\.\d{1,12})?$/.test(v)) S.f[k] = v; });
   var pg = parseInt(q.get('page'), 10); if (pg > 1) S.page = Math.min(pg, 200000);
@@ -2014,7 +2213,7 @@ button.ad:hover .vt{text-decoration:underline;}
   Object.keys(FIELDS).forEach(function (k) { $(FIELDS[k]).value = S.f[k]; });
   if (activeCount()) { $('fpanel').hidden = false; $('b-filters').setAttribute('aria-expanded', 'true'); }
   if (q.get('mode') === 'raw') S.mode = 'raw';           // the unreconciled list: every transfer, one per line (debugging)
-  $('f-chain').value = S.chain; buildTypesPop(); initTimeHeaders(); applyAddressUi(); refreshTimes(); updatePager();
+  $('f-chain').value = S.chain; buildTypesPop(); initTimeHeaders(); initQuickFilters(); initUsdInfo(); applyAddressUi(); refreshTimes(); updatePager();
   updateHPager(); mkShowView(); mkSyncFilterUi(); mkUpdatePager(); mkLoad(); loadVenues();
   detailHint(); setupChartHover(); showPanel('detail');   // Details is the home of the explorer, the price chart is one tab away
   if (q.get('hview') === 'entities') { H.view = 'entities'; $('hd-tab-holders').setAttribute('aria-selected', 'false'); $('hd-tab-entities').setAttribute('aria-selected', 'true'); $('hbody-wrap').hidden = true; $('ebody-wrap').hidden = false; $('hpager').style.visibility = 'hidden'; }

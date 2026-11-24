@@ -2,15 +2,21 @@
 //   chain=all|base|ethereum|bsc|polygon   type=all|transfer|mint|burn   address=0x...
 //   from=2026-11-01 | 2026-11-01T08:30      (UTC, inclusive)      to=... (UTC, inclusive)
 //   min=1000  max=50000                      (amount in RIZE, inclusive)
+//   minu=100  maxu=5000  price=0.0123        (value in USD, inclusive: the exact dollar value recorded for a trade, and amount x
+//                                             price (the current RIZE price, sent by the page) for every other line)
+//   src=0x…|entity:Kraken   dst=…            (who sent / who received; an entity is every address tagged with it)
+//   suggest=kra                              (instead of a list: entities and wallets whose name starts like this, for the search boxes)
 //   mode=raw|reconciled   raw = every transfer (default)
 //                         reconciled = ONE line per event: trade (buy / sell / arb), liquidity move, CCIP bridge message, and the
 //                         transfers left over (tx, mint, burn, in cex, out cex). The plumbing of a trade, a liquidity move or a
 //                         bridge (routers, vaults, pools, relays) is folded into its line.
-//   types=buy,sell,arb,liquidity,ccip,tx,mint,burn,in_cex,out_cex   (reconciled only; default = all)
+//   types=buy,sell,arb,liquidity,ccip,tx,mint,burn,in_cex,out_cex,cex_ntral   (reconciled only; default = all)
+//                       cex_ntral = between two exchange addresses (the same exchange or two different ones)
 //   page=1 (1-based)   limit=25 (max 100)
 // Newest first. Answers with the page of rows plus the exact total, so the page can show "1 / N".
 const { CHAINS, CHAIN_BY_ID, ZERO, query, fail, parseAddress, formatUnits } = require("./_db");
 const { getLookups, poolInfo, labelOf, netInfo } = require("./_lookups");
+const { resolveParty, suggest } = require("./_party");
 
 const MAX_PAGE = 200000;
 
@@ -31,6 +37,17 @@ function parseTime(v, end) {
 }
 
 // "1234.5" RIZE -> raw integer string with 18 decimals
+// "0.0123" -> the current RIZE price used for the lines that carry no dollar value of their own
+function parsePrice(v) {
+  if (v == null || v === "") return null;
+  const s = String(v).trim();
+  return /^\d{1,9}(\.\d{1,12})?$/.test(s) && Number(s) > 0 ? s : false;
+}
+function parseUsd(v) {
+  if (v == null || v === "") return null;
+  const s = String(v).trim();
+  return /^\d{1,15}(\.\d{1,6})?$/.test(s) ? s : false;
+}
 function parseRize(v) {
   if (v == null || v === "") return null;
   const s = String(v).trim();
@@ -57,10 +74,29 @@ module.exports = async function handler(req, res) {
   if (min === false) return res.status(400).json({ error: "bad_min" });
   const max = parseRize(q.max);
   if (max === false) return res.status(400).json({ error: "bad_max" });
+  const minu = parseUsd(q.minu);
+  if (minu === false) return res.status(400).json({ error: "bad_minu" });
+  const maxu = parseUsd(q.maxu);
+  if (maxu === false) return res.status(400).json({ error: "bad_maxu" });
+  const price = parsePrice(q.price);
+  if (price === false) return res.status(400).json({ error: "bad_price" });
+  if ((minu || maxu) && !price) return res.status(400).json({ error: "price_required" });
   const mode = String(q.mode || "raw").toLowerCase();
   if (!["raw", "reconciled"].includes(mode)) return res.status(400).json({ error: "bad_mode" });
   const limit = Math.min(Math.max(parseInt(q.limit, 10) || 25, 1), 100);
   const page = Math.min(Math.max(parseInt(q.page, 10) || 1, 1), MAX_PAGE);
+
+  if (q.suggest != null) {
+    try { res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=60"); return res.status(200).json({ ok: true, ...(await suggest(q.suggest)) }); }
+    catch (err) { return fail(res, err); }
+  }
+  let srcP, dstP;
+  try {
+    srcP = await resolveParty(q.src);
+    dstP = await resolveParty(q.dst);
+  } catch (err) { return fail(res, err); }
+  if (srcP === false) return res.status(400).json({ error: "bad_src" });
+  if (dstP === false) return res.status(400).json({ error: "bad_dst" });
 
   const PLUMBING = `NOT EXISTS (SELECT 1 FROM trades x WHERE x.chain_id = transfers.chain_id AND x.tx_hash = transfers.tx_hash)
       AND NOT EXISTS (SELECT 1 FROM liquidity_events y WHERE y.chain_id = transfers.chain_id AND y.tx_hash = transfers.tx_hash)`;
@@ -75,7 +111,7 @@ module.exports = async function handler(req, res) {
 
   // ---- reconciled feed: one line per event ------------------------------------------------------------------------
   async function unified() {
-    const ALL = ["buy", "sell", "arb", "liquidity", "ccip", "tx", "mint", "burn", "in_cex", "out_cex"];
+    const ALL = ["buy", "sell", "arb", "liquidity", "ccip", "tx", "mint", "burn", "in_cex", "out_cex", "cex_ntral"];
     let types = ALL;
     if (q.types != null && String(q.types).trim() !== "") {
       types = String(q.types).toLowerCase().split(",").map((x) => x.trim()).filter(Boolean);
@@ -88,6 +124,9 @@ module.exports = async function handler(req, res) {
     const params = [];
     const add = (v) => { params.push(v); return "$" + params.length; };
     const cid = chainKey !== "all" ? CHAINS[chainKey].id : null;
+    let prRef = null;                                          // the current RIZE price, added to the parameters only when a USD filter needs it
+    const usdOf = (rizeRaw) => `(${rizeRaw}) * ${prRef || (prRef = add(price) + "::numeric")} / 1e18`;
+    const addrs = (P) => add(P.addrs) + "::bytea[]";
     const branches = [];   // { ord, sql, count }   sql selects the shared columns, count selects 1 per event
 
     const COLS = "etype, chain_id, chain2_id, name1, name2, block_number, block_time, sub, tx_hash, from_addr, to_addr, amount, usd, price_usd, meta, ord";
@@ -103,6 +142,13 @@ module.exports = async function handler(req, res) {
       if (to) w.push(`t.block_time <= ${add(to)}::timestamptz`);
       if (min) w.push(`t.rize >= ${add(min)}::numeric`);
       if (max) w.push(`t.rize <= ${add(max)}::numeric`);
+      // what the page shows in the USD column: the exact value recorded for the trade, the current price when there is none
+      if (minu) w.push(`COALESCE(t.usd, ${usdOf("t.rize")}) >= ${add(minu)}::numeric`);
+      if (maxu) w.push(`COALESCE(t.usd, ${usdOf("t.rize")}) <= ${add(maxu)}::numeric`);
+      // a buy shows the venue on the From side and the trader on the To side; a sell or an arbitrage the other way round
+      const onVenue = (P) => P.pools.length ? `EXISTS (SELECT 1 FROM jsonb_array_elements(t.fills) f WHERE f->>'pool' = ANY(${add(P.pools)}::text[]))` : "false";
+      if (srcP) w.push(`((t.side <> 'buy' AND t.trader = ANY(${addrs(srcP)})) OR (t.side = 'buy' AND ${onVenue(srcP)}))`);
+      if (dstP) w.push(`((t.side = 'buy' AND t.trader = ANY(${addrs(dstP)})) OR (t.side <> 'buy' AND ${onVenue(dstP)}))`);
       const from_ = `FROM trades t WHERE ${w.join(" AND ")}`;
       branches.push({
         ord: 1, count: `SELECT 1 ${from_}`,
@@ -121,11 +167,17 @@ module.exports = async function handler(req, res) {
       if (address) w.push(`e.provider = ${add(address)}`);
       if (from) w.push(`e.block_time >= ${add(from)}::timestamptz`);
       if (to) w.push(`e.block_time <= ${add(to)}::timestamptz`);
+      // a liquidity line has the provider on one side and the pool on the other (which one depends on add / remove): either side matches
+      const eitherSide = (P) => `(e.provider = ANY(${addrs(P)}) OR e.pool_key = ANY(${add(P.poolBufs)}::bytea[]))`;
+      if (srcP) w.push(eitherSide(srcP));
+      if (dstP) w.push(eitherSide(dstP));
       const hv = [];
       const ins = "COALESCE(SUM(e.rize) FILTER (WHERE e.rize > 0), 0)";
       const outs = "COALESCE(-SUM(e.rize) FILTER (WHERE e.rize < 0), 0)";
       if (min) hv.push(`GREATEST(${ins}, ${outs}) >= ${add(min)}::numeric`);
       if (max) hv.push(`GREATEST(${ins}, ${outs}) <= ${add(max)}::numeric`);
+      if (minu) hv.push(`${usdOf(`GREATEST(${ins}, ${outs})`)} >= ${add(minu)}::numeric`);
+      if (maxu) hv.push(`${usdOf(`GREATEST(${ins}, ${outs})`)} <= ${add(maxu)}::numeric`);
       const body = `FROM liquidity_events e ${w.length ? "WHERE " + w.join(" AND ") : ""}
                     GROUP BY e.chain_id, e.tx_hash ${hv.length ? "HAVING " + hv.join(" AND ") : ""}`;
       branches.push({
@@ -151,6 +203,10 @@ module.exports = async function handler(req, res) {
       if (to) w.push(`${tm} <= ${add(to)}::timestamptz`);
       if (min) w.push(`m.amount >= ${add(min)}::numeric`);
       if (max) w.push(`m.amount <= ${add(max)}::numeric`);
+      if (minu) w.push(`${usdOf("m.amount")} >= ${add(minu)}::numeric`);
+      if (maxu) w.push(`${usdOf("m.amount")} <= ${add(maxu)}::numeric`);
+      if (srcP) w.push(`m.sender = ANY(${addrs(srcP)})`);
+      if (dstP) w.push(`m.receiver = ANY(${addrs(dstP)})`);
       const from_ = `FROM ccip_messages m ${w.length ? "WHERE " + w.join(" AND ") : ""}`;
       branches.push({
         ord: 3, count: `SELECT 1 ${from_}`,
@@ -168,19 +224,24 @@ module.exports = async function handler(req, res) {
     }
 
     // --- what is left of the transfers: tx, mint, burn, in cex, out cex
-    const rest = ["tx", "mint", "burn", "in_cex", "out_cex"].filter(want);
+    const rest = ["tx", "mint", "burn", "in_cex", "out_cex", "cex_ntral"].filter(want);
     if (rest.length) {
       const kind = `CASE WHEN transfers.from_addr = ${zero} THEN 'mint' WHEN transfers.to_addr = ${zero} THEN 'burn'
+                         WHEN transfers.from_addr IN ${CEX} AND transfers.to_addr IN ${CEX} THEN 'cex_ntral'
                          WHEN transfers.to_addr IN ${CEX} THEN 'in_cex' WHEN transfers.from_addr IN ${CEX} THEN 'out_cex'
                          ELSE 'tx' END`;
       const w = [];
-      if (rest.length < 5) w.push(`${kind} = ANY(${add(rest)}::text[])`);
+      if (rest.length < 6) w.push(`${kind} = ANY(${add(rest)}::text[])`);
       if (cid) w.push(`transfers.chain_id = ${add(cid)}`);
       if (address) { const p = add(address); w.push(`(transfers.from_addr = ${p} OR transfers.to_addr = ${p})`); }
       if (from) w.push(`transfers.block_time >= ${add(from)}::timestamptz`);
       if (to) w.push(`transfers.block_time <= ${add(to)}::timestamptz`);
       if (min) w.push(`transfers.amount >= ${add(min)}::numeric`);
       if (max) w.push(`transfers.amount <= ${add(max)}::numeric`);
+      if (minu) w.push(`${usdOf("transfers.amount")} >= ${add(minu)}::numeric`);
+      if (maxu) w.push(`${usdOf("transfers.amount")} <= ${add(maxu)}::numeric`);
+      if (srcP) w.push(`transfers.from_addr = ANY(${addrs(srcP)})`);
+      if (dstP) w.push(`transfers.to_addr = ANY(${addrs(dstP)})`);
       w.push(PLUMBING);
       w.push(`NOT EXISTS (SELECT 1 FROM ccip_messages c WHERE c.source_chain_id = transfers.chain_id AND c.source_tx = transfers.tx_hash)`);
       w.push(`NOT EXISTS (SELECT 1 FROM ccip_messages c WHERE c.dest_chain_id = transfers.chain_id AND c.dest_tx = transfers.tx_hash)`);
@@ -242,7 +303,7 @@ module.exports = async function handler(req, res) {
         chain: key, chain_name: net1 ? (net1.indexed ? CHAINS[key].name : net1.name) : key ? CHAINS[key].name : String(r.chain_id),
         block: Number(r.block_number), time: r.block_time.toISOString(),
         tx: r.etype === "ccip" ? null : "0x" + Buffer.from(r.tx_hash).toString("hex"),
-        log_index: r.etype === "tx" || r.etype === "mint" || r.etype === "burn" || r.etype === "in_cex" || r.etype === "out_cex" ? r.sub : null,
+        log_index: ["tx", "mint", "burn", "in_cex", "out_cex", "cex_ntral"].includes(r.etype) ? r.sub : null,
         from: r.from_hex ? "0x" + r.from_hex : null, to: r.to_hex ? "0x" + r.to_hex : null,
         from_label: labelOf(r.from_label, r.from_category, r.from_logo), to_label: labelOf(r.to_label, r.to_category, r.to_logo),
         amount: formatUnits(r.amount_raw == null ? "0" : r.amount_raw),
@@ -291,6 +352,12 @@ module.exports = async function handler(req, res) {
   if (to) where.push(`block_time <= ${add(to)}::timestamptz`);
   if (min) where.push(`amount >= ${add(min)}::numeric`);
   if (max) where.push(`amount <= ${add(max)}::numeric`);
+  let prRaw = null;
+  const priceRaw = () => prRaw || (prRaw = add(price) + "::numeric");
+  if (minu) where.push(`amount * ${priceRaw()} / 1e18 >= ${add(minu)}::numeric`);
+  if (maxu) where.push(`amount * ${priceRaw()} / 1e18 <= ${add(maxu)}::numeric`);
+  if (srcP) where.push(`from_addr = ANY(${add(srcP.addrs)}::bytea[])`);
+  if (dstP) where.push(`to_addr = ANY(${add(dstP.addrs)}::bytea[])`);
   const whereSql = where.length ? "WHERE " + where.join(" AND ") : "";
   const countParams = params.slice();
 

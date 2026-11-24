@@ -1,7 +1,7 @@
 // GET /api/explorize/market?view=trades|liquidity|pools|bridges|tx
 // One endpoint for the whole market layer (Vercel counts every file in /api as a function).
 //
-//   view=trades     chain, side=all|buy|sell|arbitrage, venue, pool, address (trader or sender), min/max (RIZE),
+//   view=trades     chain, side=all|buy|sell|arbitrage, venue, pool, address (trader or sender), trader (0x… or entity:Name), min/max (RIZE),
 //                   minu/maxu (USD), from/to (UTC), page, limit(<=100)
 //                   -> items + exact total + buy/sell totals over 7 / 14 / 30 days
 //   view=liquidity  chain, pool, kind=all|add|remove|collect, page, limit
@@ -18,6 +18,7 @@ const MAX_PAGE = 20000;
 const NATIVE_KEY = "0x" + "0".repeat(40);
 
 const { getLookups, tokenOf, counterList, poolInfo, chainKey, labelOf, netInfo } = require("./_lookups");
+const { resolveParty } = require("./_party");
 const hex = (b) => (b ? "0x" + Buffer.from(b).toString("hex") : null);
 
 // "2026-11-01" or "2026-11-01T08:30" (UTC) -> ISO; end=true rounds up
@@ -78,6 +79,7 @@ async function viewTrades(q, res) {
   const max = parseRize(q.max); if (max === false) return bad(res, "bad_max");
   const minu = parseUsd(q.minu); if (minu === false) return bad(res, "bad_minu");
   const maxu = parseUsd(q.maxu); if (maxu === false) return bad(res, "bad_maxu");
+  const trader = await resolveParty(q.trader); if (trader === false) return bad(res, "bad_trader");   // an address or entity:Name
   const venue = q.venue ? String(q.venue).toLowerCase() : null;
   if (venue && !/^[a-z0-9-]{1,40}$/.test(venue)) return bad(res, "bad_venue");
   const { limit, page, offset } = paging(q);
@@ -101,6 +103,7 @@ async function viewTrades(q, res) {
   const listWhere = base.slice();
   if (side !== "all") listWhere.push(`t.side = ${add(side)}`);
   if (address) { const p = add(address); listWhere.push(`(t.trader = ${p} OR t.sender = ${p})`); }
+  if (trader) listWhere.push(`t.trader = ANY(${add(trader.addrs)}::bytea[])`);
   if (from) listWhere.push(`t.block_time >= ${add(from)}::timestamptz`);
   if (to) listWhere.push(`t.block_time <= ${add(to)}::timestamptz`);
   if (min) listWhere.push(`t.rize >= ${add(min)}::numeric`);
