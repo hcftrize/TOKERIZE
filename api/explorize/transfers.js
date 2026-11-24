@@ -12,6 +12,8 @@
 //                         bridge (routers, vaults, pools, relays) is folded into its line.
 //   types=buy,sell,arb,liquidity,ccip,tx,mint,burn,in_cex,out_cex,cex_ntral   (reconciled only; default = all)
 //                       cex_ntral = between two exchange addresses (the same exchange or two different ones)
+//   zero=1             (reconciled only) also list the transfers of 0 RIZE; by default they are left out: they move nothing and
+//                       are the usual way to fake a transfer "from" a wallet (address poisoning). Raw mode always lists them.
 //   page=1 (1-based)   limit=25 (max 100)
 // Newest first. Answers with the page of rows plus the exact total, so the page can show "1 / N".
 const { CHAINS, CHAIN_BY_ID, ZERO, query, fail, parseAddress, formatUnits } = require("./_db");
@@ -83,6 +85,7 @@ module.exports = async function handler(req, res) {
   if ((minu || maxu) && !price) return res.status(400).json({ error: "price_required" });
   const mode = String(q.mode || "raw").toLowerCase();
   if (!["raw", "reconciled"].includes(mode)) return res.status(400).json({ error: "bad_mode" });
+  const showZero = String(q.zero || "") === "1";
   const limit = Math.min(Math.max(parseInt(q.limit, 10) || 25, 1), 100);
   const page = Math.min(Math.max(parseInt(q.page, 10) || 1, 1), MAX_PAGE);
 
@@ -242,6 +245,9 @@ module.exports = async function handler(req, res) {
       if (maxu) w.push(`${usdOf("transfers.amount")} <= ${add(maxu)}::numeric`);
       if (srcP) w.push(`transfers.from_addr = ANY(${addrs(srcP)})`);
       if (dstP) w.push(`transfers.to_addr = ANY(${addrs(dstP)})`);
+      // A transfer of 0 RIZE moves nothing. Anyone can emit one that looks as if it came from any wallet (address
+      // poisoning: transferFrom(victim, lookalike, 0) needs no allowance), so the feed leaves them out unless zero=1.
+      if (!showZero) w.push(`transfers.amount > 0`);
       w.push(PLUMBING);
       w.push(`NOT EXISTS (SELECT 1 FROM ccip_messages c WHERE c.source_chain_id = transfers.chain_id AND c.source_tx = transfers.tx_hash)`);
       w.push(`NOT EXISTS (SELECT 1 FROM ccip_messages c WHERE c.dest_chain_id = transfers.chain_id AND c.dest_tx = transfers.tx_hash)`);
