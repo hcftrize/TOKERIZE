@@ -140,6 +140,20 @@ a.ext:hover{color:var(--cyan);}
 .soon-over p{font-family:'DM Mono',monospace;font-size:14.5px;color:var(--muted);max-width:420px;line-height:1.65;}
 
 /* market panel: trades / liquidity moves / bridges */
+.p-holders .p-head{padding-right:8px;}
+.p-holders .p-tab{padding:0 12px;letter-spacing:1.6px;}
+.p-holders .pager{gap:2px;flex:none;}
+.p-holders .pager .icon-btn{width:26px;height:28px;font-size:16px;}
+.p-holders .pg-input{width:46px;height:28px;font-size:14px;}
+.p-holders .pg-of{font-size:14px;margin:0 4px 0 2px;}
+.p-holders .ent-name{display:inline-flex;align-items:center;gap:8px;max-width:100%;}
+.p-holders .ent-name .vt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.p-holders td.cnt{color:var(--muted);}
+.emem{margin-top:6px;}
+.emem .r{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 6px;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:13.5px;cursor:pointer;}
+.emem .r:hover{background:rgba(126,224,255,.05);}
+.emem .n{display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.emem .v{text-align:right;color:var(--text);}
 .p-trades .p-head{padding-right:8px;}
 .p-trades .p-tab{padding:0 12px;letter-spacing:1.6px;}
 .p-trades .pager{gap:2px;flex:none;}
@@ -486,7 +500,10 @@ button.ad:hover .vt{text-decoration:underline;}
   <!-- ============ TOP HOLDERS ============ -->
   <section class="panel p-holders" aria-label="RIZE top holders">
     <div class="p-head">
-      <div class="p-title">RIZE Top Holders</div>
+      <div class="p-tabs" role="tablist">
+        <button class="p-tab" role="tab" id="hd-tab-holders" aria-selected="true" title="RIZE Top Holders">Top Holders</button>
+        <button class="p-tab" role="tab" id="hd-tab-entities" aria-selected="false" title="What each known entity holds, all its addresses added up">Entities</button>
+      </div>
       <div class="pager" id="hpager">
         <button class="icon-btn" id="hg-first" aria-label="First page" title="First page">&laquo;</button>
         <button class="icon-btn" id="hg-prev" aria-label="Previous page" title="Previous page">&lsaquo;</button>
@@ -495,6 +512,19 @@ button.ad:hover .vt{text-decoration:underline;}
         <button class="icon-btn" id="hg-next" aria-label="Next page" title="Next page">&rsaquo;</button>
         <button class="icon-btn" id="hg-last" aria-label="Last page" title="Last page">&raquo;</button>
       </div>
+    </div>
+    <div class="p-body" id="ebody-wrap" hidden>
+      <table class="t">
+        <thead><tr>
+          <th>Rank</th><th>Entity</th><th class="num" title="Addresses of this entity that hold RIZE">Addrs</th>
+          <th class="num tot" title="Held + Bonded">Total</th>
+          <th class="num" title="Liquid RIZE, all chains and all addresses of the entity together">Held</th>
+          <th class="num" title="RIZE locked in governance bonds on Base, including RIZE waiting to be released">Bonded</th>
+          <th>Token</th><th class="num">USD</th>
+        </tr></thead>
+        <tbody id="erows"></tbody>
+      </table>
+      <div class="state" id="estate">Loading entities&hellip;</div>
     </div>
     <div class="p-body" id="hbody-wrap">
       <table class="t">
@@ -607,7 +637,7 @@ button.ad:hover .vt{text-decoration:underline;}
     price: null, status: null, selected: null, chartRange: 'max', chartData: {}
   };
 
-  var H = { page: 1, pages: 1, total: null, loading: false, reqId: 0, meta: null };
+  var H = { page: 1, pages: 1, total: null, loading: false, reqId: 0, meta: null, view: 'holders', eLoading: false, eReqId: 0, eMeta: null };
   var HPAGE = 50;
 
   /* ================= formatting ================= */
@@ -828,7 +858,7 @@ button.ad:hover .vt{text-decoration:underline;}
     });
   }
   function refreshUsdCells() {
-    document.querySelectorAll('#rows td.usd, #hrows td.usd').forEach(function (td) {
+    document.querySelectorAll('#rows td.usd, #hrows td.usd, #erows td.usd').forEach(function (td) {
       var raw = td.getAttribute('data-amt');
       if (raw == null) return;                         // a trade's own dollar value (fixed at the time of the trade): leave it
       var a = parseFloat(raw);
@@ -963,8 +993,8 @@ button.ad:hover .vt{text-decoration:underline;}
     ['ccip', 'CCIP', 'A bridge message sent through Chainlink CCIP: the burn and the mint on one line'],
     ['mint', 'MINT', 'RIZE created outside a bridge'],
     ['burn', 'BURN', 'RIZE destroyed outside a bridge'],
-    ['in_cex', 'IN CEX', 'RIZE sent to an exchange'],
-    ['out_cex', 'OUT CEX', 'RIZE withdrawn from an exchange']
+    ['in_cex', 'CEX IN', 'RIZE sent to an exchange'],
+    ['out_cex', 'CEX OUT', 'RIZE withdrawn from an exchange']
   ];
   var ALL_TYPES = TYPES.map(function (x) { return x[0]; });
   var TYPE_LABEL = {}; TYPES.forEach(function (x) { TYPE_LABEL[x[0]] = x[1]; });
@@ -1092,6 +1122,10 @@ button.ad:hover .vt{text-decoration:underline;}
     var r = effRange();
     if (r.err) { $('rows').textContent = ''; setState(r.err, true); return; }
     var id = ++S.reqId; S.loading = true;
+    if (!S.types.length && S.mode !== 'raw') {                       // no kind ticked: nothing to ask the server
+      S.total = 0; S.pages = 1; S.loading = false; $('rows').textContent = ''; setState('No transaction type is selected. Tick at least one in Types.');
+      $('foot-note').textContent = '0 events · USD uses the current RIZE price'; updatePager(); return;
+    }
     if (!opts.silent) { $('rows').textContent = ''; setState('Loading transfers…'); }
     var every = S.types.length === ALL_TYPES.length;
     api('/transfers', { chain: S.chain, mode: S.mode, types: (S.mode === 'raw' || every) ? '' : S.types.join(','), address: S.address, from: S.f.from, to: S.f.to, min: fnum(r.min), max: fnum(r.max), page: S.page, limit: PAGE })
@@ -1185,6 +1219,7 @@ button.ad:hover .vt{text-decoration:underline;}
   function syncTypesUi() {
     document.querySelectorAll('#pop-types input[type=checkbox]').forEach(function (cb) { cb.checked = S.types.indexOf(cb.value) >= 0; });
     $('b-types-n').textContent = S.types.length === ALL_TYPES.length ? '' : String(S.types.length);
+    var tg = $('types-all'); if (tg) tg.textContent = S.types.length === ALL_TYPES.length ? 'Deselect all' : 'Select all';
   }
   function buildTypesPop() {
     var pop = $('pop-types'); pop.textContent = '';
@@ -1192,15 +1227,16 @@ button.ad:hover .vt{text-decoration:underline;}
       var lab = el('label'), cb = el('input'); cb.type = 'checkbox'; cb.value = t[0]; cb.checked = S.types.indexOf(t[0]) >= 0; lab.title = t[2];
       cb.addEventListener('change', function () {
         var next = ALL_TYPES.filter(function (k) { return pop.querySelector('input[value="' + k + '"]').checked; });
-        if (!next.length) { cb.checked = true; return; }            // at least one kind stays ticked
         S.types = next; syncTypesUi();
         clearTimeout(typesTimer); typesTimer = setTimeout(reload, 350);
       });
       lab.appendChild(cb); lab.appendChild(el('span', 'tag etype ' + t[0], t[1])); pop.appendChild(lab);
     });
     pop.appendChild(el('div', 'pop-sep'));
-    var all = el('button', 'pop-act', 'Select all'); all.type = 'button';
-    all.addEventListener('click', function () { S.types = ALL_TYPES.slice(); syncTypesUi(); reload(); }); pop.appendChild(all);
+    var all = el('button', 'pop-act', 'Deselect all'); all.type = 'button'; all.id = 'types-all';
+    all.addEventListener('click', function () {                      // everything ticked: the button clears the list; otherwise it ticks everything
+      S.types = S.types.length === ALL_TYPES.length ? [] : ALL_TYPES.slice(); syncTypesUi(); reload();
+    }); pop.appendChild(all);
     syncTypesUi();
   }
   $('b-types').addEventListener('click', function (ev) {
@@ -1233,7 +1269,7 @@ button.ad:hover .vt{text-decoration:underline;}
     var c = el('div', 'd-cell' + (extra ? ' ' + extra : '')); c.appendChild(el('div', 'k', k)); c.appendChild(el('div', 'v' + (cls ? ' ' + cls : ''), v)); if (s) c.appendChild(el('div', 's', s)); return c;
   }
   function extLink(text, href) { var a = el('a', 'btn', text); a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
-  function clearSelectedRows() { document.querySelectorAll('#rows tr.sel, #hrows tr.sel, #mk-rows tr.sel, #mk-lrows tr.sel').forEach(function (r) { r.classList.remove('sel'); }); }
+  function clearSelectedRows() { document.querySelectorAll('#rows tr.sel, #hrows tr.sel, #erows tr.sel, #mk-rows tr.sel, #mk-lrows tr.sel').forEach(function (r) { r.classList.remove('sel'); }); }
   function markWalletButton() { var b = $('btn-filter'); if (b) { b.classList.toggle('on', !!S.address && S.selected && S.selected.address === S.address); b.textContent = (b.classList.contains('on') ? 'Showing only this wallet' : 'Filter transfers by this wallet'); } }
 
   /* ---- wallet balance chart (orange area, Arkham style): one point per day, rebuilt from the transfers ---- */
@@ -1609,6 +1645,94 @@ button.ad:hover .vt{text-decoration:underline;}
   $('hg-input').addEventListener('change', commitHPage);
   $('hg-input').addEventListener('focus', function () { this.select(); });
 
+  /* ---- Entities tab: what each known entity holds (all its addresses added up), from the same snapshot as Top Holders ---- */
+  function setEState(msg, isErr) { var s = $('estate'); s.textContent = msg || ''; s.className = 'state' + (isErr ? ' err' : ''); s.hidden = !msg; }
+  function entName(name, logo) {
+    var w = el('span', 'ent-name');
+    if (logo) w.appendChild(logoSpan(['entities', 'venues'], logo, name));
+    w.appendChild(el('span', 'vt', name)); return w;
+  }
+  function chainSplit(byChain) {
+    return Object.keys(byChain || {}).filter(function (k) { return parseFloat(byChain[k]) > 0; })
+      .map(function (k) { return netName(k) + ' ' + fmtCompact(byChain[k]); }).join(' · ');
+  }
+  function entityRow(it) {
+    var tr = el('tr'); tr.dataset.entity = it.entity;
+    tr.appendChild(el('td', 'rk', String(it.rank)));
+    var nm = el('td'); nm.title = it.entity + (it.category ? ' (' + it.category + ')' : ''); nm.appendChild(entName(it.entity, it.logo)); tr.appendChild(nm);
+    tr.appendChild(el('td', 'num cnt', String(it.addresses)));
+    var tot = el('td', 'num tot', fmtCompact(it.total)); tot.title = it.total + ' RIZE'; tr.appendChild(tot);
+    var held = el('td', 'num', fmtCompact(it.held)); held.title = chainSplit(it.by_chain) || (it.held + ' RIZE held'); tr.appendChild(held);
+    var bd = el('td', 'num'); if (parseFloat(it.bonded) > 0) { bd.textContent = fmtCompact(it.bonded); bd.title = it.bonded + ' RIZE inside governance bonds'; } else bd.appendChild(el('span', 'dash', '–')); tr.appendChild(bd);
+    var tk = el('td'); var w = el('span', 'tk'); var im = el('img'); im.src = LOGO; im.alt = ''; w.appendChild(im); w.appendChild(document.createTextNode('RIZE')); tk.appendChild(w); tr.appendChild(tk);
+    var u = el('td', 'num usd'); u.setAttribute('data-amt', it.total); u.textContent = S.price == null ? '—' : fmtUsdCompact(parseFloat(it.total) * S.price); tr.appendChild(u);
+    tr.addEventListener('click', function () { selectEntity(it.entity); });
+    if (S.selected && S.selected.kind === 'entity' && S.selected.name === it.entity) tr.className = 'sel';
+    return tr;
+  }
+  function loadEntities(opts) {
+    opts = opts || {};
+    var id = ++H.eReqId; H.eLoading = true;
+    if (!opts.silent) { $('erows').textContent = ''; setEState('Loading entities…'); }
+    api('/holders', { view: 'entities' }).then(function (d) {
+      if (id !== H.eReqId) return;
+      H.eMeta = d.meta;
+      if (!d.built) { $('erows').textContent = ''; setEState('The ranking has not been built yet. It is refreshed once a day.'); if (H.view === 'entities') $('h-foot').textContent = ''; return; }
+      var body = $('erows'); body.textContent = '';
+      var frag = document.createDocumentFragment(); d.items.forEach(function (it) { frag.appendChild(entityRow(it)); }); body.appendChild(frag);
+      setEState(d.items.length ? '' : 'No known entity holds RIZE yet.');
+      if (!opts.silent) $('ebody-wrap').scrollTop = 0;
+      H.eCount = d.items.length; setHFoot();
+    }).catch(function (e) { if (id === H.eReqId && !opts.silent) { $('erows').textContent = ''; setEState(explain(e), true); } })
+      .finally(function () { if (id === H.eReqId) H.eLoading = false; });
+  }
+  function setHFoot() {
+    if (H.view !== 'entities') return;
+    var m = H.eMeta; if (!m) { $('h-foot').textContent = ''; return; }
+    $('h-foot').textContent = 'Updated ' + ago(m.updated_at) + ' · ' + commas(H.eCount || 0) + ' entities';
+    $('h-foot').title = 'Snapshot of Base block ' + (m.base_block == null ? '—' : m.base_block.toLocaleString('en-US')) + (m.snapshot_time ? ' (' + exact(m.snapshot_time) + ' UTC)' : '');
+  }
+  function hdShowView(v) {
+    H.view = v; var en = v === 'entities';
+    $('hd-tab-holders').setAttribute('aria-selected', en ? 'false' : 'true'); $('hd-tab-entities').setAttribute('aria-selected', en ? 'true' : 'false');
+    $('hbody-wrap').hidden = en; $('ebody-wrap').hidden = !en; $('hpager').style.visibility = en ? 'hidden' : 'visible';
+    hideTip();
+    if (en) { loadEntities(); setHFoot(); } else { loadHolders(); }
+    syncUrl();
+  }
+  $('hd-tab-holders').addEventListener('click', function () { if (H.view !== 'holders') hdShowView('holders'); });
+  $('hd-tab-entities').addEventListener('click', function () { if (H.view !== 'entities') hdShowView('entities'); });
+
+  function selectEntity(name) {
+    S.selected = { kind: 'entity', name: name }; clearSelectedRows(); syncDetailBar(); syncUrl();
+    document.querySelectorAll('#erows tr').forEach(function (r) { if (r.dataset.entity === name) r.classList.add('sel'); });
+    var box = $('detail'); box.textContent = ''; box.appendChild(el('div', 'state', 'Loading entity…')); showPanel('detail');
+    api('/holders', { view: 'entity', name: name }).then(function (d) {
+      if (!S.selected || S.selected.kind !== 'entity' || S.selected.name !== name) return;
+      box.textContent = '';
+      var e = d.entity, k = kicker('Entity'); k.classList.add('x-pad'); box.appendChild(k);
+      box.appendChild(closeX('entity'));
+      var main = el('div', 'd-main x-pad'); main.appendChild(entName(e.name, e.logo)); if (e.category) main.appendChild(el('span', 'd-lbl', e.category)); box.appendChild(main);
+      var grid = el('div', 'd-grid');
+      grid.appendChild(dcell('Rank', '#' + e.rank, 'among the known entities'));
+      grid.appendChild(dcell('Total', fmtCompact(e.total) + ' RIZE', S.price != null ? fmtUsdCompact(parseFloat(e.total) * S.price) : '', null, 'total'));
+      Object.keys(e.by_chain || {}).forEach(function (c) { if (parseFloat(e.by_chain[c]) > 0) grid.appendChild(dcell(netName(c), fmtCompact(e.by_chain[c]) + ' RIZE')); });
+      if (parseFloat(e.bonded) > 0) grid.appendChild(dcell('Bonded (governance)', fmtCompact(e.bonded) + ' RIZE'));
+      box.appendChild(grid);
+      box.appendChild(el('div', 'd-sub', e.addresses + ' address' + (e.addresses === 1 ? '' : 'es') + ' holding RIZE'));
+      var list = el('div', 'emem');
+      d.members.slice(0, 150).forEach(function (m) {
+        var r = el('div', 'r'); r.title = m.address + (m.label ? ' — ' + m.label : '');
+        var n = el('span', 'n'); n.appendChild(netLogo(m.chain)); n.appendChild(el('span', null, m.label || short(m.address))); r.appendChild(n);
+        r.appendChild(el('span', 'v', fmtCompact(m.held) + (parseFloat(m.bonded) > 0 ? ' + ' + fmtCompact(m.bonded) + ' bonded' : '')));
+        r.addEventListener('click', function () { selectWallet(m.address); });
+        list.appendChild(r);
+      });
+      if (d.members.length > 150) list.appendChild(el('div', 'dim', '+ ' + (d.members.length - 150) + ' more addresses'));
+      box.appendChild(list);
+    }).catch(function (er) { if (S.selected && S.selected.kind === 'entity' && S.selected.name === name) { box.textContent = ''; box.appendChild(closeX('entity')); box.appendChild(el('div', 'state err', explain(er))); } });
+  }
+
   /* ================= market layer: trades / liquidity moves / bridges ================= */
   function blankF() { return { from: '', to: '', minr: '', maxr: '', minu: '', maxu: '' }; }
   var M = { view: 'trades', chain: 'all', src: 'all', dst: 'all', side: 'all', venue: '', kind: 'all', pool: '', fopen: false,
@@ -1863,12 +1987,14 @@ button.ad:hover .vt{text-decoration:underline;}
   function syncUrl() {
     var p = new URLSearchParams();
     if (S.chain !== 'all') p.set('chain', S.chain);
-    if (S.types.length !== ALL_TYPES.length) p.set('types', S.types.join(','));
+    if (S.types.length !== ALL_TYPES.length) p.set('types', S.types.length ? S.types.join(',') : 'none');
     if (S.mode === 'raw') p.set('mode', 'raw');
     if (S.address) p.set('address', S.address);
     Object.keys(S.f).forEach(function (k) { if (S.f[k] !== '') p.set(k, S.f[k]); });
     if (S.page > 1) p.set('page', String(S.page));
     if (H.page > 1) p.set('hpage', String(H.page));
+    if (H.view === 'entities') p.set('hview', 'entities');
+    if (S.selected && S.selected.kind === 'entity') p.set('entity', S.selected.name);
     if (S.selected && S.selected.kind === 'wallet') p.set('wallet', S.selected.address);
     if (S.selected && S.selected.kind === 'tx') { p.set('tx', S.selected.hash); p.set('txchain', S.selected.chain); }
     var qs = p.toString();
@@ -1879,7 +2005,7 @@ button.ad:hover .vt{text-decoration:underline;}
   var q = new URLSearchParams(location.search);
   if (CHAINS[q.get('chain')]) S.chain = q.get('chain');
   var tp = (q.get('types') || '').split(',').filter(function (x) { return ALL_TYPES.indexOf(x) >= 0; });
-  if (tp.length) S.types = tp;
+  if (tp.length) S.types = tp; else if (q.get('types') === 'none') S.types = [];
   if (isAddr(q.get('address') || '')) S.address = q.get('address').toLowerCase();
   ['from', 'to'].forEach(function (k) { var v = q.get(k) || ''; if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(v)) S.f[k] = v; else if (/^\d{4}-\d{2}-\d{2}$/.test(v)) S.f[k] = v + (k === 'from' ? 'T00:00' : 'T23:59'); });
   ['minr', 'maxr', 'minu', 'maxu'].forEach(function (k) { var v = q.get(k) || ''; if (/^\d{1,15}(\.\d{1,12})?$/.test(v)) S.f[k] = v; });
@@ -1891,10 +2017,12 @@ button.ad:hover .vt{text-decoration:underline;}
   $('f-chain').value = S.chain; buildTypesPop(); initTimeHeaders(); applyAddressUi(); refreshTimes(); updatePager();
   updateHPager(); mkShowView(); mkSyncFilterUi(); mkUpdatePager(); mkLoad(); loadVenues();
   detailHint(); setupChartHover(); showPanel('detail');   // Details is the home of the explorer, the price chart is one tab away
-  var marketReady = loadMarket(); loadChart('max'); loadHolders();
+  if (q.get('hview') === 'entities') { H.view = 'entities'; $('hd-tab-holders').setAttribute('aria-selected', 'false'); $('hd-tab-entities').setAttribute('aria-selected', 'true'); $('hbody-wrap').hidden = true; $('ebody-wrap').hidden = false; $('hpager').style.visibility = 'hidden'; }
+  var marketReady = loadMarket(); loadChart('max'); if (H.view === 'entities') loadEntities(); else loadHolders();
   loadStatus().then(function (d) { S.version = d && d.last_update ? d.last_update.published_at : null; });
   if (S.f.minu || S.f.maxu) marketReady.then(function () { load(); }, function () { load(); }); else load();
-  if (isAddr(q.get('wallet') || '')) selectWallet(q.get('wallet'), true);
+  if (q.get('entity')) selectEntity(String(q.get('entity')).slice(0, 120));
+  else if (isAddr(q.get('wallet') || '')) selectWallet(q.get('wallet'), true);
   else if (isHash(q.get('tx') || '') && CHAINS[q.get('txchain')]) selectTx(q.get('txchain'), q.get('tx').toLowerCase());
 
   /* The price moves every minute; the data panels move together, only when a new unified update was published (every panel
@@ -1902,7 +2030,7 @@ button.ad:hover .vt{text-decoration:underline;}
   function refreshPanels() {
     if (S.page === 1 && !S.loading && !S.f.to) load({ silent: true });
     if (M.page === 1 && !M.loading) mkLoad({ silent: true });
-    if (!H.loading) loadHolders({ silent: true });
+    if (H.view === 'entities') { if (!H.eLoading) loadEntities({ silent: true }); } else if (!H.loading) loadHolders({ silent: true });
   }
   setInterval(function () {
     if (document.hidden) return;
