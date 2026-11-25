@@ -1204,9 +1204,9 @@
     "number": 132,
     "title": "Dedicated Synchronizer Paymaster Model",
     "type": "Tokenomics",
-    "status": "Proposed",
+    "status": "Approved",
     "created": "2026-11-09",
-    "approved": "",
+    "approved": "2026-11-24",
     "description": "CIP-0129 (Universal Burn and Synchronizer Pricing) introduced universal burn for all synchronizers on the Canton Network, bringing dedicated synchronizers into the Canton Coin (CC) burn-mint economy. This CIP provides the technical specification for Phase 1 of Universal Burn: the Dedicated Synchronizer (dSync) Paymaster Model. Under this model, a trusted dedicated synchronizer operator can operate a dedicated synchronizer, get a traffic report for activity on that synchronizer, and their designated paymaster periodically pays for consumed traffic post-hoc by burning CC on the Global Synchronizer. Each burn records activity via CIP-0104’s activity recording hook, enabling the Paymaster to earn app rewards and validator rewards for activity on the dedicated synchronizer. This Phase 1 is an interim step towards later delivery of fully trustless and self-serve dedicated synchronizers."
   }
 ]
