@@ -3,7 +3,7 @@
   "scraped_at": "2026-05-05T11:09:36.105804+00:00",
   "bootstrap": true,
   "counts": {
-    "tokensReleasedEvents": 91477,
+    "tokensReleasedEvents": 91478,
     "bondMigratedEvents": 0,
     "vestingUpdatedEvents": 9682,
     "vestedTokenClawedEvents": 1
@@ -914779,6 +914779,16 @@
         "blockNumber": "61304802",
         "timestamp": "1795451336",
         "txHash": "0xc6619ecd3a8ae0c00e5aac077fdc05ae0324641d306bfc34ba3bbbc365a45e34"
+      },
+      {
+        "id": "0x1315b36c11d0ab57c31114b2706fd6819916f5ec01f38b970552185ccda53541-24",
+        "nftId": "9832",
+        "to": "0x525c1c6025923610edfe3a4fa702b35e69c85320",
+        "amount": "11863.854166666666666667",
+        "date": "2026-11-25",
+        "blockNumber": "62168469",
+        "timestamp": "1795624069",
+        "txHash": "0x1315b36c11d0ab57c31114b2706fd6819916f5ec01f38b970552185ccda53541"
       }
     ],
     "bondMigratedEvents": [],
@@ -1030981,5 +1030991,5 @@
       }
     ]
   },
-  "updated_at": "2026-11-25T05:31:46.189069+00:00"
+  "updated_at": "2026-11-26T05:31:51.955761+00:00"
 }
