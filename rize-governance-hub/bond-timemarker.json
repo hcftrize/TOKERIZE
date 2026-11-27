@@ -3,7 +3,7 @@
   "scraped_at": "2026-04-28T13:30:24.437581+00:00",
   "bootstrap": true,
   "counts": {
-    "bondTimeMarkerSnapshots": 365
+    "bondTimeMarkerSnapshots": 367
   },
   "data": {
     "bondTimeMarkerSnapshots": [
@@ -3291,8 +3291,26 @@
         "poolId": 2,
         "blockNumber": "53556099",
         "timestamp": "1793901545"
+      },
+      {
+        "id": "0x8604a4d3a2bebeef13c9ac0d7707a0f1cb7eac814403c754cc9352eee872b09f-62756810-tm",
+        "nftId": "9451",
+        "timeMarker": "1786423528",
+        "amount": "499100.0029",
+        "poolId": 2,
+        "blockNumber": "62756810",
+        "timestamp": "1795741737"
+      },
+      {
+        "id": "0xde3fd08d6a1b744311a6efe2b9f83bb8d8d6c9da40aee6b0de1ed9512b802f2e-62757050-tm",
+        "nftId": "9451",
+        "timeMarker": "1786440301",
+        "amount": "500000.0029",
+        "poolId": 2,
+        "blockNumber": "62757050",
+        "timestamp": "1795741785"
       }
     ]
   },
-  "updated_at": "2026-11-26T05:31:56.904454+00:00"
+  "updated_at": "2026-11-27T05:31:48.347303+00:00"
 }
